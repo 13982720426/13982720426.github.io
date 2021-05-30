@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>如何判断 0.1 + 0.2 与 0.3 相等</title>
+    <link href="/2021/05/30/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%200.1%20+%200.2%20%E4%B8%8E%200.3%20%E7%9B%B8%E7%AD%89/"/>
+    <url>/2021/05/30/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%200.1%20+%200.2%20%E4%B8%8E%200.3%20%E7%9B%B8%E7%AD%89/</url>
+    
+    <content type="html"><![CDATA[<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">DeviationValue</span>(<span class="hljs-params">num1, num2</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.abs(num1 - num2) &lt; <span class="hljs-built_in">Number</span>.EPSILON<br>&#125;<br></code></pre></div></td></tr></table></figure><p>像 ECMAScript 采用的就是双精确度，也就是说，会用 64 位字节来储存一个浮点数。<br>转换为二进制在计算但是小数无限延伸，二进制截取 53 位导致精度丢失。这就是 0.1+0.2 不为 0.3 的原因 Number.EPSILON 的精度是 2^-52，所以只要丢失精度小于 Number.EPSILON 基本可以确认相等。</p><p>作为一道面试题，我觉得重要的是要讲出一点其他人一般不会答出来的深度。像这道题，可以从原理和解决方案两个地方作为答题点，最好在编一个案例。大致讲自己遇到过这个问题，于是很好奇深入研究了一下，发现是浮点数精度导致……原理怎样怎样……然后又看了业界的库的源码，然后怎样怎样解决。<br>关于原理，<a href="https://github.com/mqyqingfeng/Blog/issues/155">JavaScript 深入之浮点数精度</a>来解释，实际回答的时候，我觉得答出来</p><ol><li>非是 ECMAScript 独有</li><li>IEEE754 标准中 64 位的储存格式，比如 11 位存偏移值</li><li>其中涉及的三次精度丢失</li></ol><p>就已经 OK 了。<br>再讲解决方案，这个可以直接搜索到，各种方案都了解一下，比较一下优劣，还可以参考业界的一些库的实现，比如 math.js，不过相关的我并没有看过，后面我会研究一下。<br>如果还有精力的话，可以从加法再拓展讲讲超出安全值的数字的计算问题。<br>所以我觉得一能回答出底层实现，二能回答出多种解决方案的优劣，三能拓展讲出 bignum 的问题，就是一个非常完美的回答了。</p><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-number">0.1</span> + <span class="hljs-number">0.2</span> === <span class="hljs-number">0.30000000000000004</span><br></code></pre></div></td></tr></table></figure><p>JavaScript 使用 Number 类型表示数字（整数和浮点数），遵循 IEEE 754 标准，通过 64 位来表示一个数字。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2625525/1618467913497-02dafff5-534f-4924-88d6-5c35055da92b.png#clientId=u6ac8959b-2b28-4&from=paste&height=288&id=u7dfa5716&margin=%5Bobject%20Object%5D&originHeight=288&originWidth=721&originalType=binary&size=149667&status=done&style=none&taskId=ub81cf025-31a2-4f86-8cba-01874727ab7&width=721"><br>计算机无法直接对十进制的数字进行运算，这是硬件物理特性决定的。这样运算就分成了两个部分：先按照 IEEE 754 转成相应的二进制，然后对阶运算<br>0.1 和 0.2 转换成二进制后会无限循环，但是由于 IEEE 754 尾数位数的限制，需要将后面多余的位截掉。这样在进制之间的转换过程中精度已经损失。</p><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-number">0.0001100110011001100110011001100110011001100110011001101</span>(<span class="hljs-number">0.1</span>)<br><span class="hljs-number">0.001100110011001100110011001100110011001100110011001101</span>(<span class="hljs-number">0.2</span>)<br></code></pre></div></td></tr></table></figure><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><h4 id="1-将数字转成整数，计算完成后再转小数"><a href="#1-将数字转成整数，计算完成后再转小数" class="headerlink" title="1.将数字转成整数，计算完成后再转小数"></a>1.将数字转成整数，计算完成后再转小数</h4><h4 id="2-小数点直接计算取精确小数点几位数，最后字符串再转换成浮点数"><a href="#2-小数点直接计算取精确小数点几位数，最后字符串再转换成浮点数" class="headerlink" title="2.小数点直接计算取精确小数点几位数，最后字符串再转换成浮点数"></a>2.小数点直接计算取精确小数点几位数，最后字符串再转换成浮点数</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">;(<span class="hljs-number">0.1</span> + <span class="hljs-number">0.2</span>).toFixed(<span class="hljs-number">5</span>) <span class="hljs-comment">// &quot;0.30000&quot;结果是字符串</span><br><br><span class="hljs-built_in">parseFloat</span>((<span class="hljs-number">0.1</span> + <span class="hljs-number">0.2</span>).toFixed(<span class="hljs-number">5</span>)) <span class="hljs-comment">// 0.3 parseFloat() 函数可解析一个字符串，并返回一个浮点数。</span><br></code></pre></div></td></tr></table></figure><h4 id="三方库"><a href="#三方库" class="headerlink" title="三方库"></a>三方库</h4><p>Math.js<br>big.js</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>JavaScript</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>ECMAScript</tag>
+      
+      <tag>IEEE754标准</tag>
+      
+      <tag>双精确度</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>什么是闭包</title>
     <link href="/2021/05/30/%E4%BB%80%E4%B9%88%E6%98%AF%E9%97%AD%E5%8C%85/"/>
     <url>/2021/05/30/%E4%BB%80%E4%B9%88%E6%98%AF%E9%97%AD%E5%8C%85/</url>
