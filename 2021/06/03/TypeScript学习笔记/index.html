@@ -204,7 +204,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      10.3k 字
+      10.7k 字
     </span>
   
 
@@ -214,7 +214,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      142
+      148
        分钟
     </span>
   
@@ -256,7 +256,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 分钟前
+                  本文最后更新于：几秒前
                 
               </p>
             
@@ -774,6 +774,23 @@
 
 <p>在 demo1\index.html 中，通过<code>require</code>使用<code>page</code>,其中还要引入 <code> &lt;script src=&quot;[https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.js&quot;&gt;&lt;/script&gt;](https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.js&quot;&gt;&lt;/script&gt;)</code>,<br>否则会报错</p>
 <figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&lt;!DOCTYPE html&gt;<br>&lt;html lang=&quot;en&quot;&gt;<br>  &lt;head&gt;<br>    &lt;meta charset=&quot;UTF-8&quot; /&gt;<br><br>    &lt;title&gt;Document&lt;/title&gt;<br>    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.js&quot;&gt;&lt;/script&gt;<br>    &lt;script src=&quot;./dist/page.js&quot;&gt;&lt;/script&gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;<br>    &lt;script&gt;<br>      require([&#x27;page&#x27;], function (page) &#123;<br>        new page.default();<br>      &#125;);<br>    &lt;/script&gt;<br>  &lt;/body&gt;<br>&lt;/html&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="parcel-打包"><a href="#parcel-打包" class="headerlink" title="parcel 打包"></a>parcel 打包</h3><p><code>parcel</code>官方文档<a target="_blank" rel="noopener" href="https://github.com/parcel-bundler/parcel">https://github.com/parcel-bundler/parcel</a><br>将浏览器无法运行的 ts 文件编译才可以运行的 js 文件<br>在初始文件中<br>demo2\src\page.ts</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">const teacher: string = &#x27;dell&#x27;;<br>console.log(teacher);<br><br></code></pre></div></td></tr></table></figure>
+
+<p>demo2\src\index.html</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&lt;!DOCTYPE html&gt;<br>&lt;html lang=&quot;en&quot;&gt;<br>  &lt;head&gt;<br>    &lt;meta charset=&quot;UTF-8&quot; /&gt;<br>    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;<br>    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;<br>    &lt;title&gt;Document&lt;/title&gt;<br>    &lt;script src=&quot;./page.ts&quot;&gt;&lt;/script&gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;&lt;/body&gt;<br>&lt;/html&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>直接使用 <code>&lt;script src=&quot;./page.ts&quot;&gt;&lt;/script&gt;</code>，浏览器会报错，浏览器无法识别 ts 代码</p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">Uncaught SyntaxError: Missing initializer in const declaration<br></code></pre></div></td></tr></table></figure>
+
+<p>所以我们使用<code>parcel</code>，自动类型转换<br>安装 <code>npm install parcel@next -D </code><br>在 demo2\package.json 中更改 <code>&quot;test&quot;: &quot;parcel ./src/index.html&quot;</code></p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&#123;<br>  <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;demo2&quot;</span>,<br>  <span class="hljs-attr">&quot;version&quot;</span>: <span class="hljs-string">&quot;1.0.0&quot;</span>,<br>  <span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>  <span class="hljs-attr">&quot;main&quot;</span>: <span class="hljs-string">&quot;index.js&quot;</span>,<br>  <span class="hljs-attr">&quot;scripts&quot;</span>: &#123;<br>    <span class="hljs-attr">&quot;test&quot;</span>: <span class="hljs-string">&quot;parcel ./src/index.html&quot;</span><br>  &#125;,<br>  <span class="hljs-attr">&quot;keywords&quot;</span>: [],<br>  <span class="hljs-attr">&quot;author&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>  <span class="hljs-attr">&quot;license&quot;</span>: <span class="hljs-string">&quot;ISC&quot;</span>,<br>  <span class="hljs-attr">&quot;devDependencies&quot;</span>: &#123;<br>    <span class="hljs-attr">&quot;parcel&quot;</span>: <span class="hljs-string">&quot;^2.0.0-beta.3.1&quot;</span><br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>不要再中文文件夹下运行，会运行失败的<br>最后运行 <code>npm run test</code></p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&gt; demo2@1.0.0 test E:\demo2<br>&gt; parcel ./src/index.html<br><br>ℹ Server running at http://localhost:1234<br>√ Built in 7.52s<br><br></code></pre></div></td></tr></table></figure>
+
+<p>运行成功，打开地址到浏览器即可预览</p>
 
             </div>
             <hr>
