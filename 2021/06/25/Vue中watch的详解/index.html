@@ -20,7 +20,7 @@
   <meta name="author" content="jackhoo">
   <meta name="keywords" content="">
   
-  <title>如何判断 0.1 + 0.2 与 0.3 相等 - jackhoo</title>
+  <title>Vue中watch的详解 - jackhoo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -177,7 +177,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="如何判断 0.1 + 0.2 与 0.3 相等">
+            <span class="h2" id="subtitle" title="Vue中watch的详解">
               
             </span>
 
@@ -192,8 +192,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-05-30 16:51" pubdate>
-        星期日, 五月 30日 2021, 4:51 下午
+      <time datetime="2021-06-25 22:55" pubdate>
+        星期五, 六月 25日 2021, 10:55 晚上
       </time>
     </span>
   
@@ -204,7 +204,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      723 字
+      1.1k 字
     </span>
   
 
@@ -214,7 +214,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      14
        分钟
     </span>
   
@@ -252,33 +252,33 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">如何判断 0.1 + 0.2 与 0.3 相等</h1>
+            <h1 style="display: none">Vue中watch的详解</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 个月前
+                  本文最后更新于：4 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">DeviationValue</span>(<span class="hljs-params">num1, num2</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.abs(num1 - num2) &lt; <span class="hljs-built_in">Number</span>.EPSILON<br>&#125;<br></code></pre></div></td></tr></table></figure>
+              <h1 id="Watch-概述"><a href="#Watch-概述" class="headerlink" title="Watch 概述"></a>Watch 概述</h1><p>一个对象，键是需要观察的表达式，值是对应回调函数。值也可以是方法名，或者包含选项的对象。Vue 实例将会在实例化时调用 $watch()，遍历 watch 对象的每一个属性。</p>
+<h2 id="简单的监听"><a href="#简单的监听" class="headerlink" title="简单的监听"></a>简单的监听</h2><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;body&gt;<br>&lt;div id=<span class="hljs-string">&quot;app&quot;</span>&gt;<br>    &lt;input type=<span class="hljs-string">&quot;text&quot;</span> v-model=<span class="hljs-string">&quot;num&quot;</span>&gt;<br>&lt;/div&gt;<br>&lt;script src=<span class="hljs-string">&quot;vue.js&quot;</span>&gt;&lt;/script&gt;<br>&lt;script&gt;<br>    <span class="hljs-keyword">new</span> Vue(&#123;<br>        el: <span class="hljs-string">&#x27;#app&#x27;</span>,<br>        data: &#123;<br>            num: <span class="hljs-string">&#x27;&#x27;</span><br>        &#125;,<br>        watch: &#123;<br>            <span class="hljs-function"><span class="hljs-title">num</span>(<span class="hljs-params">newVal, oldVal</span>)</span> &#123;<br>            <span class="hljs-comment">// 监听 num 属性的数据变化</span><br>    		<span class="hljs-comment">// 作用 : 只要 num 的值发生变化,这个方法就会被调用</span><br>    		<span class="hljs-comment">// 第一个参数 : 新值</span><br>    		<span class="hljs-comment">// 第二个参数 : 旧值,之前的值</span><br>                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;oldVal:&#x27;</span>,oldVal)<br>                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;newVal:&#x27;</span>,newVal)<br>            &#125;<br>        &#125;<br>    &#125;)<br>&lt;/script&gt;<br>&lt;/body&gt;<br></code></pre></div></td></tr></table></figure>
 
-<p>像 ECMAScript 采用的就是双精确度，也就是说，会用 64 位字节来储存一个浮点数。<br>转换为二进制在计算但是小数无限延伸，二进制截取 53 位导致精度丢失。这就是 0.1+0.2 不为 0.3 的原因 Number.EPSILON 的精度是 2^-52，所以只要丢失精度小于 Number.EPSILON 基本可以确认相等。</p>
-<p>作为一道面试题，我觉得重要的是要讲出一点其他人一般不会答出来的深度。像这道题，可以从原理和解决方案两个地方作为答题点，最好在编一个案例。大致讲自己遇到过这个问题，于是很好奇深入研究了一下，发现是浮点数精度导致……原理怎样怎样……然后又看了业界的库的源码，然后怎样怎样解决。<br>关于原理，<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/155">JavaScript 深入之浮点数精度</a>来解释，实际回答的时候，我觉得答出来</p>
-<ol>
-<li>非是 ECMAScript 独有</li>
-<li>IEEE754 标准中 64 位的储存格式，比如 11 位存偏移值</li>
-<li>其中涉及的三次精度丢失</li>
-</ol>
-<p>就已经 OK 了。<br>再讲解决方案，这个可以直接搜索到，各种方案都了解一下，比较一下优劣，还可以参考业界的一些库的实现，比如 math.js，不过相关的我并没有看过，后面我会研究一下。<br>如果还有精力的话，可以从加法再拓展讲讲超出安全值的数字的计算问题。<br>所以我觉得一能回答出底层实现，二能回答出多种解决方案的优劣，三能拓展讲出 bignum 的问题，就是一个非常完美的回答了。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-number">0.1</span> + <span class="hljs-number">0.2</span> === <span class="hljs-number">0.30000000000000004</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="immediate（立即处理-进入页面就触发）"><a href="#immediate（立即处理-进入页面就触发）" class="headerlink" title="immediate（立即处理 进入页面就触发）"></a>immediate（立即处理 进入页面就触发）</h2><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;body&gt;<br>&lt;div id=<span class="hljs-string">&quot;app&quot;</span>&gt;<br>    &lt;input type=<span class="hljs-string">&quot;text&quot;</span> v-model=<span class="hljs-string">&quot;num&quot;</span>&gt;<br>&lt;/div&gt;<br>&lt;script src=<span class="hljs-string">&quot;vue.js&quot;</span>&gt;&lt;/script&gt;<br>&lt;script&gt;<br>    <span class="hljs-keyword">new</span> Vue(&#123;<br>        el: <span class="hljs-string">&#x27;#app&#x27;</span>,<br>        data: &#123;<br>            num: <span class="hljs-number">1</span><br>        &#125;,<br>        watch: &#123;<br>            num: &#123;<br>            	<span class="hljs-comment">// 数据发生变化就会调用这个函数</span><br>                <span class="hljs-function"><span class="hljs-title">handler</span>(<span class="hljs-params">newVal, oldVal</span>)</span> &#123;<br>                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;oldVal:&#x27;</span>, oldVal)<br>                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;newVal:&#x27;</span>, newVal)<br>                &#125;,<br>                <span class="hljs-comment">// 立即处理 进入页面就触发</span><br>                immediate: <span class="hljs-literal">true</span><br>            &#125;<br>        &#125;<br>    &#125;)<br>&lt;/script&gt;<br>&lt;/body&gt;<br></code></pre></div></td></tr></table></figure>
 
-<p>JavaScript 使用 Number 类型表示数字（整数和浮点数），遵循 IEEE 754 标准，通过 64 位来表示一个数字。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2625525/1618467913497-02dafff5-534f-4924-88d6-5c35055da92b.png#clientId=u6ac8959b-2b28-4&from=paste&height=288&id=u7dfa5716&margin=%5Bobject%20Object%5D&originHeight=288&originWidth=721&originalType=binary&size=149667&status=done&style=none&taskId=ub81cf025-31a2-4f86-8cba-01874727ab7&width=721" srcset="/img/loading.gif" lazyload><br>计算机无法直接对十进制的数字进行运算，这是硬件物理特性决定的。这样运算就分成了两个部分：先按照 IEEE 754 转成相应的二进制，然后对阶运算<br>0.1 和 0.2 转换成二进制后会无限循环，但是由于 IEEE 754 尾数位数的限制，需要将后面多余的位截掉。这样在进制之间的转换过程中精度已经损失。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-number">0.0001100110011001100110011001100110011001100110011001101</span>(<span class="hljs-number">0.1</span>)<br><span class="hljs-number">0.001100110011001100110011001100110011001100110011001101</span>(<span class="hljs-number">0.2</span>)<br></code></pre></div></td></tr></table></figure>
+<h2 id="deep（深度监听）"><a href="#deep（深度监听）" class="headerlink" title="deep（深度监听）"></a>deep（深度监听）</h2><p>对象和数组都是引用类型，引用类型变量存的是地址，地址没有变，所以不会触发 watch。这时我们需要进行深度监听，就需要加上一个属性 deep，值为 true</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;body&gt;<br>&lt;div id=<span class="hljs-string">&quot;app&quot;</span>&gt;<br>    &lt;input type=<span class="hljs-string">&quot;button&quot;</span> value=<span class="hljs-string">&quot;更改名字&quot;</span> @click=<span class="hljs-string">&quot;change&quot;</span>&gt;<br>&lt;/div&gt;<br>&lt;script src=<span class="hljs-string">&quot;vue.js&quot;</span>&gt;&lt;/script&gt;<br>&lt;script&gt;<br>    <span class="hljs-keyword">new</span> Vue(&#123;<br>        el: <span class="hljs-string">&#x27;#app&#x27;</span>,<br>        data: &#123;<br>            food: &#123;<br>                id: <span class="hljs-number">1</span>,<br>                name: <span class="hljs-string">&#x27;冰激凌&#x27;</span><br>            &#125;<br>        &#125;,<br>        methods: &#123;<br>            <span class="hljs-function"><span class="hljs-title">change</span>(<span class="hljs-params"></span>)</span> &#123;<br>                <span class="hljs-built_in">this</span>.food.name = <span class="hljs-string">&#x27;棒棒糖&#x27;</span><br>            &#125;<br>        &#125;,<br>        watch: &#123;<br>        	<span class="hljs-comment">// 第一种方式：监听整个对象，每个属性值的变化都会执行handler</span><br>        	<span class="hljs-comment">// 注意：属性值发生变化后，handler执行后获取的 newVal 值和 oldVal 值是一样的</span><br>            food: &#123;<br>                <span class="hljs-comment">// 每个属性值发生变化就会调用这个函数</span><br>                <span class="hljs-function"><span class="hljs-title">handler</span>(<span class="hljs-params">newVal, oldVal</span>)</span> &#123;<br>                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;oldVal:&#x27;</span>, oldVal)<br>                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;newVal:&#x27;</span>, newVal)<br>                &#125;,<br>                <span class="hljs-comment">// 立即处理 进入页面就触发</span><br>                immediate: <span class="hljs-literal">true</span>,<br>                <span class="hljs-comment">// 深度监听 属性的变化</span><br>                deep: <span class="hljs-literal">true</span><br>            &#125;,<br>            <span class="hljs-comment">// 第二种方式：监听对象的某个属性，被监听的属性值发生变化就会执行函数</span><br>            <span class="hljs-comment">// 函数执行后，获取的 newVal 值和 oldVal 值不一样</span><br>            <span class="hljs-string">&#x27;food.name&#x27;</span>(newVal, oldVal) &#123;<br>                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;oldVal:&#x27;</span>, oldVal)   <span class="hljs-comment">// 冰激凌</span><br>                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;newVal:&#x27;</span>, newVal)   <span class="hljs-comment">// 棒棒糖</span><br>            &#125;<br>        &#125;<br>    &#125;)<br>&lt;/script&gt;<br>&lt;/body&gt;<br></code></pre></div></td></tr></table></figure>
 
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><h4 id="1-将数字转成整数，计算完成后再转小数"><a href="#1-将数字转成整数，计算完成后再转小数" class="headerlink" title="1.将数字转成整数，计算完成后再转小数"></a>1.将数字转成整数，计算完成后再转小数</h4><h4 id="2-小数点直接计算取精确小数点几位数，最后字符串再转换成浮点数"><a href="#2-小数点直接计算取精确小数点几位数，最后字符串再转换成浮点数" class="headerlink" title="2.小数点直接计算取精确小数点几位数，最后字符串再转换成浮点数"></a>2.小数点直接计算取精确小数点几位数，最后字符串再转换成浮点数</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">;(<span class="hljs-number">0.1</span> + <span class="hljs-number">0.2</span>).toFixed(<span class="hljs-number">5</span>) <span class="hljs-comment">// &quot;0.30000&quot;结果是字符串</span><br><br><span class="hljs-built_in">parseFloat</span>((<span class="hljs-number">0.1</span> + <span class="hljs-number">0.2</span>).toFixed(<span class="hljs-number">5</span>)) <span class="hljs-comment">// 0.3 parseFloat() 函数可解析一个字符串，并返回一个浮点数。</span><br></code></pre></div></td></tr></table></figure>
+<h1 id="Watch-和-computed-的区别"><a href="#Watch-和-computed-的区别" class="headerlink" title="Watch 和 computed 的区别"></a>Watch 和 computed 的区别</h1><h2 id="Watch"><a href="#Watch" class="headerlink" title="Watch"></a>Watch</h2><p>watch 用于观察和监听页面上的 vue 实例，当你需要在数据变化响应时，执行异步操作，或高性能消耗的操作，那么 watch 为最佳选择<br>​</p>
+<p>1、watch 是监听器，可以监听某一个数据，然后执行相应的操作；<br>2、不支持缓存，数据变直接会触发相应的操作；<br>3、监听的函数接收两个参数，第一个参数是最新的值；第二个参数是输入之前的值；<br>4、支持异步操作；</p>
+<h2 id="computed"><a href="#computed" class="headerlink" title="computed"></a>computed</h2><p>可以关联多个实时计算的对象，当这些对象中的其中一个改变时都会触发这个属性<br>     具有缓存能力，所以只有当数据再次改变时才会重新渲染，否则就会直接拿取缓存中的数据。<br>​</p>
+<p>1、computed 是计算属性，也就是依赖某个值或者 props 通过计算得来得数据；<br>2、 computed 的值是在 getter 执行之后进行缓存的，只有在它依赖的数据发生变化，会重新调用 getter 来计算；<br>3、 不支持异步，当 computed 内有异步操作时无效，无法监听数据的变化；<br>​</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>什么时候用 computed 什么时候用 watch 比较合适？<br>当多个属性影响一个属性的时候，建议用 computed，比如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-title">fullName</span>(<span class="hljs-params"></span>)</span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.firstName + <span class="hljs-built_in">this</span>.secondName<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-<h4 id="三方库"><a href="#三方库" class="headerlink" title="三方库"></a>三方库</h4><p>Math.js<br>big.js</p>
+<p>fullName 是由 firstName 和 secondName 影响的，这种情况就适合 computed；<br>当一个值发生变化之后，会引起一系列的操作，这种情况就适合用 watch；</p>
+<p>[</p>
+<p>](<a target="_blank" rel="noopener" href="https://blog.csdn.net/fu983531588/article/details/89454446">https://blog.csdn.net/fu983531588/article/details/89454446</a>)</p>
 
             </div>
             <hr>
@@ -288,7 +288,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
+                      <a class="hover-with-bg" href="/categories/Vue/">Vue</a>
                     
                   </div>
                 
@@ -296,11 +296,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/ECMAScript/">ECMAScript</a>
-                    
-                      <a class="hover-with-bg" href="/tags/IEEE754%E6%A0%87%E5%87%86/">IEEE754标准</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E7%B2%BE%E7%A1%AE%E5%BA%A6/">双精确度</a>
+                      <a class="hover-with-bg" href="/tags/watch/">watch</a>
                     
                   </div>
                 
@@ -317,18 +313,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/06/03/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">TypeScript学习笔记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/05/30/%E4%BB%80%E4%B9%88%E6%98%AF%E9%97%AD%E5%8C%85/">
-                        <span class="hidden-mobile">什么是闭包</span>
+                      <a href="/2021/06/16/Vue2-0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">Vue2.0学习笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
