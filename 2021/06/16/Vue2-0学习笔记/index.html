@@ -204,7 +204,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      12.9k 字
+      13.7k 字
     </span>
   
 
@@ -214,7 +214,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      207
+      218
        分钟
     </span>
   
@@ -615,6 +615,33 @@
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> header_a = Vue.extend(&#123;<br>  template: <span class="hljs-string">`&lt;p&gt;&#123;&#123;message&#125;&#125;-&#123;&#123;a&#125;&#125;&lt;/p&gt;`</span>,<br>  data: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> &#123;<br>      message: <span class="hljs-string">&#x27;Hello,I am Header&#x27;</span>,<br>    &#125;;<br>  &#125;,<br>  props: [<span class="hljs-string">&#x27;a&#x27;</span>],<br>&#125;);<br><span class="hljs-keyword">new</span> header_a(&#123; <span class="hljs-attr">propsData</span>: &#123; <span class="hljs-attr">a</span>: <span class="hljs-number">1</span> &#125; &#125;).$mount(<span class="hljs-string">&#x27;header&#x27;</span>);<br></code></pre></div></td></tr></table></figure>
 
 <p>总结：propsData 在实际开发中我们使用的并不多，我们在后边会学到 Vuex 的应用，他的作用就是在单页应用中保持状态和数据的。</p>
+<h2 id="computed-Option-计算选项"><a href="#computed-Option-计算选项" class="headerlink" title="computed Option 计算选项"></a>computed Option 计算选项</h2><p>computed 的作用主要是对原数据进行改造输出。改造输出：包括格式的编辑，大小写转换，顺序重排，添加符号……。<br>​</p>
+<p>1、computed 是计算属性，也就是依赖某个值或者 props 通过计算得来得数据；<br>2、 computed 的值是在 getter 执行之后进行缓存的，只有在它依赖的数据发生变化，会重新调用 getter 来计算；<br>3、 不支持异步，当 computed 内有异步操作时无效，无法监听数据的变化<br>​</p>
+<p>在 index.html 中添加代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;li&gt;<br>  &lt;a href=<span class="hljs-string">&quot;./example/computed.html&quot;</span>&gt;computed Option&lt;/a&gt;<br>&lt;/li&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>在 example 中添加 computed 加.html 文件</p>
+<h3 id="一、格式化输出结果："><a href="#一、格式化输出结果：" class="headerlink" title="一、格式化输出结果："></a>一、格式化输出结果：</h3><p>我们先来做个读出价格的例子：我们读书的原始数据是 price:100 但是我们输出给用户的样子是（￥ 100 元）。 主要的 javascript 代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">computed:&#123;<br>    newPrice:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.price=<span class="hljs-string">&#x27;￥&#x27;</span> + <span class="hljs-built_in">this</span>.price + <span class="hljs-string">&#x27;元&#x27;</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>全部代码:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;!DOCTYPE html&gt;<br>&lt;html lang=<span class="hljs-string">&quot;en&quot;</span>&gt;<br>&lt;head&gt;<br>    &lt;meta charset=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;<br>    &lt;script type=<span class="hljs-string">&quot;text/javascript&quot;</span> src=<span class="hljs-string">&quot;../assets/js/vue.js&quot;</span>&gt;&lt;/script&gt;<br>    &lt;title&gt;Computed Option 计算选项&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>    &lt;h1&gt;Computed Option 计算选项&lt;/h1&gt;<br>    &lt;hr&gt;<br>    &lt;div id=<span class="hljs-string">&quot;app&quot;</span>&gt;<br>        &#123;&#123;newPrice&#125;&#125;<br>    &lt;/div&gt;<br><br>    &lt;script type=<span class="hljs-string">&quot;text/javascript&quot;</span>&gt;<br>        <span class="hljs-keyword">var</span> app=<span class="hljs-keyword">new</span> Vue(&#123;<br>            el:<span class="hljs-string">&#x27;#app&#x27;</span>,<br>            data:&#123;<br>                price:<span class="hljs-number">100</span><br>            &#125;,<br>            computed:&#123;<br>                newPrice:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.price=<span class="hljs-string">&#x27;￥&#x27;</span> + <span class="hljs-built_in">this</span>.price + <span class="hljs-string">&#x27;元&#x27;</span>;<br>                &#125;<br>            &#125;<br>        &#125;)<br>    &lt;/script&gt;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>现在输出的结果就是：￥ 100 元。</p>
+<h3 id="二、用计算属性反转数组"><a href="#二、用计算属性反转数组" class="headerlink" title="二、用计算属性反转数组"></a>二、用计算属性反转数组</h3><p>例如：我们得到了一个新闻列表的数组，它的顺序是安装新闻时间的顺序正序排列的，也就是早反生的新闻排在前面。这是反人类的，我们需要给他反转。这时我们就可以用到我们的计算属性了。<br>没有排序的新闻列表，是安装日期正序排列的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> newsList = [<br>  &#123; <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;香港或就“装甲车被扣”事件追责 起诉涉事运输公司&#x27;</span>, <span class="hljs-attr">date</span>: <span class="hljs-string">&#x27;2017/3/10&#x27;</span> &#125;,<br>  &#123; <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;日本第二大准航母服役 外媒：针对中国潜艇&#x27;</span>, <span class="hljs-attr">date</span>: <span class="hljs-string">&#x27;2017/3/12&#x27;</span> &#125;,<br>  &#123; <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;中国北方将有明显雨雪降温天气 南方阴雨持续&#x27;</span>, <span class="hljs-attr">date</span>: <span class="hljs-string">&#x27;2017/3/13&#x27;</span> &#125;,<br>  &#123; <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;起底“最短命副市长”：不到40天落马，全家被查&#x27;</span>, <span class="hljs-attr">date</span>: <span class="hljs-string">&#x27;2017/3/23&#x27;</span> &#125;,<br>];<br></code></pre></div></td></tr></table></figure>
+
+<p>我们希望输出的结果：</p>
+<ul>
+<li>起底“最短命副市长”：不到 40 天落马，全家被查-2017/3/23</li>
+<li>中国北方将有明显雨雪降温天气 南方阴雨持续-2017/3/13</li>
+<li>日本第二大准航母服役 外媒：针对中国潜艇-2017/3/12</li>
+<li>香港或就“装甲车被扣”事件追责 起诉涉事运输公司-2017/3/10</li>
+</ul>
+<p>我们的在 computed 里的 javascript 代码：我们用 js 原生方法给数组作了反转。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">computed:&#123;<br>    reverseNews:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.newsList.reverse();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>总结：computed 属性是非常有用，在输出数据前可以轻松的改变数据。所以说这节课的代码必须要多敲几遍，加深印象</p>
 <p>todo</p>
 
             </div>
