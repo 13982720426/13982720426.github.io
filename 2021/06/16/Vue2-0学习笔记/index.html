@@ -204,7 +204,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      16.8k 字
+      16.9k 字
     </span>
   
 
@@ -214,7 +214,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      265
+      266
        分钟
     </span>
   
@@ -721,7 +721,10 @@
 <p>在 example 中添加 extends.html 文件</p>
 <h3 id="一、extends-我们来看一个扩展的实例。"><a href="#一、extends-我们来看一个扩展的实例。" class="headerlink" title="一、extends 我们来看一个扩展的实例。"></a>一、extends 我们来看一个扩展的实例。</h3><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;!DOCTYPE html&gt;<br>&lt;html lang=<span class="hljs-string">&quot;en&quot;</span>&gt;<br>&lt;head&gt;<br>    &lt;meta charset=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;<br>    &lt;script type=<span class="hljs-string">&quot;text/javascript&quot;</span> src=<span class="hljs-string">&quot;../assets/js/vue.js&quot;</span>&gt;&lt;/script&gt;<br>    &lt;title&gt;Extends Optin Demo&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>    &lt;h1&gt;Extends Optin Demo&lt;/h1&gt;<br>    &lt;hr&gt;<br>    &lt;div id=<span class="hljs-string">&quot;app&quot;</span>&gt;<br>        &#123;&#123;message&#125;&#125;<br>        &lt;p&gt;<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;add&quot;</span>&gt;</span>add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>&lt;/p&gt;<br>    &lt;/div&gt;<br><br>    &lt;script type=<span class="hljs-string">&quot;text/javascript&quot;</span>&gt;<br>        <span class="hljs-keyword">var</span> bbb=&#123;<br>            created:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;我是被扩展出来的&quot;</span>);<br>            &#125;,<br>            methods:&#123;<br>                add:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;我是被扩展出来的方法！&#x27;</span>);<br>                &#125;<br>            &#125;<br>        &#125;;<br>        <span class="hljs-keyword">var</span> app=<span class="hljs-keyword">new</span> Vue(&#123;<br>            el:<span class="hljs-string">&#x27;#app&#x27;</span>,<br>            data:&#123;<br>                message:<span class="hljs-string">&#x27;hello Vue!&#x27;</span><br>            &#125;,<br>            methods:&#123;<br>                add:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;我是原生方法&#x27;</span>);<br>                &#125;<br>            &#125;,<br>            <span class="hljs-keyword">extends</span>:bbb<br>        &#125;)<br>    &lt;/script&gt;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></div></td></tr></table></figure>
 
-<h3 id="二、delimiters-选项"><a href="#二、delimiters-选项" class="headerlink" title="二、delimiters 选项"></a>二、delimiters 选项</h3><p>delimiters 的作用是改变我们插值的符号。</p>
+<h3 id="二、delimiters-选项"><a href="#二、delimiters-选项" class="headerlink" title="二、delimiters 选项"></a>二、delimiters 选项</h3><p>delimiters 的作用是改变我们插值的符号。Vue 默认的插值是双大括号<code>&#123;&#123; &#125;&#125;</code>。但有时我们会有需求更改这个插值的形式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">delimiters: [<span class="hljs-string">&#x27;$&#123;&#x27;</span>, <span class="hljs-string">&#x27;&#125;&#x27;</span>];<br></code></pre></div></td></tr></table></figure>
+
+<p>现在我们的插值形式就变成了${}。</p>
 <p>todo</p>
 
             </div>
