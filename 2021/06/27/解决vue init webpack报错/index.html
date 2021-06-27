@@ -20,7 +20,7 @@
   <meta name="author" content="jackhoo">
   <meta name="keywords" content="">
   
-  <title>React路由传参 - jackhoo</title>
+  <title>解决vue init webpack报错 - jackhoo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -177,7 +177,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="React路由传参">
+            <span class="h2" id="subtitle" title="解决vue init webpack报错">
               
             </span>
 
@@ -192,8 +192,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-26 17:44" pubdate>
-        星期一, 四月 26日 2021, 5:44 下午
+      <time datetime="2021-06-27 14:52" pubdate>
+        星期日, 六月 27日 2021, 2:52 下午
       </time>
     </span>
   
@@ -204,7 +204,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      374 字
+      640 字
     </span>
   
 
@@ -214,7 +214,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      7
        分钟
     </span>
   
@@ -252,50 +252,43 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">React路由传参</h1>
+            <h1 style="display: none">解决vue init webpack报错</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：21 天前
+                  本文最后更新于：1 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="react-路由传参-3-种方式"><a href="#react-路由传参-3-种方式" class="headerlink" title="react 路由传参(3 种方式)"></a>react 路由传参(3 种方式)</h1><h2 id="1-params-传参-刷新页面后参数不消失，参数会在地址栏显示"><a href="#1-params-传参-刷新页面后参数不消失，参数会在地址栏显示" class="headerlink" title="1.params 传参(刷新页面后参数不消失，参数会在地址栏显示)"></a>1.params 传参(刷新页面后参数不消失，参数会在地址栏显示)</h2><p>路由页面:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;Route path=<span class="hljs-string">&quot;/link/:id&quot;</span> component=&#123;Demo&#125;&gt;&lt;<span class="hljs-regexp">/Route&gt; /</span><span class="hljs-regexp">/注意要配置/</span>:id路由跳转并传递参数。<br></code></pre></div></td></tr></table></figure>
+              <p>解决 vue init webpack 报错，直接使用<code>vue init webpack test </code>会报错，错误信息如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">vue-cli · Failed to download repo vuejs-templates/webpack: connect ETIMEDOUT xxx:<span class="hljs-number">443</span><br></code></pre></div></td></tr></table></figure>
 
-<p>链接方式:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;Link to=&#123;<span class="hljs-string">&#x27;/link/&#x27;</span>+<span class="hljs-string">&#x27;xxx&#x27;</span>&#125;&gt;首页&lt;/Link&gt;<br><span class="hljs-comment">//或</span><br>&lt;Link to=&#123;&#123;<span class="hljs-attr">pathname</span>:<span class="hljs-string">&#x27;/link/&#x27;</span>+<span class="hljs-string">&#x27;xxx&#x27;</span>&#125;&#125;&gt;首页&lt;/Link&gt;<br></code></pre></div></td></tr></table></figure>
+<p>通过 vue-cli 工具命令 vue init webpack vuedemo 创建 vue 项目的时候报错，提示连接超时，应该是下载某个 package 的时候，需要翻墙，导致出现连接超时<br>[</p>
+<p>](<a target="_blank" rel="noopener" href="https://github.com/vuejs-templates/webpack">https://github.com/vuejs-templates/webpack</a>)<br>解决办法是改为离线创建，我们需要下载 github 仓库中的 vue-templates/webpack，然后解压到本地。下载地址为：<a target="_blank" rel="noopener" href="https://github.com/vuejs-templates/webpack">https://github.com/vuejs-templates/webpack</a>，下载之后，解压到本地用户目录下创建.vue-templates 文件夹<br>​</p>
+<p>下载之后的压缩包为 webpack-develop.zip，我们解压之后，需要更改目录名为 webpack。用户目录下的目录为.vue-templates，注意文件夹名称前面的点(.)。<br>以我的为例将 webpack 文件放到 C:\Users\jackhoo.vue-templates 下<br>​</p>
+<p>这样，我们再进行 vue init webpack vuedemo 命令的时候，需要带上参数–offline 表示离线初始化。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">vue init webpack vuedemo --offline<br></code></pre></div></td></tr></table></figure>
 
-<p>js 方式:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-built_in">this</span>.props.history.push(<span class="hljs-regexp">/link/</span><span class="hljs-string">&quot;+&#x27;xxx&#x27;)</span><br><span class="hljs-string">//或</span><br><span class="hljs-string">this.props.history.push(&#123;pathname:&#x27;/link/+&#x27;xxx&#x27;&#125;)</span><br></code></pre></div></td></tr></table></figure>
+<p>输入命令后，会询问我们几个简单的选项，我们根据自己的需要进行填写就可以了。</p>
+<ul>
+<li>Project name :项目名称 ，如果不需要更改直接回车就可以了。注意：这里不能使用大写，所以我把名称改成了 vuedemo</li>
+<li>Project description:项目描述，默认为 A Vue.js project,直接回车，不用编写。</li>
+<li>Author：作者，如果你有配置 git 的作者，他会读取。</li>
+<li>Install vue-router? 是否安装 vue 的路由插件，我们这里需要安装，所以选择 Y</li>
+<li>Use ESLint to lint your code? 是否用 ESLint 来限制你的代码错误和风格。我们这里不需要输入 n，如果你是大型团队开发，最好是进行配置。</li>
+<li>setup unit tests with Karma + Mocha? 是否需要安装单元测试工具 Karma+Mocha，我们这里不需要，所以输入 n。</li>
+<li>Setup e2e tests with Nightwatch?是否安装 e2e 来进行用户行为模拟测试，我们这里不需要，所以输入 n。</li>
+<li>Should we run <code>npm install</code> for you after the project has been created? (recommended) npm</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">   vue-cli · Generated <span class="hljs-string">&quot;vuedemo&quot;</span>.<br><br><br># Installing project dependencies ...<br># ========================<br></code></pre></div></td></tr></table></figure>
 
-<p>获取参数:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-built_in">this</span>.props.match.params.id <span class="hljs-comment">//注意这里是match而非history</span><br></code></pre></div></td></tr></table></figure>
-
-<h2 id="2-query-传参-刷新页面后参数消失"><a href="#2-query-传参-刷新页面后参数消失" class="headerlink" title="2.query 传参(刷新页面后参数消失)"></a>2.query 传参(刷新页面后参数消失)</h2><p>路由页面:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;Route path=<span class="hljs-string">&quot;/demo&quot;</span> component=&#123;Demo&#125;&gt;&lt;<span class="hljs-regexp">/Route&gt; /</span><span class="hljs-regexp">/无需配置路由跳转并传递参数</span><br></code></pre></div></td></tr></table></figure>
-
-<p>链接方式:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;Link to=&#123;&#123;<span class="hljs-attr">pathname</span>: <span class="hljs-string">&#x27;/link &quot;,query:&#123; id:22, name:&#x27;</span>dahuang<span class="hljs-string">&quot;&#125;&#125;&#125;&gt;XX&lt;/Link&gt;</span><br></code></pre></div></td></tr></table></figure>
-
-<p>js 方式:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-built_in">this</span>.props.history.push(&#123; <span class="hljs-attr">pathname</span>: <span class="hljs-string">&#x27;/demo&#x27;</span>, <span class="hljs-attr">query</span>: &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">22</span>, <span class="hljs-attr">namer</span>: <span class="hljs-string">&#x27;dahuang&#x27;</span> &#125; &#125;)<br></code></pre></div></td></tr></table></figure>
-
-<p>获取参数:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-built_in">this</span>.props.location.query.name<br></code></pre></div></td></tr></table></figure>
-
-<h2 id="3-state-传参-刷新页面后参数不消失，state-传的参数是加密的"><a href="#3-state-传参-刷新页面后参数不消失，state-传的参数是加密的" class="headerlink" title="3.state 传参(刷新页面后参数不消失，state 传的参数是加密的)"></a>3.state 传参(刷新页面后参数不消失，state 传的参数是加密的)</h2><p>路由页面:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;Route path=<span class="hljs-string">&quot;/link&quot;</span> component=&#123;Demo&#125;&gt;&lt;<span class="hljs-regexp">/Route&gt; /</span><span class="hljs-regexp">/无需配置路由跳转并传递参数</span><br></code></pre></div></td></tr></table></figure>
-
-<p>链接方式:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;Link to=&#123;&#123;<span class="hljs-attr">pathname</span>:<span class="hljs-string">&#x27;/link&quot;,state:&#123;id:12,name:&#x27;</span>dahuang<span class="hljs-string">&#x27;&#125;&#125;&#125;&gt;XX&lt;/Link&gt;</span><br></code></pre></div></td></tr></table></figure>
-
-<p>js 方式:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-built_in">this</span>.props.history.push(&#123; <span class="hljs-attr">pathname</span>: <span class="hljs-string">&#x27;/demo&#x27;</span>, <span class="hljs-attr">state</span>: &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">12</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;dahuang&#x27;</span> &#125; &#125;)<br></code></pre></div></td></tr></table></figure>
-
-<p>获取参数:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-built_in">this</span>.props.location.state.name<br></code></pre></div></td></tr></table></figure>
+<p>命令行出现上面的文字，说明我们已经初始化好了第一步。</p>
+<ol>
+<li>cd vuedemo 进入我们的 vue 项目目录。</li>
+<li>npm run dev 开发模式下运行我们的程序。给我们自动构建了开发用的服务器环境和在浏览器中打开，并实时监视我们的代码更改，即时呈现给我们。</li>
+</ol>
+<p>最后运行就成功了。</p>
 
             </div>
             <hr>
@@ -305,7 +298,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/React/">React</a>
+                      <a class="hover-with-bg" href="/categories/Vue/">Vue</a>
                     
                   </div>
                 
@@ -313,9 +306,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/React/">React</a>
+                      <a class="hover-with-bg" href="/tags/Vue/">Vue</a>
                     
-                      <a class="hover-with-bg" href="/tags/React%E8%B7%AF%E7%94%B1/">React路由</a>
+                      <a class="hover-with-bg" href="/tags/webpack/">webpack</a>
                     
                   </div>
                 
@@ -332,18 +325,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/04/26/React-Hooks/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">React-Hooks</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/04/26/Sass%E5%92%8CLess/">
-                        <span class="hidden-mobile">Sass和Less</span>
+                      <a href="/2021/06/25/Vue%E4%B8%ADwatch%E7%9A%84%E8%AF%A6%E8%A7%A3/">
+                        <span class="hidden-mobile">Vue中watch的详解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
