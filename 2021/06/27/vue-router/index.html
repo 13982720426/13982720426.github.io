@@ -204,7 +204,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.3k 字
+      6.6k 字
     </span>
   
 
@@ -214,7 +214,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      30
+      84
        分钟
     </span>
   
@@ -324,6 +324,157 @@
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span>;<br><span class="hljs-keyword">import</span> Router <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-router&#x27;</span>;<br><span class="hljs-keyword">import</span> Hello <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/components/Hello&#x27;</span>;<br><span class="hljs-keyword">import</span> Hi <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/components/Hi&#x27;</span>;<br><span class="hljs-keyword">import</span> Hi1 <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/components/Hi1&#x27;</span>;<br><span class="hljs-keyword">import</span> Hi2 <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/components/Hi2&#x27;</span>;<br><br>Vue.use(Router);<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">new</span> Router(&#123;<br>  routes: [<br>    &#123;<br>      path: <span class="hljs-string">&#x27;/&#x27;</span>,<br>      name: <span class="hljs-string">&#x27;Hello&#x27;</span>,<br>      component: Hello,<br>    &#125;,<br>    &#123;<br>      path: <span class="hljs-string">&#x27;/hi&#x27;</span>,<br>      component: Hi,<br>      children: [<br>        &#123; <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-attr">component</span>: Hi &#125;,<br>        &#123; <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;hi1&#x27;</span>, <span class="hljs-attr">component</span>: Hi1 &#125;,<br>        &#123; <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;hi2&#x27;</span>, <span class="hljs-attr">component</span>: Hi2 &#125;,<br>      ],<br>    &#125;,<br>  ],<br>&#125;);<br></code></pre></div></td></tr></table></figure>
 
 <p>需要注意的是，在配置路由文件前，需要先用 import 引入 Hi1 和 Hi2。<br>总结： 这节课学的内容在路由配置里经常用到，比如我们作一个购物模块，购物模块里有很多相同的元素，我们就会利用这种子路由的形式，先定一个父页面，然后再修改子页面。希望这节课对你有帮助，其实子路由的步骤还是有些繁琐的，所以希望你们多练习几遍，能够完全掌握。</p>
+<h1 id="vue-router-如何参数传递"><a href="#vue-router-如何参数传递" class="headerlink" title="vue-router 如何参数传递"></a>vue-router 如何参数传递</h1><p>开发中，参数的传递是个最基本的业务需求。通过 URL 地址来传递参数是一个形式，我们就看看 vue-router 为我们提供了那些传递参数的功能。我们先想象一个基本需求，就是在我们点击导航菜单时，跳转页面上能显示出当前页面的路径，来告诉用户你想在所看的页面位置（类似于面包屑导航）。</p>
+<h2 id="一、用-name-传递参数"><a href="#一、用-name-传递参数" class="headerlink" title="一、用 name 传递参数"></a>一、用 name 传递参数</h2><p>两步完成用 name 传值并显示在模板里：</p>
+<ol>
+<li>在路由文件 src/router/index.js 里配置 name 属性。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">routes: [<br>  &#123;<br>    path: <span class="hljs-string">&#x27;/&#x27;</span>,<br>    name: <span class="hljs-string">&#x27;Hello&#x27;</span>,<br>    component: Hello,<br>  &#125;,<br>];<br></code></pre></div></td></tr></table></figure>
+
+<ol start="2">
+<li>模板里(src/App.vue)用$route.name 的形势接收，比如直接在模板中显示：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;p&gt;&#123;&#123; $route.name&#125;&#125;&lt;/p&gt;<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="二、通过-标签中的-to-传参"><a href="#二、通过-标签中的-to-传参" class="headerlink" title="二、通过 标签中的 to 传参"></a>二、通过<router-link> 标签中的 to 传参</h2><p>也许你也会觉的上边的传参很不正规，也不方便，其实我们多数传参是不用 name 进行传参的，我们用<router-link>标签中的 to 属性进行传参，需要您注意的是这里的 to 要进行一个绑定，写成<code>:to</code>。<br>先来看一下这种传参方法的基本语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;router-link :to=<span class="hljs-string">&quot;&#123;name:xxx,params:&#123;key:value&#125;&#125;&quot;</span>&gt;valueString&lt;/router-link&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>这里的 to 前边是带冒号的，然后后边跟的是一个对象形势的字符串.</p>
+<ul>
+<li>name：就是我们在路由 reouter 配置文件中起的 name 值。**(name 一定要一致！)**</li>
+<li>params：就是我们要传的参数，它也是对象形势，在对象里可以传递多个值。</li>
+</ul>
+<p>了解基本的语法后，我们改造一下我们的 src/App.vue 里的<router-link>标签,我们把 hi1 页面的<router-link>进行修改。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;router-link :to=<span class="hljs-string">&quot;&#123;name:&#x27;hi1&#x27;,params:&#123;username:&#x27;jsp&#x27;,id:&#x27;888&#x27;&#125;&#125;&quot;</span>&gt;Hi1&lt;/router-link&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>把 src/reouter/index.js 文件里给 hi1 配置的路由起个 name,就叫 hi1. <strong>(name 的值一定要和<router-link>的 name 一样！)</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&#123; <span class="hljs-attr">path</span>: <span class="hljs-string">&quot;hi1&quot;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;hi1&quot;</span>, <span class="hljs-attr">component</span>: Hi1 &#125;,<br></code></pre></div></td></tr></table></figure>
+
+<p>最后在模板里(src/components/Hi1.vue)用$route.params.username 进行接收.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;h2&gt;&#123;&#123;msg&#125;&#125;--&#123;&#123;$route.params.username&#125;&#125;--&#123;&#123;$route.params.id&#125;&#125;&lt;/h2&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p><em>总结：</em>今天我们学习了两种传参的方法，一般会使用第二种方法。我们通过学习也知道了 name 的用途，一种作用是传参，一种作用是在传参时起到名称作用。传参的操作在实际开发中是基本的需求，我们一定要掌握好啊。<br>​</p>
+<h1 id="单页面多路由区域操作"><a href="#单页面多路由区域操作" class="headerlink" title="单页面多路由区域操作"></a>单页面多路由区域操作</h1><p>实际需求是这样的，在一个页面里我们有 2 个以上<router-view>区域，我们通过配置路由的 js 文件，来操作这些区域的内容。例如我们在 src/App.vue 里加上两个<router-view>标签。打开了 src 目录下的 App.vue 文件，在<router-view>下面新写了两行<router-view>标签,并加入了些 CSS 样式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;router-view &gt;&lt;/router-view&gt;<br> &lt;router-view name=<span class="hljs-string">&quot;left&quot;</span> style=<span class="hljs-string">&quot;float:left;width:50%;background-color:#ccc;height:200px;&quot;</span>&gt;&lt;/router-view&gt;<br> &lt;router-view name=<span class="hljs-string">&quot;right&quot;</span> style=<span class="hljs-string">&quot;float:right;width:50%;background-color:#c0c;height:200px;&quot;</span>&gt;&lt;/router-view&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>现在的页面中有了三个<router-view>标签，也就是说我们需要在路由里配置这三个区域，配置主要是在<code>**components**</code>字段里进行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">new</span> Router(&#123;<br>  routes: [<br>    &#123;<br>      path: <span class="hljs-string">&#x27;/&#x27;</span>,<br>      name: <span class="hljs-string">&#x27;HelloWorld&#x27;</span>,<br>      components: &#123; HelloWorld, <span class="hljs-attr">left</span>: Hi1, <span class="hljs-attr">right</span>: Hi2 &#125;,<br>    &#125;,<br>    &#123;<br>      path: <span class="hljs-string">&#x27;/hi&#x27;</span>,<br>      components: &#123; HelloWorld, <span class="hljs-attr">left</span>: Hi2, <span class="hljs-attr">right</span>: Hi1 &#125;,<br>    &#125;,<br>    <span class="hljs-comment">// &#123;</span><br>    <span class="hljs-comment">//   path: &quot;/hi&quot;,</span><br>    <span class="hljs-comment">//   component: Hi,</span><br>    <span class="hljs-comment">//   children: [</span><br>    <span class="hljs-comment">//     &#123; path: &quot;/&quot;, name: &quot;HelloWorld/Hi&quot;, component: Hi &#125;,</span><br>    <span class="hljs-comment">//     &#123; path: &quot;hi1&quot;, name: &quot;hi1&quot;, component: Hi1 &#125;,</span><br>    <span class="hljs-comment">//     &#123; path: &quot;hi2&quot;, name: &quot;Hi2&quot;, component: Hi2 &#125;</span><br>    <span class="hljs-comment">//   ]</span><br>    <span class="hljs-comment">// &#125;</span><br>  ],<br>&#125;);<br></code></pre></div></td></tr></table></figure>
+
+<p>上边的代码我们编写了两个路径，一个是默认的‘/’，另一个是’/hi’.在两个路径下的 components 里面，我们对三个区域都定义了显示内容。​</p>
+<h1 id="vue-router-利用-url-传递参数"><a href="#vue-router-利用-url-传递参数" class="headerlink" title="vue-router 利用 url 传递参数"></a>vue-router 利用 url 传递参数</h1><p>因为我们以前在前后端没有分开开发的时候，经常这样做。在实际开发也是有很多用 URL 传值的需求，比如我们在新闻列表中有很多新闻标题整齐的排列，我们需要点击每个新闻标题打开不同的新闻内容，这时在跳转路由时跟上新闻编号就十分实用。</p>
+<h2 id="冒号的形式传递参数"><a href="#冒号的形式传递参数" class="headerlink" title=":冒号的形式传递参数"></a>:冒号的形式传递参数</h2><p>我们可以在理由配置文件里以:冒号的形式传递参数，这就是对参数的绑定。</p>
+<ul>
+<li>在配置文件里以冒号的形式设置参数。我们在/src/router/index.js 文件里配置路由。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&#123;<br>    path:<span class="hljs-string">&#x27;/params/:newsId/:newsTitle&#x27;</span>,<br>     component:Params<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>我们需要传递参数是新闻 ID（newsId）和新闻标题（newsTitle）.所以我们在路由配置文件里制定了这两个值。</p>
+<ul>
+<li>在 src/components 目录下建立我们 params.vue 组件，也可以说是页面。我们在页面里输出了 url 传递的的新闻 ID 和新闻标题。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;h2&gt;&#123;&#123; msg &#125;&#125;&lt;/h2&gt;<br>        &lt;p&gt;新闻ID：&#123;&#123; $route.params.newsId&#125;&#125;&lt;/p&gt;<br>        &lt;p&gt;新闻标题：&#123;&#123; $route.params.newsTitle&#125;&#125;&lt;/p&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  name: <span class="hljs-string">&#x27;params&#x27;</span>,<br>  data () &#123;<br>    <span class="hljs-keyword">return</span> &#123;<br>      msg: <span class="hljs-string">&#x27;params page&#x27;</span><br>    &#125;<br>  &#125;<br>&#125;<br>&lt;/script&gt;<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>在 App.vue 文件里加入我们的<router-view>标签。这时候我们可以直接利用 url 传值了。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;router-link to=<span class="hljs-string">&quot;/params/198/jsp&quot;</span>&gt;params&lt;/router-link&gt; |<br></code></pre></div></td></tr></table></figure>
+
+<p>我们已经实现了以 url 方式进行传值，这在实际开发中经常使用，必须完全了解</p>
+<h2 id="正则表达式在-URL-传值中的应用"><a href="#正则表达式在-URL-传值中的应用" class="headerlink" title="正则表达式在 URL 传值中的应用"></a>正则表达式在 URL 传值中的应用</h2><p>上边的例子，我们传递了新闻编号，现在需求升级了，我们希望我们传递的新闻 ID 只能是数字的形式，这时候我们就需要在传递时有个基本的类型判断，vue 是支持正则的。<br>加入正则需要在路由配置文件里（/src/router/index.js）以圆括号的形式加入。​</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">path:<span class="hljs-string">&#x27;/params/:newsId(\\d+)/:newsTitle&#x27;</span>,<br></code></pre></div></td></tr></table></figure>
+
+<p>加入了正则，我们再传递数字之外的其他参数，params.vue 组件就没有办法接收到。<br>​</p>
+<h1 id="vue-router-的重定向-redirect"><a href="#vue-router-的重定向-redirect" class="headerlink" title="vue-router 的重定向-redirect"></a>vue-router 的重定向-redirect</h1><p>开发中有时候我们虽然设置的路径不一致，但是我们希望跳转到同一个页面，或者说是打开同一个组件。这时候我们就用到了路由的重新定向 redirect 参数。</p>
+<h2 id="redirect-基本重定向"><a href="#redirect-基本重定向" class="headerlink" title="redirect 基本重定向"></a>redirect 基本重定向</h2><p>我们只要在路由配置文件中（/src/router/index.js）把原来的 component 换成 redirect 参数就可以了。我们来看一个简单的配置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">new</span> Router(&#123;<br>  routes: [<br>    &#123;<br>      path: <span class="hljs-string">&#x27;/&#x27;</span>,<br>      component: Hello,<br>    &#125;,<br>    &#123;<br>      path: <span class="hljs-string">&#x27;/params/:newsId(\\d+)/:newsTitle&#x27;</span>,<br>      component: Params,<br>    &#125;,<br>    &#123;<br>      path: <span class="hljs-string">&#x27;/goback&#x27;</span>,<br>      redirect: <span class="hljs-string">&#x27;/&#x27;</span>,<br>    &#125;,<br>  ],<br>&#125;);<br></code></pre></div></td></tr></table></figure>
+
+<p>这里我们设置了 goback 路由，但是它并没有配置任何 component（组件），而是直接 redirect 到 path:’/’下了，这就是一个简单的重新定向。</p>
+<h2 id="重定向时传递参数"><a href="#重定向时传递参数" class="headerlink" title="重定向时传递参数"></a>重定向时传递参数</h2><p>我们已经学会了通过 url 来传递参数，那我们重定向时如果也需要传递参数怎么办？其实 vue 也已经为我们设置好了，我们只需要在 ridirect 后边的参数里复制重定向路径的 path 参数就可以了。可能你看的有点晕，我们来看一段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&#123;<br>  path:<span class="hljs-string">&#x27;/params/:newsId(\\d+)/:newsTitle&#x27;</span>,<br>  component:Params<br>&#125;,&#123;<br>  path:<span class="hljs-string">&#x27;/goParams/:newsId(\\d+)/:newsTitle&#x27;</span>,<br>  redirect:<span class="hljs-string">&#x27;/params/:newsId(\\d+)/:newsTitle&#x27;</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>已经有了一个 params 路由配置，我们在设置一个 goParams 的路由重定向，并传递了参数。这时候我们的路由参数就可以传递给 params.vue 组件了。参数接收方法和正常的路由接收方法一样。</p>
+<h1 id="alias-别名的使用"><a href="#alias-别名的使用" class="headerlink" title="alias 别名的使用"></a>alias 别名的使用</h1><p>上节学习了路由的重定向，我相信大家已经可以熟练使用 redirect 进行重定向了。使用 alias 别名的形式，我们也可以实现类似重定向的效果。 1.首先我们在路由配置文件里（/src/router/index.js），起一个别名，jsp</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&#123;<br>    path: <span class="hljs-string">&#x27;/hi1&#x27;</span>,<br>    component: Hi1,<br>    alias:<span class="hljs-string">&#x27;/jsp&#x27;</span><br> &#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>2.配置我们的<router-link>，起过别名之后，可以直接使用<router-link>标签里的 to 属性，进行重新定向。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;router-link &lt; to=<span class="hljs-string">&quot;/jspang&quot;</span>&gt;jspang&lt;/router-link&gt;<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="redirect-和-alias-的区别"><a href="#redirect-和-alias-的区别" class="headerlink" title="redirect 和 alias 的区别"></a>redirect 和 alias 的区别</h2><ul>
+<li>redirect：仔细观察 URL，redirect 是直接改变了 url 的值，把 url 变成了真实的 path 路径。</li>
+<li>alias：URL 路径没有别改变，这种情况更友好，让用户知道自己访问的路径，只是改变了<router-view>中的内容。</li>
+</ul>
+<p><strong>填个小坑：</strong><br>别名请不要用在 path 为’/’中，如下代码的别名是不起作用的。​</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&#123;<br>  path: <span class="hljs-string">&#x27;/&#x27;</span>,<br>  component: Hello,<br>  alias:<span class="hljs-string">&#x27;/home&#x27;</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>在实际项目中我们遇到了这样的坑，开始以为是自己的代码写的有问题，找了两个小时作用。后来发现不是代码问题，只是 vue 不支持这样使用。我们犯过错误，踩过了坑，希望大家就不要踩了。</p>
+<h1 id="路由的过渡动画"><a href="#路由的过渡动画" class="headerlink" title="路由的过渡动画"></a>路由的过渡动画</h1><p>在开发中有一种需求叫高端、大气、上档次。所以作为一个大前端有责任让你的程序开起来更酷炫。可以在页面切换时我们加入一些动画效果，提升我们程序的动效设计。这节课我们就学习一下路由的过渡动画效果制作。</p>
+<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a><transition>标签</h2><p>想让路由有过渡动画，需要在<router-view>标签的外部添加<transition>标签，标签还需要一个 name 属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;transition name=<span class="hljs-string">&quot;fade&quot;</span>&gt;<br>  &lt;router-view&gt;&lt;/router-view&gt;<br>&lt;/transition&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>我们在/src/App.vue 文件里添加了<transition>标签，并给标签起了一个名字叫 fade。</p>
+<h2 id="css-过渡类名："><a href="#css-过渡类名：" class="headerlink" title="css 过渡类名："></a>css 过渡类名：</h2><p>组件过渡过程中，会有四个 CSS 类名进行切换，这四个类名与 transition 的 name 属性有关，比如 name=”fade”,会有如下四个 CSS 类名：</p>
+<ol>
+<li>fade-enter:进入过渡的开始状态，元素被插入时生效，只应用一帧后立刻删除。</li>
+<li>fade-enter-active:进入过渡的结束状态，元素被插入时就生效，在过渡过程完成后移除。</li>
+<li>fade-leave:离开过渡的开始状态，元素被删除时触发，只应用一帧后立刻删除。</li>
+<li>fade-leave-active:离开过渡的结束状态，元素被删除时生效，离开过渡完成后被删除。</li>
+</ol>
+<p>从上面四个类名可以看出，fade-enter-active 和 fade-leave-active 在整个进入或离开过程中都有效，所以 CSS 的 transition 属性在这两个类下进行设置。<br>那我们就在 App.vue 页面里加入四种 CSS 样式效果，并利用 CSS3 的 transition 属性控制动画的具体效果。代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">.fade-enter &#123;<br>  opacity:<span class="hljs-number">0</span>;<br>&#125;<br>.fade-leave&#123;<br>  opacity:<span class="hljs-number">1</span>;<br>&#125;<br>.fade-enter-active&#123;<br>  transition:opacity .5s;<br>&#125;<br>.fade-leave-active&#123;<br>  opacity:<span class="hljs-number">0</span>;<br>  transition:opacity .5s;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>上边的代码设置了改变透明度的动画过渡效果，但是默认的 mode 模式 in-out 模式，这并不是我们想要的。下面我们学一下 mode 模式。</p>
+<h2 id="过渡模式-mode："><a href="#过渡模式-mode：" class="headerlink" title="过渡模式 mode："></a>过渡模式 mode：</h2><ul>
+<li>in-out:新元素先进入过渡，完成之后当前元素过渡离开。</li>
+<li>out-in:当前元素先进行过渡离开，离开完成后新元素过渡进入。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;transition name=<span class="hljs-string">&quot;fade&quot;</span> mode=<span class="hljs-string">&quot;out-in&quot;</span>&gt;<br>  &lt;router-view&gt;&lt;/router-view&gt;<br>&lt;/transition&gt;<br></code></pre></div></td></tr></table></figure>
+
+<h1 id="mode-的设置和-404-页面的处理"><a href="#mode-的设置和-404-页面的处理" class="headerlink" title="mode 的设置和 404 页面的处理"></a>mode 的设置和 404 页面的处理</h1><p>在学习过渡效果的时候，我们学了 mode 的设置，但是在路由的属性中还有一个 mode。另一个 mode 模式和 404 页面的设置。</p>
+<h2 id="mode-的两个值"><a href="#mode-的两个值" class="headerlink" title="mode 的两个值"></a>mode 的两个值</h2><ol>
+<li>historty:当你使用 history 模式时，URL 就像正常的 url，例如 <a target="_blank" rel="noopener" href="http://jsapng.com/lms/%EF%BC%8C%E4%B9%9F%E5%A5%BD%E7%9C%8B%EF%BC%81">http://jsapng.com/lms/，也好看！</a></li>
+<li>hash:默认’hash’值，但是 hash 看起来就像无意义的字符排列，不太好看也不符合我们一般的网址浏览习惯。</li>
+</ol>
+<p>具体的效果我在视频中会有所掩饰，不理解的小伙伴可以到视频中进行查看。</p>
+<h2 id="404-页面的设置："><a href="#404-页面的设置：" class="headerlink" title="404 页面的设置："></a>404 页面的设置：</h2><p>用户会经常输错页面，当用户输错页面时，我们希望给他一个友好的提示，为此美工都会设计一个漂亮的页面，这个页面就是我们常说的 404 页面。vue-router 也为我们提供了这样的机制. 1.设置我们的路由配置文件（/src/router/index.js）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&#123;<br>   path:<span class="hljs-string">&#x27;*&#x27;</span>,<br>   component:<span class="hljs-built_in">Error</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>这里的 path:’ * ‘就是找不到页面时的配置，component 是我们新建的一个 Error.vue 的文件。 2.新建 404 页面：<br>在/src/components/文件夹下新建一个 Error.vue 的文件。简单输入一些有关错误页面的内容。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;h2&gt;&#123;&#123; msg &#125;&#125;&lt;/h2&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br>&lt;script&gt;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  data () &#123;<br>    <span class="hljs-keyword">return</span> &#123;<br>      msg: <span class="hljs-string">&#x27;Error:404&#x27;</span><br>    &#125;<br>  &#125;<br>&#125;<br>&lt;/script&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>3.我们在用<router-link>瞎写一个标签的路径。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;router-link to=<span class="hljs-string">&quot;/error&quot;</span>&gt;error&lt;/router-link&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>预览一下我们现在的结果，就已经实现 404 页面的效果。</p>
+<h1 id="路由中的钩子"><a href="#路由中的钩子" class="headerlink" title="路由中的钩子"></a>路由中的钩子</h1><p>我们知道一个组件从进入到销毁有很多的钩子函数，同样在路由中也设置了钩子函数。路由的钩子选项可以写在路由配置文件中，也可以写在我们的组件模板中。</p>
+<h2 id="路由配置文件中的钩子函数"><a href="#路由配置文件中的钩子函数" class="headerlink" title="路由配置文件中的钩子函数"></a>路由配置文件中的钩子函数</h2><p>我们可以直接在路由配置文件（/src/router/index.js）中写钩子函数。但是在路由文件中我们只能写一个 beforeEnter,就是在进入此路由配置时。先来看一段具体的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&#123;<br>      path:<span class="hljs-string">&#x27;/params/:newsId(\\d+)/:newsTitle&#x27;</span>,<br>      component:Params,<br>      beforeEnter:<span class="hljs-function">(<span class="hljs-params">to,<span class="hljs-keyword">from</span>,next</span>)=&gt;</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;我进入了params模板&#x27;</span>);<br>        <span class="hljs-built_in">console</span>.log(to);<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">from</span>);<br>        next();<br>&#125;,<br></code></pre></div></td></tr></table></figure>
+
+<p>我们在 params 路由里配置了 bdforeEnter 得钩子函数，函数我们采用了 ES6 的箭头函数，需要传递三个参数。我们并在箭头函数中打印了 to 和 from 函数。具体打印内容可以在控制台查看 object。</p>
+<h3 id="三个参数："><a href="#三个参数：" class="headerlink" title="三个参数："></a>三个参数：</h3><ol>
+<li>to:路由将要跳转的路径信息，信息是包含在对像里边的。</li>
+<li>from:路径跳转前的路径信息，也是一个对象的形式。</li>
+<li>next:路由的控制参数，常用的有 next(true)和 next(false)。</li>
+</ol>
+<h2 id="写在模板中的钩子函数"><a href="#写在模板中的钩子函数" class="headerlink" title="写在模板中的钩子函数"></a>写在模板中的钩子函数</h2><p>在配置文件中的钩子函数，只有一个钩子-beforeEnter，如果我们写在模板中就可以有两个钩子函数可以使用：</p>
+<ul>
+<li>beforeRouteEnter：在路由进入前的钩子函数。</li>
+<li>beforeRouteLeave：在路由离开前的钩子函数。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  name: <span class="hljs-string">&#x27;params&#x27;</span>,<br>  data () &#123;<br>    <span class="hljs-keyword">return</span> &#123;<br>      msg: <span class="hljs-string">&#x27;params page&#x27;</span><br>    &#125;<br>  &#125;,<br>  beforeRouteEnter:<span class="hljs-function">(<span class="hljs-params">to,<span class="hljs-keyword">from</span>,next</span>)=&gt;</span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;准备进入路由模板&quot;</span>);<br>    next();<br>  &#125;,<br>  beforeRouteLeave: <span class="hljs-function">(<span class="hljs-params">to, <span class="hljs-keyword">from</span>, next</span>) =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;准备离开路由模板&quot;</span>);<br>    next();<br>  &#125;<br>&#125;<br>&lt;/script&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>这是我们写在 params.vue 模板里的路由钩子函数。它可以监控到路由的进入和路由的离开，也可以轻易的读出 to 和 from 的值。</p>
+<h1 id="编程式导航"><a href="#编程式导航" class="headerlink" title="编程式导航"></a>编程式导航</h1><p>如果在业务逻辑代码中需要跳转页面我们如何操作？这就是我们要说的编程式导航，顾名思义，就是在业务逻辑代码中实现导航。</p>
+<h2 id="this-router-go-1-和-this-router-go-1"><a href="#this-router-go-1-和-this-router-go-1" class="headerlink" title="this.$router.go(-1) 和 this.$router.go(1)"></a>this.$router.go(-1) 和 this.$router.go(1)</h2><p>这两个编程式导航的意思是后退和前进，功能跟我们浏览器上的后退和前进按钮一样，这在业务逻辑中经常用到。比如条件不满足时，我们需要后退。<br>router.go(-1)代表着后退，我们可以让我们的导航进行后退，并且我们的地址栏也是有所变化的。 1.我们先在 app.vue 文件里加入一个按钮，按钮并绑定一个 goback( )方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;button @click=<span class="hljs-string">&quot;goback&quot;</span>&gt;后退&lt;/button&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>2.在我们的 script 模块中写入 goback()方法，并使用 this.$router.go(-1),进行后退操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;script&gt;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  name: <span class="hljs-string">&#x27;app&#x27;</span>,<br>  methods:&#123;<br>    <span class="hljs-function"><span class="hljs-title">goback</span>(<span class="hljs-params"></span>)</span>&#123;<br>      <span class="hljs-built_in">this</span>.$router.go(-<span class="hljs-number">1</span>);<br>    &#125;<br>  &#125;<br>&#125;<br>&lt;/script&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>打开浏览器进行预览，这时我们的后退按钮就可以向以前的网页一样后退了。<br>router.go(1):代表着前进，用法和后退一样，我在这里就不重复码字了（码字辛苦希望大家理解）。<br>this.$router.push(‘/xxx ‘)<br>这个编程式导航都作用就是跳转，比如我们判断用户名和密码正确时，需要跳转到用户中心页面或者首页，都用到这个编程的方法来操作路由。<br>我们设置一个按钮，点击按钮后回到站点首页。 1.先编写一个按钮，在按钮上绑定 goHome( )方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;button @click=<span class="hljs-string">&quot;goHome&quot;</span>&gt;回到首页&lt;/button&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>2.在<script>模块里加入 goHome 方法，并用 this.$router.push(‘/’)导航到首页</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  name: <span class="hljs-string">&#x27;app&#x27;</span>,<br>  methods: &#123;<br>    <span class="hljs-function"><span class="hljs-title">goback</span>(<span class="hljs-params"></span>)</span> &#123;<br>      <span class="hljs-built_in">this</span>.$router.go(-<span class="hljs-number">1</span>);<br>    &#125;,<br>    <span class="hljs-function"><span class="hljs-title">goHome</span>(<span class="hljs-params"></span>)</span> &#123;<br>      <span class="hljs-built_in">this</span>.$router.push(<span class="hljs-string">&#x27;/&#x27;</span>);<br>    &#125;,<br>  &#125;,<br>&#125;;<br></code></pre></div></td></tr></table></figure>
 
             </div>
             <hr>
