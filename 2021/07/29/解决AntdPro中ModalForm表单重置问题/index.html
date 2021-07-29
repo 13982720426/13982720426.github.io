@@ -20,7 +20,7 @@
   <meta name="author" content="jackhoo">
   <meta name="keywords" content="">
   
-  <title>组件间的通信方式总结 - jackhoo</title>
+  <title>解决AntdPro中ModalForm表单重置问题 - jackhoo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -177,7 +177,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="组件间的通信方式总结">
+            <span class="h2" id="subtitle" title="解决AntdPro中ModalForm表单重置问题">
               
             </span>
 
@@ -192,8 +192,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-05-13 22:13" pubdate>
-        星期四, 五月 13日 2021, 10:13 晚上
+      <time datetime="2021-07-29 09:56" pubdate>
+        星期四, 七月 29日 2021, 9:56 上午
       </time>
     </span>
   
@@ -204,7 +204,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      125 字
+      721 字
     </span>
   
 
@@ -214,7 +214,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      10
        分钟
     </span>
   
@@ -252,31 +252,117 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">组件间的通信方式总结</h1>
+            <h1 style="display: none">解决AntdPro中ModalForm表单重置问题</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：3 个月前
+                  本文最后更新于：3 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="组件间的关系"><a href="#组件间的关系" class="headerlink" title="组件间的关系:"></a>组件间的关系:</h2><ul>
-<li><strong>父子组件</strong></li>
-<li><strong>兄弟组件(非嵌套组件)</strong></li>
-<li><strong>祖孙组件(跨级组件)</strong></li>
-</ul>
-<h2 id="几种通信方式："><a href="#几种通信方式：" class="headerlink" title="几种通信方式："></a>几种通信方式：</h2><ol>
-<li><strong>props</strong>:<ol>
-<li><code>childen props</code></li>
-<li><code>render props</code></li>
-</ol>
-</li>
-<li><strong>消息订阅-发布</strong>：<code>pubs-sub</code>、<code>event</code>等</li>
-<li><strong>集中式管理</strong>：<code>redux</code>、<code>dva</code>等</li>
-<li><strong>conText</strong>：生产者-消费者模式</li>
-</ol>
-<h2 id="比较好的搭配方式："><a href="#比较好的搭配方式：" class="headerlink" title="比较好的搭配方式："></a>比较好的搭配方式：</h2><p><strong>父子组件</strong>：<code>props</code><br><strong>兄弟组件</strong>：消息订阅-发布、集中式管理<br>**祖孙组件(跨级组件)**：消息订阅-发布、集中式管理、<code>conText</code>(开发用的少，封装插件用的多)<br>​</p>
+              <h1 id="解决-AntdPro-中-ModalForm-表单重置问题"><a href="#解决-AntdPro-中-ModalForm-表单重置问题" class="headerlink" title="解决 AntdPro 中 ModalForm 表单重置问题"></a>解决 AntdPro 中 ModalForm 表单重置问题</h1><p>需求是我们点击弹窗确定之后，第二次再次点击弹窗表单数据清除。</p>
+<h2 id="Modal"><a href="#Modal" class="headerlink" title="Modal"></a>Modal</h2><p>先看看 antd 中的 Modal 是如何配置的</p>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>默认值</strong></th>
+<th><strong>版本</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>destroyOnClose</strong></td>
+<td>关闭时销毁 Modal 里的子元素</td>
+<td>boolean</td>
+<td>false</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="destroyOnClose-使用方法"><a href="#destroyOnClose-使用方法" class="headerlink" title="destroyOnClose 使用方法"></a>destroyOnClose 使用方法</h3><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript">&lt;Modal<br>  title=<span class="hljs-string">&quot;添加用户&quot;</span><br>  visible=&#123;isModalVisible&#125;<br>  onCancel=&#123;<span class="hljs-function">() =&gt;</span> isShowModal(<span class="hljs-literal">false</span>)&#125;<br>  footer=&#123;<span class="hljs-literal">null</span>&#125;<br>  destroyOnClose=&#123;<span class="hljs-literal">true</span>&#125;&gt;&lt;/Modal&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>可以看到在 Modal 中直接给<code>destroyOnClose=&#123;true&#125;</code>就可以清除元素里边的东西。</p>
+<h2 id="ModalForm"><a href="#ModalForm" class="headerlink" title="ModalForm"></a>ModalForm</h2><p>ModalForm 组合了 Modal 和 ProForm 可以减少繁琐的状态管理。<br>先来看官方文档<a target="_blank" rel="noopener" href="https://procomponents.ant.design/components/modal-form/#api">https://procomponents.ant.design/components/modal-form/#api</a><br><img src="https://i.loli.net/2021/07/29/a3JqodGrRPuVBKF.png#id=bbFOg&originHeight=568&originWidth=1203&originalType=binary&ratio=1&status=done&style=none" srcset="/img/loading.gif" lazyload><br>官方文档的方法是通过<strong>formRef</strong>手动重置，但是我们想要的是点击确定之后，第二次再次点击弹窗表单数据清除。</p>
+<h3 id="API-1"><a href="#API-1" class="headerlink" title="API"></a>API</h3><table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>默认值</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>trigger</strong></td>
+<td>用于触发 Modal 打开的 dom，一般是 button</td>
+<td>ReactNode</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>visible</strong></td>
+<td>是否打开</td>
+<td>boolean</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>onVisibleChange</strong></td>
+<td>visible 改变时触发</td>
+<td>(visible:boolean)=&gt;void</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>modalProps</strong></td>
+<td>Modal 的 props，使用方式与 <a target="_blank" rel="noopener" href="https://ant.design/components/modal-cn/">antd</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>相同。注意：不支持 ‘visible’，请使用全局的 visible</td>
+<td><a target="_blank" rel="noopener" href="https://ant.design/components/modal-cn/#API">props</a></td>
+<td>-</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>title</strong></td>
+<td>弹框的标题</td>
+<td>ReactNode</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>width</strong></td>
+<td>弹框的宽度</td>
+<td>Number</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>onFinish</strong></td>
+<td>提交数据时触发，如果返回一个 true。会关掉抽屉,如果配置了 destroyOnClose 还会重置表单。</td>
+<td>async (values)=&gt;boolean</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>submitter</strong></td>
+<td>提交按钮相关配置，使用方式与<a target="_blank" rel="noopener" href="https://procomponents.ant.design/components/form">ProForm</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>相同。</td>
+<td><a target="_blank" rel="noopener" href="https://procomponents.ant.design/components/form">ProForm</a></td>
+<td>-</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>Antdpro 中的 ModalForm 是集合 Modal 和 ProForm 了其中 <strong>onFinish</strong> 有一个 destroyOnClose 属性需要配置才会重置表单，但是在 MadalForm 中没有明确说明<br>在程序中找到 <strong>ModalForm</strong> 一层一层的找进去<br>第一层：有基本常用的属性。但是有一个 <strong>modalProps</strong> 在点进去看</p>
+<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> &#123; ModalProps, FormProps &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;antd&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> &#123; CommonFormProps &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../../BaseForm&#x27;</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">declare</span> <span class="hljs-keyword">type</span> ModalFormProps&lt;T = Record&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">any</span>&gt;&gt; = Omit&lt;<br>  FormProps&lt;T&gt;,<br>  <span class="hljs-string">&#x27;onFinish&#x27;</span> | <span class="hljs-string">&#x27;title&#x27;</span><br>&gt; &amp;<br>  CommonFormProps&lt;T&gt; &amp; &#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 接受返回一个boolean，返回 true 会关掉这个弹窗</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@name </span>表单结束后调用</span><br><span class="hljs-comment">     */</span><br>    onFinish?: <span class="hljs-function">(<span class="hljs-params">formData: T</span>) =&gt;</span> <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">boolean</span> | <span class="hljs-built_in">void</span>&gt;<br>    <span class="hljs-comment">/** <span class="hljs-doctag">@name </span>用于触发抽屉打开的 dom */</span><br>    trigger?: JSX.Element<br>    <span class="hljs-comment">/** <span class="hljs-doctag">@name </span>受控的打开关闭 */</span><br>    visible?: ModalProps[<span class="hljs-string">&#x27;visible&#x27;</span>]<br>    <span class="hljs-comment">/** <span class="hljs-doctag">@name </span>打开关闭的事件 */</span><br>    onVisibleChange?: <span class="hljs-function">(<span class="hljs-params">visible: <span class="hljs-built_in">boolean</span></span>) =&gt;</span> <span class="hljs-built_in">void</span><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 不支持 &#x27;visible&#x27;，请使用全局的 visible</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@name </span>弹框的属性</span><br><span class="hljs-comment">     */</span><br>    modalProps?: Omit&lt;ModalProps, <span class="hljs-string">&#x27;visible&#x27;</span>&gt;<br>    <span class="hljs-comment">/** <span class="hljs-doctag">@name </span>弹框的标题 */</span><br>    title?: ModalProps[<span class="hljs-string">&#x27;title&#x27;</span>]<br>    <span class="hljs-comment">/** <span class="hljs-doctag">@name </span>弹框的宽度 */</span><br>    width?: ModalProps[<span class="hljs-string">&#x27;width&#x27;</span>]<br>  &#125;<br><span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ModalForm</span>&lt;<span class="hljs-title">T</span> = <span class="hljs-title">Record</span>&lt;<span class="hljs-title">string</span>, <span class="hljs-title">any</span>&gt;&gt;(<span class="hljs-params">&#123;</span></span><br><span class="hljs-function"><span class="hljs-params">  children,</span></span><br><span class="hljs-function"><span class="hljs-params">  trigger,</span></span><br><span class="hljs-function"><span class="hljs-params">  onVisibleChange,</span></span><br><span class="hljs-function"><span class="hljs-params">  modalProps,</span></span><br><span class="hljs-function"><span class="hljs-params">  onFinish,</span></span><br><span class="hljs-function"><span class="hljs-params">  title,</span></span><br><span class="hljs-function"><span class="hljs-params">  width,</span></span><br><span class="hljs-function"><span class="hljs-params">  ...rest</span></span><br><span class="hljs-function"><span class="hljs-params">&#125;: ModalFormProps&lt;T&gt;</span>): <span class="hljs-title">JSX</span>.<span class="hljs-title">Element</span></span><br><span class="hljs-function"><span class="hljs-title">export</span> <span class="hljs-title">default</span> <span class="hljs-title">ModalForm</span></span><br></code></pre></div></td></tr></table></figure>
+
+<p>第二层： <strong>ModalProps <strong>内部有所有属性，其中有</strong>destroyOnClose?: boolean;</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> ModalProps &#123;<br>  destroyOnClose?: <span class="hljs-built_in">boolean</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>所以我们找到了<strong>destroyOnClose</strong>的使用方法</p>
+<h3 id="destroyOnClose-使用方法-1"><a href="#destroyOnClose-使用方法-1" class="headerlink" title="destroyOnClose 使用方法"></a>destroyOnClose 使用方法</h3><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript">&lt;ModalForm<br>  title=<span class="hljs-string">&quot;添加佣金&quot;</span><br>  width=<span class="hljs-string">&quot;400px&quot;</span><br>  visible=&#123;createModalVisible&#125;<br>  onVisibleChange=&#123;handleModalVisible&#125;<br>  modalProps=&#123;&#123;<br>    destroyOnClose: <span class="hljs-literal">true</span>,<br>  &#125;&#125;<br>  onFinish=&#123;<span class="hljs-keyword">async</span> value =&gt; &#123;<br>    <span class="hljs-built_in">console</span>.log(value)<br>  &#125;&#125;&gt;&lt;/ModalForm&gt;<br></code></pre></div></td></tr></table></figure>
 
             </div>
             <hr>
@@ -286,7 +372,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E7%BB%84%E4%BB%B6/">组件</a>
+                      <a class="hover-with-bg" href="/categories/UI/">UI</a>
                     
                   </div>
                 
@@ -294,11 +380,13 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/React/">React</a>
+                      <a class="hover-with-bg" href="/tags/Antd/">Antd</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%BB%84%E4%BB%B6/">组件</a>
+                      <a class="hover-with-bg" href="/tags/Antd-Pro/">Antd Pro</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E9%80%9A%E4%BF%A1/">通信</a>
+                      <a class="hover-with-bg" href="/tags/Modal/">Modal</a>
+                    
+                      <a class="hover-with-bg" href="/tags/ModalForm/">ModalForm</a>
                     
                   </div>
                 
@@ -315,18 +403,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/05/13/errorBoundary%E9%94%99%E8%AF%AF%E8%BE%B9%E7%95%8C/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">errorBoundary错误边界</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/05/07/Antd%20Pro%20%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/">
-                        <span class="hidden-mobile">Antd Pro 快速上手</span>
+                      <a href="/2021/07/27/%E5%88%A9%E7%94%A8border%E7%94%BB%E4%B8%89%E8%A7%92%E5%BD%A2/">
+                        <span class="hidden-mobile">利用border画三角形</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
