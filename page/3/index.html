@@ -196,6 +196,62 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/05/30/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%200.1%20+%200.2%20%E4%B8%8E%200.3%20%E7%9B%B8%E7%AD%89/" target="_self">
+          如何判断 0.1 + 0.2 与 0.3 相等
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/05/30/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%200.1%20+%200.2%20%E4%B8%8E%200.3%20%E7%9B%B8%E7%AD%89/" target="_self">
+          
+          
+            
+          
+          123function DeviationValue(num1, num2) &#123;  return Math.abs(num1 - num2) &lt; Number.EPSILON&#125;
+
+像 ECMAScript 采用的就是双精确度，也就是说，会用 64 位字节来储存一个浮点数。转换为二进制在计算但是小数无限延伸，二进制截取 53 位导致精度丢失。这就是 0.1+0.2 不为 0
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-30 16:51" pubdate>
+              2021-05-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/ECMAScript/">ECMAScript</a>
+            
+              <a href="/tags/IEEE754%E6%A0%87%E5%87%86/">IEEE754标准</a>
+            
+              <a href="/tags/%E5%8F%8C%E7%B2%BE%E7%A1%AE%E5%BA%A6/">双精确度</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/05/30/%E4%BB%80%E4%B9%88%E6%98%AF%E9%97%AD%E5%8C%85/" target="_self">
           什么是闭包
         </a>
@@ -705,58 +761,6 @@ HTTP/1.0 :一个tcp连接只能发一个http请求。每次服务端返回响应
               <a href="/tags/HTTP/">HTTP</a>
             
               <a href="/tags/TCP/">TCP</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/05/%E6%B5%85%E4%BA%86%E8%A7%A3-React%E4%B8%BA%E4%BD%95%E9%9C%80%E8%A6%81%E8%AE%BE%E5%AE%9A%E5%94%AF%E4%B8%80key%E5%80%BC/" target="_self">
-          浅了解_React为何需要设定唯一key值
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/05/%E6%B5%85%E4%BA%86%E8%A7%A3-React%E4%B8%BA%E4%BD%95%E9%9C%80%E8%A6%81%E8%AE%BE%E5%AE%9A%E5%94%AF%E4%B8%80key%E5%80%BC/" target="_self">
-          
-          
-            
-          
-          一、React规范1.1 react key的作用当渲染重复数据的时候,React.diff会根据生成的key进行虚拟DOM渲染, 所以我们需要在遍历的地方都要加上key,例如map、for等等同样, antd作为react的UI组件库, 有些地方也需要遵循react的key规范.例如 antd-table 在渲染前要求: 在 Table 中，dataSource 和 columns 里的数据值都
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-05 18:38" pubdate>
-              2021-05-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/React/">React</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Antd/">Antd</a>
-            
-              <a href="/tags/React/">React</a>
             
           </div>
         
