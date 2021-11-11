@@ -20,7 +20,7 @@
   <meta name="author" content="jackhoo">
   <meta name="keywords" content="">
   
-  <title>启动 MongoDB 数据库时报错 - jackhoo</title>
+  <title>React使用require动态加载图片不显示问题 - jackhoo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -177,7 +177,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="启动 MongoDB 数据库时报错">
+            <span class="h2" id="subtitle" title="React使用require动态加载图片不显示问题">
               
             </span>
 
@@ -192,8 +192,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-11-11 13:56" pubdate>
-        星期四, 十一月 11日 2021, 1:56 下午
+      <time datetime="2021-11-11 14:03" pubdate>
+        星期四, 十一月 11日 2021, 2:03 下午
       </time>
     </span>
   
@@ -204,7 +204,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      137 字
+      247 字
     </span>
   
 
@@ -214,7 +214,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2
+      3
        分钟
     </span>
   
@@ -252,27 +252,34 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">启动 MongoDB 数据库时报错</h1>
+            <h1 style="display: none">React使用require动态加载图片不显示问题</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：几秒前
+                  本文最后更新于：1 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="启动-MongoDB-数据库时报错"><a href="#启动-MongoDB-数据库时报错" class="headerlink" title="启动 MongoDB 数据库时报错"></a>启动 MongoDB 数据库时报错</h1><figure class="highlight actionscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs actionscript"><span class="hljs-keyword">const</span> utf8Encoder = <span class="hljs-keyword">new</span> TextEncoder();<br></code></pre></div></td></tr></table></figure>
+              <h1 id="React-使用-require-动态加载图片不显示"><a href="#React-使用-require-动态加载图片不显示" class="headerlink" title="React 使用 require 动态加载图片不显示"></a>React 使用 require 动态加载图片不显示</h1><h3 id="图片、头像加载不出来"><a href="#图片、头像加载不出来" class="headerlink" title="图片、头像加载不出来"></a>图片、头像加载不出来</h3><p>发现头像使用本地导入方法不能正常显示<br>导入头像</p>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">icon: require(`..<span class="hljs-regexp">/../</span>assets<span class="hljs-regexp">/images/</span>头像<span class="hljs-variable">$&#123;i + 1&#125;</span>.png`), <span class="hljs-regexp">//</span> 不能使用import<br></code></pre></div></td></tr></table></figure>
 
-<p>还是老问题，加入 util 包</p>
-<p>在 node_modules&gt;whatwg url&gt;dist 中打开 encoding.js 文件夹</p>
-<p>然后写下这个代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;<br><span class="hljs-keyword">var</span> util= <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;util&#x27;</span>);<br><span class="hljs-keyword">const</span> utf8Encoder = <span class="hljs-keyword">new</span> util.TextEncoder();<br><span class="hljs-keyword">const</span> utf8Decoder = <span class="hljs-keyword">new</span> util.TextEncoder(<span class="hljs-string">&quot;utf-8&quot;</span>, &#123; <span class="hljs-attr">ignoreBOM</span>: <span class="hljs-literal">true</span> &#125;);<br></code></pre></div></td></tr></table></figure>
+<p>结果会报错</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asciidoc"><span class="hljs-link">http://localhost:3000/</span>[<span class="hljs-string">object%20Module</span>] 404 (Not Found)<br></code></pre></div></td></tr></table></figure>
 
-<p>代替</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;<br><span class="hljs-keyword">const</span> utf8Encoder = <span class="hljs-keyword">new</span> TextEncoder();<br><span class="hljs-keyword">const</span> utf8Decoder = <span class="hljs-keyword">new</span> TextEncoder(<span class="hljs-string">&quot;utf-8&quot;</span>, &#123; <span class="hljs-attr">ignoreBOM</span>: <span class="hljs-literal">true</span> &#125;);<br></code></pre></div></td></tr></table></figure>
+<p>打印头像</p>
+<p>仔细检查发现图片的 base64 编码是在 default 属性里面，如下：</p>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Module</span> &#123;default: &#x27;data:image/png;base<span class="hljs-number">64</span>,iVBORw<span class="hljs-number">0</span>KGgoAAAANSUhEUgAAADAA…LGcWTnrPs<span class="hljs-number">8</span>HKz<span class="hljs-number">6</span>/<span class="hljs-number">8</span>FGADjS<span class="hljs-number">7</span>ldZb/fjwAAAABJRU<span class="hljs-number">5</span>ErkJggg==&#x27;, __esModule: true, Symbol(Symbol.toStringTag): &#x27;Module&#x27;&#125;<br></code></pre></div></td></tr></table></figure>
 
-<p>您所缺少的只是包含 util 的这一小部分</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> util= <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;util&#x27;</span>);<br><span class="hljs-keyword">const</span> utf8Encoder = <span class="hljs-keyword">new</span> util.TextEncoder();<br><span class="hljs-keyword">const</span> utf8Decoder = <span class="hljs-keyword">new</span> util.TextEncoder(<span class="hljs-string">&quot;utf-8&quot;</span>, &#123; <span class="hljs-attr">ignoreBOM</span>: <span class="hljs-literal">true</span> &#125;);<br></code></pre></div></td></tr></table></figure>
+<h4 id="第一种方法："><a href="#第一种方法：" class="headerlink" title="第一种方法："></a>第一种方法：</h4><p>将头像上传到自己的服务器上，使用线上的文件就能成功显示</p>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">icon</span>: `http://imgs.jackhoo.icu/%E<span class="hljs-number">5</span>%A<span class="hljs-number">4</span>%B<span class="hljs-number">4</span>%E<span class="hljs-number">5</span>%<span class="hljs-number">83</span>%<span class="hljs-number">8</span>F<span class="hljs-variable">$&#123;i + 1&#125;</span>.png`,<br><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="第二种方法："><a href="#第二种方法：" class="headerlink" title="第二种方法："></a>第二种方法：</h4><p>因为图片的 base64 编码是在 default 属性里面<br>在此进行 require 进行引入图片时，加入 default 即可，代码如下：<br>例如</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs coffeescript">&lt;img src=&#123;<span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./cs.jpg&#x27;</span>).<span class="hljs-keyword">default</span>&#125;/&gt;<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">icon: require(`..<span class="hljs-regexp">/../</span>assets<span class="hljs-regexp">/images/</span>头像<span class="hljs-variable">$&#123;i + 1&#125;</span>.png`).default<br></code></pre></div></td></tr></table></figure>
+
+<p>加入.default 后图片进行正常显示.</p>
 
             </div>
             <hr>
@@ -282,7 +289,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                      <a class="hover-with-bg" href="/categories/React/">React</a>
                     
                   </div>
                 
@@ -290,7 +297,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/MongoDB/">MongoDB</a>
+                      <a class="hover-with-bg" href="/tags/React/">React</a>
+                    
+                      <a class="hover-with-bg" href="/tags/require/">require</a>
                     
                   </div>
                 
@@ -307,18 +316,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/11/11/React%E4%BD%BF%E7%94%A8require%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">React使用require动态加载图片不显示问题</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/10/14/MongoDB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                        <span class="hidden-mobile">MongoDB学习笔记</span>
+                      <a href="/2021/11/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%97%B6%E6%8A%A5%E9%94%99/">
+                        <span class="hidden-mobile">启动 MongoDB 数据库时报错</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
