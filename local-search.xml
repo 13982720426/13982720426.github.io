@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>启动 MongoDB 数据库时报错</title>
+    <link href="/2021/11/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%97%B6%E6%8A%A5%E9%94%99/"/>
+    <url>/2021/11/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%97%B6%E6%8A%A5%E9%94%99/</url>
+    
+    <content type="html"><![CDATA[<p>启动 MongoDB 数据库时报错</p><figure class="highlight actionscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs actionscript"><span class="hljs-keyword">const</span> utf8Encoder = <span class="hljs-keyword">new</span> TextEncoder();<br></code></pre></div></td></tr></table></figure><p>还是老问题，加入 util 包</p><p>在 node_modules&gt;whatwg url&gt;dist 中打开 encoding.js 文件夹</p><p>然后写下这个代码</p><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;<br><span class="hljs-keyword">var</span> util= <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;util&#x27;</span>);<br><span class="hljs-keyword">const</span> utf8Encoder = <span class="hljs-keyword">new</span> util.TextEncoder();<br><span class="hljs-keyword">const</span> utf8Decoder = <span class="hljs-keyword">new</span> util.TextEncoder(<span class="hljs-string">&quot;utf-8&quot;</span>, &#123; <span class="hljs-attr">ignoreBOM</span>: <span class="hljs-literal">true</span> &#125;);<br></code></pre></div></td></tr></table></figure><p>代替</p><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;<br><span class="hljs-keyword">const</span> utf8Encoder = <span class="hljs-keyword">new</span> TextEncoder();<br><span class="hljs-keyword">const</span> utf8Decoder = <span class="hljs-keyword">new</span> TextEncoder(<span class="hljs-string">&quot;utf-8&quot;</span>, &#123; <span class="hljs-attr">ignoreBOM</span>: <span class="hljs-literal">true</span> &#125;);<br></code></pre></div></td></tr></table></figure><p>您所缺少的只是包含 UTIL 的这一小部分</p><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> util= <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;util&#x27;</span>);<br><span class="hljs-keyword">const</span> utf8Encoder = <span class="hljs-keyword">new</span> util.TextEncoder();<br><span class="hljs-keyword">const</span> utf8Decoder = <span class="hljs-keyword">new</span> util.TextEncoder(<span class="hljs-string">&quot;utf-8&quot;</span>, &#123; <span class="hljs-attr">ignoreBOM</span>: <span class="hljs-literal">true</span> &#125;);<br></code></pre></div></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>数据库</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>MongoDB</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>MongoDB学习笔记</title>
     <link href="/2021/10/14/MongoDB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     <url>/2021/10/14/MongoDB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
