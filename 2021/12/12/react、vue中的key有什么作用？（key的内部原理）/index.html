@@ -20,9 +20,25 @@
   <meta name="author" content="jackhoo">
   <meta name="keywords" content="">
   
-  <title>jackhoo</title>
+  <title>react、vue中的key有什么作用？（key的内部原理） - jackhoo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/%E6%AC%A2%E8%BF%8E%E5%A4%A7%E5%AE%B6%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%8C%E8%AF%B7%E5%B0%BD%E6%83%85%E7%95%99%E8%A8%80%E5%90%A7%EF%BC%81/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/hybrid.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -50,7 +66,7 @@
 
 
 <body>
-  <header style="height: 100vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -156,22 +172,68 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/bg.png') no-repeat center center;
+         style="background: url('/img/bg2.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Hello World !">
+            <span class="h2" id="subtitle" title="react、vue中的key有什么作用？（key的内部原理）">
               
             </span>
 
             
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      jackhoo
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-12 17:19" pubdate>
+        星期日, 十二月 12日 2021, 5:19 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      365 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      4
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
           </div>
 
-          
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
           
         </div>
       </div>
@@ -180,311 +242,160 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          style=margin-top:0>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">react、vue中的key有什么作用？（key的内部原理）</h1>
+            
+              <p class="note note-info">
                 
+                  本文最后更新于：几秒前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="react、vue-中的-key-有什么作用？（key-的内部原理）"><a href="#react、vue-中的-key-有什么作用？（key-的内部原理）" class="headerlink" title="react、vue 中的 key 有什么作用？（key 的内部原理）"></a>react、vue 中的 key 有什么作用？（key 的内部原理）</h2><h3 id="1-虚拟-DOM-中-key-的作用："><a href="#1-虚拟-DOM-中-key-的作用：" class="headerlink" title="1. 虚拟 DOM 中 key 的作用："></a>1. 虚拟 DOM 中 key 的作用：</h3><p>key 是虚拟 DOM 对象的标识，当数据发生变化时，Vue 会根据【新数据】生成【新的虚拟 DOM】, 随后 Vue 进行【新虚拟 DOM】与【旧虚拟 DOM】的差异比较，比较规则如下：</p>
+<h3 id="2-对比规则："><a href="#2-对比规则：" class="headerlink" title="2.对比规则："></a>2.对比规则：</h3><ul>
+<li>(1).旧虚拟 DOM 中找到了与新虚拟 DOM 相同的 key：<ul>
+<li>①.若虚拟 DOM 中内容没变, 直接使用之前的真实 DOM！</li>
+<li>②.若虚拟 DOM 中内容变了, 则生成新的真实 DOM，随后替换掉页面中之前的真实 DOM。</li>
+</ul>
+</li>
+<li>(2).旧虚拟 DOM 中未找到与新虚拟 DOM 相同的 key<ul>
+<li>创建新的真实 DOM，随后渲染到到页面。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-用-index-作为-key-可能会引发的问题："><a href="#3-用-index-作为-key-可能会引发的问题：" class="headerlink" title="3. 用 index 作为 key 可能会引发的问题："></a>3. 用 index 作为 key 可能会引发的问题：</h3><ul>
+<li><ol>
+<li>若对数据进行：逆序添加、逆序删除等破坏顺序操作:</li>
+</ol>
+<ul>
+<li>会产生没有必要的真实 DOM 更新 ==&gt; 界面效果没问题, 但效率低。</li>
+</ul>
+</li>
+<li><ol start="2">
+<li>如果结构中还包含输入类的 DOM：</li>
+</ol>
+<ul>
+<li>会产生错误 DOM 更新 ==&gt; 界面有问题。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-开发中如何选择-key"><a href="#4-开发中如何选择-key" class="headerlink" title="4. 开发中如何选择 key?:"></a>4. 开发中如何选择 key?:</h3><ul>
+<li>1.最好使用每条数据的唯一标识作为 key, 比如 id、手机号、身份证号、学号等唯一值。</li>
+<li>2.如果不存在对数据的逆序添加、逆序删除等破坏顺序操作，仅用于渲染列表用于展示，使用 index 作为 key 是没有问题的。</li>
+</ul>
 
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/05/%E6%B5%85%E4%BA%86%E8%A7%A3-React%E4%B8%BA%E4%BD%95%E9%9C%80%E8%A6%81%E8%AE%BE%E5%AE%9A%E5%94%AF%E4%B8%80key%E5%80%BC/" target="_self">
-          浅了解_React为何需要设定唯一key值
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/05/%E6%B5%85%E4%BA%86%E8%A7%A3-React%E4%B8%BA%E4%BD%95%E9%9C%80%E8%A6%81%E8%AE%BE%E5%AE%9A%E5%94%AF%E4%B8%80key%E5%80%BC/" target="_self">
-          
-          
-            
-          
-          一、React规范1.1 react key的作用当渲染重复数据的时候,React.diff会根据生成的key进行虚拟DOM渲染, 所以我们需要在遍历的地方都要加上key,例如map、for等等同样, antd作为react的UI组件库, 有些地方也需要遵循react的key规范.例如 antd-table 在渲染前要求: 在 Table 中，dataSource 和 columns 里的数据值都
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-05 18:38" pubdate>
-              2021-05-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/React/">React</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Antd/">Antd</a>
-            
-              <a href="/tags/React/">React</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/04/28/UmiJS%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/" target="_self">
-          UmiJS踩坑笔记
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/04/28/UmiJS%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/" target="_self">
-          
-          
-            
-          
-          UmiJS 踩坑笔记UmiJS官方网站
-UmiJS 快速上手
-官方未介绍目录结构
-常用配置
-第一坑:问题场景
-使用 @umijs/umi-app 为模板，创建一个项目：1yarn create @umijs/umi-app
-
-创建失败，报如下错误：
-yarn create @umijs/umi-app 报错：文件名、目录名或卷标语法不正确。
-1234567891011121314151617181
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-04-28 21:18" pubdate>
-              2021-04-28
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/UI/">UI</a>
-            
-              <a href="/categories/UI/Umi/">Umi</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/UmiJS/">UmiJS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/04/26/React-Hooks/" target="_self">
-          React-Hooks
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/04/26/React-Hooks/" target="_self">
-          
-          
-            
-          
-          在 React 的世界中，有容器组件和 UI 组件之分，在 React Hooks 出现之前，UI 组件我们可以使用函数，无状态组件来展示 UI，而对于容器组件，函数组件就显得无能为力，我们依赖于类组件来获取数据，处理数据，并向下传递参数给 UI 组件进行渲染。在我看来，使用 React Hooks 相比于从前的类组件有以下几点好处：
-
-代码可读性更强，原本同一块功能的代码逻辑被拆分在了不同的生命
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-04-26 18:22" pubdate>
-              2021-04-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/React/">React</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/React-Hooks/">React-Hooks</a>
-            
-              <a href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">生命周期</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/04/26/React%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82/" target="_self">
-          React路由传参
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/04/26/React%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82/" target="_self">
-          
-          
-            
-          
-          react 路由传参(3 种方式)1.params 传参(刷新页面后参数不消失，参数会在地址栏显示)路由页面:
-1&lt;Route path=&quot;/link/:id&quot; component=&#123;Demo&#125;&gt;&lt;/Route&gt; //注意要配置/:id路由跳转并传递参数。
-
-链接方式:
-123&lt;Link to=&#123;&#x27;/link
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-04-26 17:44" pubdate>
-              2021-04-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/React/">React</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/React/">React</a>
-            
-              <a href="/tags/React%E8%B7%AF%E7%94%B1/">React路由</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/04/26/Sass%E5%92%8CLess/" target="_self">
-          Sass和Less
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/04/26/Sass%E5%92%8CLess/" target="_self">
-          
-          
-            
-          
-          Sass和LessSass和Less都属于CSS预处理器，CSS 预处理器定义了一种新的语言，其基本思想是，用一种专门的编程语言，为 CSS 增加了一些编程的特性，如：变量、语句、函数、继承等概念。将 CSS 作为目标生成文件，然后开发者就只要使用这种语言进行CSS的编码工作。
-
-
-   官网地址： http://lesscss.org/
-   VSCode插件：Easy LESS
-   官网地址
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-04-26 17:10" pubdate>
-              2021-04-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CSS/">CSS</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Sass/">Sass</a>
-            
-              <a href="/tags/Less/">Less</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-
-
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/4/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="page-number current">5</span>
-    </span>
-  </nav>
-
-
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/React/">React</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Vue/">Vue</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/07/%E9%80%89%E6%8B%A9Object%E8%BF%98%E6%98%AFMap/">
+                        <span class="hidden-mobile">选择Object还是Map</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#valine",
+          app_id: "wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz",
+          app_key: "BlsdS19vhoVr77n1TiE2diHr",
+          placeholder: "老师们，说点什么吧！",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: true,
+          serverURLs: "https://wvn0ubbm.lc-cn-n1-shared.com",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -599,9 +510,15 @@ yarn create @umijs/umi-app 报错：文件名、目录名或卷标语法不正�
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
