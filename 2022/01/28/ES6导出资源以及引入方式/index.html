@@ -20,7 +20,7 @@
   <meta name="author" content="jackhoo">
   <meta name="keywords" content="">
   
-  <title>解决git上传拉取 port 443问题 - jackhoo</title>
+  <title>ES6导出资源以及引入方式 - jackhoo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -177,7 +177,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="解决git上传拉取 port 443问题">
+            <span class="h2" id="subtitle" title="ES6导出资源以及引入方式">
               
             </span>
 
@@ -192,8 +192,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-06-06 20:55" pubdate>
-        星期日, 六月 6日 2021, 8:55 晚上
+      <time datetime="2022-01-28 21:46" pubdate>
+        星期五, 一月 28日 2022, 9:46 晚上
       </time>
     </span>
   
@@ -204,7 +204,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      254 字
+      198 字
     </span>
   
 
@@ -252,32 +252,32 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">解决git上传拉取 port 443问题</h1>
+            <h1 style="display: none">ES6导出资源以及引入方式</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：8 个月前
+                  本文最后更新于：几秒前
                 
               </p>
             
             <div class="markdown-body">
-              <p>如果遇到类似情况，1.也许是网络问题，多试几次也，2.有可能是 https 协议无法访问。</p>
-<figure class="highlight vhdl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vhdl">fatal: unable <span class="hljs-keyword">to</span> <span class="hljs-keyword">access</span> <span class="hljs-symbol">&#x27;https</span>://github.com/xxxxxxxx: OpenSSL SSL_connect: SSL_ERROR_SYSCALL <span class="hljs-keyword">in</span> connection <span class="hljs-keyword">to</span> github.com:<span class="hljs-number">443</span><br></code></pre></div></td></tr></table></figure>
+              <h2 id="ES6导出资源以及引入方式"><a href="#ES6导出资源以及引入方式" class="headerlink" title="ES6导出资源以及引入方式"></a>ES6导出资源以及引入方式</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><h4 id="单独导出"><a href="#单独导出" class="headerlink" title="单独导出"></a>单独导出</h4><p>src\util.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs JavaScript"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setData</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;setData&quot;</span>);<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getData</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;getData&quot;</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-<p>先排查排查网络问题，确定网络流畅(科学上网)</p>
-<h1 id="方法-1：普通-https-协议的方法"><a href="#方法-1：普通-https-协议的方法" class="headerlink" title="方法 1：普通 https 协议的方法"></a>方法 1：普通 https 协议的方法</h1><p>通过:取消代理<br>​</p>
-<p>先查询是否有代理<br>​</p>
-<p><code>git config --global http.proxy</code><br><code>git config --global https.proxy</code><br>​</p>
-<p>查询到当前设置了代理，所以我取消这个设置：<br>​</p>
-<p><code>git config --global --unset http.proxy</code><br><code>git config --global --unset https.proxy</code><br>​</p>
-<p>再查询，已经没有了代理，然后再 push,成功了！<br>​</p>
-<h1 id="方法-2：SSH-协议方法"><a href="#方法-2：SSH-协议方法" class="headerlink" title="方法 2：SSH 协议方法"></a>方法 2：SSH 协议方法</h1><p>例如：在个人仓库中找到 ssh<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2625525/1622983591329-ff872692-b4ec-48ce-9a43-bce2bfd785f2.png#clientId=ue73c0a22-0c69-4&from=paste&height=449&id=u003d56fd&margin=%5Bobject%20Object%5D&name=image.png&originHeight=449&originWidth=555&originalType=binary&ratio=1&size=30780&status=done&style=none&taskId=ubf3e04e2-6fa1-4ac0-b31c-b53e260b5c0&width=555" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<p>先确定 ssh 秘钥本地和 github 已经配置好，具体方法自行百度</p>
-<p>在仓库的.git\config 文件夹中，将 url 换成仓库的 ssh 地址<a href="mailto:&#103;&#x69;&#x74;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#99;&#x6f;&#x6d;">&#103;&#x69;&#x74;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#99;&#x6f;&#x6d;</a>:xxx/xxx.git</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">[remote <span class="hljs-string">&quot;origin&quot;</span>]<br>	url = git@github.com:xxx/xxx.git<br>	fetch = +refs/heads<span class="hljs-comment">/*:refs/remotes/origin/*</span><br></code></pre></div></td></tr></table></figure>
+<h4 id="解构赋值引入"><a href="#解构赋值引入" class="headerlink" title="解构赋值引入"></a>解构赋值引入</h4><p>src\pages\test\test.jsx</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs JavaScript"><span class="hljs-keyword">import</span> &#123; setData , getData &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../../util&quot;</span>;<br></code></pre></div></td></tr></table></figure>
 
-<p>最后完美解决<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2625525/1622984017222-475ed0fb-d927-4f15-92e4-c5a88ff707e5.png#clientId=ue73c0a22-0c69-4&from=paste&height=213&id=uc597a356&margin=%5Bobject%20Object%5D&name=image.png&originHeight=213&originWidth=736&originalType=binary&ratio=1&size=26518&status=done&style=none&taskId=u7108e0ee-5cb0-4be9-afb1-dafb42a4259&width=736" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>如果是 export 单独导出，则解构赋值方法引入</p>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><h4 id="默认方式导出"><a href="#默认方式导出" class="headerlink" title="默认方式导出"></a>默认方式导出</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs JavaScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setData</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;setData&quot;</span>);<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getData</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;getData&quot;</span>);<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> setData;<br></code></pre></div></td></tr></table></figure>
 
+<h4 id="单独引入"><a href="#单独引入" class="headerlink" title="单独引入"></a>单独引入</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs JavaScript"><span class="hljs-keyword">import</span> getData <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../../util&quot;</span>;<br></code></pre></div></td></tr></table></figure>
+
+<p>如果使用结构赋值方式引入会报错</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs JavaScript"><span class="hljs-keyword">import</span> &#123; getData &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../../util&quot;</span>;<span class="hljs-comment">//TypeError: Object(...) is not a function</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h3><h4 id="对象方式导出"><a href="#对象方式导出" class="headerlink" title="对象方式导出"></a>对象方式导出</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs JavaScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setData</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;setData&quot;</span>);<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getData</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;getData&quot;</span>);<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123; setData, getData &#125;;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="调用方式引入"><a href="#调用方式引入" class="headerlink" title="调用方式引入"></a>调用方式引入</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs JavaScript"><span class="hljs-comment">//引入</span><br><span class="hljs-keyword">import</span> util <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../../util&quot;</span>;<br><br><span class="hljs-comment">//调用</span><br>util.getData();<br><br></code></pre></div></td></tr></table></figure>
             </div>
             <hr>
             <div>
@@ -286,9 +286,9 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/git/">git</a>
+                      <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
                     
-                      <a class="hover-with-bg" href="/categories/git/github/">github</a>
+                      <a class="hover-with-bg" href="/categories/JavaScript/ES6/">ES6</a>
                     
                   </div>
                 
@@ -296,7 +296,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/git/">git</a>
+                      <a class="hover-with-bg" href="/tags/ES6/">ES6</a>
                     
                   </div>
                 
@@ -313,18 +313,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/06/07/%E8%B4%AA%E5%90%83%E8%9B%87%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">贪吃蛇项目笔记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/06/03/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                        <span class="hidden-mobile">TypeScript学习笔记</span>
+                      <a href="/2022/01/18/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">Vue学习笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
