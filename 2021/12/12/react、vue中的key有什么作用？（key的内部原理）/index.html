@@ -20,7 +20,7 @@
   <meta name="author" content="jackhoo">
   <meta name="keywords" content="">
   
-  <title>react、vue中的key有什么作用？（key的内部原理） - jackhoo</title>
+  <title>react、vue中的key有什么作用？(key的内部原理) - jackhoo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -177,7 +177,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="react、vue中的key有什么作用？（key的内部原理）">
+            <span class="h2" id="subtitle" title="react、vue中的key有什么作用？(key的内部原理)">
               
             </span>
 
@@ -204,7 +204,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      365 字
+      361 字
     </span>
   
 
@@ -252,46 +252,42 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">react、vue中的key有什么作用？（key的内部原理）</h1>
+            <h1 style="display: none">react、vue中的key有什么作用？(key的内部原理)</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：3 个月前
+                  本文最后更新于：几秒前
                 
               </p>
             
             <div class="markdown-body">
               <h2 id="react、vue-中的-key-有什么作用？（key-的内部原理）"><a href="#react、vue-中的-key-有什么作用？（key-的内部原理）" class="headerlink" title="react、vue 中的 key 有什么作用？（key 的内部原理）"></a>react、vue 中的 key 有什么作用？（key 的内部原理）</h2><h3 id="1-虚拟-DOM-中-key-的作用："><a href="#1-虚拟-DOM-中-key-的作用：" class="headerlink" title="1. 虚拟 DOM 中 key 的作用："></a>1. 虚拟 DOM 中 key 的作用：</h3><p>key 是虚拟 DOM 对象的标识，当数据发生变化时，Vue 会根据【新数据】生成【新的虚拟 DOM】, 随后 Vue 进行【新虚拟 DOM】与【旧虚拟 DOM】的差异比较，比较规则如下：</p>
 <h3 id="2-对比规则："><a href="#2-对比规则：" class="headerlink" title="2.对比规则："></a>2.对比规则：</h3><ul>
-<li>(1).旧虚拟 DOM 中找到了与新虚拟 DOM 相同的 key：<ul>
-<li>①.若虚拟 DOM 中内容没变, 直接使用之前的真实 DOM！</li>
-<li>②.若虚拟 DOM 中内容变了, 则生成新的真实 DOM，随后替换掉页面中之前的真实 DOM。</li>
+<li>旧虚拟 DOM 中找到了与新虚拟 DOM 相同的 key：<ul>
+<li>若虚拟 DOM 中内容没变, 直接使用之前的真实 DOM！</li>
+<li>若虚拟 DOM 中内容变了, 则生成新的真实 DOM，随后替换掉页面中之前的真实 DOM。</li>
 </ul>
 </li>
-<li>(2).旧虚拟 DOM 中未找到与新虚拟 DOM 相同的 key<ul>
+<li>旧虚拟 DOM 中未找到与新虚拟 DOM 相同的 key<ul>
 <li>创建新的真实 DOM，随后渲染到到页面。</li>
 </ul>
 </li>
 </ul>
 <h3 id="3-用-index-作为-key-可能会引发的问题："><a href="#3-用-index-作为-key-可能会引发的问题：" class="headerlink" title="3. 用 index 作为 key 可能会引发的问题："></a>3. 用 index 作为 key 可能会引发的问题：</h3><ul>
-<li><ol>
-<li>若对数据进行：逆序添加、逆序删除等破坏顺序操作:</li>
-</ol>
+<li><p>若对数据进行：逆序添加、逆序删除等破坏顺序操作:</p>
 <ul>
 <li>会产生没有必要的真实 DOM 更新 ==&gt; 界面效果没问题, 但效率低。</li>
 </ul>
 </li>
-<li><ol start="2">
-<li>如果结构中还包含输入类的 DOM：</li>
-</ol>
+<li><p>如果结构中还包含输入类的 DOM：</p>
 <ul>
 <li>会产生错误 DOM 更新 ==&gt; 界面有问题。</li>
 </ul>
 </li>
 </ul>
 <h3 id="4-开发中如何选择-key"><a href="#4-开发中如何选择-key" class="headerlink" title="4. 开发中如何选择 key?:"></a>4. 开发中如何选择 key?:</h3><ul>
-<li>1.最好使用每条数据的唯一标识作为 key, 比如 id、手机号、身份证号、学号等唯一值。</li>
-<li>2.如果不存在对数据的逆序添加、逆序删除等破坏顺序操作，仅用于渲染列表用于展示，使用 index 作为 key 是没有问题的。</li>
+<li>最好使用每条数据的唯一标识作为 key, 比如 id、手机号、身份证号、学号等唯一值。</li>
+<li>如果不存在对数据的逆序添加、逆序删除等破坏顺序操作，仅用于渲染列表用于展示，使用 index 作为 key 是没有问题的。</li>
 </ul>
 
             </div>
