@@ -192,8 +192,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-14 21:29" pubdate>
-        星期一, 三月 14日 2022, 9:29 晚上
+      <time datetime="2022-03-14 21:35" pubdate>
+        星期一, 三月 14日 2022, 9:35 晚上
       </time>
     </span>
   
@@ -204,7 +204,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.5k 字
+      2.4k 字
     </span>
   
 
@@ -214,7 +214,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      36
+      35
        分钟
     </span>
   
@@ -256,13 +256,12 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：几秒前
+                  本文最后更新于：1 分钟前
                 
               </p>
             
             <div class="markdown-body">
               <h1 id="原型、构造器、隐式原型、原型链"><a href="#原型、构造器、隐式原型、原型链" class="headerlink" title="原型、构造器、隐式原型、原型链"></a>原型、构造器、隐式原型、原型链</h1><p>实例、构造函数、原型之间，形成一个环形指向它们的指向关系是：<br>由构造函数 new 出实例，然后实例的隐式原型（<code>__proto__</code>）指向构造函数的显示原型（<code>prototype</code>）。</p>
-<p>如果原型是另一个类型的实例呢？<br><strong>那就意味着这个原型本身有一个内部指针指向另一个原型，相应地另一个原型也有一个指针指向另一个构造函数。这样就在实例和原型之间构造了一条原型链。这就是原型链的基本构想。</strong></p>
 <h2 id="原型prototype"><a href="#原型prototype" class="headerlink" title="原型prototype"></a>原型prototype</h2><p><strong>原型对象prototype其实是构造函数(function对象)的一个属性，但是他也是一个对象</strong><br>只要创建一个函数，就会按照特定的规则为这个函数创建一个 prototype 属性（指向原型对象）。<br>默认情况下，所有原型对象自动获得一个名为 <code>constructor</code> 的属性，指回与之关联的构造函数。  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Test</span>(<span class="hljs-params"></span>) </span>&#123;&#125;<br><span class="hljs-comment">//prototype</span><br><span class="hljs-built_in">console</span>.log(Test.prototype) <span class="hljs-comment">//&#123;constructor: ƒ&#125;</span><br></code></pre></div></td></tr></table></figure>
 <p><strong>prototype是定义构造函数构造出的每个对象的公共祖先，所有被该构造函数构造出来的对象都可以继承原型上的属性和方法</strong><br>对象自己身上有的就不会访问原型上的</p>
@@ -344,9 +343,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/14/%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/">
+                      <a href="/2022/03/15/AJAX/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">浅拷贝与深拷贝</span>
+                        <span class="hidden-mobile">AJAx</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -354,8 +353,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/03/07/%E6%B5%AE%E5%8A%A8/">
-                        <span class="hidden-mobile">浮动</span>
+                      <a href="/2022/03/14/%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/">
+                        <span class="hidden-mobile">浅拷贝与深拷贝</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

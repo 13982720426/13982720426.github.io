@@ -196,6 +196,57 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/05/30/%E9%97%AD%E5%8C%85/" target="_self">
+          闭包
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/05/30/%E9%97%AD%E5%8C%85/" target="_self">
+          
+          
+            
+          
+          闭包当内部函数被返回到外部并保持时，一定会产生闭包，闭包会产生原来的作用域链不释放，过度的闭包可能会导致内存泄漏或加载过慢
+1234567891011121314function test1() &#123;  function test2() &#123;    var b = 2    console.log(a) //1  &#125;  var a = 1  return test2 //
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-30 15:43" pubdate>
+              2021-05-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%97%AD%E5%8C%85/">闭包</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/05/27/var%E4%B8%8Elet%E3%80%81const%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
           var与let、const的区别
         </a>
@@ -706,67 +757,6 @@ HTTP/1.0 :一个 tcp 连接只能发一个 http 请求。每次服务端返回�
               <a href="/tags/Antd/">Antd</a>
             
               <a href="/tags/React/">React</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/04/28/UmiJS%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/" target="_self">
-          UmiJS踩坑笔记
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/04/28/UmiJS%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/" target="_self">
-          
-          
-            
-          
-          UmiJS 踩坑笔记UmiJS官方网站
-UmiJS 快速上手
-官方未介绍目录结构
-常用配置
-第一坑:问题场景
-使用 @umijs/umi-app 为模板，创建一个项目：1yarn create @umijs/umi-app
-
-创建失败，报如下错误：
-yarn create @umijs/umi-app 报错：文件名、目录名或卷标语法不正确。
-1234567891011121314151617181
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-04-28 21:18" pubdate>
-              2021-04-28
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/UI/">UI</a>
-            
-              <a href="/categories/UI/Umi/">Umi</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/UmiJS/">UmiJS</a>
             
           </div>
         
