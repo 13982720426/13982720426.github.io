@@ -46,7 +46,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -196,19 +196,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/05/05/%E4%B8%80%E4%B8%AAtcp%E8%BF%9E%E6%8E%A5%E8%83%BD%E5%8F%91%E5%87%A0%E4%B8%AAhttp%E8%AF%B7%E6%B1%82/" target="_self">
-          一个tcp连接能发几个http请求
+        <a href="/2021/06/07/%E8%B4%AA%E5%90%83%E8%9B%87%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/" target="_self">
+          贪吃蛇项目笔记
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/05/05/%E4%B8%80%E4%B8%AAtcp%E8%BF%9E%E6%8E%A5%E8%83%BD%E5%8F%91%E5%87%A0%E4%B8%AAhttp%E8%AF%B7%E6%B1%82/" target="_self">
+        <a href="/2021/06/07/%E8%B4%AA%E5%90%83%E8%9B%87%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/" target="_self">
           
           
             
           
-          如果是 http1.0，一个 tcp 连接只能发一个 http 请求，因为是 HTTP/1.1 开始才有 Connection 头，引入了持续连接的概念，只要不断开，就能够持续发。所以一个 tcp 连接能发多个 http 请求。
-HTTP/1.0 :一个 tcp 连接只能发一个 http 请求。每次服务端返回响应后 TCP 连接会断开。HTTP/1.1: 默认开启 Connection: keep
+          项目搭建初始配置文件在根目录下，添加初始配置文件package.json，tsconfig.json，webpack.config.jspackage.json
+123456789101112131415161718192021222324&#123;  &quot;name&quot;: &quot;part3&quot;,  &quot;version&quot;: &quot;1.0.0&q
         </a>
       </p>
 
@@ -216,8 +216,8 @@ HTTP/1.0 :一个 tcp 连接只能发一个 http 请求。每次服务端返回�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-05 19:05" pubdate>
-              2021-05-05
+            <time datetime="2021-06-07 23:50" pubdate>
+              2021-06-07
             </time>
           </div>
         
@@ -225,7 +225,7 @@ HTTP/1.0 :一个 tcp 连接只能发一个 http 请求。每次服务端返回�
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/HTTP/">HTTP</a>
+              <a href="/categories/TypeScript/">TypeScript</a>
             
           </div>
         
@@ -233,9 +233,9 @@ HTTP/1.0 :一个 tcp 连接只能发一个 http 请求。每次服务端返回�
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/HTTP/">HTTP</a>
+              <a href="/tags/TypeScript/">TypeScript</a>
             
-              <a href="/tags/TCP/">TCP</a>
+              <a href="/tags/%E8%B4%AA%E5%90%83%E8%9B%87/">贪吃蛇</a>
             
           </div>
         
@@ -249,18 +249,21 @@ HTTP/1.0 :一个 tcp 连接只能发一个 http 请求。每次服务端返回�
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/05/05/%E6%B5%85%E4%BA%86%E8%A7%A3-React%E4%B8%BA%E4%BD%95%E9%9C%80%E8%A6%81%E8%AE%BE%E5%AE%9A%E5%94%AF%E4%B8%80key%E5%80%BC/" target="_self">
-          浅了解_React为何需要设定唯一key值
+        <a href="/2021/06/06/%E8%A7%A3%E5%86%B3git%E4%B8%8A%E4%BC%A0%E6%8B%89%E5%8F%96%20port%20443%E9%97%AE%E9%A2%98/" target="_self">
+          解决git上传拉取 port 443问题
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/05/05/%E6%B5%85%E4%BA%86%E8%A7%A3-React%E4%B8%BA%E4%BD%95%E9%9C%80%E8%A6%81%E8%AE%BE%E5%AE%9A%E5%94%AF%E4%B8%80key%E5%80%BC/" target="_self">
+        <a href="/2021/06/06/%E8%A7%A3%E5%86%B3git%E4%B8%8A%E4%BC%A0%E6%8B%89%E5%8F%96%20port%20443%E9%97%AE%E9%A2%98/" target="_self">
           
           
             
           
-          一、React规范1.1 react key的作用当渲染重复数据的时候,React.diff会根据生成的key进行虚拟DOM渲染, 所以我们需要在遍历的地方都要加上key,例如map、for等等同样, antd作为react的UI组件库, 有些地方也需要遵循react的key规范.例如 antd-table 在渲染前要求: 在 Table 中，dataSource 和 columns 里的数据值都
+          如果遇到类似情况，1.也许是网络问题，多试几次也，2.有可能是 https 协议无法访问。
+1fatal: unable to access &#x27;https://github.com/xxxxxxxx: OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to github.com:443
+
+先排查排查网络问题，确定网络流畅(科学上网)
         </a>
       </p>
 
@@ -268,8 +271,8 @@ HTTP/1.0 :一个 tcp 连接只能发一个 http 请求。每次服务端返回�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-05 18:38" pubdate>
-              2021-05-05
+            <time datetime="2021-06-06 20:55" pubdate>
+              2021-06-06
             </time>
           </div>
         
@@ -277,7 +280,9 @@ HTTP/1.0 :一个 tcp 连接只能发一个 http 请求。每次服务端返回�
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/React/">React</a>
+              <a href="/categories/git/">git</a>
+            
+              <a href="/categories/git/github/">github</a>
             
           </div>
         
@@ -285,70 +290,346 @@ HTTP/1.0 :一个 tcp 连接只能发一个 http 请求。每次服务端返回�
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Antd/">Antd</a>
+              <a href="/tags/git/">git</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/06/03/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_self">
+          TypeScript学习笔记
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/03/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_self">
+          
+          
+            
+          
+          一. 优势1.在开发过程中，发现潜在的问题 2.更友好的编辑器自动提示 3.代码语义更清晰易懂
+二.环境搭建2.1 百度 node 安装教程https://nodejs.org/en/ node 官网
+2.2 查看版本检查是否安装命令行 node -v 和 npm -v 查看版本检查是否安装​
+2.3 设置 vscode打开设置搜索quote TypeScript › Preferences: Q
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-03 00:52" pubdate>
+              2021-06-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/TypeScript/">TypeScript</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/TypeScript/">TypeScript</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/30/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%200.1%20+%200.2%20%E4%B8%8E%200.3%20%E7%9B%B8%E7%AD%89/" target="_self">
+          如何判断 0.1 + 0.2 与 0.3 相等
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/05/30/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%200.1%20+%200.2%20%E4%B8%8E%200.3%20%E7%9B%B8%E7%AD%89/" target="_self">
+          
+          
+            
+          
+          123function DeviationValue(num1, num2) &#123;  return Math.abs(num1 - num2) &lt; Number.EPSILON&#125;
+
+像 ECMAScript 采用的就是双精确度，也就是说，会用 64 位字节来储存一个浮点数。转换为二进制在计算但是小数无限延伸，二进制截取 53 位导致精度丢失。这就是 0.1+0.2 不为 0
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-30 16:51" pubdate>
+              2021-05-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/ECMAScript/">ECMAScript</a>
+            
+              <a href="/tags/IEEE754%E6%A0%87%E5%87%86/">IEEE754标准</a>
+            
+              <a href="/tags/%E5%8F%8C%E7%B2%BE%E7%A1%AE%E5%BA%A6/">双精确度</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/30/%E9%97%AD%E5%8C%85/" target="_self">
+          闭包
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/05/30/%E9%97%AD%E5%8C%85/" target="_self">
+          
+          
+            
+          
+          闭包当内部函数被返回到外部并保持时，一定会产生闭包，闭包会产生原来的作用域链不释放，过度的闭包可能会导致内存泄漏或加载过慢
+1234567891011121314function test1() &#123;  function test2() &#123;    var b = 2    console.log(a) //1  &#125;  var a = 1  return test2 //
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-30 15:43" pubdate>
+              2021-05-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%97%AD%E5%8C%85/">闭包</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/27/var%E4%B8%8Elet%E3%80%81const%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
+          var与let、const的区别
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/05/27/var%E4%B8%8Elet%E3%80%81const%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
+          
+          
+            
+          
+          var 与 let、const 的区别什么是变量提升？JavaScript 中，函数及变量的声明都将被提升到函数的最顶部。JavaScript 中，变量可以在使用后声明，也就是变量可以先使用再声明
+暂时性死区
+暂时性死区的本质就是，只要进入当前作用域，所要使用的变量就己经存在，但是不可获取，只有等到声明变量的那一行代码出现，才可以获取和使用该变量。
+
+在解析代码时，JavaScript 引擎也会注
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-27 22:54" pubdate>
+              2021-05-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+              <a href="/categories/JavaScript/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AC%AC%E5%9B%9B%E7%89%88%E7%AC%94%E8%AE%B0/">JavaScript高级程序设计第四版笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/var/">var</a>
+            
+              <a href="/tags/let/">let</a>
+            
+              <a href="/tags/const/">const</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/15/JSON.stringify()%E4%B8%8EJSON.parse()%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
+          JSON.stringify()与JSON.parse()的区别
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/05/15/JSON.stringify()%E4%B8%8EJSON.parse()%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
+          
+          
+            
+          
+          一、JSON.stringify()与JSON.parse()的区别最近做项目，发现JSON.stringify()使用场景真的挺多，我们都知道JSON.stringify()的作用是将 JavaScript 对象转换为 JSON 字符串，而JSON.parse()可以将JSON字符串转为一个对象。简单点说，它们的作用是相对的，我用JSON.stringify()将对象a变成了字符串c，那么我就可
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-15 23:35" pubdate>
+              2021-05-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JSON/">JSON</a>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/15/antd-pro-shop-admin%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/" target="_self">
+          antd_pro_shop_admin项目笔记
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/05/15/antd-pro-shop-admin%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/" target="_self">
+          
+          
+            
+          
+          一、项目搭建1.1 安装脚手架1yarn create umi
+
+
+1.2 选择版本
+1.3 安装依赖1yarn
+
+1.4 启动项目1npm start
+
+
+1.5 点击链接进入浏览器
+二、初始化项目项目接口文档https://www.showdoc.com.cn/1207745568269674?page_id=6094279351627422
+2.1 删掉多余的文件在编译器中打开项目删掉\sr
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-15 11:38" pubdate>
+              2021-05-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Antd-Pro/">Antd Pro</a>
             
               <a href="/tags/React/">React</a>
             
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/04/28/UmiJS%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/" target="_self">
-          UmiJS踩坑笔记
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/04/28/UmiJS%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/" target="_self">
-          
-          
-            
-          
-          UmiJS 踩坑笔记UmiJS官方网站
-UmiJS 快速上手
-官方未介绍目录结构
-常用配置
-第一坑:问题场景
-使用 @umijs/umi-app 为模板，创建一个项目：1yarn create @umijs/umi-app
-
-创建失败，报如下错误：
-yarn create @umijs/umi-app 报错：文件名、目录名或卷标语法不正确。
-1234567891011121314151617181
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-04-28 21:18" pubdate>
-              2021-04-28
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/UI/">UI</a>
-            
-              <a href="/categories/UI/Umi/">Umi</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/UmiJS/">UmiJS</a>
+              <a href="/tags/Umi/">Umi</a>
             
           </div>
         
@@ -362,20 +643,21 @@ yarn create @umijs/umi-app 报错：文件名、目录名或卷标语法不正�
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/04/26/React-Hooks/" target="_self">
-          React-Hooks
+        <a href="/2021/05/13/errorBoundary%E9%94%99%E8%AF%AF%E8%BE%B9%E7%95%8C/" target="_self">
+          errorBoundary错误边界
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/04/26/React-Hooks/" target="_self">
+        <a href="/2021/05/13/errorBoundary%E9%94%99%E8%AF%AF%E8%BE%B9%E7%95%8C/" target="_self">
           
           
             
           
-          在 React 的世界中，有容器组件和 UI 组件之分，在 React Hooks 出现之前，UI 组件我们可以使用函数，无状态组件来展示 UI，而对于容器组件，函数组件就显得无能为力，我们依赖于类组件来获取数据，处理数据，并向下传递参数给 UI 组件进行渲染。在我看来，使用 React Hooks 相比于从前的类组件有以下几点好处：
-
-代码可读性更强，原本同一块功能的代码逻辑被拆分在了不同的生命
+          理解：错误边界：用来捕获后代组件错误，渲染出备用页面​
+子组件出现错误，导致组件不可控，出现穿透影响其他组件显示
+特点：只能捕获后代组件生命周期产生的错误，比如render里产生的错误，不能捕获自己组件产生的错误和其他组件在合成事件、定时器中产生的错误​
+解决：在父组件中设置getDerivedStateFromError，当后代组件出现错误时，getDerivedStateFromError就会
         </a>
       </p>
 
@@ -383,64 +665,8 @@ yarn create @umijs/umi-app 报错：文件名、目录名或卷标语法不正�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-04-26 18:22" pubdate>
-              2021-04-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/React/">React</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/React-Hooks/">React-Hooks</a>
-            
-              <a href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">生命周期</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/04/26/React%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82/" target="_self">
-          React路由传参
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/04/26/React%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82/" target="_self">
-          
-          
-            
-          
-          react 路由传参(3 种方式)1.params 传参(刷新页面后参数不消失，参数会在地址栏显示)路由页面:
-1&lt;Route path=&quot;/link/:id&quot; component=&#123;Demo&#125;&gt;&lt;/Route&gt; //注意要配置/:id路由跳转并传递参数。
-
-链接方式:
-123&lt;Link to=&#123;&#x27;/link
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-04-26 17:44" pubdate>
-              2021-04-26
+            <time datetime="2021-05-13 22:23" pubdate>
+              2021-05-13
             </time>
           </div>
         
@@ -458,7 +684,9 @@ yarn create @umijs/umi-app 报错：文件名、目录名或卷标语法不正�
             
               <a href="/tags/React/">React</a>
             
-              <a href="/tags/React%E8%B7%AF%E7%94%B1/">React路由</a>
+              <a href="/tags/%E9%94%99%E8%AF%AF%E8%BE%B9%E7%95%8C/">错误边界</a>
+            
+              <a href="/tags/%E7%BB%84%E4%BB%B6/">组件</a>
             
           </div>
         
@@ -472,23 +700,33 @@ yarn create @umijs/umi-app 报错：文件名、目录名或卷标语法不正�
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/04/26/Sass%E5%92%8CLess/" target="_self">
-          Sass和Less
+        <a href="/2021/05/13/%E7%BB%84%E4%BB%B6%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E6%80%BB%E7%BB%93/" target="_self">
+          组件间的通信方式总结
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/04/26/Sass%E5%92%8CLess/" target="_self">
+        <a href="/2021/05/13/%E7%BB%84%E4%BB%B6%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E6%80%BB%E7%BB%93/" target="_self">
           
           
             
           
-          Sass和LessSass和Less都属于CSS预处理器，CSS 预处理器定义了一种新的语言，其基本思想是，用一种专门的编程语言，为 CSS 增加了一些编程的特性，如：变量、语句、函数、继承等概念。将 CSS 作为目标生成文件，然后开发者就只要使用这种语言进行CSS的编码工作。
+          组件间的关系:
+父子组件
+兄弟组件(非嵌套组件)
+祖孙组件(跨级组件)
+
+几种通信方式：
+props:
+childen props
+render props
 
 
-   官网地址： http://lesscss.org/
-   VSCode插件：Easy LESS
-   官网地址
+消息订阅-发布：pubs-sub、event等
+集中式管理：redux、dva等
+conText：生产者-消费者模式
+
+比较好的搭配方式：父子组件：props兄弟组件：消息订阅-发布、集中式管理**祖孙组件(跨级组件)**：消息订阅-发布
         </a>
       </p>
 
@@ -496,8 +734,8 @@ yarn create @umijs/umi-app 报错：文件名、目录名或卷标语法不正�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-04-26 17:10" pubdate>
-              2021-04-26
+            <time datetime="2021-05-13 22:13" pubdate>
+              2021-05-13
             </time>
           </div>
         
@@ -505,7 +743,7 @@ yarn create @umijs/umi-app 报错：文件名、目录名或卷标语法不正�
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/CSS/">CSS</a>
+              <a href="/categories/%E7%BB%84%E4%BB%B6/">组件</a>
             
           </div>
         
@@ -513,9 +751,11 @@ yarn create @umijs/umi-app 报错：文件名、目录名或卷标语法不正�
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Sass/">Sass</a>
+              <a href="/tags/React/">React</a>
             
-              <a href="/tags/Less/">Less</a>
+              <a href="/tags/%E7%BB%84%E4%BB%B6/">组件</a>
+            
+              <a href="/tags/%E9%80%9A%E4%BF%A1/">通信</a>
             
           </div>
         
@@ -527,7 +767,7 @@ yarn create @umijs/umi-app 报错：文件名、目录名或卷标语法不正�
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/5/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="page-number current">6</span>
+      <a class="extend prev" rel="prev" href="/page/5/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/7/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

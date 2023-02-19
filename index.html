@@ -46,7 +46,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -233,21 +233,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/03/18/BFC/" target="_self">
-          BFC
+        <a href="/2022/10/11/%E5%AF%B9%E8%B1%A1%E6%9E%9A%E4%B8%BE%E5%B1%9E%E6%80%A7/" target="_self">
+          对象枚举属性
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/03/18/BFC/" target="_self">
+        <a href="/2022/10/11/%E5%AF%B9%E8%B1%A1%E6%9E%9A%E4%B8%BE%E5%B1%9E%E6%80%A7/" target="_self">
           
           
             
           
-          BFC参考资料：MDN: Block formatting context
-什么是 BFCBFC（Block Formatting Context，块格式化上下文）是 Web 页面中可视的 CSS 渲染的一部分，它是块盒子布局时所在的区域，该区域中的浮动元素与其他元素相互作用（即清除浮动的作用）。
-
-我的理解：就是页面中的一个渲染区域，该区域是块级的，并且该区域中的浮动元素不影响其它 BFC 中元
+          对象枚举属性for/in循环对指定对象的每个可枚举（自有或继承）属性都会运行一次循环体，将属性的名字赋给循环变量。对象继承的内置方法是不可枚举的，但你的代码添加给对象的属性默认是可枚举的。例如： 
+12345678910let o=&#123;x:1,y:2,z:3&#125;o.propertyIsEnumerable(&#x27;toString&#x27;)for(let i in o)&#
         </a>
       </p>
 
@@ -255,85 +253,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-18 16:18" pubdate>
-              2022-03-18
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CSS/">CSS</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/BFC/">BFC</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/03/17/this/" target="_self">
-          this
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/03/17/this/" target="_self">
-          
-          
-            
-          
-          this根据函数的调用方式的不同，this 会指向不同的对象：这些this的指向，是当我们调用函数的时候确定的。调用方式的不同决定了this的指向不同，一般指向我们的调用者。
-
-
-
-调用方式
-this指向
-
-
-
-普通函数调用
-window
-
-
-定时器函数
-window
-
-
-立即执行函数
-window
-
-
-构造函数调用
-实例对象 原型对象里面的方法也指向实例对象
-
-
-对象方法的调用
-该方法所属对象
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-17 15:08" pubdate>
-              2022-03-17
+            <time datetime="2022-10-11 14:11" pubdate>
+              2022-10-11
             </time>
           </div>
         
@@ -343,13 +264,15 @@ window
             
               <a href="/categories/JavaScript/">JavaScript</a>
             
+              <a href="/categories/JavaScript/JavaScript%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E7%AC%AC%E4%B8%83%E7%89%88/">JavaScript权威指南第七版</a>
+            
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/this/">this</a>
+              <a href="/tags/JavaScript/">JavaScript</a>
             
           </div>
         
@@ -363,21 +286,19 @@ window
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/03/15/AJAX/" target="_self">
-          AJAx
+        <a href="/2022/10/10/for-of%E3%80%81Object-entries/" target="_self">
+          for/of、Object.entries()
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/03/15/AJAX/" target="_self">
+        <a href="/2022/10/10/for-of%E3%80%81Object-entries/" target="_self">
           
           
             
           
-          AJAX什么是AJAX异步的javascript和xml，AJAX 是一种用于创建快速动态网页的技术。  
-优点在不需要重新刷新页面的情况下，Ajax 通过异步请求加载后台数据，并在网页上呈现出来。
-作用ajax用来与后台交互常见运用场景有表单验证是否登入成功、百度搜索下拉框提示和快递单号查询等等。Ajax的目的是提高用户体验，较少网络数据的传输量
-初识 XMLHttpRequest要发送一个 A
+          for/of、Object.entries()for/offor/of循环专门用于可迭代对象。现在只要知道数组、字符串、集合和映射都是可迭代的就行了。它们都是一组或一批元素，可以使用for/of循环来循环或迭代这些元素。
+12345let data=[1,2,3,4,5,6,7,8,9],sum=0for(let i of data)&#123;    sum += i&#125;sum // 4
         </a>
       </p>
 
@@ -385,8 +306,8 @@ window
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-15 13:59" pubdate>
-              2022-03-15
+            <time datetime="2022-10-10 15:54" pubdate>
+              2022-10-10
             </time>
           </div>
         
@@ -396,13 +317,15 @@ window
             
               <a href="/categories/JavaScript/">JavaScript</a>
             
+              <a href="/categories/JavaScript/JavaScript%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E7%AC%AC%E4%B8%83%E7%89%88/">JavaScript权威指南第七版</a>
+            
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/AJAX/">AJAX</a>
+              <a href="/tags/JavaScript/">JavaScript</a>
             
           </div>
         
@@ -416,19 +339,19 @@ window
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/03/14/%E5%8E%9F%E5%9E%8B%E3%80%81%E6%9E%84%E9%80%A0%E5%99%A8%E3%80%81%E9%9A%90%E5%BC%8F%E5%8E%9F%E5%9E%8B%E3%80%81%E5%8E%9F%E5%9E%8B%E9%93%BE/" target="_self">
-          原型、构造器、隐式原型、原型链
+        <a href="/2022/10/08/%E5%85%88%E5%AE%9A%E4%B9%89%E6%93%8D%E4%BD%9C%E7%AC%A6/" target="_self">
+          先定义操作符(??)(缺值合并)
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/03/14/%E5%8E%9F%E5%9E%8B%E3%80%81%E6%9E%84%E9%80%A0%E5%99%A8%E3%80%81%E9%9A%90%E5%BC%8F%E5%8E%9F%E5%9E%8B%E3%80%81%E5%8E%9F%E5%9E%8B%E9%93%BE/" target="_self">
+        <a href="/2022/10/08/%E5%85%88%E5%AE%9A%E4%B9%89%E6%93%8D%E4%BD%9C%E7%AC%A6/" target="_self">
           
           
             
           
-          原型、构造器、隐式原型、原型链实例、构造函数、原型之间，形成一个环形指向它们的指向关系是：由构造函数 new 出实例，然后实例的隐式原型（__proto__）指向构造函数的显示原型（prototype）。
-原型prototype原型对象prototype其实是构造函数(function对象)的一个属性，但是他也是一个对象只要创建一个函数，就会按照特定的规则为这个函数创建一个 prototype 属
+          先定义操作符(??)(缺值合并)先定义（first-defined）操作符**??**求值其先定义的操作数，如果其左操作数不是null或undefined，就返回该值。否则，它会返回右操作数的值。与&amp;&amp;或||操作符类似，??是短路的：它只在第一个操作数求值为null或undefined时才会求值第二个操作数。如果表达式a没有副效应，那么表达式a ?? b等价于:
+1( a !== 
         </a>
       </p>
 
@@ -436,8 +359,8 @@ window
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-14 21:35" pubdate>
-              2022-03-14
+            <time datetime="2022-10-08 15:11" pubdate>
+              2022-10-08
             </time>
           </div>
         
@@ -447,19 +370,15 @@ window
             
               <a href="/categories/JavaScript/">JavaScript</a>
             
+              <a href="/categories/JavaScript/JavaScript%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E7%AC%AC%E4%B8%83%E7%89%88/">JavaScript权威指南第七版</a>
+            
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E5%8E%9F%E5%9E%8B/">原型</a>
-            
-              <a href="/tags/%E6%9E%84%E9%80%A0%E5%99%A8/">构造器</a>
-            
-              <a href="/tags/%E9%9A%90%E5%BC%8F%E5%8E%9F%E5%9E%8B/">隐式原型</a>
-            
-              <a href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/">原型链</a>
+              <a href="/tags/JavaScript/">JavaScript</a>
             
           </div>
         
@@ -473,20 +392,19 @@ window
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/03/14/%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/" target="_self">
-          浅拷贝与深拷贝
+        <a href="/2022/09/29/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/" target="_self">
+          宏任务和微任务
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/03/14/%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/" target="_self">
+        <a href="/2022/09/29/%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1/" target="_self">
           
           
             
           
-          浅拷贝与深拷贝在了解深浅拷贝之前应该了解JavaScript的数据类型
-数据类型数据类型分为基本数据类型(String, Number, Boolean, Null, Undefined, Symbo, Symbol (ES6), BigInt (ES2020))和引用数据类型 (Object、Array、Function)。
-基本数据类型的特点：直接存储在栈(stack)中的数据引用数据类型的特
+          宏任务和微任务js 代码执行顺序，先同步任务，异步任务进入事件列表(Event Table)并注册回调函数，等待指定的事件完成时，事件列表会将这个回调函数移入事件队列(Event Queue)/任务队列(Task Queue)，任务队列被细分为两个，macro-task(宏任务)队列和micro-task(微任务)队列
+1.微任务是用于插队的 2.微任务是快于宏任务的，但是一般是由宏任务&lt;s
         </a>
       </p>
 
@@ -494,8 +412,8 @@ window
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-14 21:29" pubdate>
-              2022-03-14
+            <time datetime="2022-09-29 10:35" pubdate>
+              2022-09-29
             </time>
           </div>
         
@@ -505,15 +423,15 @@ window
             
               <a href="/categories/JavaScript/">JavaScript</a>
             
+              <a href="/categories/JavaScript/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript/">你不知道的JavaScript</a>
+            
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E6%B5%85%E6%8B%B7%E8%B4%9D/">浅拷贝</a>
-            
-              <a href="/tags/%E6%B7%B1%E6%8B%B7%E8%B4%9D/">深拷贝</a>
+              <a href="/tags/JavaScript/">JavaScript</a>
             
           </div>
         
@@ -527,30 +445,19 @@ window
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/03/07/%E6%B5%AE%E5%8A%A8/" target="_self">
-          浮动
+        <a href="/2022/09/29/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" target="_self">
+          事件循环
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/03/07/%E6%B5%AE%E5%8A%A8/" target="_self">
+        <a href="/2022/09/29/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" target="_self">
           
           
             
           
-          浮动文本主要内容
-
-标准文档流 
-标准文档流的特性
-元素
-行内元素和块级元素的相互转换
-
-
-浮动的性质
-浮动的清除
-
-标准文档流宏观地讲，我们的web页面和photoshop等设计软件有本质的区别：web页面的制作，是个“流”，必须从上而下，像“织毛衣”。而设计软件，想往哪里画个东西，都能画。
-标准文档流的特性空白折叠现象：无论多少个空格、换行、tab，都会折叠为一个空格。比如，如果我们想让img
+          事件循环JavaScript 引擎并不是独立运行的，它运行在宿主环境中，对多数开发者来说通常就是 Web 浏览器。经过最近几年（不仅于此)的发展，JavaScript 已经超出了浏览器的范围,进入了其他环境，比如通过像 Node.,js 这样的工具进入服务器领域。实际上，JavaScript 现如今已经嵌入到了从机器人到电灯泡等各种各样的设备中。
+但是，所有这些环境都有一个共同“点”(thread
         </a>
       </p>
 
@@ -558,8 +465,8 @@ window
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-07 14:29" pubdate>
-              2022-03-07
+            <time datetime="2022-09-29 09:47" pubdate>
+              2022-09-29
             </time>
           </div>
         
@@ -567,7 +474,9 @@ window
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/CSS/">CSS</a>
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+              <a href="/categories/JavaScript/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript/">你不知道的JavaScript</a>
             
           </div>
         
@@ -575,11 +484,7 @@ window
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/HTML/">HTML</a>
-            
-              <a href="/tags/CSS/">CSS</a>
-            
-              <a href="/tags/%E6%B5%AE%E5%8A%A8/">浮动</a>
+              <a href="/tags/JavaScript/">JavaScript</a>
             
           </div>
         
@@ -593,19 +498,21 @@ window
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/03/07/HTML5/" target="_self">
-          HTML5
+        <a href="/2022/09/27/%E6%95%B0%E5%AD%97%E8%AF%AD%E6%B3%95/" target="_self">
+          数字语法
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/03/07/HTML5/" target="_self">
+        <a href="/2022/09/27/%E6%95%B0%E5%AD%97%E8%AF%AD%E6%B3%95/" target="_self">
           
           
             
           
-          HTML5HTML5并不仅仅只是做为HTML标记语言的一个最新版本，更重要的是它制定了Web应用开发的一系列标准，成为第一个将Web做为应用开发平台的HTML语言。​
-HTML5定义了一系列新元素，如新语义标签、智能表单、多媒体标签等，可以帮助开发者创建富互联网应用，还提供了一些Javascript API，如地理定位、重力感应、硬件访问等，可以在浏览器内实现类原生应用。我们甚至可以结合 Canv
+          数字语法比较小的数值二进制浮点数最大的问题(不仅JavaScript，所有遵循IEEE 754规范的语言都是如此)，是会出现如下情况:
+10.1 +0.2 === 0.3;// false
+
+从数学角度来说，上面的条件判断应该为 true，可结果为什么是false 呢?简单来说，二进制浮点数中的0.1和0.2并不是十分精确，它们相加的结果并非刚好等于0.3，而是一个比较接近的数字0.3000000
         </a>
       </p>
 
@@ -613,8 +520,8 @@ HTML5定义了一系列新元素，如新语义标签、智能表单、多媒体
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-07 09:53" pubdate>
-              2022-03-07
+            <time datetime="2022-09-27 17:59" pubdate>
+              2022-09-27
             </time>
           </div>
         
@@ -622,7 +529,9 @@ HTML5定义了一系列新元素，如新语义标签、智能表单、多媒体
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/HTML/">HTML</a>
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+              <a href="/categories/JavaScript/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript/">你不知道的JavaScript</a>
             
           </div>
         
@@ -630,9 +539,7 @@ HTML5定义了一系列新元素，如新语义标签、智能表单、多媒体
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/HTML/">HTML</a>
-            
-              <a href="/tags/HTML5/">HTML5</a>
+              <a href="/tags/JavaScript/">JavaScript</a>
             
           </div>
         
@@ -646,38 +553,19 @@ HTML5定义了一系列新元素，如新语义标签、智能表单、多媒体
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/03/06/CSS%E5%9F%BA%E7%A1%80/" target="_self">
-          CSS基础
+        <a href="/2022/09/27/%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E5%90%8D/" target="_self">
+          可计算属性名
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/03/06/CSS%E5%9F%BA%E7%A1%80/" target="_self">
+        <a href="/2022/09/27/%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E5%90%8D/" target="_self">
           
           
             
           
-          CSS基础CSS 全称 cascading style sheets: 层叠样式表，是一种用来表现HTML的文件样式的计算机语言。作用：静态地修饰网页，并且可以配合各种脚本语言动态地对网页各元素进行格式化。
-前端三层技术
-
-
-HTML
-CSS
-Javascript
-
-
-
-结构层
-样式层
-行为层
-
-
-从语义的角度搭建网页结构
-从美观的角度描述页面样式
-从交互的角度描述页面行为
-
-
-不同位置分类CSS
+          可计算属性名对象ES6增加了可计算属性名，可以在文字形式中使用[]包裹一个表达式来当作属性名：
+123456789var prefix=&#x27;foo&#x27;var myObj=&#123;	[prefix+&#x27;bar&#x27;]:&#x27;hello&#x27;,	[prefix+&#x27;baz&#x27;]:&#x27;world&#x27;&#125;myObj[&#
         </a>
       </p>
 
@@ -685,8 +573,8 @@ Javascript
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-06 20:40" pubdate>
-              2022-03-06
+            <time datetime="2022-09-27 17:45" pubdate>
+              2022-09-27
             </time>
           </div>
         
@@ -694,7 +582,9 @@ Javascript
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/CSS/">CSS</a>
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+              <a href="/categories/JavaScript/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript/">你不知道的JavaScript</a>
             
           </div>
         
@@ -702,7 +592,7 @@ Javascript
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/CSS/">CSS</a>
+              <a href="/tags/JavaScript/">JavaScript</a>
             
           </div>
         
@@ -716,20 +606,20 @@ Javascript
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/03/03/HTML%E5%9F%BA%E7%A1%80/" target="_self">
-          HTML基础
+        <a href="/2022/09/26/%E5%B1%9E%E6%80%A7%E6%8F%8F%E8%BF%B0%E7%AC%A6/" target="_self">
+          属性描述符
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/03/03/HTML%E5%9F%BA%E7%A1%80/" target="_self">
+        <a href="/2022/09/26/%E5%B1%9E%E6%80%A7%E6%8F%8F%E8%BF%B0%E7%AC%A6/" target="_self">
           
           
             
           
-          HTML基础前端开发 Web Front-end development前端开发：开发什么？结构布局、样式呈现、页面的动态交互 js-脚本数据交互处理、数据格式化渲染​
-结构布局、样式呈现、行为逻辑HTML        CSS          JavaScript
-网页基本结构&lt;!DOCTYPE&gt;文档类型声明&lt;html&gt;根标签&lt;head&gt;头部标签&lt;bo
+          属性描述符ES5开始，所有的属性都具备了属性描述符
+definePropertydefineProperty添加一个新属性或者修改一个已有属性(如果他的configurable=true)并对特性进行设置
+12345678910var myObj=&#123;&#125;Object.defineProperty(myObj,&#x27;a&#x27;,&#123;	configurable: t
         </a>
       </p>
 
@@ -737,8 +627,8 @@ Javascript
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-03 19:43" pubdate>
-              2022-03-03
+            <time datetime="2022-09-26 22:09" pubdate>
+              2022-09-26
             </time>
           </div>
         
@@ -746,7 +636,9 @@ Javascript
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/HTML/">HTML</a>
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+              <a href="/categories/JavaScript/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript/">你不知道的JavaScript</a>
             
           </div>
         
@@ -754,7 +646,60 @@ Javascript
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/HTML/">HTML</a>
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/09/14/%E4%B8%BA%E4%BB%80%E4%B9%88null%E6%98%AF%E5%AF%B9%E8%B1%A1/" target="_self">
+          为什么null是对象
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/09/14/%E4%B8%BA%E4%BB%80%E4%B9%88null%E6%98%AF%E5%AF%B9%E8%B1%A1/" target="_self">
+          
+          
+            
+          
+          为什么null是对象null有时候会被当做一种对象类型，但是其实是语言本身的一个bug，即对null执行 typeof null 时返回字符串 &#39;object&#39;，实际上，null本身是基本类型
+原理是这样的，不同的对象在底层都表示为二进制，在JavaScript中二进制前三位都为 0 的话会被判断为 object 类型，null 的二进制表示全是 0 ，所以执行 typeof 时返
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-09-14 15:45" pubdate>
+              2022-09-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+              <a href="/categories/JavaScript/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript/">你不知道的JavaScript</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
             
           </div>
         
@@ -766,7 +711,7 @@ Javascript
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#board">6</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

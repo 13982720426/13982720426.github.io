@@ -46,7 +46,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -196,52 +196,21 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/03/02/JavaScript%E5%9F%BA%E7%A1%80/" target="_self">
-          JavaScript基础
+        <a href="/2022/09/11/post%E8%AF%B7%E6%B1%82body%E4%B8%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%97%B6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" target="_self">
+          post请求body为字符串时的解决方法
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/03/02/JavaScript%E5%9F%BA%E7%A1%80/" target="_self">
+        <a href="/2022/09/11/post%E8%AF%B7%E6%B1%82body%E4%B8%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%97%B6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" target="_self">
           
           
             
           
-          JavaScript基础五大浏览器内核
+          post请求body为字符串时的解决方法在讲这个问题之前先要了解一下Content-Type，Content-Type这个时请求头里的字段，用于配置请求内容的类型
 
-
-五大主浏览器
-内核
-
-
-
-IE
-Trident
-
-
-Chrome
-Webkit  Blink
-
-
-Safari
-Webkit
-
-
-Firefox
-Gecko
-
-
-Opera
-Presto
-
-
-
-单线程JS引擎是单线程，但是他会模拟多线程
-轮转时间片短时间之内轮流执行多个任务的片段
-
-任务一    任务二
-切分任务一     任务二
-随机排列这些任务片段，
+在开发的时候肯定会遇到各种请求参数类型，但一般都是application/json，JSON数据格式。
+如果在post的请求时只需要传递一个字符串时，Content-Type为application/json就会请求不成功，此时参数为
         </a>
       </p>
 
@@ -249,8 +218,114 @@ Presto
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-02 15:51" pubdate>
-              2022-03-02
+            <time datetime="2022-09-11 14:39" pubdate>
+              2022-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/HTTP/">HTTP</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/HTTP/">HTTP</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/08/25/git%E4%BF%AE%E6%94%B9%E5%B7%B2%E7%BB%8F%E6%8F%90%E4%BA%A4%E5%88%B0%E8%BF%9C%E7%A8%8B%E7%9A%84commit%E4%BF%A1%E6%81%AF/" target="_self">
+          git修改已经提交到远程的commit信息
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/08/25/git%E4%BF%AE%E6%94%B9%E5%B7%B2%E7%BB%8F%E6%8F%90%E4%BA%A4%E5%88%B0%E8%BF%9C%E7%A8%8B%E7%9A%84commit%E4%BF%A1%E6%81%AF/" target="_self">
+          
+          
+            
+          
+          git修改已经提交到远程的commit信息1.git log/git reflog开始之前先查看log日志
+git loggit log 命令可以显示所有提交过的版本信息
+git refloggit reflog 可以查看所有分支的所有操作记录（包括已经被删除的 commit 记录和 reset 的操作）
+2.修改最近某个commit message找出最近提交的commitgit rebase 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-08-25 16:10" pubdate>
+              2022-08-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/git/">git</a>
+            
+              <a href="/categories/git/github/">github</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/git/">git</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/25/JavaScript%E4%B8%AD%E5%90%84%E7%A7%8D%EF%BC%9F%E7%9A%84%E7%94%A8%E6%B3%95%E4%BB%A5%E5%8F%8A%E5%90%AB%E4%B9%89/" target="_self">
+          JavaScript中 `?.` 、`??` 、`??=` 的用法以及含义
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/07/25/JavaScript%E4%B8%AD%E5%90%84%E7%A7%8D%EF%BC%9F%E7%9A%84%E7%94%A8%E6%B3%95%E4%BB%A5%E5%8F%8A%E5%90%AB%E4%B9%89/" target="_self">
+          
+          
+            
+          
+          JavaScript中 ?. 、?? 、??= 的用法以及含义可选链(?.)如果一个值为null、或者是undefined.那么我们再去用点操作符去调用一个方法或者访问一个属性会发生什么?
+123let a;let b = a.name;//Uncaught TypeError: Cannot read properties of undefined (reading &#x27;name&#x2
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-25 17:07" pubdate>
+              2022-07-25
             </time>
           </div>
         
@@ -280,21 +355,21 @@ Presto
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/01/28/ES6%E5%AF%BC%E5%87%BA%E8%B5%84%E6%BA%90%E4%BB%A5%E5%8F%8A%E5%BC%95%E5%85%A5%E6%96%B9%E5%BC%8F/" target="_self">
-          ES6导出资源以及引入方式
+        <a href="/2022/03/18/BFC/" target="_self">
+          BFC
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/01/28/ES6%E5%AF%BC%E5%87%BA%E8%B5%84%E6%BA%90%E4%BB%A5%E5%8F%8A%E5%BC%95%E5%85%A5%E6%96%B9%E5%BC%8F/" target="_self">
+        <a href="/2022/03/18/BFC/" target="_self">
           
           
             
           
-          ES6导出资源以及引入方式方法一单独导出src\util.js
-123456export function setData() &#123;  console.log(&quot;setData&quot;);&#125;export function getData() &#123;  console.log(&quot;getData&quot;);&#125;
+          BFC参考资料：MDN: Block formatting context
+什么是 BFCBFC（Block Formatting Context，块格式化上下文）是 Web 页面中可视的 CSS 渲染的一部分，它是块盒子布局时所在的区域，该区域中的浮动元素与其他元素相互作用（即清除浮动的作用）。
 
-解构赋值引入src\page
+我的理解：就是页面中的一个渲染区域，该区域是块级的，并且该区域中的浮动元素不影响其它 BFC 中元
         </a>
       </p>
 
@@ -302,8 +377,85 @@ Presto
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-28 21:46" pubdate>
-              2022-01-28
+            <time datetime="2022-03-18 16:18" pubdate>
+              2022-03-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CSS/">CSS</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/BFC/">BFC</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/17/this/" target="_self">
+          this
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/17/this/" target="_self">
+          
+          
+            
+          
+          this根据函数的调用方式的不同，this 会指向不同的对象：这些this的指向，是当我们调用函数的时候确定的。调用方式的不同决定了this的指向不同，一般指向我们的调用者。
+
+
+
+调用方式
+this指向
+
+
+
+普通函数调用
+window
+
+
+定时器函数
+window
+
+
+立即执行函数
+window
+
+
+构造函数调用
+实例对象 原型对象里面的方法也指向实例对象
+
+
+对象方法的调用
+该方法所属对象
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-17 15:08" pubdate>
+              2022-03-17
             </time>
           </div>
         
@@ -313,15 +465,13 @@ Presto
             
               <a href="/categories/JavaScript/">JavaScript</a>
             
-              <a href="/categories/JavaScript/ES6/">ES6</a>
-            
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/ES6/">ES6</a>
+              <a href="/tags/this/">this</a>
             
           </div>
         
@@ -335,18 +485,21 @@ Presto
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/01/18/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_self">
-          Vue学习笔记
+        <a href="/2022/03/15/AJAX/" target="_self">
+          AJAx
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/01/18/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_self">
+        <a href="/2022/03/15/AJAX/" target="_self">
           
           
             
           
-          vue核心初识Vue：1.想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象；2.root容器里的代码依然符合html规范，只不过混入了一些特殊的Vue语法；3.root容器里的代码被称为【Vue模板】；4.Vue实例和容器是一一对应的；5.真实开发中只有一个Vue实例，并且会配合着组件一起使用；6.中的xxx要写js表达式，且xxx可以自动读取到data中的所有属性；7.一旦data
+          AJAX什么是AJAX异步的javascript和xml，AJAX 是一种用于创建快速动态网页的技术。  
+优点在不需要重新刷新页面的情况下，Ajax 通过异步请求加载后台数据，并在网页上呈现出来。
+作用ajax用来与后台交互常见运用场景有表单验证是否登入成功、百度搜索下拉框提示和快递单号查询等等。Ajax的目的是提高用户体验，较少网络数据的传输量
+初识 XMLHttpRequest要发送一个 A
         </a>
       </p>
 
@@ -354,114 +507,8 @@ Presto
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-18 19:54" pubdate>
-              2022-01-18
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Vue/">Vue</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Vue2-0/">Vue2.0</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/12/12/react%E3%80%81vue%E4%B8%AD%E7%9A%84key%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8%EF%BC%9F(key%E7%9A%84%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86)/" target="_self">
-          react、vue中的key有什么作用？(key的内部原理)
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/12/12/react%E3%80%81vue%E4%B8%AD%E7%9A%84key%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8%EF%BC%9F(key%E7%9A%84%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86)/" target="_self">
-          
-          
-            
-          
-          react、vue 中的 key 有什么作用？（key 的内部原理）1. 虚拟 DOM 中 key 的作用：key 是虚拟 DOM 对象的标识，当数据发生变化时，Vue 会根据【新数据】生成【新的虚拟 DOM】, 随后 Vue 进行【新虚拟 DOM】与【旧虚拟 DOM】的差异比较，比较规则如下：
-2.对比规则：
-旧虚拟 DOM 中找到了与新虚拟 DOM 相同的 key：
-若虚拟 DOM 中内容没变
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-12 17:19" pubdate>
-              2021-12-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/React/">React</a>
-            
-              <a href="/tags/Vue/">Vue</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/12/07/%E9%80%89%E6%8B%A9Object%E8%BF%98%E6%98%AFMap/" target="_self">
-          选择Object还是Map
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/12/07/%E9%80%89%E6%8B%A9Object%E8%BF%98%E6%98%AFMap/" target="_self">
-          
-          
-            
-          
-          选择 Object 还是 Map对于多数 Web 开发任务来说，选择 Object 还是 Map 只是个人偏好问题，影响不大。不过，对于在乎内存和性能的开发者来说，对象和映射之间确实存在显著的差别。
-内存占用Object 和 Map 的工程级实现在不同浏览器间存在明显差异，但存储单个键/值对所占用的内存数量都会随键的数量线性增加。批量添加或删除键/值对则取决于各浏览器对该类型内存分配的工程实现。不
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-07 21:09" pubdate>
-              2021-12-07
+            <time datetime="2022-03-15 13:59" pubdate>
+              2022-03-15
             </time>
           </div>
         
@@ -471,17 +518,13 @@ Presto
             
               <a href="/categories/JavaScript/">JavaScript</a>
             
-              <a href="/categories/JavaScript/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AC%AC%E5%9B%9B%E7%89%88%E7%AC%94%E8%AE%B0/">JavaScript高级程序设计第四版笔记</a>
-            
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Object/">Object</a>
-            
-              <a href="/tags/Map/">Map</a>
+              <a href="/tags/AJAX/">AJAX</a>
             
           </div>
         
@@ -495,21 +538,19 @@ Presto
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/12/07/%E6%95%B0%E7%BB%84/" target="_self">
-          数组
+        <a href="/2022/03/14/%E5%8E%9F%E5%9E%8B%E3%80%81%E6%9E%84%E9%80%A0%E5%99%A8%E3%80%81%E9%9A%90%E5%BC%8F%E5%8E%9F%E5%9E%8B%E3%80%81%E5%8E%9F%E5%9E%8B%E9%93%BE/" target="_self">
+          原型、构造器、隐式原型、原型链
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/12/07/%E6%95%B0%E7%BB%84/" target="_self">
+        <a href="/2022/03/14/%E5%8E%9F%E5%9E%8B%E3%80%81%E6%9E%84%E9%80%A0%E5%99%A8%E3%80%81%E9%9A%90%E5%BC%8F%E5%8E%9F%E5%9E%8B%E3%80%81%E5%8E%9F%E5%9E%8B%E9%93%BE/" target="_self">
           
           
             
           
-          数组创建数组有几种基本的方式可以创建数组。一种是使用Array 构造函数，比如：
-123let colors = new Array()let colors = new Array(3) // 创建一个包含 3 个元素的数组let names = new Array(&#x27;Greg&#x27;) // 创建一个只包含一个元素，即字符串&quot;Greg&quot;的数组
-
-另一种创建数组的
+          原型、构造器、隐式原型、原型链实例、构造函数、原型之间，形成一个环形指向它们的指向关系是：由构造函数 new 出实例，然后实例的隐式原型（__proto__）指向构造函数的显示原型（prototype）。
+原型prototype原型对象prototype其实是构造函数(function对象)的一个属性，但是他也是一个对象只要创建一个函数，就会按照特定的规则为这个函数创建一个 prototype 属
         </a>
       </p>
 
@@ -517,8 +558,8 @@ Presto
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-07 19:47" pubdate>
-              2021-12-07
+            <time datetime="2022-03-14 21:35" pubdate>
+              2022-03-14
             </time>
           </div>
         
@@ -528,15 +569,19 @@ Presto
             
               <a href="/categories/JavaScript/">JavaScript</a>
             
-              <a href="/categories/JavaScript/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AC%AC%E5%9B%9B%E7%89%88%E7%AC%94%E8%AE%B0/">JavaScript高级程序设计第四版笔记</a>
-            
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E6%95%B0%E7%BB%84/">数组</a>
+              <a href="/tags/%E5%8E%9F%E5%9E%8B/">原型</a>
+            
+              <a href="/tags/%E6%9E%84%E9%80%A0%E5%99%A8/">构造器</a>
+            
+              <a href="/tags/%E9%9A%90%E5%BC%8F%E5%8E%9F%E5%9E%8B/">隐式原型</a>
+            
+              <a href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/">原型链</a>
             
           </div>
         
@@ -550,21 +595,20 @@ Presto
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/12/03/Taro%E5%A4%9A%E7%AB%AF%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_self">
-          Taro多端小程序学习笔记
+        <a href="/2022/03/14/%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/" target="_self">
+          浅拷贝与深拷贝
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/12/03/Taro%E5%A4%9A%E7%AB%AF%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_self">
+        <a href="/2022/03/14/%E6%B5%85%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B7%B1%E6%8B%B7%E8%B4%9D/" target="_self">
           
           
             
           
-          Taro 多端小程序学习笔记快速搭建项目项目初始化以及配置推荐看Taro官网更详细
-安装12345678# 使用 npm 安装 CLInpm install -g @tarojs/cli# OR 使用 yarn 安装 CLIyarn global add @tarojs/cli# OR 安装了 cnpm，使用 cnpm 安装 CLIcnpm install -g @tarojs/cli
-
-查看 T
+          浅拷贝与深拷贝在了解深浅拷贝之前应该了解JavaScript的数据类型
+数据类型数据类型分为基本数据类型(String, Number, Boolean, Null, Undefined, Symbo, Symbol (ES6), BigInt (ES2020))和引用数据类型 (Object、Array、Function)。
+基本数据类型的特点：直接存储在栈(stack)中的数据引用数据类型的特
         </a>
       </p>
 
@@ -572,60 +616,8 @@ Presto
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-03 20:54" pubdate>
-              2021-12-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Taro/">Taro</a>
-            
-              <a href="/tags/%E5%A4%9A%E7%AB%AF%E5%B0%8F%E7%A8%8B%E5%BA%8F/">多端小程序</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/11/23/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" target="_self">
-          垃圾回收
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/11/23/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" target="_self">
-          
-          
-            
-          
-          垃圾回收JavaScript 是使用垃圾回收的语言，也就是说执行环境负责在代码执行时管理内存。JavaScript 为开发者卸下了这个负担，通过自动内存管理实现内存分配和闲置资源回收。基本思路很简单：确定哪个变量不会再使用，然后释放它占用的内存。这个过程是周期性的，即垃圾回收程序每隔一定时间（或者说在代码执行过程中某个预定的收集时间）就会自动运行。垃圾回收过程是一个近似且不完美的方案，因为某块内存
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-11-23 15:31" pubdate>
-              2021-11-23
+            <time datetime="2022-03-14 21:29" pubdate>
+              2022-03-14
             </time>
           </div>
         
@@ -635,15 +627,15 @@ Presto
             
               <a href="/categories/JavaScript/">JavaScript</a>
             
-              <a href="/categories/JavaScript/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AC%AC%E5%9B%9B%E7%89%88%E7%AC%94%E8%AE%B0/">JavaScript高级程序设计第四版笔记</a>
-            
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">垃圾回收</a>
+              <a href="/tags/%E6%B5%85%E6%8B%B7%E8%B4%9D/">浅拷贝</a>
+            
+              <a href="/tags/%E6%B7%B1%E6%8B%B7%E8%B4%9D/">深拷贝</a>
             
           </div>
         
@@ -657,18 +649,30 @@ Presto
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/11/23/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F/" target="_self">
-          执行上下文与作用域
+        <a href="/2022/03/07/%E6%B5%AE%E5%8A%A8/" target="_self">
+          浮动
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/11/23/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F/" target="_self">
+        <a href="/2022/03/07/%E6%B5%AE%E5%8A%A8/" target="_self">
           
           
             
           
-          执行上下文与作用域执行上下文执行上下文（以下简称“上下文”）的概念在 JavaScript 中是颇为重要的。变量或函数的上下文决定了它们可以访问哪些数据，以及它们的行为。每个上下文都有一个关联的变量对象（variable object），而这个上下文中定义的所有变量和函数都存在于这个对象上。全局上下文是最外层的上下文。根据 ECMAScript 实现的宿主环境，表示全局上下文的对象可能不一样。在浏
+          浮动文本主要内容
+
+标准文档流 
+标准文档流的特性
+元素
+行内元素和块级元素的相互转换
+
+
+浮动的性质
+浮动的清除
+
+标准文档流宏观地讲，我们的web页面和photoshop等设计软件有本质的区别：web页面的制作，是个“流”，必须从上而下，像“织毛衣”。而设计软件，想往哪里画个东西，都能画。
+标准文档流的特性空白折叠现象：无论多少个空格、换行、tab，都会折叠为一个空格。比如，如果我们想让img
         </a>
       </p>
 
@@ -676,8 +680,8 @@ Presto
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-11-23 15:28" pubdate>
-              2021-11-23
+            <time datetime="2022-03-07 14:29" pubdate>
+              2022-03-07
             </time>
           </div>
         
@@ -685,9 +689,7 @@ Presto
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/JavaScript/">JavaScript</a>
-            
-              <a href="/categories/JavaScript/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AC%AC%E5%9B%9B%E7%89%88%E7%AC%94%E8%AE%B0/">JavaScript高级程序设计第四版笔记</a>
+              <a href="/categories/CSS/">CSS</a>
             
           </div>
         
@@ -695,9 +697,11 @@ Presto
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/">执行上下文</a>
+              <a href="/tags/HTML/">HTML</a>
             
-              <a href="/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F/">作用域</a>
+              <a href="/tags/CSS/">CSS</a>
+            
+              <a href="/tags/%E6%B5%AE%E5%8A%A8/">浮动</a>
             
           </div>
         
@@ -711,18 +715,19 @@ Presto
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/11/17/JavaScript%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_self">
-          JavaScript数据类型
+        <a href="/2022/03/07/HTML5/" target="_self">
+          HTML5
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/11/17/JavaScript%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_self">
+        <a href="/2022/03/07/HTML5/" target="_self">
           
           
             
           
-          JavaScript 数据类型基本类型ECMAScript 有 7 种简单数据类型（也称为原始类型）：Undefined、 Null、 Boolean、 Number、 String、 Symbol 和 BigInt(ES2020) 。Symbol（符号）是 ECMAScript 6 新增的，BigInt 是 ES2020 新增还有一种复杂数据类型叫 Object（对象）。Object 是一种无序
+          HTML5HTML5并不仅仅只是做为HTML标记语言的一个最新版本，更重要的是它制定了Web应用开发的一系列标准，成为第一个将Web做为应用开发平台的HTML语言。​
+HTML5定义了一系列新元素，如新语义标签、智能表单、多媒体标签等，可以帮助开发者创建富互联网应用，还提供了一些Javascript API，如地理定位、重力感应、硬件访问等，可以在浏览器内实现类原生应用。我们甚至可以结合 Canv
         </a>
       </p>
 
@@ -730,8 +735,8 @@ Presto
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-11-17 18:39" pubdate>
-              2021-11-17
+            <time datetime="2022-03-07 09:53" pubdate>
+              2022-03-07
             </time>
           </div>
         
@@ -739,9 +744,7 @@ Presto
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/JavaScript/">JavaScript</a>
-            
-              <a href="/categories/JavaScript/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AC%AC%E5%9B%9B%E7%89%88%E7%AC%94%E8%AE%B0/">JavaScript高级程序设计第四版笔记</a>
+              <a href="/categories/HTML/">HTML</a>
             
           </div>
         
@@ -749,7 +752,9 @@ Presto
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/JavaScript/">JavaScript</a>
+              <a href="/tags/HTML/">HTML</a>
+            
+              <a href="/tags/HTML5/">HTML5</a>
             
           </div>
         
@@ -761,7 +766,7 @@ Presto
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#board">6</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
