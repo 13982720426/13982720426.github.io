@@ -1,0 +1,835 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="jackhoo">
+  <meta name="keywords" content="">
+  
+  <title>MongoDB学习笔记 - jackhoo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/%E6%AC%A2%E8%BF%8E%E5%A4%A7%E5%AE%B6%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%8C%E8%AF%B7%E5%B0%BD%E6%83%85%E7%95%99%E8%A8%80%E5%90%A7%EF%BC%81/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/hybrid.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"13982720426.github.io","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz","app_key":"BlsdS19vhoVr77n1TiE2diHr","server_url":"https://wvn0ubbm.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>jackhoo的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/13982720426/">
+                <i class="iconfont icon-github-fill"></i>
+                GitHub
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg2.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MongoDB学习笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      jackhoo
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-14 19:51" pubdate>
+        星期四, 十月 14日 2021, 7:51 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      102
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MongoDB学习笔记</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2 小时前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="MongoDB-学习笔记"><a href="#MongoDB-学习笔记" class="headerlink" title="MongoDB 学习笔记"></a>MongoDB 学习笔记</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="数据库-database"><a href="#数据库-database" class="headerlink" title="数据库(database)"></a>数据库(database)</h3><h4 id="什么是数据库？"><a href="#什么是数据库？" class="headerlink" title="什么是数据库？"></a>什么是数据库？</h4><p>存储数据的仓库<br>​</p>
+<h4 id="为什么要有数据库？"><a href="#为什么要有数据库？" class="headerlink" title="为什么要有数据库？"></a>为什么要有数据库？</h4><p>首先数据是存储在内存里运行的，如果一断电的话，数据就会丢失，所以可以将数据存储到硬盘，但是硬盘没有联网，所以有了可以联网也可以存储数据的数据库。<br>​</p>
+<h4 id="数据库能做什么？"><a href="#数据库能做什么？" class="headerlink" title="数据库能做什么？"></a>数据库能做什么？</h4><p>数据库可以存储数据，并且这些数据还可以连接网络，也就是和硬盘相比，可以不用将数据库到处带，就像是网盘。<br>​</p>
+<h4 id="数据库的服务器和客户端"><a href="#数据库的服务器和客户端" class="headerlink" title="数据库的服务器和客户端"></a>数据库的服务器和客户端</h4><p>值得注意的是数据库它也是分为服务器和客户端的</p>
+<ul>
+<li>服务器：保存数据的</li>
+<li>客户端：操作和存储数据的(CRUD)</li>
+</ul>
+<h4 id="数据库的分类"><a href="#数据库的分类" class="headerlink" title="数据库的分类"></a>数据库的分类</h4><h5 id="按照关系型分类："><a href="#按照关系型分类：" class="headerlink" title="按照关系型分类："></a>按照关系型分类：</h5><ul>
+<li>1、关系型数据库(MySQL、Orcal 等)</li>
+<li>2、非关系型数据库(MongoDB)</li>
+</ul>
+<p>​</p>
+<h5 id="关系型和非关系型的区别"><a href="#关系型和非关系型的区别" class="headerlink" title="关系型和非关系型的区别:"></a>关系型和非关系型的区别:</h5><p>总而言之就是：关系型的是创建表格, 非关系型是可以创建任意多个文档。<br>​</p>
+<p>1、数据存储方式不同。<br>关系型和非关系型数据库的主要差异是数据存储的方式。关系型数据天然就是表格式的，因此存储在数据表的行和列中。数据表可以彼此关联协作存储，也很容易提取数据。<br>与其相反，非关系型数据不适合存储在数据表的行和列中，而是大块组合在一起。非关系型数据通常存储在数据集中，就像文档、键值对或者图结构。你的数据及其特性是选择数据存储和提取方式的首要影响因素。<br>​</p>
+<p>2、扩展方式不同。<br>SQL 和 NoSQL 数据库最大的差别可能是在扩展方式上，要支持日益增长的需求当然要扩展。<br>要支持更多并发量，SQL 数据库是纵向扩展，也就是说提高处理能力，使用速度更快速的计算机，这样处理相同的数据集就更快了。<br>因为数据存储在关系表中，操作的性能瓶颈可能涉及很多个表，这都需要通过提高计算机性能来客服。虽然 SQL 数据库有很大扩展空间，但最终肯定会达到纵向扩展的上限。而 NoSQL 数据库是横向扩展的。<br>而非关系型数据存储天然就是分布式的，NoSQL 数据库的扩展可以通过给资源池添加更多普通的数据库服务器(节点)来分担负载。<br>​</p>
+<p>3、对事务性的支持不同。<br>如果数据操作需要高事务性或者复杂数据查询需要控制执行计划，那么传统的 SQL 数据库从性能和稳定性方面考虑是你的最佳选择。SQL 数据库支持对事务原子性细粒度控制，并且易于回滚事务。</p>
+<h2 id="什么是-MongoDB"><a href="#什么是-MongoDB" class="headerlink" title="什么是 MongoDB?"></a>什么是 MongoDB?</h2><p>一种数据库，而且是非关系型数据库。<br>MongoDB 是由 C++语言编写的，是一个基于分布式文件存储的开源数据库系统。<br>在高负载的情况下，添加更多的节点，可以保证服务器性能。<br>MongoDB 旨在为 WEB 应用提供可扩展的高性能数据存储解决方案。<br>MongoDB 将数据存储为一个文档，数据结构由键值(key=&gt;value)对组成。MongoDB 文档类似于 JSON 对象。字段值可以包含其他文档<br>​</p>
+<h3 id="MongoDB-的优点"><a href="#MongoDB-的优点" class="headerlink" title="MongoDB 的优点"></a>MongoDB 的优点</h3><p>1、可以快速开发 web 型应用，因为灵活，不用像关系型数据库一样需要建表<br>2、MongoDB 存储的是文档（document），文档内存储的是类似 json 的结构，所谓 json 就是字符串数组</p>
+<h3 id="MongoDB-常见的命令"><a href="#MongoDB-常见的命令" class="headerlink" title="MongoDB 常见的命令"></a>MongoDB 常见的命令</h3><ul>
+<li>开启服务器: net start MongoDB</li>
+<li>关闭服务器: net stop MongoDB</li>
+<li>打开客户端: mongo，在 cmd 窗口输入便可以连接上数据库</li>
+</ul>
+<h3 id="MongoDB-的数据库分类"><a href="#MongoDB-的数据库分类" class="headerlink" title="MongoDB 的数据库分类"></a>MongoDB 的数据库分类</h3><ul>
+<li>数据库（database）：用来存储集合的，而且数据库也有分大小。</li>
+<li>集合（collection）：集合类似于数组，用于存放文档的</li>
+<li>文档（document）： 文档是 MongoDB 数据库中最小的单位，我们要操作的目标就是文档。</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/13/ClDB28tgM4mHKNx.png#id=Gm3RW&originHeight=304&originWidth=679&originalType=binary&ratio=1&status=done&style=none" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title class_">MongoDB</span>关系: 数据库（database） &gt; 集合（collection）&gt; 文档（<span class="hljs-variable language_">document</span>）<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>在 MongoDB 中不需要自己创建数据库和集合，便可以直接创建文档，其实就是在创建文档的同时，会将数据库和集合创建了。</p>
+</blockquote>
+<h2 id="安装配置-MongoDB"><a href="#安装配置-MongoDB" class="headerlink" title="安装配置 MongoDB"></a>安装配置 MongoDB</h2><h3 id="安装-MongoDB"><a href="#安装-MongoDB" class="headerlink" title="安装 MongoDB"></a>安装 MongoDB</h3><p>在官网下载<a target="_blank" rel="noopener" href="https://www.mongodb.com/try/download/community">MongoDB</a>，选择免费的社区服务，对应操作系统版本<br>​</p>
+<p><img src="https://i.loli.net/2021/10/13/Eoxh5NT4yWvmwzt.png#id=tTBHa&originHeight=418&originWidth=1001&originalType=binary&ratio=1&status=done&style=none" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>推荐下载最新版本，4.0 以上版本集成了系统服务，不用自己去配置系统服务了</p>
+</blockquote>
+<p>下载之后就直接安装，建议 D 盘</p>
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>打开高级系统设置找到环境变量，在用户变量的 Path 中配置环境变量，<br>我的是 D:\Program Files\MongoDB\Server\5.0\bin<br><img src="https://i.loli.net/2021/10/13/k3xIK6v15PegRV7.png#id=gSOZ4&originHeight=764&originWidth=1690&originalType=binary&ratio=1&status=done&style=none" srcset="/img/loading.gif" lazyload></p>
+<h3 id="启动-MongoDB"><a href="#启动-MongoDB" class="headerlink" title="启动 MongoDB"></a>启动 MongoDB</h3><p>如果是安装的最新版 5.0 以上可以不用配置 data/db 和系统服务，因为默认配置好了，可以直接命令行启动<br>在安装路径下可以找到数据库，储存位置和 log<br><img src="https://i.loli.net/2021/10/13/leNrLdFSwhp2Z3f.png#id=L5S6Z&originHeight=372&originWidth=804&originalType=binary&ratio=1&status=done&style=none" srcset="/img/loading.gif" lazyload></p>
+<h4 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h4><p>打开 cmd 命令行输入 <code>mongod</code> 启动服务，有如下说明启动成功。<br>​</p>
+<p><img src="https://i.loli.net/2021/10/13/b9yV2SzG8f5mKI1.png#id=T98ac&originHeight=367&originWidth=1175&originalType=binary&ratio=1&status=done&style=none" srcset="/img/loading.gif" lazyload></p>
+<h4 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h4><p>不要关闭此窗口，再开一个 cmd 命令行输入 <code>mongo</code>，默认端口 27017<br>​</p>
+<p><img src="https://i.loli.net/2021/10/13/Kb7Gy9dMahNjcom.png#id=woag7&originHeight=639&originWidth=1223&originalType=binary&ratio=1&status=done&style=none" srcset="/img/loading.gif" lazyload><br>浏览器访问 <a target="_blank" rel="noopener" href="http://127.0.0.1:27017/?compressors=disabled&amp;gssapiServiceName=mongodb">http://127.0.0.1:27017/?compressors=disabled&amp;gssapiServiceName=mongodb</a><br>浏览器显示，数据库就链接成功</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title class_">It</span> looks like you are trying to access <span class="hljs-title class_">MongoDB</span> over <span class="hljs-variable constant_">HTTP</span> on the native driver port.<br></code></pre></div></td></tr></table></figure>
+
+<p>如果是安装的 4.0 以上的版本就不用配置系统服务，<br>先关闭 cmd 命令行，打开任务管理，选择 服务 找到 MongoDB。如果 MongoDB 正在启动就说明，已经配置好了开机自启，不用手动配置，也不用每次都手动启动 mongo<br><img src="https://i.loli.net/2021/10/13/mUISaYsrXAGZLOg.png#id=adt23&originHeight=742&originWidth=834&originalType=binary&ratio=1&status=done&style=none" srcset="/img/loading.gif" lazyload></p>
+<h2 id="MongoDB-操作"><a href="#MongoDB-操作" class="headerlink" title="MongoDB 操作"></a>MongoDB 操作</h2><h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><p>先打开 cmd 命令行，输入<code>mongo</code>连接数据库</p>
+<h4 id="显示当前所有的数据库"><a href="#显示当前所有的数据库" class="headerlink" title="显示当前所有的数据库"></a>显示当前所有的数据库</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">show dbs<br><span class="hljs-comment">//或者</span><br>show databases<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="进入到指定数据库"><a href="#进入到指定数据库" class="headerlink" title="进入到指定数据库"></a>进入到指定数据库</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">use 数据库名<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>在 MongoDB 中不需要自己创建数据库和集合，便可以直接创建文档，其实就是在创建文档的同时，会将数据库和集合创建了。<br>所以如果没有这个数据库 <code>use 数据库名</code> 会自动创建该数据库</p>
+</blockquote>
+<h4 id="查看当前所处数据库"><a href="#查看当前所处数据库" class="headerlink" title="查看当前所处数据库"></a>查看当前所处数据库</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="显示当前数据库所有集合"><a href="#显示当前数据库所有集合" class="headerlink" title="显示当前数据库所有集合"></a>显示当前数据库所有集合</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">show collections<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="数据库的-CRUD（增删改查）的操作"><a href="#数据库的-CRUD（增删改查）的操作" class="headerlink" title="数据库的 CRUD（增删改查）的操作"></a>数据库的 CRUD（增删改查）的操作</h3><p><strong>​</strong></p>
+<p>MongoDB<a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/crud/">CRUD</a>官方文档<br><strong>核心: 增: insert() 删: remove() 查: find() 改: update()</strong><br>也有官方图形化工具 MongoDB Compass</p>
+<h4 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h4><h5 id="向集合中插入一个或者多个文档"><a href="#向集合中插入一个或者多个文档" class="headerlink" title="向集合中插入一个或者多个文档"></a>向集合中插入一个或者多个文档</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.&lt;collection&gt;.<span class="hljs-title function_">insert</span>(<span class="hljs-variable language_">document</span>)<br><span class="hljs-comment">//&lt;collection&gt;表示集合名</span><br><span class="hljs-comment">//document表示插入的文档</span><br></code></pre></div></td></tr></table></figure>
+
+<p>例如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">piyou</span>.<span class="hljs-title function_">insert</span>(&#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;孙悟空&#x27;</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">28</span>, <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;花果山&#x27;</span> &#125;)<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">	表示向 集合名为piyou插入了文档, 文档内容是对象。</span><br><span class="hljs-comment">	集合名是自己创建的，想用什么名称就用什么。</span><br><span class="hljs-comment">*/</span><br><br>db.<span class="hljs-property">piyou</span>.<span class="hljs-title function_">insert</span>([<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;猪八戒&#x27;</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">38</span>, <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;高老庄&#x27;</span> &#125;,<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;沙和尚&#x27;</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">45</span>, <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;流沙河&#x27;</span> &#125;,<br>])<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">	可以注意到: 传递的数据是数组，数组内部是对象，</span><br><span class="hljs-comment">		其实对象就相当于文档，这就是插入了两个文档。</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
+
+<p>当我们在向集合中插入文档时，如果没有给文档指定 <code>_id</code> 属性，则数据库会自动为文档添加<code>_id</code>，该属性用来作为文档的唯一标识。<br>自己也能指定<code>_id</code>，但是要必须保证唯一性，不建议这样做<br><img src="https://i.loli.net/2021/10/13/AHY9uOypfKMsnCZ.png#id=ZgB1O&originHeight=89&originWidth=1076&originalType=binary&ratio=1&status=done&style=none" srcset="/img/loading.gif" lazyload><br>输入指令<code>ObjectId()</code></p>
+<p>会输出一个唯一 id <code>ObjectId(&quot;6166daec105f2c7be7b963e5&quot;)</code><br>​</p>
+<h5 id="向集合中插入一个文档"><a href="#向集合中插入一个文档" class="headerlink" title="向集合中插入一个文档"></a>向集合中插入一个文档</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">piyou</span>.<span class="hljs-title function_">insertOne</span>(&#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;唐僧&#x27;</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>, <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;女儿国&#x27;</span> &#125;)<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">	表示向集合名为piyou的 插入了一个文档。</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
+
+<h5 id="向集合中插入多个文档"><a href="#向集合中插入多个文档" class="headerlink" title="向集合中插入多个文档"></a>向集合中插入多个文档</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">piyou</span>.<span class="hljs-title function_">insertMany</span>([<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;白骨精&#x27;</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">20</span>, <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;白骨洞&#x27;</span> &#125;,<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;蜘蛛精&#x27;</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">24</span>, <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;蜘蛛洞&#x27;</span> &#125;,<br>])<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">	可以看到，用法是和insert是相差不多的。数组里面有对象，对象即是文档。</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p><code>insertOne</code>和<code>insertMany</code>相对于<code>insert</code>增加了语义化</p>
+</blockquote>
+<p>​</p>
+<h4 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.&lt;collection&gt;.<span class="hljs-title function_">find</span>();<br><span class="hljs-comment">//db.&lt;collection&gt;.find([&#123;属性：值&#125;,&#123;属性：值&#125;]) 查询符合条件的集合</span><br><br>db.集合名.<span class="hljs-title function_">find</span>(condition);					查询一个或多个文档 condition是查询条件 ，返回的是数组<br>db.集合名.<span class="hljs-title function_">findOne</span>(condition);	    查询一个文档，返回的是文档对象<br>db.集合名.<span class="hljs-title function_">findMany</span>(condition)			查询多个文档<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&gt; db.<span class="hljs-property">students</span>.<span class="hljs-title function_">find</span>(&#123;<span class="hljs-attr">_id</span>:<span class="hljs-number">222</span>&#125;).<span class="hljs-property">name</span>  <span class="hljs-comment">//错误</span><br>&gt; db.<span class="hljs-property">students</span>.<span class="hljs-title function_">findOne</span>(&#123;<span class="hljs-attr">_id</span>:<span class="hljs-number">222</span>&#125;).<span class="hljs-property">name</span> <span class="hljs-comment">//正确</span><br></code></pre></div></td></tr></table></figure>
+
+<p>例如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">piyou</span>.<span class="hljs-title function_">find</span>(&#123; <span class="hljs-attr">age</span>: <span class="hljs-number">18</span> &#125;)<br><span class="hljs-comment">//这条语句表示的是查询age是18的文档。 值得注意的是，条件也是写在了对象里面，</span><br><span class="hljs-comment">//也是因为传入的值需要是json语句</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.集合名.<span class="hljs-title function_">find</span>(condition).<span class="hljs-title function_">count</span>();	使用<span class="hljs-title function_">count</span>()来计数<br>db.<span class="hljs-property">piyou</span>.<span class="hljs-title function_">find</span>().<span class="hljs-title function_">count</span>();	<span class="hljs-comment">// 执行结果是: 6, 因为在插入那边是一共插入了6条数据</span><br></code></pre></div></td></tr></table></figure>
+
+<p>总结：</p>
+<ul>
+<li>find()返回的是数组，数组内存放着文档，</li>
+<li>findOne()返回的就是一个文档，</li>
+<li>findMany()返回的也是数组内存放着文档的形式。</li>
+<li>find()的返回值还可以调用 count(),<br>用来获取符合条件的数量</li>
+</ul>
+<p>​</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">查询操作符的使用<br>#比较操作符<br>$gt 大于<br>$gte 大于等于<br>$lt 小于<br>$lte 小于等于<br>$ne 不等于<br>$eq 等于的另一种写法<br><br>db.<span class="hljs-property">users</span>.<span class="hljs-title function_">find</span>(&#123;<span class="hljs-attr">num</span>:&#123;<span class="hljs-attr">$gt</span>:<span class="hljs-number">200</span>&#125;&#125;) #大于<span class="hljs-number">200</span><br>db.<span class="hljs-property">users</span>.<span class="hljs-title function_">find</span>(&#123;<span class="hljs-attr">num</span>:&#123;<span class="hljs-attr">$gt</span>:<span class="hljs-number">200</span>,<span class="hljs-attr">$lt</span>:<span class="hljs-number">300</span>&#125;&#125;) #大于<span class="hljs-number">200</span>小于<span class="hljs-number">300</span><br><br>$or 或者<br>db.<span class="hljs-property">users</span>.<span class="hljs-title function_">find</span>(<br>    &#123;<br>        <span class="hljs-attr">$or</span>:[<br>            &#123;<span class="hljs-attr">num</span>:&#123;<span class="hljs-attr">$gt</span>:<span class="hljs-number">300</span>&#125;&#125;,<br>            &#123;<span class="hljs-attr">num</span>:&#123;<span class="hljs-attr">$lt</span>:<span class="hljs-number">200</span>&#125;&#125;<br>        ]<br>    &#125;<br>) #大于<span class="hljs-number">300</span>或小于<span class="hljs-number">200</span><br><br><br>#分页查询<br>db.<span class="hljs-property">users</span>.<span class="hljs-title function_">find</span>().<span class="hljs-title function_">skip</span>(页码-<span class="hljs-number">1</span> * 每页显示的条数).<span class="hljs-title function_">limit</span>(每页显示的条数)<br><br>db.<span class="hljs-property">users</span>.<span class="hljs-title function_">find</span>().<span class="hljs-title function_">limit</span>(<span class="hljs-number">10</span>) #前<span class="hljs-number">10</span>条数据<br>db.<span class="hljs-property">users</span>.<span class="hljs-title function_">find</span>().<span class="hljs-title function_">skip</span>(<span class="hljs-number">50</span>).<span class="hljs-title function_">limit</span>(<span class="hljs-number">10</span>) #跳过前<span class="hljs-number">50</span>条数据，即查询的是第<span class="hljs-number">61</span>-<span class="hljs-number">70</span>条数据，即第<span class="hljs-number">6</span>页的数据<br><br><br>#排序<br>db.<span class="hljs-property">emp</span>.<span class="hljs-title function_">find</span>().<span class="hljs-title function_">sort</span>(&#123;<span class="hljs-attr">sal</span>:<span class="hljs-number">1</span>&#125;) #<span class="hljs-number">1</span>表示升序排列，-<span class="hljs-number">1</span>表示降序排列<br>db.<span class="hljs-property">emp</span>.<span class="hljs-title function_">find</span>().<span class="hljs-title function_">sort</span>(&#123;<span class="hljs-attr">sal</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">empno</span>:-<span class="hljs-number">1</span>&#125;) #先按照sal升序排列，如果遇到相同的sal，则按empno降序排列<br><br>#注意：skip,limit,sort可以以任意的顺序调用，最终的结果都是先调sort，再调skip，最后调limit<br><br>#<span class="hljs-number">5.</span>设置查询结果的投影，即只过滤出自己想要的字段<br>db.<span class="hljs-property">emp</span>.<span class="hljs-title function_">find</span>(&#123;&#125;,&#123;<span class="hljs-attr">ename</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">_id</span>:<span class="hljs-number">0</span>&#125;) #在匹配到的文档中只显示ename字段<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h4><h5 id="默认替换"><a href="#默认替换" class="headerlink" title="默认替换"></a>默认替换</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.&lt;collection&gt;.<span class="hljs-title function_">update</span>(查询条件，新对象)<br><span class="hljs-comment">//update()默认条件下是使用新对象替换就对象</span><br><span class="hljs-comment">//在使用update()时，需要一个新的玩意加入，叫做修改操作符</span><br><span class="hljs-comment">//update()默认条件下只会修改一个</span><br></code></pre></div></td></tr></table></figure>
+
+<p>例如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">piyou</span>.<span class="hljs-title function_">update</span>(&#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;猪八戒&#x27;</span> &#125;, &#123; <span class="hljs-attr">age</span>: <span class="hljs-number">39</span> &#125;)<br><span class="hljs-comment">//这样使用的话，会使用&#123;age:18&#125;覆盖掉&#123;name:“猪八戒”…&#125;这整条语句。</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.集合名.<span class="hljs-title function_">update</span>(condition,newObject);		修改一个或多个文档<br>db.集合名.<span class="hljs-title function_">uodateOne</span>(condition,newObject);	修改一个文档<br>db.集合名.<span class="hljs-title function_">updateMany</span>(condition, newObject);  修改多个文档<br><span class="hljs-attr">condition</span>: 查询的条件		<span class="hljs-attr">newObject</span>: 需要修改的语句<br><br></code></pre></div></td></tr></table></figure>
+
+<h5 id="修改操作符"><a href="#修改操作符" class="headerlink" title="修改操作符"></a>修改操作符</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">$set				表示需要设置指定的属性<br>$unset			表示需要删除指定的属性<br>$push				表示给数组添加一个新元素，因为文档内也会有数组，数组便会有数组元素<br>$addToset 	表示给数组添加一个新元素，和push的区别是，如果出现同名的数组元素，则不会再添加<br>$gt					大于<br>$gte				大于等于<br>$lt					小于<br>$lte				小于等于<br>$or [&#123;条件一,条件二&#125;]		表示或的意思，符合条件一或者条件二<br>$inc				表示自增，用在在原来数据的基础上对数据加减，可用于加薪减薪的操作<br><br></code></pre></div></td></tr></table></figure>
+
+<h5 id="使用修饰符修改属性"><a href="#使用修饰符修改属性" class="headerlink" title="使用修饰符修改属性"></a>使用修饰符修改属性</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">piyou</span>.<span class="hljs-title function_">update</span>(&#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;孙悟空&#x27;</span> &#125;, &#123; <span class="hljs-attr">$set</span>: &#123; <span class="hljs-attr">age</span>: <span class="hljs-number">29</span> &#125; &#125;)<br><span class="hljs-comment">/*	</span><br><span class="hljs-comment">	表示根据条件&#123;name:&quot;孙悟空&quot;&#125;, 找到了孙悟空的这个文档, 使用了$set(修改指定属性)</span><br><span class="hljs-comment">	这个修改操作符，将age修改成了29</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
+
+<h5 id="修饰符删除指定属性"><a href="#修饰符删除指定属性" class="headerlink" title="修饰符删除指定属性"></a>修饰符删除指定属性</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">piyou</span>.<span class="hljs-title function_">update</span>(&#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;唐僧&#x27;</span> &#125;, &#123; <span class="hljs-attr">$unset</span>: &#123; <span class="hljs-attr">address</span>: <span class="hljs-number">1</span> &#125; &#125;)<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">	表示使用 $unset(删除指定属性), 将唐僧的address的属性值给删掉了</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
+
+<h5 id="替换一个"><a href="#替换一个" class="headerlink" title="替换一个"></a>替换一个</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">collection</span>.<span class="hljs-title function_">replaceOne</span>(查询条件，新对象)<br><span class="hljs-comment">//第一个参数是查找条件，第二个是替换内容</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">修改对应的属性，需要用到修改操作符，比如$set,$unset,$push,$addToSet<br>db.<span class="hljs-property">collectionName</span>.<span class="hljs-title function_">update</span>(<br>	# 查询条件<br>	&#123;<span class="hljs-attr">_id</span>:<span class="hljs-number">222</span>&#125;,<br>	&#123;<br>		#修改对应的属性<br>		<span class="hljs-attr">$set</span>:&#123;<br>			<span class="hljs-attr">name</span>:<span class="hljs-string">&#x27;kang2&#x27;</span>,<br>			<span class="hljs-attr">age</span>:<span class="hljs-number">21</span><br>		&#125;<br>		#删除对应的属性<br>		<span class="hljs-attr">$unset</span>:&#123;<br>			<span class="hljs-attr">gender</span>:<span class="hljs-number">1</span> <span class="hljs-comment">//这里的1可以随便改为其他的值，无影响</span><br>		&#125;<br><br>	&#125;<br>)<br><br># update默认与<span class="hljs-title function_">updateOne</span>()等效，即对于匹配到的文档只更改其中的第一个<br># <span class="hljs-title function_">updateMany</span>()可以用来更改匹配到的所有文档<br>db.<span class="hljs-property">students</span>.<span class="hljs-title function_">updateMany</span>(<br>	&#123;<span class="hljs-attr">name</span>:<span class="hljs-string">&#x27;liu&#x27;</span>&#125;,<br>	&#123;<br>		<span class="hljs-attr">$set</span>:&#123;<br>			<span class="hljs-attr">age</span>:<span class="hljs-number">21</span>,<br>			<span class="hljs-attr">gender</span>:<span class="hljs-number">222</span><br>		&#125;<br>	&#125;<br>)<br><br><br># 向数组中添加数据<br>db.<span class="hljs-property">users</span>.<span class="hljs-title function_">update</span>(&#123;<span class="hljs-attr">username</span>:<span class="hljs-string">&#x27;liu&#x27;</span>&#125;,&#123;<span class="hljs-attr">$push</span>:&#123;<span class="hljs-string">&quot;hobby.movies&quot;</span>:<span class="hljs-string">&#x27;movie4&#x27;</span>&#125;&#125;)<br><br>#如果数据已经存在，则不会添加<br>db.<span class="hljs-property">users</span>.<span class="hljs-title function_">update</span>(&#123;<span class="hljs-attr">username</span>:<span class="hljs-string">&#x27;liu&#x27;</span>&#125;,&#123;<span class="hljs-attr">$addToSet</span>:&#123;<span class="hljs-string">&quot;hobby.movies&quot;</span>:<span class="hljs-string">&#x27;movie4&#x27;</span>&#125;&#125;)<br><br><br># 自增自减操作符$inc<br>&#123;<span class="hljs-attr">$inc</span>:&#123;<span class="hljs-attr">num</span>:<span class="hljs-number">100</span>&#125;&#125; #让num自增<span class="hljs-number">100</span><br>&#123;<span class="hljs-attr">$inc</span>:&#123;<span class="hljs-attr">num</span>:-<span class="hljs-number">100</span>&#125;&#125; #让num自减<span class="hljs-number">100</span><br>db.<span class="hljs-property">emp</span>.<span class="hljs-title function_">updateMany</span>(&#123;<span class="hljs-attr">sal</span>:&#123;<span class="hljs-attr">$lt</span>:<span class="hljs-number">1000</span>&#125;&#125;,&#123;<span class="hljs-attr">$inc</span>:&#123;<span class="hljs-attr">sal</span>:<span class="hljs-number">400</span>&#125;&#125;) #给工资低于<span class="hljs-number">1000</span>的员工增加<span class="hljs-number">400</span>的工资<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><h5 id="删除一个或者多个"><a href="#删除一个或者多个" class="headerlink" title="删除一个或者多个"></a>删除一个或者多个</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.&lt;collection&gt;.<span class="hljs-title function_">remove</span>()<br><span class="hljs-comment">//删除一个或者多个，第二个参数传递一个true,则只会删除一个</span><br><span class="hljs-comment">//如果只传一个空对象，则会删除全部</span><br></code></pre></div></td></tr></table></figure>
+
+<p>例如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">piyou</span>.<span class="hljs-title function_">remove</span>(&#123; <span class="hljs-attr">age</span>: <span class="hljs-number">39</span> &#125;)<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">	表示删除了符合 age为39 这个条件的一个或多个文档。</span><br><span class="hljs-comment">	也就是删掉了刚刚那个猪八戒的那条语句</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
+
+<p>这个是真删除数据库，一般是不真删除。<br>一般在数据添加一个表示删除的字段 例如：<code>&#123; isDel : 0 &#125;</code>，<br>查询时添加这个属性 <code>db.piyou.find(&#123; isDel : 0 &#125;)</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.集合名.<span class="hljs-title function_">remove</span>(condition)		删除符合条件的一个或多个文档<br>db.集合名.<span class="hljs-title function_">deleteOne</span>(condition)	删除符合条件的一个文档<br>db.集合名.<span class="hljs-title function_">deleteMany</span>(condition)	删除符合条件的多个文档<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="删除集合"><a href="#删除集合" class="headerlink" title="删除集合"></a>删除集合</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.&lt;collection&gt;.<span class="hljs-title function_">drop</span>()<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.&lt;collection&gt;.<span class="hljs-title function_">dropDatabase</span>()<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>注意数据库里的数据一般不删除</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"># <span class="hljs-number">1.</span> db.<span class="hljs-property">collectionName</span>.<span class="hljs-title function_">remove</span>()<br># remove默认会删除所有匹配的文档。相当于<span class="hljs-title function_">deleteMany</span>()<br># remove可以加第二个参数，表示只删除匹配到的第一个文档。此时相当于<span class="hljs-title function_">deleteOne</span>()<br>db.<span class="hljs-property">students</span>.<span class="hljs-title function_">remove</span>(&#123;<span class="hljs-attr">name</span>:<span class="hljs-string">&#x27;liu&#x27;</span>,<span class="hljs-literal">true</span>&#125;)<br><br># <span class="hljs-number">2.</span> db.<span class="hljs-property">collectionName</span>.<span class="hljs-title function_">deleteOne</span>()<br># <span class="hljs-number">3.</span> db.<span class="hljs-property">collectionName</span>.<span class="hljs-title function_">deleteMany</span>()<br>db.<span class="hljs-property">students</span>.<span class="hljs-title function_">deleteOne</span>(&#123;<span class="hljs-attr">name</span>:<span class="hljs-string">&#x27;liu&#x27;</span>&#125;)<br><br># <span class="hljs-number">4.</span> 删除所有数据：db.<span class="hljs-property">students</span>.<span class="hljs-title function_">remove</span>(&#123;&#125;)----性格较差，内部是在一条一条的删除文档。<br># 可直接通过db.<span class="hljs-property">students</span>.<span class="hljs-title function_">drop</span>()删除整个集合来提高效率。<br><br># <span class="hljs-number">5.</span>删除集合<br>db.<span class="hljs-property">collection</span>.<span class="hljs-title function_">drop</span>()<br><br># <span class="hljs-number">6.</span>删除数据库<br>db.<span class="hljs-title function_">dropDatabase</span>()<br><br># <span class="hljs-number">7.</span>注意：删除某一个文档的属性，应该用update。   remove以及<span class="hljs-keyword">delete</span>系列删除的是整个文档<br><br># <span class="hljs-number">8.</span>当删除的条件为内嵌的属性时：<br>db.<span class="hljs-property">users</span>.<span class="hljs-title function_">remove</span>(&#123;<span class="hljs-string">&quot;hobby.movies&quot;</span>:<span class="hljs-string">&#x27;movie3&#x27;</span>&#125;)<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="附加方法"><a href="#附加方法" class="headerlink" title="附加方法"></a>附加方法</h5><p>以下方法也可以从集合中删除文档：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/reference/method/db.collection.findOneAndDelete/#mongodb-method-db.collection.findOneAndDelete">db.collection.findOneAndDelete()</a></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/reference/method/db.collection.findAndModify/#std-label-findAndModify-wrapper-sorted-remove">findOneAndDelete()</a> 提供了一个排序选项。该选项允许删除按指定顺序排序的第一个文档。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/reference/method/db.collection.findAndModify/#mongodb-method-db.collection.findAndModify">db.collection.findAndModify()</a></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/reference/method/db.collection.findAndModify/#mongodb-method-db.collection.findAndModify">db.collection.findAndModify()</a>提供排序选项。该选项允许删除按指定顺序排序的第一个文档。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/reference/method/db.collection.bulkWrite/#mongodb-method-db.collection.bulkWrite">db.collection.bulkWrite()</a>.</li>
+</ul>
+<p>有关更多信息和示例，请参阅方法的各个参考页。</p>
+<h3 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h3><h4 id="内嵌文档"><a href="#内嵌文档" class="headerlink" title="内嵌文档"></a>内嵌文档</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">persons</span>.<span class="hljs-title function_">insert</span>([<br>  &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;大大白&#x27;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">28</span>,<br>    <span class="hljs-attr">hobby</span>: &#123;<br>      <span class="hljs-attr">music</span>: [<span class="hljs-string">&#x27;new Boy&#x27;</span>, <span class="hljs-string">&#x27;云烟成雨&#x27;</span>, <span class="hljs-string">&#x27;秋酿&#x27;</span>],<br>      <span class="hljs-attr">games</span>: [<span class="hljs-string">&#x27;王者荣耀&#x27;</span>, <span class="hljs-string">&#x27;和平精英&#x27;</span>, <span class="hljs-string">&#x27;光遇&#x27;</span>],<br>    &#125;,<br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;小白&#x27;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">21</span>,<br>    <span class="hljs-attr">hobby</span>: &#123;<br>      <span class="hljs-attr">movies</span>: [<span class="hljs-string">&#x27;大话西游&#x27;</span>, <span class="hljs-string">&#x27;唐伯虎点秋香&#x27;</span>],<br>      <span class="hljs-attr">games</span>: [<span class="hljs-string">&#x27;王者荣耀&#x27;</span>, <span class="hljs-string">&#x27;旅行青蛙&#x27;</span>, <span class="hljs-string">&#x27;穿越火线&#x27;</span>],<br>    &#125;,<br>  &#125;,<br>])<br></code></pre></div></td></tr></table></figure>
+
+<p>语句解释：</p>
+<ul>
+<li>向集合 persons 中插入一个数组，数组中有两个文档，文档内有一个 hobby 的文档，</li>
+<li>这个 hobby 文档被称作内嵌文档，然后 hobby 文档内有两个数组。</li>
+</ul>
+<p>​</p>
+<h5 id="需求：查询喜欢玩-王者荣耀-的人"><a href="#需求：查询喜欢玩-王者荣耀-的人" class="headerlink" title="需求：查询喜欢玩 王者荣耀 的人"></a>需求：查询喜欢玩 王者荣耀 的人</h5><p>分析:王者荣耀是存在于 hobby 中的 games</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">persons</span>.<span class="hljs-title function_">find</span>(&#123; <span class="hljs-string">&#x27;hobby.games&#x27;</span>: <span class="hljs-string">&#x27;王者荣耀&#x27;</span> &#125;)<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">	这是需要注意的知识点:如果查询的是内嵌文档可以使用 . 的方式查询，</span><br><span class="hljs-comment">	不过需要使用引号，这是因为mongodb的文档是json的缘故吧。</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">users</span>.<span class="hljs-title function_">find</span>(&#123;hobby.<span class="hljs-property">movies</span>:<span class="hljs-string">&#x27;movie1&#x27;</span>&#125;) <span class="hljs-comment">//错误</span><br>db.<span class="hljs-property">users</span>.<span class="hljs-title function_">find</span>(&#123;<span class="hljs-string">&quot;hobby.movies&quot;</span>:<span class="hljs-string">&#x27;movie1&#x27;</span>&#125;)<span class="hljs-comment">//此时查询的属性名必须加上引号</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="大量数据快速插入"><a href="#大量数据快速插入" class="headerlink" title="大量数据快速插入"></a>大量数据快速插入</h4><h5 id="需求-插入-20000-条数据，有哪种是比较快捷的方式？"><a href="#需求-插入-20000-条数据，有哪种是比较快捷的方式？" class="headerlink" title="需求: 插入 20000 条数据，有哪种是比较快捷的方式？"></a>需求: 插入 20000 条数据，有哪种是比较快捷的方式？</h5><p>方式一：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">20000</span>; i++) &#123;<br>  db.<span class="hljs-property">nums</span>.<span class="hljs-title function_">insert</span>(&#123; <span class="hljs-attr">num</span>: i &#125;)<br>&#125;<br>db.<span class="hljs-property">users</span>.<span class="hljs-title function_">find</span>().<span class="hljs-title function_">count</span>() <span class="hljs-comment">//20000</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">	这是方式一，这种方式是需要调用insert语句20000次，效率会十分低下，那么可不可以，</span><br><span class="hljs-comment">	只调用一次insert语句呢？如果可以的话，应该怎么实现呢？</span><br><span class="hljs-comment">	可以将数据先存储起来，然后一次性加入。</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>不推荐使用方式一，因为将会 insert 调用两千次，会消耗大量时间，影响性能</p>
+</blockquote>
+<p>方式二：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> arr = []<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">20000</span>; i++) &#123;<br>  arr.<span class="hljs-title function_">push</span>(&#123; <span class="hljs-attr">num</span>: i &#125;)<br>&#125;<br>db.<span class="hljs-property">nums</span>.<span class="hljs-title function_">insert</span>(arr)<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">	这是将数据全部存到了数组中，随后再将数组插入，只执行了一次insert语句。</span><br><span class="hljs-comment">	如果还有更好的想法都可以去尝试。</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>推荐使用方式二，提前进行逻辑处理，减少原生的方法调用，加快程序运行</p>
+</blockquote>
+<h4 id="文档间的关系-三种"><a href="#文档间的关系-三种" class="headerlink" title="文档间的关系(三种)"></a>文档间的关系(三种)</h4><h5 id="一对一-one-to-one"><a href="#一对一-one-to-one" class="headerlink" title="一对一(one to one)"></a>一对一(one to one)</h5><ul>
+<li>内嵌文档</li>
+<li>夫妻关系</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">wife</span>.<span class="hljs-title function_">insert</span>([<br>  &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;黄蓉&#x27;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">26</span>,<br>    <span class="hljs-attr">handsband</span>: &#123;<br>      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;郭靖&#x27;</span>,<br>      <span class="hljs-attr">age</span>: <span class="hljs-number">38</span>,<br>    &#125;,<br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;小兰&#x27;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">16</span>,<br>    <span class="hljs-attr">handsband</span>: &#123;<br>      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;新一&#x27;</span>,<br>      <span class="hljs-attr">age</span>: <span class="hljs-number">16</span>,<br>    &#125;,<br>  &#125;,<br>])<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">	可以看到一个妻子是对应一个丈夫的，这是使用内嵌文档来实现的。</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
+
+<h5 id="一对多-one-to-many"><a href="#一对多-one-to-many" class="headerlink" title="一对多(one to many)"></a>一对多(one to many)</h5><ul>
+<li>父母 - 孩子</li>
+<li>文章 - 评论</li>
+</ul>
+<p>内嵌文档也可以实现，就是一个文档内嵌多个文档，不过比较繁琐<br>用户一个文档，订单一个文档，在使用的时候再一一对应</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 第一句是创建了两个用户, 分别是花木兰和诸葛亮</span><br>db.<span class="hljs-property">users</span>.<span class="hljs-title function_">insert</span>([&#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;花木兰&#x27;</span> &#125;, &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;诸葛亮&#x27;</span> &#125;])<br><span class="hljs-comment">// 这一句是查询用户内容， 这是需要知道用户的_id，从而在第三句加入</span><br>db.<span class="hljs-property">users</span>.<span class="hljs-title function_">find</span>()<br><span class="hljs-comment">// 这是生成了一个订单，并且user_id存储的是花木兰的id</span><br>db.<span class="hljs-property">orders</span>.<span class="hljs-title function_">insert</span>(&#123;<br>  <span class="hljs-attr">list_name</span>: [<span class="hljs-string">&#x27;配马&#x27;</span>, <span class="hljs-string">&#x27;鞍鞯&#x27;</span>],<br>  <span class="hljs-attr">user_id</span>: <span class="hljs-title class_">ObjectId</span>(<span class="hljs-string">&#x27;61374eac77393663e2de9bd3&#x27;</span>),<br>&#125;)<br><span class="hljs-comment">// 再生成了一个订单，并且user_id存储的是花木兰的id</span><br>db.<span class="hljs-property">orders</span>.<span class="hljs-title function_">insert</span>(&#123;<br>  <span class="hljs-attr">list_name</span>: [<span class="hljs-string">&#x27;蜜糖&#x27;</span>, <span class="hljs-string">&#x27;男装&#x27;</span>],<br>  <span class="hljs-attr">user_id</span>: <span class="hljs-title class_">ObjectId</span>(<span class="hljs-string">&#x27;61374eac77393663e2de9bd3&#x27;</span>),<br>&#125;)<br><span class="hljs-comment">// 在users里查找到 花木兰 这个用户的id，并将其存储起来</span><br><span class="hljs-keyword">let</span> userId = db.<span class="hljs-property">users</span>.<span class="hljs-title function_">findOne</span>(&#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;花木兰&#x27;</span> &#125;).<span class="hljs-property">_id</span><br><span class="hljs-comment">// 使用id来查找</span><br>db.<span class="hljs-property">orders</span>.<span class="hljs-title function_">find</span>(&#123; <span class="hljs-attr">user_id</span>: userId &#125;)<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="多对多-many-to-many"><a href="#多对多-many-to-many" class="headerlink" title="多对多(many to many)"></a>多对多(many to many)</h5><ul>
+<li>学生 - 老师</li>
+<li>商品 - 分类</li>
+</ul>
+<p>可以使用内嵌文档的形式完成</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">teas</span>.<span class="hljs-title function_">insert</span>([&#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;诸葛亮&#x27;</span> &#125;, &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;龟仙人&#x27;</span> &#125;, &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;唐僧&#x27;</span> &#125;])<br>db.<span class="hljs-property">teas</span>.<span class="hljs-title function_">find</span>()<br>db.<span class="hljs-property">stus</span>.<span class="hljs-title function_">insert</span>([<br>  &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;孙悟空&#x27;</span>,<br>    <span class="hljs-comment">// 插入的是 龟仙人和唐僧的id</span><br>    <span class="hljs-attr">teas_id</span>: [<br>      <span class="hljs-title class_">ObjectId</span>(<span class="hljs-string">&#x27;6137552877393663e2de9bdb&#x27;</span>),<br>      <span class="hljs-title class_">ObjectId</span>(<span class="hljs-string">&#x27;6137552877393663e2de9bdc&#x27;</span>),<br>    ],<br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;刘禅&#x27;</span>,<br>    <span class="hljs-comment">// 插入的是 诸葛亮和龟仙人的id</span><br>    <span class="hljs-attr">teas_id</span>: [<br>      <span class="hljs-title class_">ObjectId</span>(<span class="hljs-string">&#x27;6137552877393663e2de9bda&#x27;</span>),<br>      <span class="hljs-title class_">ObjectId</span>(<span class="hljs-string">&#x27;6137552877393663e2de9bdb&#x27;</span>),<br>    ],<br>  &#125;,<br>])<br><br>db.<span class="hljs-property">stus</span>.<span class="hljs-title function_">find</span>()<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="投影-就是限制条件，显示效果"><a href="#投影-就是限制条件，显示效果" class="headerlink" title="投影(就是限制条件，显示效果)"></a>投影(就是限制条件，显示效果)</h4><p>首先先创建一个集合：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">staff</span>.<span class="hljs-title function_">insert</span>([<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;小白&#x27;</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>, <span class="hljs-attr">salary</span>: <span class="hljs-number">3000</span> &#125;,<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;大白&#x27;</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">19</span>, <span class="hljs-attr">salary</span>: <span class="hljs-number">3500</span> &#125;,<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;熊大&#x27;</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">23</span>, <span class="hljs-attr">salary</span>: <span class="hljs-number">3200</span> &#125;,<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;熊二&#x27;</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">22</span>, <span class="hljs-attr">salary</span>: <span class="hljs-number">3100</span> &#125;,<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;光头强&#x27;</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">27</span>, <span class="hljs-attr">salary</span>: <span class="hljs-number">3400</span> &#125;,<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;小鲤鱼&#x27;</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">17</span>, <span class="hljs-attr">salary</span>: <span class="hljs-number">1500</span> &#125;,<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;奥特曼&#x27;</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">39</span>, <span class="hljs-attr">salary</span>: <span class="hljs-number">4500</span> &#125;,<br>])<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">	这样创建的是一个列表集合。</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
+
+<h5 id="需求一-按照薪资排列，可以使用-sort-方法"><a href="#需求一-按照薪资排列，可以使用-sort-方法" class="headerlink" title="需求一:按照薪资排列，可以使用 sort()方法"></a>需求一:按照薪资排列，可以使用 sort()方法</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">sort</span>(condition)<br><span class="hljs-title function_">sort</span>(&#123;<span class="hljs-attr">salary</span>:  <span class="hljs-number">1</span>&#125;)表示按照薪资升序排列<br><span class="hljs-title function_">sort</span>(&#123;<span class="hljs-attr">salary</span>: -<span class="hljs-number">1</span>&#125;)表示按照薪资降序排列<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>一个条件查询</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">staff</span>.<span class="hljs-title function_">find</span>().<span class="hljs-title function_">sort</span>(&#123; <span class="hljs-attr">salary</span>: <span class="hljs-number">1</span> &#125;)<br></code></pre></div></td></tr></table></figure>
+
+<p>按照薪资升序查询结果<br><img src="https://i.loli.net/2021/10/14/qmxaEGr2SjlJfVB.png#id=HdiSG&originHeight=584&originWidth=1509&originalType=binary&ratio=1&status=done&style=none" srcset="/img/loading.gif" lazyload></p>
+<p><strong>多条件查询</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">staff</span>.<span class="hljs-title function_">find</span>().<span class="hljs-title function_">sort</span>(&#123; <span class="hljs-attr">salary</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">age</span>: -<span class="hljs-number">1</span> &#125;)<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">	这句的含义是按照薪资升序排序，如果出现了相同的薪资的人，</span><br><span class="hljs-comment">	则按照年龄降序排序。</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
+
+<h5 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h5><p>limit() 限制 和 skip() 跳过， 这两个方法经常可以一起使用,从而用来翻页。<br>而且这两个方法是可以不分先后的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">staff</span>.<span class="hljs-title function_">find</span>().<span class="hljs-title function_">limit</span>(<span class="hljs-number">2</span>).<span class="hljs-title function_">skip</span>(<span class="hljs-number">5</span>)<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">	表示跳过前面5个数据，显示第七八个。可以理解为5个为一页，显示第二页的2个数据</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
+
+<h5 id="投影配置"><a href="#投影配置" class="headerlink" title="投影配置"></a>投影配置</h5><p>在查询时可以在 find()中的第二个参数的位置传入 投影，<br><code>&#123;name: 1, _id: 0&#125;</code>： 表示 1 显示 name 属性，0 不显示_id 属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">db.<span class="hljs-property">staff</span>.<span class="hljs-title function_">find</span>(&#123;&#125;, &#123; <span class="hljs-attr">name</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">_id</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">salary</span>: <span class="hljs-number">1</span> &#125;)<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">	这句的含义是只显示 name和salary属性，不显示 _id属性</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="Mongoose"><a href="#Mongoose" class="headerlink" title="Mongoose"></a>Mongoose</h2><h3 id="什么是-Mongose"><a href="#什么是-Mongose" class="headerlink" title="什么是 Mongose"></a>什么是 Mongose</h3><div class="hljs code-wrapper"><pre><code>一般我们不会直接用MongoDB的函数来操作MongoDB数据库 ，
+而Mongose就是一套操作MongoDB数据库的接口。
+简而言之就是:mongoose也可以操作mongodb数据库，而且它来操作数据库会有更多好处
+</code></pre></div>
+<p>​</p>
+<h4 id="Mongoose-优点"><a href="#Mongoose-优点" class="headerlink" title="Mongoose 优点"></a>Mongoose 优点</h4><p>可以为 mongodb 的文档创建一个模式结构(Schema),说白了就是一个<strong>约束的条件</strong><br>比原生的 Node 相比更容易操作 mongodb 数据库，也就是<strong>更方便</strong><br>可以使用中间件和其他的应用业务挂钩，可以和其他的应用<strong>结合使用</strong><br>数据可以通过类型转换转换成对象模型，也就是有方法可以使用。<br>​</p>
+<h3 id="Mongoose-的三个新对象"><a href="#Mongoose-的三个新对象" class="headerlink" title="Mongoose 的三个新对象"></a>Mongoose 的三个新对象</h3><h4 id="Schema-模式对象"><a href="#Schema-模式对象" class="headerlink" title="Schema(模式对象)"></a>Schema(模式对象)</h4><p>定义了约束 mongodb 的文档结构的条件<br>​</p>
+<h4 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h4><p>相当于 mongodb 中的 collection(集合)<br>​</p>
+<h4 id="Document"><a href="#Document" class="headerlink" title="Document"></a>Document</h4><p>document 表示集合中的具体文档</p>
+<blockquote>
+<p>值得注意的是这三个都是对象，是对象的话则有它们对应的方法和属性。</p>
+</blockquote>
+<h3 id="vscode-使用-mongoose-来操作数据库"><a href="#vscode-使用-mongoose-来操作数据库" class="headerlink" title="vscode 使用 mongoose 来操作数据库"></a>vscode 使用 mongoose 来操作数据库</h3><p>当需要在 webstorm 或 vscode 时编写 mongoose 时,需要先将 mongoose 模块引入。步骤如下:<br>使用 Mongoose:</p>
+<h5 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h5><p>在终端输入命令行:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">npm i mongoose --save<br></code></pre></div></td></tr></table></figure>
+
+<p>步骤</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-number">1</span>、导入mongoose模块<br>	<span class="hljs-keyword">const</span> mongoose = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;mongoose&#x27;</span>);<br><span class="hljs-number">2</span>、连接数据库并且监听<br>	mongoose.<span class="hljs-title function_">connect</span>(<span class="hljs-string">&quot;mongodb://数据库ip地址:端口/数据库名称&quot;</span>)；<br>	mongoose.<span class="hljs-property">connection</span>.<span class="hljs-title function_">once</span>(<span class="hljs-string">&quot;open&quot;</span>, (err)+&gt;&#123;&#125;);<br><span class="hljs-number">3</span>、创建<span class="hljs-title class_">Schema</span>约束条件<br>	<span class="hljs-keyword">const</span> <span class="hljs-title class_">Schema</span> = mongoose.<span class="hljs-property">Schema</span>;	将<span class="hljs-title class_">Schema</span>重命名<br>	<span class="hljs-keyword">const</span> schema约束条件 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Schema</span>(约束的内容);<br><span class="hljs-number">4</span>、创建<span class="hljs-title class_">Model</span><br>	<span class="hljs-keyword">const</span> 模型<span class="hljs-title class_">Model</span> = mongoose.<span class="hljs-title function_">model</span>(<span class="hljs-string">&#x27;mongodb的集合名&#x27;</span>, schema约束条件);<br><span class="hljs-number">5</span>、插入文档<br>	使用 模型<span class="hljs-title class_">Model</span>,插入文档<br>	模型model.<span class="hljs-title function_">create</span>(文档<span class="hljs-variable language_">document</span>);<br><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 1、引入 mongoose 模块</span><br><span class="hljs-keyword">const</span> mongoose = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;mongoose&#x27;</span>)<br><br><span class="hljs-comment">// 2、连接数据库    27017是默认端口号，可以省略不写， ppxia是需要连接的数据库</span><br>mongoose.<span class="hljs-title function_">connect</span>(<span class="hljs-string">&#x27;mongodb://127.0.0.1:27017/ppxia&#x27;</span>)<br><br><span class="hljs-comment">// 2.1、这是对数据库的监听，而且是使用once, 只监听一次就行了</span><br>mongoose.<span class="hljs-property">connection</span>.<span class="hljs-title function_">once</span>(<span class="hljs-string">&#x27;open&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">if</span> (!err) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;数据库已连接...&#x27;</span>)<br>  &#125;<br>&#125;)<br><br>mongoose.<span class="hljs-property">connection</span>.<span class="hljs-title function_">once</span>(<span class="hljs-string">&#x27;close&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">if</span> (!err) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;数据库已断开!!!&#x27;</span>)<br>  &#125;<br>&#125;)<br><br><span class="hljs-comment">// 3、重命名，简化操作</span><br><span class="hljs-keyword">const</span> <span class="hljs-title class_">Schema</span> = mongoose.<span class="hljs-property">Schema</span><br><br><span class="hljs-comment">// 3.1、创建了约束条件:type是类型，default是默认是女，如果是女的话则不用写性别这个属性值了。</span><br><span class="hljs-keyword">const</span> stuSch = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Schema</span>(&#123;<br>  <span class="hljs-attr">name</span>: <span class="hljs-title class_">String</span>,<br>  <span class="hljs-attr">age</span>: <span class="hljs-title class_">Number</span>,<br>  <span class="hljs-attr">gender</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,<br>    <span class="hljs-attr">default</span>: <span class="hljs-string">&#x27;女&#x27;</span>,<br>  &#125;,<br>  <span class="hljs-attr">address</span>: <span class="hljs-title class_">String</span>,<br>&#125;)<br><br><span class="hljs-comment">// 4、创建了 模型， 数据库中的集合名是 stuSch(会自动加s), 第二个参数是标准，即是约束条件: stuSch</span><br><span class="hljs-keyword">const</span> stuModel = mongoose.<span class="hljs-title function_">model</span>(<span class="hljs-string">&#x27;stuSch&#x27;</span>, stuSch)<br><br><span class="hljs-comment">// 5、使用模型创建对象, 当想创建多个的时候，可以使用数组里面存储对象的方式</span><br>stuModel.<span class="hljs-title function_">create</span>(<br>  &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;西施&#x27;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,<br>    <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;王者峡谷&#x27;</span>,<br>  &#125;,<br>  <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;文档创建成功~&#x27;</span>)<br>  &#125;<br>)<br></code></pre></div></td></tr></table></figure>
+
+<p>如果出现这种报错</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-attr">E</span>:\web\<span class="hljs-title class_">MongoDB</span>-test\mongoose-test\node_modules\whatwg-url\dist\encoding.<span class="hljs-property">js</span>:<span class="hljs-number">2</span><br><span class="hljs-keyword">const</span> utf8Encoder = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TextEncoder</span>();<br>                    ^<br><br><span class="hljs-title class_">ReferenceError</span>: <span class="hljs-title class_">TextEncoder</span> is not defined<br>    at <span class="hljs-title class_">Object</span>.&lt;anonymous&gt; (<span class="hljs-attr">E</span>:\web\<span class="hljs-title class_">MongoDB</span>-test\mongoose-test\node_modules\whatwg-url\dist\encoding.<span class="hljs-property">js</span>:<span class="hljs-number">2</span>:<span class="hljs-number">21</span>)<br>    at <span class="hljs-title class_">Module</span>.<span class="hljs-property">_compile</span> (internal/modules/cjs/loader.<span class="hljs-property">js</span>:<span class="hljs-number">689</span>:<span class="hljs-number">30</span>)<br>    at <span class="hljs-title class_">Object</span>.<span class="hljs-property">Module</span>.<span class="hljs-property">_extensions</span>..<span class="hljs-property">js</span> (internal/modules/cjs/loader.<span class="hljs-property">js</span>:<span class="hljs-number">700</span>:<span class="hljs-number">10</span>)<br>    at <span class="hljs-title class_">Module</span>.<span class="hljs-property">load</span> (internal/modules/cjs/loader.<span class="hljs-property">js</span>:<span class="hljs-number">599</span>:<span class="hljs-number">32</span>)<br>    at <span class="hljs-title function_">tryModuleLoad</span> (internal/modules/cjs/loader.<span class="hljs-property">js</span>:<span class="hljs-number">538</span>:<span class="hljs-number">12</span>)<br>    at <span class="hljs-title class_">Function</span>.<span class="hljs-property">Module</span>.<span class="hljs-property">_load</span> (internal/modules/cjs/loader.<span class="hljs-property">js</span>:<span class="hljs-number">530</span>:<span class="hljs-number">3</span>)<br>    at <span class="hljs-title class_">Module</span>.<span class="hljs-property">require</span> (internal/modules/cjs/loader.<span class="hljs-property">js</span>:<span class="hljs-number">637</span>:<span class="hljs-number">17</span>)<br>    at <span class="hljs-built_in">require</span> (internal/modules/cjs/helpers.<span class="hljs-property">js</span>:<span class="hljs-number">22</span>:<span class="hljs-number">18</span>)<br>    at <span class="hljs-title class_">Object</span>.&lt;anonymous&gt; (<span class="hljs-attr">E</span>:\web\<span class="hljs-title class_">MongoDB</span>-test\mongoose-test\node_modules\whatwg-url\dist\url-state-machine.<span class="hljs-property">js</span>:<span class="hljs-number">5</span>:<span class="hljs-number">34</span>)<br><span class="hljs-variable constant_">PS</span> <span class="hljs-attr">E</span>:\web\<span class="hljs-title class_">MongoDB</span>-test\mongoose-test&gt; node helloMongoose.<span class="hljs-property">js</span><br>(<span class="hljs-attr">node</span>:<span class="hljs-number">4888</span>) <span class="hljs-title class_">UnhandledPromiseRejectionWarning</span>: <span class="hljs-title class_">MongoParseError</span>: <span class="hljs-title class_">Invalid</span> connection string <span class="hljs-string">&quot;mongoose://127.0.0.1/mongoose_test&quot;</span><br>    at <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConnectionString</span> (<span class="hljs-attr">E</span>:\web\<span class="hljs-title class_">MongoDB</span>-test\mongoose-test\node_modules\mongodb-connection-string-url\lib\index.<span class="hljs-property">js</span>:<span class="hljs-number">66</span>:<span class="hljs-number">19</span>)<br>    at <span class="hljs-title class_">Object</span>.<span class="hljs-property">parseOptions</span> (<span class="hljs-attr">E</span>:\web\<span class="hljs-title class_">MongoDB</span>-test\mongoose-test\node_modules\mongodb\lib\connection_string.<span class="hljs-property">js</span>:<span class="hljs-number">210</span>:<span class="hljs-number">17</span>)<br>    at <span class="hljs-keyword">new</span> <span class="hljs-title class_">MongoClient</span> (<span class="hljs-attr">E</span>:\web\<span class="hljs-title class_">MongoDB</span>-test\mongoose-test\node_modules\mongodb\lib\mongo_client.<span class="hljs-property">js</span>:<span class="hljs-number">62</span>:<span class="hljs-number">46</span>)<br>    at <span class="hljs-title class_">Promise</span> (<span class="hljs-attr">E</span>:\web\<span class="hljs-title class_">MongoDB</span>-test\mongoose-test\node_modules\mongoose\lib\connection.<span class="hljs-property">js</span>:<span class="hljs-number">779</span>:<span class="hljs-number">16</span>)<br>    at <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span> (&lt;anonymous&gt;)<br>    at <span class="hljs-title class_">NativeConnection</span>.<span class="hljs-property">Connection</span>.<span class="hljs-property">openUri</span> (<span class="hljs-attr">E</span>:\web\<span class="hljs-title class_">MongoDB</span>-test\mongoose-test\node_modules\mongoose\lib\connection.<span class="hljs-property">js</span>:<span class="hljs-number">776</span>:<span class="hljs-number">19</span>)<br>    at _mongoose.<span class="hljs-property">_promiseOrCallback</span>.<span class="hljs-property">cb</span> (<span class="hljs-attr">E</span>:\web\<span class="hljs-title class_">MongoDB</span>-test\mongoose-test\node_modules\mongoose\lib\index.<span class="hljs-property">js</span>:<span class="hljs-number">330</span>:<span class="hljs-number">10</span>)<br>    at <span class="hljs-title class_">Promise</span> (<span class="hljs-attr">E</span>:\web\<span class="hljs-title class_">MongoDB</span>-test\mongoose-test\node_modules\mongoose\lib\helpers\promiseOrCallback.<span class="hljs-property">js</span>:<span class="hljs-number">32</span>:<span class="hljs-number">5</span>)<br>    at <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span> (&lt;anonymous&gt;)<br>    at <span class="hljs-title function_">promiseOrCallback</span> (<span class="hljs-attr">E</span>:\web\<span class="hljs-title class_">MongoDB</span>-test\mongoose-test\node_modules\mongoose\lib\helpers\promiseOrCallback.<span class="hljs-property">js</span>:<span class="hljs-number">31</span>:<span class="hljs-number">10</span>)<br>(<span class="hljs-attr">node</span>:<span class="hljs-number">4888</span>) <span class="hljs-title class_">UnhandledPromiseRejectionWarning</span>: <span class="hljs-title class_">Unhandled</span> promise rejection. <span class="hljs-title class_">This</span> error originated either by throwing inside <span class="hljs-keyword">of</span> an <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> without a <span class="hljs-keyword">catch</span> block, or by rejecting a promise which was not handled <span class="hljs-keyword">with</span> .<span class="hljs-title function_">catch</span>(). (rejection <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>)<br>(<span class="hljs-attr">node</span>:<span class="hljs-number">4888</span>) [<span class="hljs-title class_">DEP0018</span>] <span class="hljs-title class_">DeprecationWarning</span>: <span class="hljs-title class_">Unhandled</span> promise rejections are deprecated. <span class="hljs-title class_">In</span> the future, promise rejections that are not handled will terminate the <span class="hljs-title class_">Node</span>.<span class="hljs-property">js</span> process <span class="hljs-keyword">with</span> a non-zero exit code.<br></code></pre></div></td></tr></table></figure>
+
+<p>打开文件 \node_modules\whatwg-url\dist\encoding.js 替换以下代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">将<br><span class="hljs-comment">// &quot;use strict&quot;;</span><br><span class="hljs-comment">// const utf8Encoder = new TextEncoder();</span><br><span class="hljs-comment">// const utf8Decoder = new TextDecoder(&quot;utf-8&quot;, &#123; ignoreBOM: true &#125;);</span><br><br>替换成<br>;(<span class="hljs-string">&#x27;use strict&#x27;</span>)<br><span class="hljs-keyword">var</span> util = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;util&#x27;</span>)<br><span class="hljs-keyword">const</span> utf8Encoder = <span class="hljs-keyword">new</span> util.<span class="hljs-title class_">TextEncoder</span>()<br><span class="hljs-keyword">const</span> utf8Decoder = <span class="hljs-keyword">new</span> util.<span class="hljs-title class_">TextEncoder</span>(<span class="hljs-string">&#x27;utf-8&#x27;</span>, &#123; <span class="hljs-attr">ignoreBOM</span>: <span class="hljs-literal">true</span> &#125;)<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="连接数据库-1"><a href="#连接数据库-1" class="headerlink" title="连接数据库"></a>连接数据库</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 1.引入mongoose</span><br><span class="hljs-keyword">const</span> mongooes = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;mongoose&#x27;</span>)<br><span class="hljs-comment">// 2.连接mongodb数据库</span><br>mongooes.<span class="hljs-title function_">connect</span>(<span class="hljs-string">&#x27;mongodb://localhost/users&#x27;</span>, &#123;<br>  <span class="hljs-attr">useNewUrlParser</span>: <span class="hljs-literal">true</span>,<br>  <span class="hljs-attr">useUnifiedTopology</span>: <span class="hljs-literal">true</span>,<br>&#125;)<br><br><span class="hljs-comment">// 3.监听mongodb数据库的连接状态</span><br><span class="hljs-comment">// 绑定数据库连接成功事件</span><br>mongooes.<span class="hljs-property">connection</span>.<span class="hljs-title function_">once</span>(<span class="hljs-string">&#x27;open&#x27;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;连接成功&#x27;</span>)<br>&#125;)<br><span class="hljs-comment">// 绑定数据库连接失败事件</span><br>mongooes.<span class="hljs-property">connection</span>.<span class="hljs-title function_">once</span>(<span class="hljs-string">&#x27;close&#x27;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;数据库连接已经断开&#x27;</span>)<br>&#125;)<br><br><span class="hljs-comment">// 4.断开数据库连接(一般不用)</span><br><span class="hljs-comment">//mongooes.disconnect();</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="创建模式对象和模型对象："><a href="#创建模式对象和模型对象：" class="headerlink" title="创建模式对象和模型对象："></a>创建模式对象和模型对象：</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 重命名，简化操作</span><br><span class="hljs-keyword">const</span> <span class="hljs-title class_">Schema</span> = mongoose.<span class="hljs-property">Schema</span><br><br><span class="hljs-comment">//创建了约束条件:type是类型，default是默认是女，如果是女的话则不用写性别这个属性值了。</span><br><span class="hljs-keyword">const</span> stuSch = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Schema</span>(&#123;<br>  <span class="hljs-attr">name</span>: <span class="hljs-title class_">String</span>,<br>  <span class="hljs-attr">age</span>: <span class="hljs-title class_">Number</span>,<br>  <span class="hljs-attr">gender</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,<br>    <span class="hljs-attr">default</span>: <span class="hljs-string">&#x27;女&#x27;</span>,<br>  &#125;,<br>  <span class="hljs-attr">address</span>: <span class="hljs-title class_">String</span>,<br>&#125;)<br><br><span class="hljs-comment">//创建了 模型， 数据库中的集合名是 stuSch(会自动加s), 第二个参数是标准，即是约束条件: stuSch</span><br><span class="hljs-comment">//第一个参数表示创建的集合的名称，第二个参数表示利用的模式对象</span><br><span class="hljs-keyword">const</span> stuModel = mongoose.<span class="hljs-title function_">model</span>(<span class="hljs-string">&#x27;stuSch&#x27;</span>, stuSch)<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="利用-Model（模型）对象进行增删查改操作："><a href="#利用-Model（模型）对象进行增删查改操作：" class="headerlink" title="利用 Model（模型）对象进行增删查改操作："></a>利用 Model（模型）对象进行增删查改操作：</h4><h5 id="添加操作："><a href="#添加操作：" class="headerlink" title="添加操作："></a>添加操作：</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title class_">Model</span>.<span class="hljs-title function_">create</span>(doc,[callback]);			创建一个或多个对象<br><span class="hljs-title class_">Model</span>.<span class="hljs-title function_">createOne</span>(doc, [callback]);		创建一个对象<br><span class="hljs-title class_">Model</span>.<span class="hljs-title function_">createMany</span>(doc, [callback]);		创建多个对象<br>	#doc是需要插入的文档<br>	#<span class="hljs-title function_">callback</span>(err) 是回调函数，可以用来提示是否创建成功了<br><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 使用模型创建对象, 当想创建多个的时候，可以使用数组里面存储对象的方式</span><br>stuModel.<span class="hljs-title function_">create</span>(<br>  &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;西施&#x27;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,<br>    <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;王者峡谷&#x27;</span>,<br>  &#125;,<br>  <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;文档创建成功~&#x27;</span>)<br>  &#125;<br>)<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="查询操作："><a href="#查询操作：" class="headerlink" title="查询操作："></a>查询操作：</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title class_">Model</span>.<span class="hljs-title function_">find</span>(condition, 投影, [options], [callback]);	 	查询一个或多个文档<br>	# 返回的是数组<br><span class="hljs-title class_">Model</span>.<span class="hljs-title function_">findById</span>(id, 投影, [callback]);  			根据id查询一个文档<br><span class="hljs-title class_">Model</span>.<span class="hljs-title function_">findMany</span>(condition, 投影. [callback]); 	查询多个文档<br><span class="hljs-title class_">Model</span>.<span class="hljs-title function_">findOne</span>(condition, [projection], [options], [callback]);	查询一个文档<br>	# condition 			查询条件<br>	# 投影/ <span class="hljs-attr">projection</span>: 	投影，也就是 查询条件，有两种方式<br>  	# &#123;<span class="hljs-attr">name</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">_id</span>:<span class="hljs-number">0</span>&#125;: <span class="hljs-number">1</span>是显示，<span class="hljs-number">0</span>是不显示	<span class="hljs-string">&quot;name  -_id&quot;</span>显示name, 不显示 _id<br>  # <span class="hljs-attr">options</span>:  	查询的选项, skip是跳过，limit是限制 &#123;<span class="hljs-attr">skip</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">limit</span>:<span class="hljs-number">3</span>&#125;<br>  # <span class="hljs-attr">callback</span>: 	回调函数,有两个参数(err, doc) err是错误类型, doc是文档。<br><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">stuModel.<span class="hljs-title function_">find</span>(&#123;&#125;, <span class="hljs-function">(<span class="hljs-params">err, doc</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">if</span> (!err) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(doc)<br>  &#125;<br>&#125;)<br>stuModel.<span class="hljs-title function_">findById</span>(<span class="hljs-string">&#x27;6137839348ee37e25b1c1c74&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">err, doc</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">if</span> (!err) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(doc)<br>  &#125;<br>&#125;)<br>stuModel.<span class="hljs-title function_">findOne</span>(&#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;西施&#x27;</span> &#125;, <span class="hljs-string">&#x27;name -_id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">err, doc</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">if</span> (!err) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(doc)<br>  &#125;<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="修改操作："><a href="#修改操作：" class="headerlink" title="修改操作："></a>修改操作：</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title class_">Model</span>.<span class="hljs-title function_">updateMany</span>(condition, doc, [options], [callback]);<br><span class="hljs-title class_">Model</span>.<span class="hljs-title function_">updateOne</span>(condition, doc, [options], callback);<br>	## <span class="hljs-title class_">Model</span>.<span class="hljs-title function_">update</span>() 已经不适用了<br># condition 修改的条件<br># doc 修改后的内容/需要修改的内容<br><br>需要配合修改操作符来使用:<br>	$set		表示需要设置指定的属性<br>	$unset		表示需要删除指定的属性<br>	$push		表示给数组添加一个新元素，因为文档内也会有数组，数组便会有数组元素<br>	$addToset 	表示给数组添加一个新元素，和push的区别是，如果出现同名的数组元素，则不会再添加<br>	$gt			大于<br>	$gte		大于等于<br>	$lt			小于<br>	$lte		小于等于<br>	$or [&#123;条件一,条件二&#125;]		表示或的意思，符合条件一或者条件二<br>	$inc		表示自增，用在在原来数据的基础上对数据加减，可用于加薪减薪的操作<br><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">stuModel.<span class="hljs-title function_">updateOne</span>(&#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;西施&#x27;</span> &#125;, &#123; <span class="hljs-attr">$set</span>: &#123; <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;北京&#x27;</span> &#125; &#125;, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">if</span> (!err) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;修改成功~&#x27;</span>)<br>  &#125;<br>&#125;)<br><br>stuModel.<span class="hljs-title function_">find</span>(&#123;&#125;, <span class="hljs-function">(<span class="hljs-params">err, doc</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">if</span> (!err) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(doc)<br>  &#125;<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title class_">Model</span>.<span class="hljs-title function_">remove</span>(condition, [callback]);<br><span class="hljs-title class_">Model</span>.<span class="hljs-title function_">deleteOne</span>(condition, [callback]);<br><span class="hljs-title class_">Model</span>.<span class="hljs-title function_">deleteMany</span>(condition, [callback]);<br>	# condition 条件<br><br></code></pre></div></td></tr></table></figure>
+
+<h5 id="查看个数"><a href="#查看个数" class="headerlink" title="查看个数"></a>查看个数</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title class_">Model</span>.<span class="hljs-title function_">count</span>(condition, [callback])<br>获取当前这个集合的符合条件的文档数量<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="Document（文档）的方法"><a href="#Document（文档）的方法" class="headerlink" title="Document（文档）的方法"></a>Document（文档）的方法</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">document</span>.<span class="hljs-title function_">save</span>([options], [callback])<br>    <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">update</span>([options], [callback])<br>        collection.<span class="hljs-property">update</span>不推荐使用。改用updateOne、updateMany或bulkWrite。<br>    doc.<span class="hljs-title function_">get</span>(name)<br>        获取指定属性值<br>        doc.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;name&quot;</span>) === doc.<span class="hljs-property">name</span><br>    doc.<span class="hljs-title function_">set</span>(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;猪猪&quot;</span>) === doc.<span class="hljs-property">name</span> = <span class="hljs-string">&quot;猪猪&quot;</span><br>    doc.<span class="hljs-property">id</span><br>        属性, 获取id<br>    doc.<span class="hljs-title function_">toJSON</span>()<br>        - 转换成 <span class="hljs-title class_">JSON</span><br>    doc.<span class="hljs-title function_">toObject</span>()<br>        将doc对象 转换成 普通<span class="hljs-variable constant_">JS</span>对象, 转换后, 所有doc的属性和方法都不能使用了<br>          --这样就可以将 address给删掉了, 表面上删掉了, 数据库中没有删除<br>            doc = doc.<span class="hljs-property">toObject</span>;<br>            <span class="hljs-keyword">delete</span> doc.<span class="hljs-property">address</span>;<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(doc);<br><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="模块化处理："><a href="#模块化处理：" class="headerlink" title="模块化处理："></a>模块化处理：</h4><ul>
+<li>1.单独创建一个数据库连接文件\tools\conn_mongo.js</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> mongooes = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;mongoose&#x27;</span>)<br>mongooes.<span class="hljs-title function_">connect</span>(<span class="hljs-string">&#x27;mongodb://localhost/mongooes_test&#x27;</span>, &#123;<br>  <span class="hljs-attr">useNewUrlParser</span>: <span class="hljs-literal">true</span>,<br>  <span class="hljs-attr">useUnifiedTopology</span>: <span class="hljs-literal">true</span>,<br>&#125;)<br>mongooes.<span class="hljs-property">connection</span>.<span class="hljs-title function_">once</span>(<span class="hljs-string">&#x27;open&#x27;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;连接成功&#x27;</span>)<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>2.为每一个集合创建一个模型对象文件\models\userModel.js</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> mongooes = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;mongoose&#x27;</span>)<br><span class="hljs-keyword">const</span> <span class="hljs-title class_">Schema</span> = mongooes.<span class="hljs-property">Schema</span><br><span class="hljs-keyword">const</span> userSchema = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Schema</span>(&#123;<br>  <span class="hljs-attr">user_id</span>: <span class="hljs-title class_">String</span>,<br>  <span class="hljs-attr">name</span>: <span class="hljs-title class_">String</span>,<br>  <span class="hljs-attr">age</span>: <span class="hljs-title class_">Number</span>,<br>  <span class="hljs-attr">gender</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-title class_">Number</span>,<br>    <span class="hljs-attr">default</span>: <span class="hljs-number">0</span>,<br>  &#125;,<br>&#125;)<br><span class="hljs-keyword">const</span> <span class="hljs-title class_">UserModel</span> = mongooes.<span class="hljs-title function_">model</span>(<span class="hljs-string">&#x27;user&#x27;</span>, userSchema)<br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-title class_">UserModel</span><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>3.在最终的文件 index.js 中引入数据库连接文件和创建模型的文件：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> mongooes = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./dbconncet&#x27;</span>)<br><span class="hljs-keyword">const</span> <span class="hljs-title class_">PostModel</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./models/postModel&#x27;</span>)<br><br><span class="hljs-comment">//第一次创建之后才有数据</span><br><span class="hljs-comment">// PostModel.create(</span><br><span class="hljs-comment">//   &#123;</span><br><span class="hljs-comment">//     user_id: 123,</span><br><span class="hljs-comment">//     name: &#x27;小明&#x27;,</span><br><span class="hljs-comment">//     age: 18,</span><br><span class="hljs-comment">//   &#125;,</span><br><span class="hljs-comment">//   (err, data) =&gt; &#123;</span><br><span class="hljs-comment">//     if (err) &#123;</span><br><span class="hljs-comment">//       console.log(&#x27;文档创建成功~~~&#x27;)</span><br><span class="hljs-comment">//     &#125;</span><br><span class="hljs-comment">//   &#125;</span><br><span class="hljs-comment">// )</span><br><br><span class="hljs-title class_">PostModel</span>.<span class="hljs-title function_">findOne</span>(&#123;&#125;, <span class="hljs-keyword">function</span> (<span class="hljs-params">err, data</span>) &#123;<br>  <span class="hljs-keyword">if</span> (!err) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data)<br>  &#125;<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/MongoDB/">MongoDB</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/11/11/%E5%90%AF%E5%8A%A8MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%97%B6%E6%8A%A5%E9%94%99/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">启动MongoDB数据库时报错</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/06/%E4%BF%AE%E6%94%B9antdPro%E6%97%B6%E9%97%B4%E7%BB%84%E4%BB%B6%E9%BB%98%E8%AE%A4%E6%A0%B7%E5%BC%8F%EF%BC%8C%E6%97%B6%E5%88%86%E7%A7%92%E5%AE%9A%E4%BD%8D%E5%88%B0%E5%9B%BA%E5%AE%9A%E6%97%B6%E9%97%B4/">
+                        <span class="hidden-mobile">修改antdPro时间组件默认样式，时分秒定位到固定时间</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#valine",
+          app_id: "wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz",
+          app_key: "BlsdS19vhoVr77n1TiE2diHr",
+          placeholder: "老师们，说点什么吧！",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: true,
+          serverURLs: "https://wvn0ubbm.lc-cn-n1-shared.com",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> |<i class="iconfont icon-love"></i>| <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        蜀ICP备2021012542号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

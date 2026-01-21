@@ -1,0 +1,633 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="jackhoo">
+  <meta name="keywords" content="">
+  
+  <title>垃圾回收 - jackhoo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/%E6%AC%A2%E8%BF%8E%E5%A4%A7%E5%AE%B6%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%8C%E8%AF%B7%E5%B0%BD%E6%83%85%E7%95%99%E8%A8%80%E5%90%A7%EF%BC%81/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/hybrid.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"13982720426.github.io","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz","app_key":"BlsdS19vhoVr77n1TiE2diHr","server_url":"https://wvn0ubbm.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>jackhoo的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/13982720426/">
+                <i class="iconfont icon-github-fill"></i>
+                GitHub
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg2.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="垃圾回收">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      jackhoo
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-23 15:31" pubdate>
+        星期二, 十一月 23日 2021, 3:31 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      53
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">垃圾回收</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2 小时前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h2><p>JavaScript 是使用垃圾回收的语言，也就是说执行环境负责在代码执行时管理内存。JavaScript 为开发者卸下了这个负担，通过自动内存管理实现内存分配和闲置资源回收。<br>基本思路很简单：确定哪个变量不会再使用，然后释放它占用的内存。这个过程是周期性的，即垃圾回收程序每隔一定时间（或者说在代码执行过程中某个预定的收集时间）就会自动运行。垃圾回收过程是一个近似且不完美的方案，因为某块内存是否还有用，属于“不可判定的”问题， 意味着靠算法是解决不了的。<br>​</p>
+<p>我们以函数中局部变量的正常生命周期为例。函数中的局部变量会在函数执行时存在。此时，栈（或堆）内存会分配空间以保存相应的值。函数在内部使用了变量，然后退出。此时，就不再需要那个局部变量了，它占用的内存可以释放，供后面使用。这种情况下显然不再需要局部变量了，但并不是所有时候都会这么明显。<br>垃圾回收程序必须跟踪记录哪个变量还会使用，以及哪个变量不会再使用，以便回收内存。如何标记未使用的变量也许有不同的实现方式。不过，在浏览器的发展史上，用到过两种主要的标记策略：<strong>标记清理</strong>和<strong>引用计数</strong>。<br>​</p>
+<h3 id="标记清理"><a href="#标记清理" class="headerlink" title="标记清理"></a>标记清理</h3><p>JavaScript 最常用的垃圾回收策略是标记清理（mark-and-sweep）。当变量进入上下文，比如在函数内部声明一个变量时，这个变量会被加上存在于上下文中的标记。而不在上下文中的变量，逻辑上讲，永远不应该释放它们的内存，因为只要上下文中的代码在运行，就有可能用到它们。当变量离开上下文时，也会被加上离开上下文的标记。<br>给变量加标记的方式有很多种。比如，当变量进入上下文时，反转某一位；或者可以维护“在上下文中”和“不在上下文中”两个变量列表，可以把变量从一个列表转移到另一个列表。标记过程的实现并不重要，关键是策略。<br>垃圾回收程序运行的时候，会标记内存中存储的所有变量（记住，标记方法有很多种）。然后，它会将所有在上下文中的变量，以及被在上下文中的变量引用的变量的标记去掉。在此之后再被加上标记的变量就是待删除的了，原因是任何在上下文中的变量都访问不到它们了。随后垃圾回收程序做一次内存清理，销毁带标记的所有值并收回它们的内存。</p>
+<h3 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h3><p>另一种没那么常用的垃圾回收策略是引用计数（reference counting）。<br>其思路是对每个值都记录它被引用的次数。声明变量并给它赋一个引用值时，这个值的引用数为 1。如果同一个值又被赋给另一个变量，那么引用数加 1。类似地，如果保存对该值引用的变量被其他值给覆盖了，那么引用数减 1。当一个值的引用数为 0 时，就说明没办法再访问到这个值了，因此可以安全地收回其内存了。垃圾回收程序 下次运行的时候就会释放引用数为 0 的值的内存。<br>引用计数最早由 Netscape Navigator 3.0 采用，但很快就遇到了严重的问题：<strong>循环引用</strong>。所谓循环引用，就是<strong>对象 A 有一个指针指向对象 B，而对象 B 也引用了对象 A</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">problem</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">let</span> objectA = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>()<br>  <span class="hljs-keyword">let</span> objectB = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>()<br>  objectA.<span class="hljs-property">someOtherObject</span> = objectB<br>  objectB.<span class="hljs-property">anotherObject</span> = objectA<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>在这个例子中， objectA 和 objectB 通过各自的属性相互引 用，意味着它们的引用数都是 2。在标记清理策略下，这不是问题，因为在函数结束后，这两个对象都不在作用域中。而在引用计数策略下， objectA 和 objectB 在函数结束后还会存在，因为它们的引 用数永远不会变成 0。如果函数被多次调用，则会导致大量内存永远不会被释放。为此，Netscape 在 4.0 版放弃了引用计数，转而采用标记清理。<br>为避免类似的循环引用问题，应该在确保不使用的情况下切断原生 JavaScript 对象与 DOM 元素之间的连接。比如，通过以下代码可以清除前面的例子中建立的循环引用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">myObject.<span class="hljs-property">element</span> = <span class="hljs-literal">null</span><br>element.<span class="hljs-property">someObject</span> = <span class="hljs-literal">null</span><br></code></pre></div></td></tr></table></figure>
+
+<p>把变量设置为 null 实际上会切断变量与其之前引用值之间的关系。当下次垃圾回收程序运行时，这些值就会被删除，内存也会被回收。 为了补救这一点，IE9 把 BOM 和 DOM 对象都改成了 JavaScript 对 象，这同时也避免了由于存在两套垃圾回收算法而导致的问题，还消除了常见的内存泄漏现象</p>
+<h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><p>垃圾回收程序会周期性运行，如果内存中分配了很多变量，则可能造成性能损失，因此垃圾回收的时间调度很重要。尤其是在内存有限的移动设备上，垃圾回收有可能会明显拖慢渲染的速度和帧速率。 开发者不知道什么时候运行时会收集垃圾，因此最好的办法是在写代码时就要做到：无论什么时候开始收集垃圾，都能让它尽快结束工 作。<br>​</p>
+<p>现代垃圾回收程序会基于对 JavaScript 运行时环境的探测来决定何时运行。探测机制因引擎而异，但基本上都是根据已分配对象的大小和数量来判断的。比如，根据 V8 团队 2016 年的一篇博文的说法：“在 一次完整的垃圾回收之后，V8 的堆增长策略会根据活跃对象的数量外加一些余量来确定何时再次垃圾回收。”<br>​</p>
+<p>由于调度垃圾回收程序方面的问题会导致性能下降，IE 曾饱受诟病。它的策略是根据分配数，比如分配了 256 个变量、4096 个对象/数组字面量和数组槽位（slot），或者 64KB 字符串。只要满足其中某个条件，垃圾回收程序就会运行。这样实现的问题在于，分配那么多变量的脚本，很可能在其整个生命周期内始终需要那么多变量，结果就 会导致垃圾回收程序过于频繁地运行。由于对性能的严重影响，IE7 最终更新了垃圾回收程序。</p>
+<p>IE7 发布后，JavaScript 引擎的垃圾回收程序被调优为动态改变分配变量、字面量或数组槽位等会触发垃圾回收的阈值。IE7 的起始阈值都与 IE6 的相同。如果垃圾回收程序回收的内存不到已分配的 15%，这些变量、字面量或数组槽位的阈值就会翻倍。如果有一次回收的内存达到已分配的 85%，则阈值重置为默认值。这么一个简单的修改，极大地提升了重度依赖 JavaScript 的网页在浏览器中的性能。</p>
+<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><p>在使用垃圾回收的编程环境中，开发者通常无须关心内存管理。 不过，JavaScript 运行在一个内存管理与垃圾回收都很特殊的环境。分配给浏览器的内存通常比分配给桌面软件的要少很多，分配给移动浏览器的就更少了。<br>这更多出于安全考虑而不是别的，就是为了避免运行大量 JavaScript 的网页耗尽系统内存而导致操作系统崩溃。这个内存限制不仅影响变量分配，也影响调用栈以及能够同时在一个线程中执行的语句数量。<br>将内存占用量保持在一个较小的值可以让页面性能更好。优化内存占用的最佳手段就是保证在执行代码时只保存必要的数据。如果数据不再必要，那么把它设置为 null ，从而释放其引用。这也可以叫作<strong>解除引用</strong>。这个建议最适合全局变量和全局对象的属性。局部变量在超出作用域后会被自动解除引用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">createPerson</span>(<span class="hljs-params">name</span>) &#123;<br>  <span class="hljs-keyword">let</span> localPerson = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>()<br>  localPerson.<span class="hljs-property">name</span> = name<br>  <span class="hljs-keyword">return</span> localPerson<br>&#125;<br><span class="hljs-keyword">let</span> globalPerson = <span class="hljs-title function_">createPerson</span>(<span class="hljs-string">&#x27;Nicholas&#x27;</span>)<br><span class="hljs-comment">// 解除globalPerson对值的引用</span><br>globalPerson = <span class="hljs-literal">null</span><br></code></pre></div></td></tr></table></figure>
+
+<p>在上面的代码中，变量 globalPerson 保存着 createPerson() 函数调用返回的值。在 createPerson() 内部， localPerson 创建了一个对象并给它添加了一个 name 属性。然后， localPerson 作为函数值被返回，并被赋值给 globalPerson 。 localPerson 在 createPerson() 执行完成超出上下文后会自动被解除引用，不需要显式处理。但 globalPerson 是一个全局变量，应该在不再需要时手动解除其引用，最后一行就是这么做的。<br>不过要注意，<strong>解除对一个值的引用并不会自动导致相关内存被回收。解除引用的关键在于确保相关的值已经不在上下文里了</strong>，因此它在下次垃圾回收时会被回收。</p>
+<h4 id="通过-const-和-let-声明提升性能"><a href="#通过-const-和-let-声明提升性能" class="headerlink" title="通过 const 和 let 声明提升性能"></a>通过 const 和 let 声明提升性能</h4><p>ES6 增加这两个关键字不仅有助于改善代码风格，而且同样有助于改进垃圾回收的过程。因为 const 和 let 都以块（而非函数）为作用域，所以相比于使用 var ，使用这两个新关键字可能会更早地让垃圾回收程序介入，尽早回收应该回收的内存。在块作用域比函数作用域更早终止的情况下，这就有可能发生。</p>
+<h4 id="隐藏类和删除操作"><a href="#隐藏类和删除操作" class="headerlink" title="隐藏类和删除操作"></a>隐藏类和删除操作</h4><p>根据 JavaScript 所在的运行环境，有时候需要根据浏览器使用的 JavaScript 引擎来采取不同的性能优化策略。截至 2017 年，Chrome 是最流行的浏览器，使用 V8 JavaScript 引擎。V8 在将解释后的 JavaScript 代码编译为实际的机器码时会利用“隐藏类”。如果你的代码非常注重性能，那么这一点可能对你很重要。<br>运行期间，V8 会将创建的对象与隐藏类关联起来，以跟踪它们的属性特征。能够共享相同隐藏类的对象性能会更好，V8 会针对这种情况进行优化，但不一定总能够做到。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Article</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">title</span> = <span class="hljs-string">&#x27;Inauguration Ceremony Features Kazoo Band&#x27;</span><br>&#125;<br><span class="hljs-keyword">let</span> a1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Article</span>()<br><span class="hljs-keyword">let</span> a2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Article</span>()<br></code></pre></div></td></tr></table></figure>
+
+<p>V8 会在后台配置，让这两个类实例共享相同的隐藏类，因为这两个实例共享同一个构造函数和原型。假设之后又添加了下面这行 代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">a2.<span class="hljs-property">author</span> = <span class="hljs-string">&#x27;Jake&#x27;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>此时两个 Article 实例就会对应两个不同的隐藏类。根据这种操作的频率和隐藏类的大小，这有可能对性能产生明显影响。 当然，解决方案就是避免 JavaScript 的“先创建再补充”（ready-fireaim）式的动态属性赋值，并在构造函数中一次性声明所有属性， 如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Article</span>(<span class="hljs-params">opt_author</span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">title</span> = <span class="hljs-string">&#x27;Inauguration Ceremony</span><br><span class="hljs-string">  Features Kazoo Band&#x27;</span>;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">author</span> = opt_author;<br>&#125;<br><span class="hljs-keyword">let</span> a1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Article</span>();<br><span class="hljs-keyword">let</span> a2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Article</span>(<span class="hljs-string">&#x27;Jake&#x27;</span>);<br></code></pre></div></td></tr></table></figure>
+
+<p>这样，两个实例基本上就一样了（不考虑 hasOwnProperty 的返回值），因此可以共享一个隐藏类，从而带来潜在的性能提 升。不过要记住，使用 delete 关键字会导致生成相同的隐藏类片段。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Article</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">title</span> = <span class="hljs-string">&#x27;Inauguration Ceremony</span><br><span class="hljs-string">  Features Kazoo Band&#x27;</span>;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">author</span> = <span class="hljs-string">&#x27;Jake&#x27;</span>;<br>&#125;<br><span class="hljs-keyword">let</span> a1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Article</span>();<br><span class="hljs-keyword">let</span> a2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Article</span>();<br><span class="hljs-keyword">delete</span> a1.<span class="hljs-property">author</span>;<br></code></pre></div></td></tr></table></figure>
+
+<p>在代码结束后，即使两个实例使用了同一个构造函数，它们也不再共享一个隐藏类。动态删除属性与动态添加属性导致的后果一 样。最佳实践是把不想要的属性设置为 null 。这样可以保持隐藏类不变和继续共享，同时也能达到删除引用值供垃圾回收程序回收的效果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Article</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">title</span> = <span class="hljs-string">&#x27;Inauguration Ceremony</span><br><span class="hljs-string">  Features Kazoo Band&#x27;</span>;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">author</span> = <span class="hljs-string">&#x27;Jake&#x27;</span>;<br>&#125;<br><span class="hljs-keyword">let</span> a1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Article</span>();<br><span class="hljs-keyword">let</span> a2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Article</span>();<br>a1.<span class="hljs-property">author</span> = <span class="hljs-literal">null</span>;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h4><p>写得不好的 JavaScript 可能出现难以察觉且有害的内存泄漏问题。 在内存有限的设备上，或者在函数会被调用很多次的情况下，内存泄漏可能是个大问题。JavaScript 中的内存泄漏大部分是由不合理的引用导致的。<br>意外声明全局变量是最常见但也最容易修复的内存泄漏问题。下面的代码没有使用任何关键字声明变量</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">setName</span>(<span class="hljs-params"></span>) &#123;<br>  name = <span class="hljs-string">&#x27;Jake&#x27;</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>此时，解释器会把变量 name 当作 window 的属性来创建（相 当于 window.name = ‘Jake’ ）。可想而知，在 window 对象上创建的属性，只要 window 本身不被清理就不会消失。这个问题很容易解决，只要在变量声明前头加上 var 、 let 或 const 关键字即可，这样变量就会在函数执行完毕后离开作用域。<br>定时器也可能会悄悄地导致内存泄漏。下面的代码中，定时器的回调通过闭包引用了外部变量</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> name = <span class="hljs-string">&#x27;Jake&#x27;</span><br><span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(name)<br>&#125;, <span class="hljs-number">100</span>)<br></code></pre></div></td></tr></table></figure>
+
+<p>只要定时器一直运行，回调函数中引用的 name 就会一直占用内存。垃圾回收程序当然知道这一点，因而就不会清理外部变量。 使用 JavaScript 闭包很容易在不知不觉间造成内存泄漏。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> outer = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">let</span> name = <span class="hljs-string">&#x27;Jake&#x27;</span><br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> name<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>这会导致分配给 name 的内存被泄漏。以上代码创建了一个内部 闭包，只要 outer 函数存在就不能清理 name ，因为闭包一直在引用着它。假如 name 的内容很大（不止是一个小字符串）， 那可能就是个大问题了。</p>
+<h4 id="静态分配与对象池"><a href="#静态分配与对象池" class="headerlink" title="静态分配与对象池"></a>静态分配与对象池</h4><p>为了提升 JavaScript 性能，最后要考虑的一点往往就是压榨浏览器了。此时，一个关键问题就是如何减少浏览器执行垃圾回收的次数。开发者无法直接控制什么时候开始收集垃圾，但可以间接控制触发垃圾回收的条件。理论上，<strong>如果能够合理使用分配的内存，同时避免多余的垃圾回收，那就可以保住因释放内存而损失的性能</strong>。<br><strong>浏览器决定何时运行垃圾回收程序的一个标准就是对象更替的速度</strong>。如果有很多对象被初始化，然后一下子又都超出了作用域， 那么浏览器就会采用更激进的方式调度垃圾回收程序运行，这样当然会影响性能。看一看下面的例子，这是一个计算二维矢量加法的函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">addVector</span>(<span class="hljs-params">a, b</span>) &#123;<br>  <span class="hljs-keyword">let</span> resultant = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Vector</span>()<br>  resultant.<span class="hljs-property">x</span> = a.<span class="hljs-property">x</span> + b.<span class="hljs-property">x</span><br>  resultant.<span class="hljs-property">y</span> = a.<span class="hljs-property">y</span> + b.<span class="hljs-property">y</span><br>  <span class="hljs-keyword">return</span> resultant<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>调用这个函数时，会在堆上创建一个新对象，然后修改它，最后再把它返回给调用者。如果这个矢量对象的生命周期很短，那么它会很快失去所有对它的引用，成为可以被回收的值。假如这个矢量加法函数频繁被调用，那么垃圾回收调度程序会发现这里对象更替的速度很快，从而会更频繁地安排垃圾回收。<br>该问题的解决方案是不要动态创建矢量对象，比如可以修改上面的函数，让它使用一个已有的矢量对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">addVector</span>(<span class="hljs-params">a, b, resultant</span>) &#123;<br>  resultant.<span class="hljs-property">x</span> = a.<span class="hljs-property">x</span> + b.<span class="hljs-property">x</span><br>  resultant.<span class="hljs-property">y</span> = a.<span class="hljs-property">y</span> + b.<span class="hljs-property">y</span><br>  <span class="hljs-keyword">return</span> resultant<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>当然，这需要在其他地方实例化矢量参数 resultant ，但这个函数的行为没有变。那么在哪里创建矢量可以不让垃圾回收调度程序盯上呢?<br>一个策略是使用对象池。在初始化的某一时刻，可以创建一个对象池，用来管理一组可回收的对象。应用程序可以向这个对象池请求一个对象、设置其属性、使用它，然后在操作完成后再把它还给对象池。由于没发生对象初始化，垃圾回收探测就不会发现有对象更替，因此垃圾回收程序就不会那么频繁地运行。<br>下面是一个对象池的伪实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// vectorPool是已有的对象池</span><br><span class="hljs-keyword">let</span> v1 = vectorPool.<span class="hljs-title function_">allocate</span>()<br><span class="hljs-keyword">let</span> v2 = vectorPool.<span class="hljs-title function_">allocate</span>()<br><span class="hljs-keyword">let</span> v3 = vectorPool.<span class="hljs-title function_">allocate</span>()<br>v1.<span class="hljs-property">x</span> = <span class="hljs-number">10</span><br>v1.<span class="hljs-property">y</span> = <span class="hljs-number">5</span><br>v2.<span class="hljs-property">x</span> = -<span class="hljs-number">3</span><br>v2.<span class="hljs-property">y</span> = -<span class="hljs-number">6</span><br><span class="hljs-title function_">addVector</span>(v1, v2, v3)<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>([v3.<span class="hljs-property">x</span>, v3.<span class="hljs-property">y</span>]) <span class="hljs-comment">// [7, -1]</span><br>vectorPool.<span class="hljs-title function_">free</span>(v1)<br>vectorPool.<span class="hljs-title function_">free</span>(v2)<br>vectorPool.<span class="hljs-title function_">free</span>(v3)<br><span class="hljs-comment">// 如果对象有属性引用了其他对象</span><br><span class="hljs-comment">// 则这里也需要把这些属性设置为null</span><br>v1 = <span class="hljs-literal">null</span><br>v2 = <span class="hljs-literal">null</span><br>v3 = <span class="hljs-literal">null</span><br></code></pre></div></td></tr></table></figure>
+
+<p>如果对象池只按需分配矢量（在对象不存在时创建新的，在对象存在时则复用存在的），那么这个实现本质上是一种贪婪算法， 有单调增长但为静态的内存。这个对象池必须使用某种结构维护所有对象，数组是比较好的选择。不过，使用数组来实现，必须留意不要招致额外的垃圾回收。比如下面这个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> vectorList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(<span class="hljs-number">100</span>)<br><span class="hljs-keyword">let</span> vector = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Vector</span>()<br>vectorList.<span class="hljs-title function_">push</span>(vector)<br></code></pre></div></td></tr></table></figure>
+
+<p>由于 JavaScript 数组的大小是动态可变的，引擎会删除大小为 100 的数组，再创建一个新的大小为 200 的数组。垃圾回收程序会看到这个删除操作，说不定因此很快就会跑来收一次垃圾。要避免这种动态分配操作，可以在初始化时就创建一个大小够用的数组， 从而避免上述先删除再创建的操作。不过，必须事先想好这个数组有多大。</p>
+<blockquote>
+<p><strong>注意</strong> 静态分配是优化的一种极端形式。如果你的应用程序被垃圾回收严重地拖了后腿，可以利用它提升性能。但这种情况并不多见。大多数情况下，这都属于过早优化，因此不用考虑。</p>
+</blockquote>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><ul>
+<li>离开作用域的值会被自动标记为可回收，然后在垃圾回收期间被删除。</li>
+<li>主流的垃圾回收算法是标记清理，即先给当前不使用的值加上标记，再回来回收它们的内存。</li>
+<li>引用计数是另一种垃圾回收策略，需要记录值被引用了多少次。 JavaScript 引擎不再使用这种算法，但某些旧版本的 IE 仍然会受这种算法的影响，原因是 JavaScript 会访问非原生 JavaScript 对象（如 DOM 元素）。</li>
+<li>引用计数在代码中存在循环引用时会出现问题。</li>
+<li>解除变量的引用不仅可以消除循环引用，而且对垃圾回收也有帮助。为促进内存回收，全局对象、全局对象的属性和循环引用都应该在不需要时解除引用。</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaScript/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AC%AC%E5%9B%9B%E7%89%88%E7%AC%94%E8%AE%B0/">JavaScript高级程序设计第四版笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">垃圾回收</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/12/03/Taro%E5%A4%9A%E7%AB%AF%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Taro多端小程序学习笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/23/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F/">
+                        <span class="hidden-mobile">执行上下文与作用域</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#valine",
+          app_id: "wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz",
+          app_key: "BlsdS19vhoVr77n1TiE2diHr",
+          placeholder: "老师们，说点什么吧！",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: true,
+          serverURLs: "https://wvn0ubbm.lc-cn-n1-shared.com",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> |<i class="iconfont icon-love"></i>| <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        蜀ICP备2021012542号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

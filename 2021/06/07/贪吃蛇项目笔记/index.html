@@ -1,0 +1,649 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="jackhoo">
+  <meta name="keywords" content="">
+  
+  <title>贪吃蛇项目笔记 - jackhoo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/%E6%AC%A2%E8%BF%8E%E5%A4%A7%E5%AE%B6%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%8C%E8%AF%B7%E5%B0%BD%E6%83%85%E7%95%99%E8%A8%80%E5%90%A7%EF%BC%81/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/hybrid.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"13982720426.github.io","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz","app_key":"BlsdS19vhoVr77n1TiE2diHr","server_url":"https://wvn0ubbm.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>jackhoo的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/13982720426/">
+                <i class="iconfont icon-github-fill"></i>
+                GitHub
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg2.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="贪吃蛇项目笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      jackhoo
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-07 23:50" pubdate>
+        星期一, 六月 7日 2021, 11:50 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      80
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">贪吃蛇项目笔记</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：25 分钟前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="项目搭建"><a href="#项目搭建" class="headerlink" title="项目搭建"></a>项目搭建</h1><h2 id="初始配置文件"><a href="#初始配置文件" class="headerlink" title="初始配置文件"></a>初始配置文件</h2><p>在根目录下，添加初始配置文件<strong>package.json，tsconfig.json，webpack.config.js</strong><br><strong>package.json</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;part3&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.0.0&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;main&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;index.js&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;test&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;start&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;webpack serve --open chrome.exe&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;dev&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;webpack --mode development&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;build&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;webpack --mode production&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;keywords&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;author&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;license&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ISC&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;devDependencies&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;clean-webpack-plugin&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^4.0.0-alpha.0&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;html-webpack-plugin&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^5.3.1&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;ts-loader&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^9.2.2&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;typescript&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^4.3.2&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;webpack&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^5.38.1&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;webpack-cli&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^4.7.0&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;webpack-dev-server&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^3.11.2&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></div></td></tr></table></figure>
+
+<p><strong>tsconfig.json</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;compilerOptions&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;target&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ES2015&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;module&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ES2015&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;strict&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;noEmitOnError&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></div></td></tr></table></figure>
+
+<p><strong>webpack.config.js</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">const path = require(&#x27;path&#x27;)<br><span class="hljs-comment">// 引入html插件</span><br>const HTMLWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;)<br><span class="hljs-comment">// 引入clean插件</span><br>const <span class="hljs-punctuation">&#123;</span> CleanWebpackPlugin <span class="hljs-punctuation">&#125;</span> = require(&#x27;clean-webpack-plugin&#x27;)<br><br><span class="hljs-comment">// webpack中的所有的配置信息都应该写在module.exports中</span><br>module.exports = <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-comment">// 指定入口文件</span><br>  entry<span class="hljs-punctuation">:</span> &#x27;./src/index.ts&#x27;<span class="hljs-punctuation">,</span><br>  <span class="hljs-comment">// 指定打包文件所在目录</span><br>  output<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">// 指定打包文件的目录</span><br>    path<span class="hljs-punctuation">:</span> path.resolve(__dirname<span class="hljs-punctuation">,</span> &#x27;dist&#x27;)<span class="hljs-punctuation">,</span><br>    <span class="hljs-comment">// 打包后文件的文件</span><br>    filename<span class="hljs-punctuation">:</span> &#x27;bundle.js&#x27;<span class="hljs-punctuation">,</span><br><br>    <span class="hljs-comment">// 告诉webpack不使用箭头</span><br>    <span class="hljs-comment">// 默认打包后是一个立即执行的箭头函数，在IE 11中也是无法执行的！</span><br>    <span class="hljs-comment">// 加上下面的配置，可以在webpack打包时，最外层不再是箭头函数</span><br>    <span class="hljs-comment">// webpack新版本已经不想兼容IE了！233</span><br>    environment<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      arrowFunction<span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-comment">// 指定webpack打包时要使用模块</span><br>  module<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">// 指定要加载的规则</span><br>    rules<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>      <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-comment">// test指定的是规则生效的文件</span><br>        test<span class="hljs-punctuation">:</span> /\.ts$/<span class="hljs-punctuation">,</span><br>        <span class="hljs-comment">// 要使用的loader</span><br>        <span class="hljs-comment">// Webpack在加载时是&quot;从后向前&quot;加载！</span><br>        use<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>          <span class="hljs-comment">// 配置babel</span><br>          <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-comment">// 指定加载器</span><br>            loader<span class="hljs-punctuation">:</span> &#x27;babel-loader&#x27;<span class="hljs-punctuation">,</span><br>            <span class="hljs-comment">// 设置babel</span><br>            options<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>              <span class="hljs-comment">// 设置预定义的环境</span><br>              presets<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>                <span class="hljs-punctuation">[</span><br>                  <span class="hljs-comment">// 指定环境的插件</span><br>                  &#x27;@babel/preset-env&#x27;<span class="hljs-punctuation">,</span><br>                  <span class="hljs-comment">// 配置信息</span><br>                  <span class="hljs-punctuation">&#123;</span><br>                    <span class="hljs-comment">// 要兼容的目标浏览器</span><br>                    targets<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>                      chrome<span class="hljs-punctuation">:</span> &#x27;<span class="hljs-number">58</span>&#x27;<span class="hljs-punctuation">,</span><br>                      ie<span class="hljs-punctuation">:</span> &#x27;<span class="hljs-number">11</span>&#x27;<span class="hljs-punctuation">,</span><br>                    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>                    <span class="hljs-comment">// 指定corejs的版本</span><br>                    <span class="hljs-comment">// package.json中的版本为3.8.1</span><br>                    corejs<span class="hljs-punctuation">:</span> &#x27;<span class="hljs-number">3</span>&#x27;<span class="hljs-punctuation">,</span><br>                    <span class="hljs-comment">// 使用corejs的方式，&quot;usage&quot; 表示按需加载</span><br>                    useBuiltIns<span class="hljs-punctuation">:</span> &#x27;usage&#x27;<span class="hljs-punctuation">,</span><br>                  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>              <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>          <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>          &#x27;ts-loader&#x27;<span class="hljs-punctuation">,</span><br>        <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-comment">// 要排除的文件</span><br>        exclude<span class="hljs-punctuation">:</span> /node-modules/<span class="hljs-punctuation">,</span><br>      <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br><br>  <span class="hljs-comment">// 配置Webpack插件</span><br>  plugins<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>    new CleanWebpackPlugin()<span class="hljs-punctuation">,</span><br>    new HTMLWebpackPlugin(<span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-comment">// title: &quot;这是一个自定义的title&quot;</span><br>      template<span class="hljs-punctuation">:</span> &#x27;./src/index.html&#x27;<span class="hljs-punctuation">,</span><br>    <span class="hljs-punctuation">&#125;</span>)<span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-comment">// 用来设置引用模块</span><br>  resolve<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    extensions<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>&#x27;.ts&#x27;<span class="hljs-punctuation">,</span> &#x27;.js&#x27;<span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br><span class="hljs-punctuation">&#125;</span><br><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h2><h3 id="安装-node-modules-依赖"><a href="#安装-node-modules-依赖" class="headerlink" title="安装 node_modules 依赖"></a>安装 node_modules 依赖</h3><p><code>npm i</code><br>​</p>
+<h3 id="更新依赖"><a href="#更新依赖" class="headerlink" title="更新依赖"></a>更新依赖</h3><p><code>npm install -D babel-loader @babel/core @babel/preset-env webpack </code></p>
+<p>在根目录新建 src 文件夹，src 下新建 index.html 文件和 index.ts 文件<br><strong>index.html</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&lt;!DOCTYPE html&gt;<br>&lt;html lang=<span class="hljs-string">&quot;en&quot;</span>&gt;<br>  &lt;head&gt;<br>    &lt;meta charset=<span class="hljs-string">&quot;UTF-8&quot;</span> /&gt;<br>    &lt;meta http-equiv=<span class="hljs-string">&quot;X-UA-Compatible&quot;</span> content=<span class="hljs-string">&quot;IE=edge&quot;</span> /&gt;<br>    &lt;meta name=<span class="hljs-string">&quot;viewport&quot;</span> content=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span> /&gt;<br>    &lt;title&gt;贪吃蛇&lt;/title&gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;&lt;/body&gt;<br>&lt;/html&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="打包运行项目"><a href="#打包运行项目" class="headerlink" title="打包运行项目"></a>打包运行项目</h3><p><code>npm run build</code></p>
+<h3 id="安装-less-依赖"><a href="#安装-less-依赖" class="headerlink" title="安装 less 依赖"></a>安装 less 依赖</h3><p><code>npm i -D less less-loader css-loader style-loader</code></p>
+<h4 id="配置-less-文件"><a href="#配置-less-文件" class="headerlink" title="配置 less 文件"></a>配置 less 文件</h4><p>在 webpack.config.js 中设置 less 文件的处理</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">...<br><br><span class="hljs-comment">// 指定webpack打包时要使用模块</span><br>  module<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">// 指定要加载的规则</span><br>    rules<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>      <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-comment">// test指定的是规则生效的文件</span><br>        test<span class="hljs-punctuation">:</span> /\.ts$/<span class="hljs-punctuation">,</span><br>        <span class="hljs-comment">// 要使用的loader</span><br>        <span class="hljs-comment">// Webpack在加载时是&quot;从后向前&quot;加载！</span><br>        use<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>          <span class="hljs-comment">// 配置babel</span><br>          <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-comment">// 指定加载器</span><br>            loader<span class="hljs-punctuation">:</span> &#x27;babel-loader&#x27;<span class="hljs-punctuation">,</span><br>            <span class="hljs-comment">// 设置babel</span><br>            options<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>              <span class="hljs-comment">// 设置预定义的环境</span><br>              presets<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>                <span class="hljs-punctuation">[</span><br>                  <span class="hljs-comment">// 指定环境的插件</span><br>                  &#x27;@babel/preset-env&#x27;<span class="hljs-punctuation">,</span><br>                  <span class="hljs-comment">// 配置信息</span><br>                  <span class="hljs-punctuation">&#123;</span><br>                    <span class="hljs-comment">// 要兼容的目标浏览器</span><br>                    targets<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>                      chrome<span class="hljs-punctuation">:</span> &#x27;<span class="hljs-number">58</span>&#x27;<span class="hljs-punctuation">,</span><br>                      ie<span class="hljs-punctuation">:</span> &#x27;<span class="hljs-number">11</span>&#x27;<span class="hljs-punctuation">,</span><br>                    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>                    <span class="hljs-comment">// 指定corejs的版本</span><br>                    <span class="hljs-comment">// package.json中的版本为3.8.1</span><br>                    corejs<span class="hljs-punctuation">:</span> &#x27;<span class="hljs-number">3</span>&#x27;<span class="hljs-punctuation">,</span><br>                    <span class="hljs-comment">// 使用corejs的方式，&quot;usage&quot; 表示按需加载</span><br>                    useBuiltIns<span class="hljs-punctuation">:</span> &#x27;usage&#x27;<span class="hljs-punctuation">,</span><br>                  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>              <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>          <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>          &#x27;ts-loader&#x27;<span class="hljs-punctuation">,</span><br>        <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-comment">// 要排除的文件</span><br>        exclude<span class="hljs-punctuation">:</span> /node-modules/<span class="hljs-punctuation">,</span><br>      <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-comment">//设置less文件的处理</span><br>      <span class="hljs-punctuation">&#123;</span><br>        test<span class="hljs-punctuation">:</span> /\.less$/<span class="hljs-punctuation">,</span><br>        use<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>&#x27;style-loader&#x27;<span class="hljs-punctuation">,</span> &#x27;css-loader&#x27;<span class="hljs-punctuation">,</span> &#x27;less-loader&#x27;<span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>...<br></code></pre></div></td></tr></table></figure>
+
+<p>其中关键代码，use 中的文件执行先后顺序是从后往前执行</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json"><span class="hljs-comment">//设置less文件的处理</span><br><span class="hljs-punctuation">&#123;</span><br>  test<span class="hljs-punctuation">:</span> /\.less$/<span class="hljs-punctuation">,</span><br>  use<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>&#x27;style-loader&#x27;<span class="hljs-punctuation">,</span> &#x27;css-loader&#x27;<span class="hljs-punctuation">,</span> &#x27;less-loader&#x27;<span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="测试-less-文件"><a href="#测试-less-文件" class="headerlink" title="测试 less 文件"></a>测试 less 文件</h4><p>在 src 文件夹下新建 style 文件，并在其中新建 index.less 文件<br>简单设置样式</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">body <span class="hljs-punctuation">&#123;</span><br>  background-color<span class="hljs-punctuation">:</span> aquamarine;<br><span class="hljs-punctuation">&#125;</span><br><br></code></pre></div></td></tr></table></figure>
+
+<p>在 src\index.ts 中引入样式文件</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">import &#x27;./style/index.less&#x27;<br>console.log(<span class="hljs-number">123</span>)<br><br></code></pre></div></td></tr></table></figure>
+
+<p>先<code>npm run duild</code>在打包生成的 dist 文件夹中，点击 ndex.html 文件进行运行，网页有样式生效，则说明 less 文件运行成功<br>​</p>
+<h3 id="安装-css-兼容插件"><a href="#安装-css-兼容插件" class="headerlink" title="安装 css 兼容插件"></a>安装 css 兼容插件</h3><p><code>npm i -D postcss postcss-loader postcss-preset-env</code><br>​</p>
+<h4 id="配置-postcss"><a href="#配置-postcss" class="headerlink" title="配置 postcss"></a>配置 postcss</h4><p>在 webpack.config.js 添加 postcss 配置</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">			...<br>use<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>              <span class="hljs-string">&quot;style-loader&quot;</span><span class="hljs-punctuation">,</span><br>              <span class="hljs-string">&quot;css-loader&quot;</span><span class="hljs-punctuation">,</span><br><br>              <span class="hljs-comment">// 引入postcss</span><br>              <span class="hljs-comment">// 类似于babel，把css语法转换兼容旧版浏览器的语法</span><br>              <span class="hljs-punctuation">&#123;</span><br>                  loader<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;postcss-loader&quot;</span><span class="hljs-punctuation">,</span><br>                  options<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>                      postcssOptions<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>                          plugins<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>                              <span class="hljs-punctuation">[</span><br>                                  <span class="hljs-comment">// 浏览器兼容插件</span><br>                                  <span class="hljs-string">&quot;postcss-preset-env&quot;</span><span class="hljs-punctuation">,</span><br>                                  <span class="hljs-punctuation">&#123;</span><br>                                      <span class="hljs-comment">// 每个浏览器最新两个版本</span><br>                                      browsers<span class="hljs-punctuation">:</span> &#x27;last <span class="hljs-number">2</span> versions&#x27;<br>                                  <span class="hljs-punctuation">&#125;</span><br>                              <span class="hljs-punctuation">]</span><br>                          <span class="hljs-punctuation">]</span><br>                      <span class="hljs-punctuation">&#125;</span><br>                  <span class="hljs-punctuation">&#125;</span><br>              <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>              <span class="hljs-string">&quot;less-loader&quot;</span><br>          <span class="hljs-punctuation">]</span><br>		...<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="测试-css-兼容"><a href="#测试-css-兼容" class="headerlink" title="测试 css 兼容"></a>测试 css 兼容</h4><p>在 src\style\index.less 中添加<code>display: flex;</code>布局</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">body <span class="hljs-punctuation">&#123;</span><br>  background-color<span class="hljs-punctuation">:</span> aquamarine;<br>  display<span class="hljs-punctuation">:</span> flex;<br><span class="hljs-punctuation">&#125;</span><br><br></code></pre></div></td></tr></table></figure>
+
+<p>先<code>npm run duild</code>，在在打包的文件夹 dist 中找到 bundle.js，查看<code>display</code>属性值是否添加了前缀，有则 css 兼容成功<br>​</p>
+<h1 id="项目界面"><a href="#项目界面" class="headerlink" title="项目界面"></a>项目界面</h1><p><strong>每次调试都要进入进入开发环境</strong><br><code>npm start</code><br>​<br>​## 基本页面</p>
+<p>在 src\index.html 中</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&lt;!DOCTYPE html&gt;<br>&lt;html lang=<span class="hljs-string">&quot;en&quot;</span>&gt;<br>  &lt;head&gt;<br>    &lt;meta charset=<span class="hljs-string">&quot;UTF-8&quot;</span> /&gt;<br>    &lt;meta http-equiv=<span class="hljs-string">&quot;X-UA-Compatible&quot;</span> content=<span class="hljs-string">&quot;IE=edge&quot;</span> /&gt;<br>    &lt;meta name=<span class="hljs-string">&quot;viewport&quot;</span> content=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span> /&gt;<br>    &lt;title&gt;贪吃蛇&lt;/title&gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;<br>    &lt;!-- 创建游戏主容器 --&gt;<br>    &lt;div id=<span class="hljs-string">&quot;main&quot;</span>&gt;<br>      &lt;!-- 设置游戏舞台 --&gt;<br>      &lt;div id=<span class="hljs-string">&quot;stage&quot;</span>&gt;<br>        &lt;!-- 设置蛇 --&gt;<br>        &lt;div id=<span class="hljs-string">&quot;snake&quot;</span>&gt;<br>          &lt;!-- snake内部的div 表示蛇的各部分 --&gt;<br>          &lt;div&gt;&lt;/div&gt;<br>        &lt;/div&gt;<br>        &lt;!-- 设置食物 --&gt;<br>        &lt;div id=<span class="hljs-string">&quot;food&quot;</span>&gt;<br>          &lt;!-- 添加是个小div，设置食物样式 --&gt;<br>          &lt;div&gt;&lt;/div&gt;<br>          &lt;div&gt;&lt;/div&gt;<br>          &lt;div&gt;&lt;/div&gt;<br>          &lt;div&gt;&lt;/div&gt;<br>        &lt;/div&gt;<br>      &lt;/div&gt;<br><br>      &lt;!-- 游戏积分牌 --&gt;<br>      &lt;div id=<span class="hljs-string">&quot;score-panel&quot;</span>&gt;<br>        &lt;div&gt;<br>          SCORE<span class="hljs-punctuation">:</span><br>          &lt;span id=<span class="hljs-string">&quot;score&quot;</span>&gt;<span class="hljs-number">0</span>&lt;/span&gt;<br>        &lt;/div&gt;<br>        &lt;div&gt;<br>          level<span class="hljs-punctuation">:</span><br>          &lt;span id=<span class="hljs-string">&quot;level&quot;</span>&gt;<span class="hljs-number">1</span>&lt;/span&gt;<br>        &lt;/div&gt;<br>      &lt;/div&gt;<br>    &lt;/div&gt;<br>  &lt;/body&gt;<br>&lt;/html&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="基本样式"><a href="#基本样式" class="headerlink" title="基本样式"></a>基本样式</h2><p>在 src\style\index.less 中</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json"><span class="hljs-comment">// 设置变量</span><br>@bg-color<span class="hljs-punctuation">:</span> #b7d4a8;<br><br><span class="hljs-comment">// 清除默认样式</span><br>* <span class="hljs-punctuation">&#123;</span><br>  margin<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span>;<br>  padding<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span>;<br>  <span class="hljs-comment">// 改变盒子模型的计算方式</span><br>  box-sizing<span class="hljs-punctuation">:</span> border-box;<br><span class="hljs-punctuation">&#125;</span><br><br>body <span class="hljs-punctuation">&#123;</span><br>  font<span class="hljs-punctuation">:</span> bold <span class="hljs-number">20</span>px &#x27;Courier&#x27;;<br><span class="hljs-punctuation">&#125;</span><br><br><span class="hljs-comment">//设置主窗口的样式</span><br>#main <span class="hljs-punctuation">&#123;</span><br>  width<span class="hljs-punctuation">:</span> <span class="hljs-number">360</span>px;<br>  height<span class="hljs-punctuation">:</span> <span class="hljs-number">420</span>px;<br>  <span class="hljs-comment">//设置背景</span><br>  background-color<span class="hljs-punctuation">:</span> @bg-color;<br>  <span class="hljs-comment">//设置居中</span><br>  margin<span class="hljs-punctuation">:</span> <span class="hljs-number">100</span>px auto;<br>  border<span class="hljs-punctuation">:</span> <span class="hljs-number">10</span>px solid black;<br>  <span class="hljs-comment">//设置圆角</span><br>  border-radius<span class="hljs-punctuation">:</span> <span class="hljs-number">40</span>px;<br>  <span class="hljs-comment">// 开启弹性盒模型</span><br>  display<span class="hljs-punctuation">:</span> flex;<br>  <span class="hljs-comment">//设置主轴方向</span><br>  flex-flow<span class="hljs-punctuation">:</span> column;<br>  <span class="hljs-comment">//设置侧轴对齐方式</span><br>  align-items<span class="hljs-punctuation">:</span> center;<br>  <span class="hljs-comment">// 设置主轴对齐方式</span><br>  justify-content<span class="hljs-punctuation">:</span> space-around;<br>  <span class="hljs-comment">//游戏舞台</span><br>  #stage <span class="hljs-punctuation">&#123;</span><br>    width<span class="hljs-punctuation">:</span> <span class="hljs-number">304</span>px;<br>    height<span class="hljs-punctuation">:</span> <span class="hljs-number">304</span>px;<br>    border<span class="hljs-punctuation">:</span> <span class="hljs-number">2</span>px solid black;<br>    position<span class="hljs-punctuation">:</span> relative;<br>    <span class="hljs-comment">// 开启相对定位</span><br>    position<span class="hljs-punctuation">:</span> relative;<br><br>    <span class="hljs-comment">//设置蛇的样式</span><br>    #snake <span class="hljs-punctuation">&#123;</span><br>      &amp; &gt; div <span class="hljs-punctuation">&#123;</span><br>        width<span class="hljs-punctuation">:</span> <span class="hljs-number">10</span>px;<br>        height<span class="hljs-punctuation">:</span> <span class="hljs-number">10</span>px;<br>        background-color<span class="hljs-punctuation">:</span> #<span class="hljs-number">000</span>;<br>        border<span class="hljs-punctuation">:</span> <span class="hljs-number">1</span>px solid @bg-color;<br>        <span class="hljs-comment">// 开启绝对定位</span><br>        position<span class="hljs-punctuation">:</span> absolute;<br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">&#125;</span><br><br>    <span class="hljs-comment">// 设置食物</span><br>    #food <span class="hljs-punctuation">&#123;</span><br>      width<span class="hljs-punctuation">:</span> <span class="hljs-number">10</span>px;<br>      height<span class="hljs-punctuation">:</span> <span class="hljs-number">10</span>px;<br>      <span class="hljs-comment">// 开启绝对定位</span><br>      position<span class="hljs-punctuation">:</span> absolute;<br>      <span class="hljs-comment">// 开启弹性盒模型</span><br>      display<span class="hljs-punctuation">:</span> flex;<br>      <span class="hljs-comment">// 设置横轴位主轴，wrap表示会自动换行</span><br>      flex-flow<span class="hljs-punctuation">:</span> row wrap;<br>      <span class="hljs-comment">// 设置主轴和侧轴的空白空间分配到元素之间</span><br>      justify-content<span class="hljs-punctuation">:</span> space-between;<br>      align-content<span class="hljs-punctuation">:</span> space-between;<br><br>      left<span class="hljs-punctuation">:</span> <span class="hljs-number">40</span>px;<br>      top<span class="hljs-punctuation">:</span> <span class="hljs-number">100</span>px;<br>      <span class="hljs-comment">// transform: rotate(45deg);</span><br><br>      &amp; &gt; div <span class="hljs-punctuation">&#123;</span><br>        width<span class="hljs-punctuation">:</span> <span class="hljs-number">4</span>px;<br>        height<span class="hljs-punctuation">:</span> <span class="hljs-number">4</span>px;<br>        background-color<span class="hljs-punctuation">:</span> black;<br>        <span class="hljs-comment">//使div旋转45度</span><br>        transform<span class="hljs-punctuation">:</span> rotate(<span class="hljs-number">45</span>deg);<br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-comment">// 记分牌</span><br>  #score-panel <span class="hljs-punctuation">&#123;</span><br>    width<span class="hljs-punctuation">:</span> <span class="hljs-number">300</span>px;<br>    display<span class="hljs-punctuation">:</span> flex;<br>    <span class="hljs-comment">//设置主轴对齐方式</span><br>    justify-content<span class="hljs-punctuation">:</span> space-between;<br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="IE-兼容"><a href="#IE-兼容" class="headerlink" title="IE 兼容"></a>IE 兼容</h2><p>IE 自己都已经放弃了！！！<br>​</p>
+<p>在 webpack.config.js 中，IE10 不兼容箭头函数写法，给<code>environment</code>添加<code>const: false,</code><br>IE9 不兼容<code>flex</code>布局，IE10 一下可以用其他方式布局，</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">environment<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>  arrowFunction<span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span><br>  const<span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span><br><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br></code></pre></div></td></tr></table></figure>
+
+<h1 id="逻辑功能"><a href="#逻辑功能" class="headerlink" title="逻辑功能"></a>逻辑功能</h1><h2 id="Food-类"><a href="#Food-类" class="headerlink" title="Food 类"></a>Food 类</h2><p>在 src\index.ts 中，添加食物类。先获取 food 元素，定义食物的 X、Y 坐标，并生成符合规定的随机坐标</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">import &#x27;./style/index.less&#x27;<br><br><span class="hljs-comment">//定义食物类</span><br>class Food <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-comment">// 定义一个属性表示食物所对应的元素</span><br>  private element<span class="hljs-punctuation">:</span> HTMLElement<br><br>  constructor() <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">// 获取页面中的food元素并将其赋值给element</span><br>    <span class="hljs-comment">// 末尾加上叹号，表示id为food的元素必定存在（非空）</span><br>    this.element = document.getElementById(&#x27;food&#x27;)!<br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">// 定义一个获取食物X轴坐标的方法</span><br>  get X() <span class="hljs-punctuation">&#123;</span><br>    return this.element.offsetLeft<br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">// 定义一个获取食物Y轴坐标的方法</span><br>  get Y() <span class="hljs-punctuation">&#123;</span><br>    return this.element.offsetTop<br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">// 修改食物的位置</span><br>  change() <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">// 生成一个随机的位置</span><br>    <span class="hljs-comment">// 食物的位置最小，最大290，并且是整数10</span><br>    <span class="hljs-comment">// 蛇移动一次就是一格，一格的大小就是10，所以就要求食物的坐标必须是整10</span><br>    let left = Math.round(Math.random() * <span class="hljs-number">29</span>) * <span class="hljs-number">10</span><br>    let top = Math.round(Math.random() * <span class="hljs-number">29</span>) * <span class="hljs-number">10</span><br><br>    this.element.style.left = left + &#x27;px&#x27;<br>    this.element.style.top = top + &#x27;px&#x27;<br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br><br><span class="hljs-comment">// 测试代码</span><br><span class="hljs-comment">// const food =  new Food();</span><br><span class="hljs-comment">// console.log(food.X, food.Y);</span><br><span class="hljs-comment">// food.change();</span><br><span class="hljs-comment">// console.log(food.X, food.Y);</span><br><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="ScorePanel-类"><a href="#ScorePanel-类" class="headerlink" title="ScorePanel 类"></a>ScorePanel 类</h2><p>在 src\moduls 中新建 ScorePanel.ts 文件，添加记分牌类</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json"><span class="hljs-comment">// 定义记分牌的类</span><br>class ScorePanel <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-comment">//score 和level用来记录分数和等级</span><br>  score = <span class="hljs-number">0</span><br>  level = <span class="hljs-number">1</span><br>  <span class="hljs-comment">// 分数和等级所在的元素，在构造函数中进行初始化</span><br>  scoreEle<span class="hljs-punctuation">:</span> HTMLElement<br>  levelEle<span class="hljs-punctuation">:</span> HTMLElement<br><br>  <span class="hljs-comment">//设置一个变量限制等级</span><br>  maxLevel<span class="hljs-punctuation">:</span> number<br>  <span class="hljs-comment">//设置一个变量表示多少分时升级</span><br>  upScore<span class="hljs-punctuation">:</span> number<br><br>  constructor(maxLevel<span class="hljs-punctuation">:</span> number = <span class="hljs-number">10</span><span class="hljs-punctuation">,</span> upScore<span class="hljs-punctuation">:</span> number = <span class="hljs-number">10</span>) <span class="hljs-punctuation">&#123;</span><br>    this.scoreEle = document.getElementById(&#x27;score&#x27;)!<br>    this.levelEle = document.getElementById(&#x27;level&#x27;)!<br>    this.maxLevel = maxLevel<br>    this.upScore = upScore<br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">//设置一个加分的方法</span><br>  addScore() <span class="hljs-punctuation">&#123;</span><br>    this.scoreEle.innerHTML = ++this.score + &#x27;&#x27;<br>    <span class="hljs-comment">//判断分数达到时升级</span><br>    if (this.score % this.upScore === <span class="hljs-number">0</span>) <span class="hljs-punctuation">&#123;</span><br>      this.levelUp()<br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">//提升等级的方法</span><br>  levelUp() <span class="hljs-punctuation">&#123;</span><br>    if (this.level &lt; this.maxLevel) <span class="hljs-punctuation">&#123;</span><br>      this.levelEle.innerHTML = ++this.level + &#x27;&#x27;<br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br><span class="hljs-comment">// 测试代码</span><br><span class="hljs-comment">// const scorePanel = new ScorePanel(200, 2)</span><br><span class="hljs-comment">// for (let i = 0; i &lt; 200; i++) &#123;</span><br><span class="hljs-comment">//   scorePanel.addScore()</span><br><span class="hljs-comment">// &#125;</span><br><br>export default ScorePanel<br><br></code></pre></div></td></tr></table></figure>
+
+<p>在 src\index.ts 中调用 ScorePanel 类</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">import &#x27;./style/index.less&#x27;<br><br>import Food from &#x27;./moduls/Food&#x27;<br>import ScorePanel from &#x27;./moduls/ScorePanel&#x27;<br><br>const food = new Food()<br>console.log(food.X<span class="hljs-punctuation">,</span> food.Y)<br>food.change()<br>console.log(food.X<span class="hljs-punctuation">,</span> food.Y)<br><br>const scorePanel = new ScorePanel(<span class="hljs-number">200</span><span class="hljs-punctuation">,</span> <span class="hljs-number">2</span>)<br>for (let i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">200</span>; i++) <span class="hljs-punctuation">&#123;</span><br>  scorePanel.addScore()<br><span class="hljs-punctuation">&#125;</span><br><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="Snake-类"><a href="#Snake-类" class="headerlink" title="Snake 类"></a>Snake 类</h2><h3 id="初步添加-Snake-类"><a href="#初步添加-Snake-类" class="headerlink" title="初步添加 Snake 类"></a>初步添加 Snake 类</h3><p>在 src\moduls 中新建一个 Snake.ts 文件，初步添加 Snake 类，之后再添加其他功能</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">class Snake <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-comment">//表示蛇头的元素</span><br>  head<span class="hljs-punctuation">:</span> HTMLElement<br><br>  <span class="hljs-comment">// 蛇的身体(包括蛇头)</span><br>  bodies<span class="hljs-punctuation">:</span> HTMLCollection<br>  <span class="hljs-comment">//获取蛇的容器</span><br>  element<span class="hljs-punctuation">:</span> HTMLElement<br><br>  constructor() <span class="hljs-punctuation">&#123;</span><br>    this.head = document.querySelector(&#x27;#snake &gt; div&#x27;) as HTMLElement<br>    this.element = document.getElementById(&#x27;snake&#x27;)!<br>    this.bodies = this.element.getElementsByTagName(&#x27;div&#x27;)<br>  <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-comment">//获取蛇的坐标(蛇头坐标)</span><br>  get X() <span class="hljs-punctuation">&#123;</span><br>    return this.head.offsetLeft<br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">// 获取蛇的Y轴坐标</span><br>  get Y() <span class="hljs-punctuation">&#123;</span><br>    return this.head.offsetHeight<br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">// 设置蛇头的坐标</span><br>  set X(value<span class="hljs-punctuation">:</span> number) <span class="hljs-punctuation">&#123;</span><br>    this.head.style.left = value + &#x27;px&#x27;<br>  <span class="hljs-punctuation">&#125;</span><br>  set Y(value<span class="hljs-punctuation">:</span> number) <span class="hljs-punctuation">&#123;</span><br>    this.head.style.top = value + &#x27;px&#x27;<br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">// 蛇增加身体的方法</span><br>  addBody() <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">//向element中添加一个div</span><br>    this.element.insertAdjacentHTML(&#x27;beforeend&#x27;<span class="hljs-punctuation">,</span> &#x27;&lt;div&gt;&lt;/div&gt;&#x27;)<br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="GameControl-类"><a href="#GameControl-类" class="headerlink" title="GameControl 类"></a>GameControl 类</h2><h3 id="GameControl-类添加键盘事件"><a href="#GameControl-类添加键盘事件" class="headerlink" title="GameControl 类添加键盘事件"></a>GameControl 类添加键盘事件</h3><p>在 src\moduls 中添加 GameControl.ts 文件,先引入其他几个类，绑定键盘按键事件，修改方向</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">import Snake from &#x27;./Snake&#x27;<br>import Food from &#x27;./Food&#x27;<br>import ScorePanel from &#x27;./ScorePanel&#x27;<br><br><span class="hljs-comment">//游戏控制器，控制其他所有类</span><br>class GameControl <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-comment">//定义三个属性</span><br>  snake<span class="hljs-punctuation">:</span> Snake<br>  food<span class="hljs-punctuation">:</span> Food<br>  scorePanel<span class="hljs-punctuation">:</span> ScorePanel<br><br>  <span class="hljs-comment">//创建一个属性来存储蛇的移动方向（也就是按键的方向）</span><br>  direction<span class="hljs-punctuation">:</span> string = &#x27;&#x27;<br><br>  constructor() <span class="hljs-punctuation">&#123;</span><br>    this.snake = new Snake()<br>    this.food = new Food()<br>    this.scorePanel = new ScorePanel()<br><br>    this.init()<br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">//游戏得初始化方法，调用后游戏即开始</span><br>  init() <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">// 绑定键盘按键按下的事件</span><br>    document.addEventListener(&#x27;keydown&#x27;<span class="hljs-punctuation">,</span> this.keydownHandler.bind(this))<br>  <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-comment">//创建一个键盘按下的响应函数</span><br>  keydownHandler(event<span class="hljs-punctuation">:</span> KeyboardEvent) <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">//需要检查event.key的值是否合法（用户是否按了正确的按键）</span><br><br>    <span class="hljs-comment">// 修改direction 属性</span><br>    this.direction = event.key<br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br><br>export default GameControl<br><br></code></pre></div></td></tr></table></figure>
+
+<p>在 src\index.ts 中添加游戏控制</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">import &#x27;./style/index.less&#x27;<br><br><span class="hljs-comment">// import Food from &#x27;./moduls/Food&#x27;</span><br><span class="hljs-comment">// import ScorePanel from &#x27;./moduls/ScorePanel&#x27;</span><br><br><span class="hljs-comment">// const food = new Food()</span><br><span class="hljs-comment">// console.log(food.X, food.Y)</span><br><span class="hljs-comment">// food.change()</span><br><span class="hljs-comment">// console.log(food.X, food.Y)</span><br><br><span class="hljs-comment">// const scorePanel = new ScorePanel(200, 2)</span><br><span class="hljs-comment">// for (let i = 0; i &lt; 200; i++) &#123;</span><br><span class="hljs-comment">//   scorePanel.addScore()</span><br><span class="hljs-comment">// &#125;</span><br><br>import GameControl from &#x27;./moduls/GameControl&#x27;<br><br>const gameControl = new GameControl()<br><br><span class="hljs-comment">// setInterval(() =&gt; &#123;</span><br><span class="hljs-comment">//   console.log(gameControl.direction)</span><br><span class="hljs-comment">// &#125;, 1000)</span><br><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="GameControl-使蛇移动"><a href="#GameControl-使蛇移动" class="headerlink" title="GameControl 使蛇移动"></a>GameControl 使蛇移动</h3><p>在 src\moduls\GameControl.ts 中，创建蛇移动的 run 方法，获取蛇的坐标，并修改蛇的坐标，通过定时器来时时监控</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">import Snake from &#x27;./Snake&#x27;<br>import Food from &#x27;./Food&#x27;<br>import ScorePanel from &#x27;./ScorePanel&#x27;<br><br><span class="hljs-comment">//游戏控制器，控制其他所有类</span><br>class GameControl <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-comment">//定义三个属性</span><br>  snake<span class="hljs-punctuation">:</span> Snake<br>  food<span class="hljs-punctuation">:</span> Food<br>  scorePanel<span class="hljs-punctuation">:</span> ScorePanel<br><br>  <span class="hljs-comment">//创建一个属性来存储蛇的移动方向（也就是按键的方向）</span><br>  direction<span class="hljs-punctuation">:</span> string = &#x27;&#x27;<br><br>  <span class="hljs-comment">//创建一个属性来记录是否结束游戏</span><br>  isLive = <span class="hljs-literal"><span class="hljs-keyword">true</span></span><br><br>  constructor() <span class="hljs-punctuation">&#123;</span><br>    this.snake = new Snake()<br>    this.food = new Food()<br>    this.scorePanel = new ScorePanel()<br><br>    this.init()<br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">//游戏得初始化方法，调用后游戏即开始</span><br>  init() <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">// 绑定键盘按键按下的事件</span><br>    document.addEventListener(&#x27;keydown&#x27;<span class="hljs-punctuation">,</span> this.keydownHandler.bind(this))<br><br>    <span class="hljs-comment">// 调用run方法，使蛇移动</span><br>    this.run()<br>  <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-comment">//创建一个键盘按下的响应函数</span><br>  keydownHandler(event<span class="hljs-punctuation">:</span> KeyboardEvent) <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">//需要检查event.key的值是否合法（用户是否按了正确的按键）</span><br><br>    <span class="hljs-comment">// 修改direction 属性</span><br>    this.direction = event.key<br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">/*</span><br><span class="hljs-comment">        Chrome       IE</span><br><span class="hljs-comment">        ArrowUp      Up</span><br><span class="hljs-comment">        ArrowDown    Down</span><br><span class="hljs-comment">        ArrowLeft    Left</span><br><span class="hljs-comment">        ArrowRight   Right</span><br><span class="hljs-comment">    */</span><br>  <span class="hljs-comment">// 创建一个控制蛇移动的方法</span><br>  run() <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 根据方向（this.direction）来使蛇的位置改变</span><br><span class="hljs-comment">     *  向上  top 减少</span><br><span class="hljs-comment">     *  向下  top 增加</span><br><span class="hljs-comment">     *  向左  left  减少</span><br><span class="hljs-comment">     *  向右  left  增加</span><br><span class="hljs-comment">     */</span><br><br>    <span class="hljs-comment">// 先获取蛇现在坐标</span><br>    let X = this.snake.X<br>    let Y = this.snake.Y<br><br>    <span class="hljs-comment">// 根据按键方向来修改X值和Y值</span><br>    switch (this.direction) <span class="hljs-punctuation">&#123;</span><br>      case &#x27;ArrowUp&#x27;<span class="hljs-punctuation">:</span><br>      case &#x27;Up&#x27;<span class="hljs-punctuation">:</span><br>        Y -= <span class="hljs-number">10</span><br>        break<br>      case &#x27;ArrowDown&#x27;<span class="hljs-punctuation">:</span><br>      case &#x27;Down&#x27;<span class="hljs-punctuation">:</span><br>        Y += <span class="hljs-number">10</span><br>        break<br>      case &#x27;ArrowLeft&#x27;<span class="hljs-punctuation">:</span><br>      case &#x27;Left&#x27;<span class="hljs-punctuation">:</span><br>        X -= <span class="hljs-number">10</span><br>        break<br>      case &#x27;ArrowRight&#x27;<span class="hljs-punctuation">:</span><br>      case &#x27;Right&#x27;<span class="hljs-punctuation">:</span><br>        X += <span class="hljs-number">10</span><br>        break<br>    <span class="hljs-punctuation">&#125;</span><br><br>    <span class="hljs-comment">//修改蛇的X和Y的值</span><br>    this.snake.X = X<br>    this.snake.Y = Y<br><br>    <span class="hljs-comment">//开启一个定时器</span><br>    this.isLive &amp;&amp; setTimeout(this.run.bind(this)<span class="hljs-punctuation">,</span> <span class="hljs-number">300</span> - (this.scorePanel.level - <span class="hljs-number">1</span>) * <span class="hljs-number">30</span>)<br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br><br>export default GameControl<br><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="蛇撞墙和吃食检测"><a href="#蛇撞墙和吃食检测" class="headerlink" title="蛇撞墙和吃食检测"></a>蛇撞墙和吃食检测</h3><p>此时发现一个 bug，在 src\style\index.less 中，设置了食物初始值<code>left: 40px;</code>但是控制台打印的是 41,设置成其他数值则是正常的</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json"><span class="hljs-comment">// 设置食物</span><br>  #food <span class="hljs-punctuation">&#123;</span><br>	...<br>    <span class="hljs-comment">// 初始化一个位置</span><br>    left<span class="hljs-punctuation">:</span> <span class="hljs-number">40</span>px;<br>    top<span class="hljs-punctuation">:</span> <span class="hljs-number">100</span>px;<br>	...<br>	<span class="hljs-punctuation">&#125;</span><br></code></pre></div></td></tr></table></figure>
+
+<p><img src="https://images.weserv.nl/?url=cdn.hbtap.cn/blog/images/1768986055269_8qrbjz.png" srcset="/img/loading.gif" lazyload alt="image.png">，<br>导致后续检查蛇是否吃到食物无法成功判断 <code>X === this.food.X &amp;&amp; Y === this.food.Y</code><br>所以将食物初始值 left 设置成<code>left:30px</code><br>​</p>
+<h4 id="撞墙检测"><a href="#撞墙检测" class="headerlink" title="撞墙检测"></a>撞墙检测</h4><p>在 src\moduls\Snake.ts 中，增加撞墙的判断，并抛出异常<code>throw new Error(&#39;蛇撞墙了！&#39;)</code></p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">class Snake <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-comment">//表示蛇头的元素</span><br>  head<span class="hljs-punctuation">:</span> HTMLElement<br><br>  <span class="hljs-comment">// 蛇的身体(包括蛇头)</span><br>  bodies<span class="hljs-punctuation">:</span> HTMLCollection<br>  <span class="hljs-comment">//获取蛇的容器</span><br>  element<span class="hljs-punctuation">:</span> HTMLElement<br><br>  constructor() <span class="hljs-punctuation">&#123;</span><br>    this.head = document.querySelector(&#x27;#snake &gt; div&#x27;) as HTMLElement<br>    this.element = document.getElementById(&#x27;snake&#x27;)!<br>    this.bodies = this.element.getElementsByTagName(&#x27;div&#x27;)<br>  <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-comment">//获取蛇的坐标(蛇头坐标)</span><br>  get X() <span class="hljs-punctuation">&#123;</span><br>    return this.head.offsetLeft<br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">// 获取蛇的Y轴坐标</span><br>  get Y() <span class="hljs-punctuation">&#123;</span><br>    return this.head.offsetTop<br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">// 设置蛇头的坐标</span><br>  set X(value<span class="hljs-punctuation">:</span> number) <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">//如果新值和旧值相同，则不修改</span><br>    if (this.X === value) <span class="hljs-punctuation">&#123;</span><br>      return<br>    <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-comment">//X的值的合法范围0-290</span><br>    if (value &lt; <span class="hljs-number">0</span> || value &gt;= <span class="hljs-number">300</span>) <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-comment">//进入判断说明蛇撞墙了</span><br>      throw new Error(&#x27;蛇撞墙了！&#x27;)<br>    <span class="hljs-punctuation">&#125;</span><br>    this.head.style.left = value + &#x27;px&#x27;<br>  <span class="hljs-punctuation">&#125;</span><br>  set Y(value<span class="hljs-punctuation">:</span> number) <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">//如果新值和旧值相同，则不修改</span><br>    if (this.Y === value) <span class="hljs-punctuation">&#123;</span><br>      return<br>    <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-comment">//Y的值的合法范围0-290</span><br>    if (value &lt; <span class="hljs-number">0</span> || value &gt;= <span class="hljs-number">300</span>) <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-comment">//进入判断说明蛇撞墙了</span><br>      throw new Error(&#x27;蛇撞墙了！&#x27;)<br>    <span class="hljs-punctuation">&#125;</span><br>    this.head.style.top = value + &#x27;px&#x27;<br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">// 蛇增加身体的方法</span><br>  addBody() <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">//向element中添加一个div</span><br>    this.element.insertAdjacentHTML(&#x27;beforeend&#x27;<span class="hljs-punctuation">,</span> &#x27;&lt;div&gt;&lt;/div&gt;&#x27;)<br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br>export default Snake<br><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="吃食检测"><a href="#吃食检测" class="headerlink" title="吃食检测"></a>吃食检测</h4><p>在 src\moduls\GameControl.ts 中，使用<code>try &#123; &#125; catch (e) &#123; &#125;</code>处理异常操作，添加<code>checkEat</code>方法检查是否吃到食物，<br>在判断是否吃到食物时一个 bug，蛇的 X、Y 坐标超过 50 之后，个位数会加 1 就变成了 51 61 71…，解决办法是四舍五入 <code>Math.round(X / 10) * 10 === Math.round(this.food.X / 10) * 10 &amp;&amp; Math.round(Y / 10) * 10 === Math.round(this.food.Y / 10) * 10</code></p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">import Snake from &#x27;./Snake&#x27;<br>import Food from &#x27;./Food&#x27;<br>import ScorePanel from &#x27;./ScorePanel&#x27;<br><br><span class="hljs-comment">//游戏控制器，控制其他所有类</span><br>class GameControl <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-comment">//定义三个属性</span><br>  snake<span class="hljs-punctuation">:</span> Snake<br>  food<span class="hljs-punctuation">:</span> Food<br>  scorePanel<span class="hljs-punctuation">:</span> ScorePanel<br><br>  <span class="hljs-comment">//创建一个属性来存储蛇的移动方向（也就是按键的方向）</span><br>  direction<span class="hljs-punctuation">:</span> string = &#x27;&#x27;<br><br>  <span class="hljs-comment">//创建一个属性来记录是否结束游戏</span><br>  isLive = <span class="hljs-literal"><span class="hljs-keyword">true</span></span><br><br>  constructor() <span class="hljs-punctuation">&#123;</span><br>    this.snake = new Snake()<br>    this.food = new Food()<br>    this.scorePanel = new ScorePanel()<br><br>    this.init()<br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">//游戏得初始化方法，调用后游戏即开始</span><br>  init() <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">// 绑定键盘按键按下的事件</span><br>    document.addEventListener(&#x27;keydown&#x27;<span class="hljs-punctuation">,</span> this.keydownHandler.bind(this))<br><br>    <span class="hljs-comment">// 调用run方法，使蛇移动</span><br>    this.run()<br>  <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-comment">//创建一个键盘按下的响应函数</span><br>  keydownHandler(event<span class="hljs-punctuation">:</span> KeyboardEvent) <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">//需要检查event.key的值是否合法（用户是否按了正确的按键）</span><br><br>    <span class="hljs-comment">// 修改direction 属性</span><br>    this.direction = event.key<br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">/*</span><br><span class="hljs-comment">        Chrome       IE</span><br><span class="hljs-comment">        ArrowUp      Up</span><br><span class="hljs-comment">        ArrowDown    Down</span><br><span class="hljs-comment">        ArrowLeft    Left</span><br><span class="hljs-comment">        ArrowRight   Right</span><br><span class="hljs-comment">    */</span><br>  <span class="hljs-comment">// 创建一个控制蛇移动的方法</span><br>  run() <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 根据方向（this.direction）来使蛇的位置改变</span><br><span class="hljs-comment">     *  向上  top 减少</span><br><span class="hljs-comment">     *  向下  top 增加</span><br><span class="hljs-comment">     *  向左  left  减少</span><br><span class="hljs-comment">     *  向右  left  增加</span><br><span class="hljs-comment">     */</span><br><br>    <span class="hljs-comment">// 先获取蛇现在坐标</span><br>    let X = this.snake.X<br>    let Y = this.snake.Y<br><br>    <span class="hljs-comment">// 根据按键方向来修改X值和Y值</span><br>    switch (this.direction) <span class="hljs-punctuation">&#123;</span><br>      case &#x27;ArrowUp&#x27;<span class="hljs-punctuation">:</span><br>      case &#x27;Up&#x27;<span class="hljs-punctuation">:</span><br>        Y -= <span class="hljs-number">10</span><br>        break<br>      case &#x27;ArrowDown&#x27;<span class="hljs-punctuation">:</span><br>      case &#x27;Down&#x27;<span class="hljs-punctuation">:</span><br>        Y += <span class="hljs-number">10</span><br>        break<br>      case &#x27;ArrowLeft&#x27;<span class="hljs-punctuation">:</span><br>      case &#x27;Left&#x27;<span class="hljs-punctuation">:</span><br>        X -= <span class="hljs-number">10</span><br>        break<br>      case &#x27;ArrowRight&#x27;<span class="hljs-punctuation">:</span><br>      case &#x27;Right&#x27;<span class="hljs-punctuation">:</span><br>        X += <span class="hljs-number">10</span><br>        break<br>    <span class="hljs-punctuation">&#125;</span><br><br>    <span class="hljs-comment">// 检查蛇是否吃到食物</span><br>    this.checkEat(X<span class="hljs-punctuation">,</span> Y)<br><br>    <span class="hljs-comment">//修改蛇的X和Y的值</span><br>    try <span class="hljs-punctuation">&#123;</span><br>      this.snake.X = X<br>      this.snake.Y = Y<br>    <span class="hljs-punctuation">&#125;</span> catch (e) <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-comment">//进入到catch，说明出现了异常，游戏结束</span><br>      alert(e.message + &#x27; GAME OVER！&#x27;)<br>      <span class="hljs-comment">//将isLive设置成false</span><br>      this.isLive = <span class="hljs-literal"><span class="hljs-keyword">false</span></span><br>    <span class="hljs-punctuation">&#125;</span><br><br>    <span class="hljs-comment">//开启一个定时器</span><br>    this.isLive &amp;&amp; setTimeout(this.run.bind(this)<span class="hljs-punctuation">,</span> <span class="hljs-number">300</span> - (this.scorePanel.level - <span class="hljs-number">1</span>) * <span class="hljs-number">30</span>)<br>  <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-comment">// 定义一个方法，检查蛇是否吃到食物</span><br>  checkEat(X<span class="hljs-punctuation">:</span> number<span class="hljs-punctuation">,</span> Y<span class="hljs-punctuation">:</span> number) <span class="hljs-punctuation">&#123;</span><br>    if (<br>      <span class="hljs-comment">//此处有个bug，蛇的X、Y坐标超过50之后，个位数会加1 就变成了51 61 71...，解决办法是四舍五入</span><br>      Math.round(X / <span class="hljs-number">10</span>) * <span class="hljs-number">10</span> === Math.round(this.food.X / <span class="hljs-number">10</span>) * <span class="hljs-number">10</span> &amp;&amp;<br>      Math.round(Y / <span class="hljs-number">10</span>) * <span class="hljs-number">10</span> === Math.round(this.food.Y / <span class="hljs-number">10</span>) * <span class="hljs-number">10</span><br>    ) <span class="hljs-punctuation">&#123;</span><br>      console.log(&#x27;吃到食物&#x27;)<br>      <span class="hljs-comment">// 食物的位置进行重置</span><br>      this.food.change()<br>      <span class="hljs-comment">//分数增加</span><br>      this.scorePanel.addScore()<br>      <span class="hljs-comment">//蛇要增加一节</span><br>      this.snake.addBody()<br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br><br>export default GameControl<br><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="小蛇移动"><a href="#小蛇移动" class="headerlink" title="小蛇移动"></a>小蛇移动</h2><p>在 src\moduls\Snake.ts 中，添加<code>moveBody</code>蛇移动的方法，逻辑是将后边的身体设置成前一个身体位置，头不设置。 <code>checkHeadBody</code>检测是否撞到自己</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">class Snake <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-comment">//表示蛇头的元素</span><br>  head<span class="hljs-punctuation">:</span> HTMLElement;<br><br>  <span class="hljs-comment">// 蛇的身体(包括蛇头)</span><br>  bodies<span class="hljs-punctuation">:</span> HTMLCollection;<br>  <span class="hljs-comment">//获取蛇的容器</span><br>  element<span class="hljs-punctuation">:</span> HTMLElement;<br><br>  constructor() <span class="hljs-punctuation">&#123;</span><br>    this.head = document.querySelector(&#x27;#snake &gt; div&#x27;) as HTMLElement;<br>    this.element = document.getElementById(&#x27;snake&#x27;)!;<br>    this.bodies = this.element.getElementsByTagName(&#x27;div&#x27;);<br>  <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-comment">//获取蛇的坐标(蛇头坐标)</span><br>  get X() <span class="hljs-punctuation">&#123;</span><br>    return this.head.offsetLeft;<br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">// 获取蛇的Y轴坐标</span><br>  get Y() <span class="hljs-punctuation">&#123;</span><br>    return this.head.offsetTop;<br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">// 设置蛇头的坐标</span><br>  set X(value<span class="hljs-punctuation">:</span> number) <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">//如果新值和旧值相同，则不修改</span><br>    if (this.X === value) <span class="hljs-punctuation">&#123;</span><br>      return;<br>    <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-comment">//X的值的合法范围0-290</span><br>    if (value &lt; <span class="hljs-number">0</span> || value &gt;= <span class="hljs-number">300</span>) <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-comment">//进入判断说明蛇撞墙了</span><br>      throw new Error(&#x27;蛇撞墙了！&#x27;);<br>    <span class="hljs-punctuation">&#125;</span><br><br>    <span class="hljs-comment">//修改X时,是修改水平坐标，蛇在左右移动，蛇不能掉头</span><br>    if (this.bodies<span class="hljs-punctuation">[</span><span class="hljs-number">1</span><span class="hljs-punctuation">]</span> &amp;&amp; (this.bodies<span class="hljs-punctuation">[</span><span class="hljs-number">1</span><span class="hljs-punctuation">]</span> as HTMLElement).offsetLeft === value) <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-comment">//如果发生了掉头，让蛇反向继续移动</span><br>      if (value &gt; this.X) <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-comment">//如果新值value大于旧X，则说明蛇正在向右走，此时发生掉头，应该使蛇继续向右移动</span><br>        value = this.X - <span class="hljs-number">10</span>;<br>      <span class="hljs-punctuation">&#125;</span> else <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-comment">//向左走</span><br>        value = this.X + <span class="hljs-number">10</span>;<br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">&#125;</span><br>    this.moveBody();<br><br>    this.head.style.left = value + &#x27;px&#x27;;<br>    <span class="hljs-comment">//检查有没有撞到自己</span><br>    this.checkHeadBody();<br>  <span class="hljs-punctuation">&#125;</span><br>  set Y(value<span class="hljs-punctuation">:</span> number) <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">//如果新值和旧值相同，则不修改</span><br>    if (this.Y === value) <span class="hljs-punctuation">&#123;</span><br>      return;<br>    <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-comment">//Y的值的合法范围0-290</span><br>    if (value &lt; <span class="hljs-number">0</span> || value &gt;= <span class="hljs-number">300</span>) <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-comment">//进入判断说明蛇撞墙了</span><br>      throw new Error(&#x27;蛇撞墙了！&#x27;);<br>    <span class="hljs-punctuation">&#125;</span><br><br>    if (this.bodies<span class="hljs-punctuation">[</span><span class="hljs-number">1</span><span class="hljs-punctuation">]</span> &amp;&amp; (this.bodies<span class="hljs-punctuation">[</span><span class="hljs-number">1</span><span class="hljs-punctuation">]</span> as HTMLElement).offsetTop === value) <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-comment">//如果发生了掉头，让蛇反向继续移动</span><br>      if (value &gt; this.Y) <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-comment">//如果新值value大于旧X，则说明蛇正在向右走，此时发生掉头，应该使蛇继续向左移动</span><br>        value = this.Y - <span class="hljs-number">10</span>;<br>      <span class="hljs-punctuation">&#125;</span> else <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-comment">//向左走</span><br>        value = this.Y + <span class="hljs-number">10</span>;<br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">&#125;</span><br><br>    this.moveBody();<br><br>    this.head.style.top = value + &#x27;px&#x27;;<br>    <span class="hljs-comment">//检查有没有撞到自己</span><br>    this.checkHeadBody();<br>  <span class="hljs-punctuation">&#125;</span><br><br>  <span class="hljs-comment">// 蛇增加身体的方法</span><br>  addBody() <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">//向element中添加一个div</span><br>    this.element.insertAdjacentHTML(&#x27;beforeend&#x27;<span class="hljs-punctuation">,</span> &#x27;&lt;div&gt;&lt;/div&gt;&#x27;);<br>  <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-comment">//添加一个蛇身体移动的方法</span><br>  moveBody() <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 将后边的身体设置为前边身体的位置</span><br><span class="hljs-comment">     * 比如：</span><br><span class="hljs-comment">     *    第三节=&gt;第二节的位置</span><br><span class="hljs-comment">     *    第二节=&gt;蛇头的位置</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-comment">//遍历获取所有的身体</span><br>    for (let i = this.bodies.length - <span class="hljs-number">1</span>; i &gt; <span class="hljs-number">0</span>; i--) <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-comment">//获取前边身体的值</span><br>      let X = (this.bodies<span class="hljs-punctuation">[</span>i - <span class="hljs-number">1</span><span class="hljs-punctuation">]</span> as HTMLElement).offsetLeft;<br>      let Y = (this.bodies<span class="hljs-punctuation">[</span>i - <span class="hljs-number">1</span><span class="hljs-punctuation">]</span> as HTMLElement).offsetTop;<br>      <span class="hljs-comment">//将值设置到当前身体上</span><br><br>      (this.bodies<span class="hljs-punctuation">[</span>i<span class="hljs-punctuation">]</span> as HTMLElement).style.left = X + &#x27;px&#x27;;<br>      (this.bodies<span class="hljs-punctuation">[</span>i<span class="hljs-punctuation">]</span> as HTMLElement).style.top = Y + &#x27;px&#x27;;<br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-comment">//检查有没有撞到自己</span><br>  checkHeadBody() <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">//获取所有的身体，检查是否和蛇头的坐标发生重叠</span><br>    for (let i = <span class="hljs-number">1</span>; i &lt; this.bodies.length; i++) <span class="hljs-punctuation">&#123;</span><br>      let bd = this.bodies<span class="hljs-punctuation">[</span>i<span class="hljs-punctuation">]</span> as HTMLElement;<br>      if (this.X === bd.offsetLeft &amp;&amp; this.Y === bd.offsetTop) <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-comment">//撞到身体，游戏结束</span><br>        throw new Error(&#x27;撞到自己了!&#x27;);<br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br>export default Snake;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>最后就大功告成了！</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/TypeScript/">TypeScript</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/TypeScript/">TypeScript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%B4%AA%E5%90%83%E8%9B%87/">贪吃蛇</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/16/Vue2-0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Vue2.0学习笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/06/%E8%A7%A3%E5%86%B3git%E4%B8%8A%E4%BC%A0%E6%8B%89%E5%8F%96%20port%20443%E9%97%AE%E9%A2%98/">
+                        <span class="hidden-mobile">解决git上传拉取 port 443问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#valine",
+          app_id: "wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz",
+          app_key: "BlsdS19vhoVr77n1TiE2diHr",
+          placeholder: "老师们，说点什么吧！",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: true,
+          serverURLs: "https://wvn0ubbm.lc-cn-n1-shared.com",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> |<i class="iconfont icon-love"></i>| <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        蜀ICP备2021012542号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,633 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="jackhoo">
+  <meta name="keywords" content="">
+  
+  <title>执行上下文与作用域 - jackhoo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/%E6%AC%A2%E8%BF%8E%E5%A4%A7%E5%AE%B6%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%8C%E8%AF%B7%E5%B0%BD%E6%83%85%E7%95%99%E8%A8%80%E5%90%A7%EF%BC%81/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/hybrid.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"13982720426.github.io","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz","app_key":"BlsdS19vhoVr77n1TiE2diHr","server_url":"https://wvn0ubbm.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>jackhoo的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/13982720426/">
+                <i class="iconfont icon-github-fill"></i>
+                GitHub
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg2.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="执行上下文与作用域">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      jackhoo
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-23 15:28" pubdate>
+        星期二, 十一月 23日 2021, 3:28 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      38
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">执行上下文与作用域</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2 小时前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="执行上下文与作用域"><a href="#执行上下文与作用域" class="headerlink" title="执行上下文与作用域"></a>执行上下文与作用域</h2><h3 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h3><p>执行上下文（以下简称“上下文”）的概念在 JavaScript 中是颇为重要的。变量或函数的上下文决定了它们可以访问哪些数据，以及它们的行为。每个上下文都有一个关联的<strong>变量对象</strong>（variable object），而这个上下文中定义的所有变量和函数都存在于这个对象上。<br>全局上下文是最外层的上下文。根据 ECMAScript 实现的宿主环境，表示全局上下文的对象可能不一样。在浏览器中，全局上下文就是我们常说的 window 对象），因此所有通过 var 定义的全局变量和函数都会成为 window 对象的属性和方法。<br>使用 let 和 const 的顶级声明不会定义在全局上下文中，但在作用域链解析上效果是一样的。上下文在其所有代码都执行完毕后会被销毁，包括定义在它上面的所有变量和函数（全局上下文在应用程序退出前才会被销毁，比如关闭网页或退出浏览器）。<br>每个函数调用都有自己的上下文。当代码执行流进入函数时，函数的上下文被推到一个上下文栈上。在函数执行完之后，上下文栈会弹出该函数上下文，将控制权返还给之前的执行上下文。ECMAScript 程序的执行流就是通过这个上下文栈进行控制的。<br>上下文中的代码在执行的时候，会创建变量对象的一个作用域链 （scope chain）。这个作用域链决定了各级上下文中的代码在访问变量和函数时的顺序。代码正在执行的上下文的变量对象始终位于作用域链的最前端。如果上下文是函数，则其活动对象（activation object）用作变量对象。<br> 活动对象最初只有一个定义变量： arguments 。（全局上下文中没有这个变量）作用域链中的下一个变量对象来自包含上下文，再下一个对象来自再下一个包含上下文。以此类推直至全局上下文；全局上下文的变量对象始终是作用域链的最后一个变量对象。 代码执行时的标识符解析是通过沿作用域链逐级搜索标识符名称完成的。搜索过程始终从作用域链的最前端开始，然后逐级往后，直到找到标识符。（如果没有找到标识符，那么通常会报错。）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> color = <span class="hljs-string">&#x27;blue&#x27;</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">changeColor</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">if</span> (color === <span class="hljs-string">&#x27;blue&#x27;</span>) &#123;<br>    color = <span class="hljs-string">&#x27;red&#x27;</span><br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    color = <span class="hljs-string">&#x27;blue&#x27;</span><br>  &#125;<br>&#125;<br><span class="hljs-title function_">changeColor</span>()<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(color) <span class="hljs-comment">// red</span><br></code></pre></div></td></tr></table></figure>
+
+<p>对这个例子而言，函数 changeColor() 的作用域链包含两个对象：一个是它自己的变量对象（就是定义 arguments 对象的那个），另一个是全局上下文的变量对象。这个函数内部之所以能够访问变量 color ，就是因为可以在作用域链中找到它。<br>此外，局部作用域中定义的变量可用于在局部上下文中替换全局变量。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> color = <span class="hljs-string">&#x27;blue&#x27;</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">changeColor</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">let</span> anotherColor = <span class="hljs-string">&#x27;red&#x27;</span><br>  <span class="hljs-keyword">function</span> <span class="hljs-title function_">swapColors</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">let</span> tempColor = anotherColor<br>    anotherColor = color<br>    color = tempColor<br>    <span class="hljs-comment">// 这里可以访问color、anotherColor和tempColor</span><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">1</span>, color, anotherColor, tempColor) <span class="hljs-comment">// 1 red blue red</span><br>  &#125;<br>  <span class="hljs-comment">// 这里可以访问color和anotherColor，但访问不到tempColor</span><br>  <span class="hljs-title function_">swapColors</span>()<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">2</span>, color, anotherColor) <span class="hljs-comment">// 2 red blue</span><br>&#125;<br><span class="hljs-comment">// 这里只能访问color</span><br><span class="hljs-title function_">changeColor</span>()<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">3</span>, color) <span class="hljs-comment">// 3 red</span><br><span class="hljs-comment">// 1 red blue red</span><br><span class="hljs-comment">// 2 red blue</span><br><span class="hljs-comment">// 3 red</span><br></code></pre></div></td></tr></table></figure>
+
+<p>以上代码涉及 3 个上下文：<strong>全局上下文</strong>、<strong>changeColor() 的局部上下文</strong>和 <strong>swapColors() 的局部上下文</strong>。<br>全局上下文中有一个变量 color 和一个函数 chageColor() 。<br>changeColor() 的局部上下文中有一个变量 anotherColor 和一个函数 swapColors() ，但在这里可以访问全局上下文中的变量 color 。<br>swapColors() 的局部上下文中有一个变量 tempColor ，只能在这个上下文中访问到。全局上下文和 changeColor() 的局部上下文都无法访问到 tempColor 。而在 swapColors() 中则可以访问另外两个上下文中的变量，因为它们都是父上下文。<br><img src="https://i.loli.net/2021/11/20/LS8kqP5wiH6JnoI.png#crop=0&crop=0&crop=1&crop=1&id=HT2zB&originHeight=472&originWidth=594&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload><br>内部上下文可以通过作用域链访问外部上下文中的一切，但外部上下文无法访问内部上下文中的任何东西。上下文之间的连接是线性的、有序的。每个上下文都可以到上一级上下文中去搜索变量和函数，但任何上下文都不能到下一级上下文中去搜索。<br>swapColors() 局部上下文的作用域链中有 3 个对 象： swapColors() 的变量对象、 changeColor() 的变量对象 和全局变量对象。 swapColors() 的局部上下文首先从自己的变量对象开始搜索变量和函数，搜不到就去搜索上一级变量对象。<br>changeColor() 上下文的作用域链中只有 2 个对象：它自己的变量对象和全局变量对象。因此，它不能访问 swapColors() 的上下 文。</p>
+<h3 id="作用域链增强"><a href="#作用域链增强" class="headerlink" title="作用域链增强"></a>作用域链增强</h3><p>虽然执行上下文主要有全局上下文和函数上下文两种（ eval() 调用内部存在第三种上下文），但有其他方式来增强作用域链。某些语句会导致在作用域链前端临时添加一个上下文，这个上下文在代码 执行后会被删除。<br>通常在两种情况下会出现这个现象，即代码执行到下面任意一种情况时：</p>
+<ul>
+<li>try / catch 语句的 catch 块</li>
+<li>with 语句</li>
+</ul>
+<p>这两种情况下，都会在作用域链前端添加一个变量对象。对 with 语句来说，会向作用域链前端添加指定的对象；对 catch 语句而言，则会创建一个新的变量对象，这个变量对象会包含要抛出的错误对象的声明</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">buildUrl</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">let</span> qs = <span class="hljs-string">&#x27;?debug=true&#x27;</span><br>  <span class="hljs-title function_">with</span> (location) &#123;<br>    <span class="hljs-keyword">let</span> url = href + qs<br>  &#125;<br>  <span class="hljs-keyword">return</span> url<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>这里， with 语句将 location 对象作为上下文，因此 location 会被添加到作用域链前端。 buildUrl() 函数中定义了一个变量 qs 。当 with 语句中的代码引用变量 href 时，实际上引用的是 location.href ，也就是自己变量对象的属性。在引用 qs 时，引用的则是定义在 buildUrl() 中的那个变量，它定义在函数上下文的变量对象上。而在 with 语句中使用 var 声明的变量 url 会成为函数上下文的一部分，可以作为函数的值被返回；但像这里使用 let 声明的变量 url ，因为被限制在块级作用域（稍后介 绍），所以在 with 块之外没有定义</p>
+<h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><p>直到 ECMAScript 5.1， var 都是声明变量的唯一关键字。ES6 不仅增加了 let 和 const 两个关键字，而且还让这两个关键字压倒性地超越 var 成为首选。</p>
+<h4 id="使用-var-的函数作用域声明"><a href="#使用-var-的函数作用域声明" class="headerlink" title="使用 var 的函数作用域声明"></a>使用 var 的函数作用域声明</h4><p>在使用 var 声明变量时，变量会被自动添加到最接近的上下文。在函数中，最接近的上下文就是函数的局部上下文。在 with 语句中，最接近的上下文也是函数上下文。如果变量未经声明就被初始化了，那么它就会自动被添加到全局上下文</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">num1, num2</span>) &#123;<br>  <span class="hljs-keyword">var</span> sum = num1 + num2<br>  <span class="hljs-keyword">return</span> sum<br>&#125;<br><span class="hljs-keyword">let</span> result = <span class="hljs-title function_">add</span>(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>) <span class="hljs-comment">// 30</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(sum) <span class="hljs-comment">// 报错：sum在这里不是有效变量</span><br></code></pre></div></td></tr></table></figure>
+
+<p>这里，函数 add() 定义了一个局部变量 sum ，保存加法操作的结果。这个值作为函数的值被返回，但变量 sum 在函数外部是访问不到的。如果省略上面例子中的关键字 var ，那么 sum 在 add() 被调用之后就变成可以访问的了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">num1, num2</span>) &#123;<br>  sum = num1 + num2<br>  <span class="hljs-keyword">return</span> sum<br>&#125;<br><span class="hljs-keyword">let</span> result = <span class="hljs-title function_">add</span>(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>) <span class="hljs-comment">// 30</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(sum)<br></code></pre></div></td></tr></table></figure>
+
+<p>这一次，变量 sum 被用加法操作的结果初始化时并没有使用 var 声明。在调用 add() 之后， sum 被添加到了全局上下文，在函数退出之后依然存在，从而在后面可以访问到。</p>
+<blockquote>
+<p>注意 未经声明而初始化变量是 JavaScript 编程中一个非常常见的错误，会导致很多问题。</p>
+</blockquote>
+<p>var 声明会被拿到函数或全局作用域的顶部，位于作用域中所有代码之前。这个现象叫作“提升”（hoisting）。提升让同一作用域中的代码不必考虑变量是否已经声明就可以直接使用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> name = <span class="hljs-string">&#x27;Jake&#x27;</span><br><span class="hljs-comment">// 等价于：</span><br>name = <span class="hljs-string">&#x27;Jake&#x27;</span><br><span class="hljs-keyword">var</span> name<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fn1</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">var</span> name = <span class="hljs-string">&#x27;Jake&#x27;</span><br>&#125;<br><span class="hljs-comment">// 等价于：</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">fn2</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">var</span> name<br>  name = <span class="hljs-string">&#x27;Jake&#x27;</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>通过在声明之前打印变量，可以验证变量会被提升。声明的提升意味着会输出 undefined 而不是 Reference Error</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(name1) <span class="hljs-comment">// undefined</span><br><span class="hljs-keyword">var</span> name1 = <span class="hljs-string">&#x27;Jake&#x27;</span><br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">a1</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(name2) <span class="hljs-comment">// undefined</span><br>  <span class="hljs-keyword">var</span> name2 = <span class="hljs-string">&#x27;Jake&#x27;</span><br>&#125;<br><span class="hljs-title function_">a1</span>()<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="使用-let-的块级作用域声明"><a href="#使用-let-的块级作用域声明" class="headerlink" title="使用 let 的块级作用域声明"></a>使用 let 的块级作用域声明</h4><p>ES6 新增的 let 关键字跟 var 很相似，但它的作用域是块级的，这也是 JavaScript 中的新概念。块级作用域由最近的一对包含花括号 {} 界定。换句话说， if 块、 while 块、 function 块，甚至连单独的块也是 let 声明变量的作用域</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>) &#123;<br>  <span class="hljs-keyword">let</span> a<br>&#125;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a) <span class="hljs-comment">// ReferenceError: a没有定义</span><br><span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;<br>  <span class="hljs-keyword">let</span> b<br>&#125;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(b) <span class="hljs-comment">// ReferenceError: b没有定义</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">foo</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">let</span> c<br>&#125;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(c) <span class="hljs-comment">// ReferenceError: c没有定义</span><br><span class="hljs-comment">// 这没什么可奇怪的</span><br><span class="hljs-comment">// var声明也会导致报错</span><br><span class="hljs-comment">// 这不是对象字面量，而是一个独立的块</span><br><span class="hljs-comment">// JavaScript解释器会根据其中内容识别出它来</span><br>&#123;<br>  <span class="hljs-keyword">let</span> d<br>&#125;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(d) <span class="hljs-comment">// ReferenceError: d没有定义</span><br></code></pre></div></td></tr></table></figure>
+
+<p>let 与 var 的另一个不同之处是在同一作用域内不能声明两次。重复的 var 声明会被忽略，而重复的 let 声明会抛出 SyntaxError 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a;<br><span class="hljs-keyword">var</span> a;<br><span class="hljs-comment">// 不会报错</span><br>&#123;<br>  <span class="hljs-keyword">let</span> b;<br>  <span class="hljs-keyword">let</span> b;<br>&#125;<br><span class="hljs-comment">// SyntaxError: 标识符b已经声明过</span><br></code></pre></div></td></tr></table></figure>
+
+<p>let 的行为非常适合在循环中声明迭代变量。使用 var 声明的迭代变量会泄漏到循环外部，这种情况应该避免。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; ++i) &#123;&#125;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(i); <span class="hljs-comment">// 10</span><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">10</span>; ++j) &#123;&#125;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(j); <span class="hljs-comment">// ReferenceError: j没有定义</span><br></code></pre></div></td></tr></table></figure>
+
+<p>严格来讲， let 在 JavaScript 运行时中也会被提升，但由于“暂时性死区”（temporal dead zone）的缘故，实际上不能在声明之前使用 let 变量。因此，从写 JavaScript 代码的角度说， let 的提升跟 var 是不一样的。</p>
+<h4 id="使用-const-的常量声明"><a href="#使用-const-的常量声明" class="headerlink" title="使用 const 的常量声明"></a>使用 const 的常量声明</h4><p>除了 let ，ES6 同时还增加了 const 关键字。使用 const 声明的变量必须同时初始化为某个值。一经声明，在其生命周期的任何时候都不能再重新赋予新值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> a; <span class="hljs-comment">// SyntaxError: 常量声明时没有初始化</span><br><span class="hljs-keyword">const</span> b = <span class="hljs-number">3</span>;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(b); <span class="hljs-comment">// 3</span><br>b = <span class="hljs-number">4</span>; <span class="hljs-comment">// TypeError: 给常量赋值</span><br></code></pre></div></td></tr></table></figure>
+
+<p>const 除了要遵循以上规则，其他方面与 let 声明是一样的<br>const 声明只应用到顶级原语或者对象。换句话说，**赋值为对象的 const 变量不能再被重新赋值为其他引用值，但对象的键则不受限制。 **</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> o1 = &#123;&#125;;<br>o1 = &#123;&#125;; <span class="hljs-comment">// TypeError: 给常量赋值</span><br><span class="hljs-keyword">const</span> o2 = &#123;&#125;;<br>o2.<span class="hljs-property">name</span> = <span class="hljs-string">&#x27;Jake&#x27;</span>;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(o2.<span class="hljs-property">name</span>); <span class="hljs-comment">// &#x27;Jake&#x27;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>如果想让整个对象都不能修改，可以使用 Object.freeze() ，这样再给属性赋值时虽然不会报错，但会静默失败：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> o3 = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">freeze</span>(&#123;&#125;)<br>o3.<span class="hljs-property">name</span> = <span class="hljs-string">&#x27;Jake&#x27;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(o3.<span class="hljs-property">name</span>) <span class="hljs-comment">// undefined</span><br></code></pre></div></td></tr></table></figure>
+
+<p><strong>Object.freeze()</strong> 方法可以<strong>冻结</strong>一个对象。一个被冻结的对象再也不能被修改；冻结了一个对象则不能向这个对象添加新的属性，不能删除已有属性，不能修改该对象已有属性的可枚举性、可配置性、可写性，以及不能修改已有属性的值。此外，冻结一个对象后该对象的原型也不能被修改。freeze() 返回和传入的参数相同的对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> obj = &#123;<br>  <span class="hljs-attr">prop</span>: <span class="hljs-number">42</span><br>&#125;;<br><span class="hljs-title class_">Object</span>.<span class="hljs-title function_">freeze</span>(obj);<br>obj.<span class="hljs-property">prop</span> = <span class="hljs-number">33</span>;<br><span class="hljs-comment">// Throws an error in strict mode</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(obj.<span class="hljs-property">prop</span>);<br><span class="hljs-comment">// expected output: 42</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>任何变量（不管包含的是原始值还是引用值）都存在于某个执行上下文中（也称为作用域）。这个上下文（作用域）决定了变量的生命周期，以及它们可以访问代码的哪些部分。</p>
+<ul>
+<li>执行上下文分全局上下文、函数上下文和块级上下文。</li>
+<li>代码执行流每进入一个新上下文，都会创建一个作用域链，用于搜索变量和函数。</li>
+<li>函数或块的局部上下文不仅可以访问自己作用域内的变量，而且也可以访问任何包含上下文乃至全局上下文中的变量。</li>
+<li>全局上下文只能访问全局上下文中的变量和函数，不能直接访问局部上下文中的任何数据。</li>
+<li>变量的执行上下文用于确定什么时候释放内存。</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaScript/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AC%AC%E5%9B%9B%E7%89%88%E7%AC%94%E8%AE%B0/">JavaScript高级程序设计第四版笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/">执行上下文</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F/">作用域</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/11/23/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">垃圾回收</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/17/JavaScript%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+                        <span class="hidden-mobile">JavaScript数据类型</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#valine",
+          app_id: "wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz",
+          app_key: "BlsdS19vhoVr77n1TiE2diHr",
+          placeholder: "老师们，说点什么吧！",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: true,
+          serverURLs: "https://wvn0ubbm.lc-cn-n1-shared.com",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> |<i class="iconfont icon-love"></i>| <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        蜀ICP备2021012542号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

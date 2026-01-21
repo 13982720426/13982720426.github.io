@@ -1,0 +1,596 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="jackhoo">
+  <meta name="keywords" content="">
+  
+  <title>git修改已经提交到远程的commit信息 - jackhoo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/%E6%AC%A2%E8%BF%8E%E5%A4%A7%E5%AE%B6%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%8C%E8%AF%B7%E5%B0%BD%E6%83%85%E7%95%99%E8%A8%80%E5%90%A7%EF%BC%81/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/hybrid.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"13982720426.github.io","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz","app_key":"BlsdS19vhoVr77n1TiE2diHr","server_url":"https://wvn0ubbm.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>jackhoo的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/13982720426/">
+                <i class="iconfont icon-github-fill"></i>
+                GitHub
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg2.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="git修改已经提交到远程的commit信息">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      jackhoo
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-08-25 16:10" pubdate>
+        星期四, 八月 25日 2022, 4:10 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">git修改已经提交到远程的commit信息</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2 小时前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="git修改已经提交到远程的commit信息"><a href="#git修改已经提交到远程的commit信息" class="headerlink" title="git修改已经提交到远程的commit信息"></a>git修改已经提交到远程的commit信息</h1><h2 id="1-git-log-git-reflog"><a href="#1-git-log-git-reflog" class="headerlink" title="1.git log/git reflog"></a>1.git log/git reflog</h2><p>开始之前先查看log日志</p>
+<h3 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a>git log</h3><p><code>git log</code> 命令可以显示所有提交过的版本信息</p>
+<h3 id="git-reflog"><a href="#git-reflog" class="headerlink" title="git reflog"></a>git reflog</h3><p><code>git reflog</code> 可以查看所有分支的所有操作记录（包括已经被删除的 commit 记录和 reset 的操作）</p>
+<h2 id="2-修改最近某个commit-message"><a href="#2-修改最近某个commit-message" class="headerlink" title="2.修改最近某个commit message"></a>2.修改最近某个commit message</h2><h3 id="找出最近提交的commit"><a href="#找出最近提交的commit" class="headerlink" title="找出最近提交的commit"></a>找出最近提交的commit</h3><h4 id="git-rebase-i-HEAD-3"><a href="#git-rebase-i-HEAD-3" class="headerlink" title="git rebase -i HEAD~3"></a>git rebase -i HEAD~3</h4><p><code>git rebase -i HEAD~3</code><br>HEAD~3表示将修改当前版本的近三条commit。</p>
+<h4 id="git-rebase-i-哈希值"><a href="#git-rebase-i-哈希值" class="headerlink" title="git rebase -i  哈希值"></a>git rebase -i  哈希值</h4><p>或者，也可以直接用git每次commit生成的哈希值——SHA-1码来定位(git log中可找到对应的哈希值)。可以使用简码，也可以使用全码，其实只要没有歧义即可。<br><code>git rebase -i ffc21e</code><br><code>git rebase -i ffc21e88dbad1742ae32889461c5981ea50f1283</code></p>
+<h4 id="git-rebase-i-–root"><a href="#git-rebase-i-–root" class="headerlink" title="git rebase -i –root"></a>git rebase -i –root</h4><p>以上两种命令虽然可以解决大部分的情况，但是依然会有失效的时候。<br>这时候我们就需要用第三条命令了。<br><code>git rebase -i --root</code></p>
+<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><p>以上命令输入成功之后输出结果</p>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">pick</span> <span class="hljs-number">733</span>d868 first commit<br><span class="hljs-attribute">pick</span> <span class="hljs-number">2640678</span> test1<br><span class="hljs-attribute">pick</span> cbba117 &#x27;test&#x27;<br><br><span class="hljs-comment"># Rebase cbba117 onto dd90bd9 (3 commands)</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Commands:</span><br><span class="hljs-comment"># p, pick &lt;commit&gt; = use commit</span><br><span class="hljs-comment"># r, reword &lt;commit&gt; = use commit, but edit the commit message</span><br><span class="hljs-comment"># e, edit &lt;commit&gt; = use commit, but stop for amending</span><br><span class="hljs-comment"># s, squash &lt;commit&gt; = use commit, but meld into previous commit</span><br><span class="hljs-comment"># f, fixup &lt;commit&gt; = like &quot;squash&quot;, but discard this commit&#x27;s log message</span><br><span class="hljs-comment"># x, exec &lt;command&gt; = run command (the rest of the line) using shell</span><br><span class="hljs-comment"># b, break = stop here (continue rebase later with &#x27;git rebase --continue&#x27;)</span><br><span class="hljs-comment"># d, drop &lt;commit&gt; = remove commit</span><br><span class="hljs-comment"># l, label &lt;label&gt; = label current HEAD with a name</span><br><span class="hljs-comment"># t, reset &lt;label&gt; = reset HEAD to a label</span><br><span class="hljs-comment"># m, merge [-C &lt;commit&gt; | -c &lt;commit&gt;] &lt;label&gt; [# &lt;oneline&gt;]</span><br><span class="hljs-comment"># .       create a merge commit using the original merge commit&#x27;s</span><br><span class="hljs-comment"># .       message (or the oneline, if no original merge commit was</span><br><span class="hljs-comment"># .       specified). Use -c &lt;commit&gt; to reword the commit message.</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># These lines can be re-ordered; they are executed from top to bottom.</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># If you remove a line here THAT COMMIT WILL BE LOST.</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># However, if you remove everything, the rebase will be aborted.</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="进入-推出编辑模式"><a href="#进入-推出编辑模式" class="headerlink" title="进入/推出编辑模式"></a>进入/推出编辑模式</h4><p>以上结果出来后，控制台输入 <code>i</code> 进入编辑模式，然后我们就可以进行修改了，比如我要改第一条</p>
+<p>1.把第一条的“pick”修改为“edit”。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-built_in">edit</span> 733d868 first commit<br>pick 2640678 test1<br>pick cbba117 <span class="hljs-string">&#x27;test&#x27;</span><br><br><span class="hljs-comment"># Rebase cbba117 onto dd90bd9 (3 commands)</span><br><br></code></pre></div></td></tr></table></figure>
+
+<p>2.键盘<code>esc</code>退出编辑模式，<code>:wq</code>保存文件并退出</p>
+<h4 id="git-commit-–amend"><a href="#git-commit-–amend" class="headerlink" title="git commit –amend"></a>git commit –amend</h4><p>控制台输出</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">Stopped <span class="hljs-keyword">at</span> <span class="hljs-number">733</span>d868...  <span class="hljs-keyword">first</span> <span class="hljs-keyword">commit</span><br>You can amend the <span class="hljs-keyword">commit</span> now, <span class="hljs-keyword">with</span><br><br>  git <span class="hljs-keyword">commit</span> <span class="hljs-comment">--amend</span><br><br>Once you <span class="hljs-keyword">are</span> satisfied <span class="hljs-keyword">with</span> your changes, run<br><br>  git rebase <span class="hljs-comment">--continue</span><br></code></pre></div></td></tr></table></figure>
+
+<p>根据提示，控制台输入<br><code>git commit --amend</code><br>或者<br><code>git commit --amend -s</code><br>正常来说你不需要加-s，如果你加了-s，是这样的 ：加不加-s都是可以的，-s表示要加入签名。<br>修改成功之后会多一个签名 Signed-off-by: jackxxx <a href="mailto:&#x6a;&#x61;&#x63;&#107;&#x78;&#x78;&#x78;&#x40;&#102;&#x6f;&#x78;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#111;&#x6d;">&#x6a;&#x61;&#x63;&#107;&#x78;&#x78;&#x78;&#x40;&#102;&#x6f;&#x78;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#111;&#x6d;</a></p>
+<p>进入编辑模式，修改commit信息，保存并退出</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">commit<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">Please enter the commit message <span class="hljs-keyword">for</span> your changes. Lines starting</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">with <span class="hljs-string">&#x27;#&#x27;</span> will be ignored, and an empty message aborts the commit.</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"></span><br><span class="language-bash"><span class="hljs-comment"># Date:      Mon May 9 10:29:01 2022 +0800</span></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"></span><br><span class="language-bash"><span class="hljs-comment"># interactive rebase in progress; onto dd90bd9</span></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">Last <span class="hljs-built_in">command</span> <span class="hljs-keyword">done</span> (1 <span class="hljs-built_in">command</span> <span class="hljs-keyword">done</span>):</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">   edit 733d868 first commit</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">Next commands to <span class="hljs-keyword">do</span> (2 remaining commands):</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">   pick 2640678 test1</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">   pick cbba117 <span class="hljs-string">&#x27;test&#x27;</span></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">You are currently splitting a commit <span class="hljs-keyword">while</span> rebasing branch <span class="hljs-string">&#x27;master&#x27;</span> on <span class="hljs-string">&#x27;dd90bd9&#x27;</span>.</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"></span><br><span class="language-bash"><span class="hljs-comment">#</span></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">Initial commit</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"></span><br><span class="language-bash"><span class="hljs-comment"># Changes to be committed:</span></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">      new file:   README.md</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="git-rebase-–continue"><a href="#git-rebase-–continue" class="headerlink" title="git rebase –continue"></a>git rebase –continue</h4><p>将基变合并<br><code>git rebase --continue</code><br>控制台输出以下则成功</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript">Successfully rebased <span class="hljs-keyword">and</span> updated <span class="hljs-built_in">ref</span>s/heads/master.<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="3-推送到远程"><a href="#3-推送到远程" class="headerlink" title="3.推送到远程"></a>3.推送到远程</h2><h3 id="git-push-git-push-f"><a href="#git-push-git-push-f" class="headerlink" title="git push/git push -f"></a>git push/git push -f</h3><h4 id="git-push"><a href="#git-push" class="headerlink" title="git push"></a>git push</h4><p><code>git push</code> 推送到远程<br>如果提示失败</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vbnet"> ! [rejected]        master -&gt; master (non-fast-forward)<br><span class="hljs-symbol">error:</span> failed <span class="hljs-keyword">to</span> push some refs <span class="hljs-keyword">to</span> <span class="hljs-comment">&#x27;git@gitee.com:jackhoo_98/test.git&#x27;</span><br><span class="hljs-symbol">hint:</span> Updates were rejected because the tip <span class="hljs-keyword">of</span> your current branch <span class="hljs-built_in">is</span> behind<br><span class="hljs-symbol">hint:</span> its remote counterpart. Integrate the remote changes (e.g.<br><span class="hljs-symbol">hint:</span> <span class="hljs-comment">&#x27;git pull ...&#x27;) before pushing again.</span><br><span class="hljs-symbol">hint:</span> See the <span class="hljs-comment">&#x27;Note about fast-forwards&#x27; in &#x27;git push --help&#x27; for details.</span><br></code></pre></div></td></tr></table></figure>
+
+<p>如果你确定你的代码没有问题的话，你可以强提代码到远程，也就是强制push</p>
+<h4 id="git-push-f"><a href="#git-push-f" class="headerlink" title="git push -f"></a>git push -f</h4><p><code>git push -f</code> 强制推送到远程 </p>
+<h2 id="4-友情提醒"><a href="#4-友情提醒" class="headerlink" title="4.友情提醒"></a>4.友情提醒</h2><p>如果你只是为了好奇而在本地尝试了本文的以上命令，但是尝鲜过后不想要更改了，你可以使用下面的命令 。<br><code>git pull --rebase origin master</code><br>或者<br><code>git pull --rebase origin 分支名</code><br>运行了这行代码后，会pull远程仓库的代码到本地，强行覆盖本地的所有修改。<br>这样就和以前一样啦~</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/git/">git</a>
+                    
+                      <a class="hover-with-bg" href="/categories/git/github/">github</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/git/">git</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/09/11/post%E8%AF%B7%E6%B1%82body%E4%B8%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%97%B6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">post请求body为字符串时的解决方法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/25/JavaScript%E4%B8%AD%E5%90%84%E7%A7%8D%EF%BC%9F%E7%9A%84%E7%94%A8%E6%B3%95%E4%BB%A5%E5%8F%8A%E5%90%AB%E4%B9%89/">
+                        <span class="hidden-mobile">JavaScript中 `?.` 、`??` 、`??=` 的用法以及含义</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#valine",
+          app_id: "wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz",
+          app_key: "BlsdS19vhoVr77n1TiE2diHr",
+          placeholder: "老师们，说点什么吧！",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: true,
+          serverURLs: "https://wvn0ubbm.lc-cn-n1-shared.com",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> |<i class="iconfont icon-love"></i>| <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        蜀ICP备2021012542号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

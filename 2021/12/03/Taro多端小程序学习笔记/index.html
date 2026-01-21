@@ -1,0 +1,787 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="jackhoo">
+  <meta name="keywords" content="">
+  
+  <title>Taro多端小程序学习笔记 - jackhoo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/%E6%AC%A2%E8%BF%8E%E5%A4%A7%E5%AE%B6%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%8C%E8%AF%B7%E5%B0%BD%E6%83%85%E7%95%99%E8%A8%80%E5%90%A7%EF%BC%81/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/hybrid.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"13982720426.github.io","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz","app_key":"BlsdS19vhoVr77n1TiE2diHr","server_url":"https://wvn0ubbm.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>jackhoo的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/13982720426/">
+                <i class="iconfont icon-github-fill"></i>
+                GitHub
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg2.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Taro多端小程序学习笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      jackhoo
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-03 20:54" pubdate>
+        星期五, 十二月 3日 2021, 8:54 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      89
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Taro多端小程序学习笔记</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：25 分钟前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="Taro-多端小程序学习笔记"><a href="#Taro-多端小程序学习笔记" class="headerlink" title="Taro 多端小程序学习笔记"></a>Taro 多端小程序学习笔记</h2><h3 id="快速搭建项目"><a href="#快速搭建项目" class="headerlink" title="快速搭建项目"></a>快速搭建项目</h3><p>项目初始化以及配置推荐看<a target="_blank" rel="noopener" href="https://taro-docs.jd.com/taro/docs/GETTING-STARTED">Taro</a>官网更详细</p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"># 使用 npm 安装 <span class="hljs-variable constant_">CLI</span><br>npm install -g @tarojs/cli<br><br># <span class="hljs-variable constant_">OR</span> 使用 yarn 安装 <span class="hljs-variable constant_">CLI</span><br>yarn <span class="hljs-variable language_">global</span> add @tarojs/cli<br><br># <span class="hljs-variable constant_">OR</span> 安装了 cnpm，使用 cnpm 安装 <span class="hljs-variable constant_">CLI</span><br>cnpm install -g @tarojs/cli<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="查看-Taro-全部版本信息"><a href="#查看-Taro-全部版本信息" class="headerlink" title="查看 Taro 全部版本信息"></a>查看 Taro 全部版本信息</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">npm info @tarojs/cli<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="项目初始化"><a href="#项目初始化" class="headerlink" title="项目初始化"></a>项目初始化</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">taro init myApp<br></code></pre></div></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/11/30/Kzh5ln67UuHSEtj.png#crop=0&crop=0&crop=1&crop=1&id=me34h&originHeight=647&originWidth=984&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h4 id="编译运行"><a href="#编译运行" class="headerlink" title="编译运行"></a>编译运行</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">npm run <span class="hljs-attr">dev</span>:h5 <span class="hljs-comment">//H5小程序</span><br>npm run <span class="hljs-attr">build</span>:h5<br><br>npm run <span class="hljs-attr">dev</span>:weapp <span class="hljs-comment">//微信小程序</span><br>npm run <span class="hljs-attr">build</span>:weapp<br><br>npm run <span class="hljs-attr">dev</span>:swan <span class="hljs-comment">//百度小程序</span><br>npm run <span class="hljs-attr">build</span>:swan<br><br>npm run <span class="hljs-attr">dev</span>:alipay <span class="hljs-comment">//支付宝小程序</span><br>npm run <span class="hljs-attr">build</span>:alipay<br><br>npm run <span class="hljs-attr">dev</span>:tt <span class="hljs-comment">//字节跳动小程序</span><br>npm run <span class="hljs-attr">build</span>:tt<br><br>npm run <span class="hljs-attr">dev</span>:qq <span class="hljs-comment">//QQ小程序</span><br>npm run <span class="hljs-attr">build</span>:qq<br><br>npm run <span class="hljs-attr">dev</span>:jd <span class="hljs-comment">//京东小程序</span><br>npm run <span class="hljs-attr">build</span>:jd<br><br>......<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><h4 id="项目目录结构"><a href="#项目目录结构" class="headerlink" title="项目目录结构"></a>项目目录结构</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">├── dist                        编译结果目录<br>|<br>├── config                      项目编译配置目录<br>|   ├── index.<span class="hljs-property">js</span>                默认配置<br>|   ├── dev.<span class="hljs-property">js</span>                  开发环境配置<br>|   └── prod.<span class="hljs-property">js</span>                 生产环境配置<br>|<br>├── src                         源码目录<br>|   ├── pages                   页面文件目录<br>|   |   └── index               index 页面目录<br>|   |       ├── index.<span class="hljs-property">js</span>        index 页面逻辑<br>|   |       ├── index.<span class="hljs-property">css</span>       index 页面样式<br>|   |       └── index.<span class="hljs-property">config</span>.<span class="hljs-property">js</span> index 页面配置<br>|   |<br>|   ├── app.<span class="hljs-property">js</span>                  项目入口文件<br>|   ├── app.<span class="hljs-property">css</span>                 项目总通用样式<br>|   └── app.<span class="hljs-property">config</span>.<span class="hljs-property">js</span>           项目入口配置<br>|<br>├── project.<span class="hljs-property">config</span>.<span class="hljs-property">json</span>         微信小程序项目配置 project.<span class="hljs-property">config</span>.<span class="hljs-property">json</span><br>├── project.<span class="hljs-property">tt</span>.<span class="hljs-property">json</span>             字节跳动小程序项目配置 project.<span class="hljs-property">config</span>.<span class="hljs-property">json</span><br>├── project.<span class="hljs-property">swan</span>.<span class="hljs-property">json</span>           百度小程序项目配置 project.<span class="hljs-property">swan</span>.<span class="hljs-property">json</span><br>├── project.<span class="hljs-property">qq</span>.<span class="hljs-property">json</span>             <span class="hljs-variable constant_">QQ</span> 小程序项目配置 project.<span class="hljs-property">config</span>.<span class="hljs-property">json</span><br>|<br>├── babel.<span class="hljs-property">config</span>.<span class="hljs-property">js</span>             <span class="hljs-title class_">Babel</span> 配置<br>├── tsconfig.<span class="hljs-property">json</span>               <span class="hljs-title class_">TypeScript</span> 配置<br>├── .<span class="hljs-property">eslintrc</span>                   <span class="hljs-title class_">ESLint</span> 配置<br>|<br>└── package.<span class="hljs-property">json</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="编译配置"><a href="#编译配置" class="headerlink" title="编译配置"></a>编译配置</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">└── config                      项目编译配置目录<br>    ├── index.<span class="hljs-property">js</span>                默认配置<br>    ├── dev.<span class="hljs-property">js</span>                  开发环境配置<br>    └── prod.<span class="hljs-property">js</span>                 生产环境配置<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="源码组织"><a href="#源码组织" class="headerlink" title="源码组织"></a>源码组织</h4><h5 id="app"><a href="#app" class="headerlink" title="app"></a>app</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">└── src                         源码目录<br>    ├── app.<span class="hljs-property">js</span>                  项目入口文件<br>    ├── app.<span class="hljs-property">css</span>                 项目总通用样式<br>    └── app.<span class="hljs-property">config</span>.<span class="hljs-property">js</span>           项目入口配置<br></code></pre></div></td></tr></table></figure>
+
+<p>小程序的主体由下面三个文件组成：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>必须</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>app.js</td>
+<td>是</td>
+<td>小程序入口逻辑</td>
+</tr>
+<tr>
+<td>app.css</td>
+<td>否</td>
+<td>小程序全局样式</td>
+</tr>
+<tr>
+<td>app.config.js</td>
+<td>是</td>
+<td>小程序全局配置</td>
+</tr>
+</tbody></table>
+<h5 id="page"><a href="#page" class="headerlink" title="page"></a>page</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">└── src                         源码目录<br>    └── pages                   页面文件目录<br>        └── index               index 页面目录<br>            ├── index.<span class="hljs-property">js</span>        index 页面逻辑<br>            ├── index.<span class="hljs-property">css</span>       index 页面样式<br>            └── index.<span class="hljs-property">config</span>.<span class="hljs-property">js</span> index 页面配置<br></code></pre></div></td></tr></table></figure>
+
+<p>一个小程序页面由三个文件组成，如下：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>必须</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>page.js</td>
+<td>是</td>
+<td>页面入口逻辑</td>
+</tr>
+<tr>
+<td>page.css</td>
+<td>否</td>
+<td>页面样式</td>
+</tr>
+<tr>
+<td>page.config.js</td>
+<td>否</td>
+<td>页面配置</td>
+</tr>
+</tbody></table>
+<h5 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">└──project.<span class="hljs-property">config</span>.<span class="hljs-property">json</span>         微信小程序项目配置 project.<span class="hljs-property">config</span>.<span class="hljs-property">json</span><br></code></pre></div></td></tr></table></figure>
+
+<h5 id="Babel-配置"><a href="#Babel-配置" class="headerlink" title="Babel 配置"></a>Babel 配置</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">└── babel.<span class="hljs-property">config</span>.<span class="hljs-property">js</span>             <span class="hljs-title class_">Babel</span> 配置<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="ESLint-配置"><a href="#ESLint-配置" class="headerlink" title="ESLint 配置"></a>ESLint 配置</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">└── .<span class="hljs-property">eslintrc</span>                   <span class="hljs-title class_">ESLint</span> 配置<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><h4 id="组件的使用"><a href="#组件的使用" class="headerlink" title="组件的使用"></a>组件的使用</h4><p>taro 的组件使用支持 react 的组件方式，如果使用 taro 创建组件会报错。<br>child.jsx 子组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@tarojs/taro&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@tarojs/components&quot;</span>;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>我是Child组件<span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>;<br>  &#125;<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">Child</span>;<br><span class="hljs-comment">//或者</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Taro</span>, &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@tarojs/taro&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@tarojs/components&quot;</span>;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Taro.Component</span> &#123;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>我是Child组件<span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>;<br>  &#125;<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">Child</span>;<br><br><span class="hljs-comment">//这两种方式都会报错</span><br></code></pre></div></td></tr></table></figure>
+
+<p>Error: TypeError: Super expression must either be null or a function<br><img src="https://images.weserv.nl/?url=cdn.hbtap.cn/blog/images/1768985862009_bzjb0l.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>所以推荐使用 react 创建组件的方式<br>child.jsx 子组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@tarojs/components&quot;</span>;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> &#123;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>我是Child组件<span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>;<br>  &#125;<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">Child</span>;<br><span class="hljs-comment">//或者</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@tarojs/components&quot;</span>;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>我是Child组件<span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>;<br>  &#125;<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">Child</span>;<br><br><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="父子组件传值"><a href="#父子组件传值" class="headerlink" title="父子组件传值"></a>父子组件传值</h4><p>父子组件通过 props 传递数据，子组件不能修改，只能接收父组件的数据<br>父组件在组件内部设置一个属性传递给子组件<br>src\pages\index\index.jsx 父组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./index.less&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Child</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./child&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  state = &#123;<br>    <span class="hljs-attr">text</span>: &#123; <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;李四&#x27;</span> &#125;,<br>  &#125;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;render...&#x27;</span>)<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        &#123;/* <span class="hljs-tag">&lt;<span class="hljs-name">Child</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Child</span>&gt;</span> */&#125;</span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Child</span> <span class="hljs-attr">text</span>=<span class="hljs-string">&#123;this.state.text&#125;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Child</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>src\pages\index\child.jsx 子组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">const</span> &#123; text &#125; = <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span><br>    <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>我是Child组件&#123;text.username&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>  &#125;<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">Child</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="设置默认属性"><a href="#设置默认属性" class="headerlink" title="设置默认属性"></a>设置默认属性</h4><p>如果父组件没有传递任何属性，可以在子组件通过<code>Child.defaultProps=&#123;&#125;</code>设置默认属性<br>src\pages\index\index.jsx 父组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./index.less&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Child</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./child&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Child</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Child</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>src\pages\index\child.jsx 子组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">const</span> &#123; text &#125; = <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span><br>    <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>我是Child组件&#123;text.username&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>  &#125;<br>&#125;<br><span class="hljs-comment">//设置默认属性 如果父组件没有传递属性给子组件</span><br><span class="hljs-title class_">Child</span>.<span class="hljs-property">defaultProps</span> = &#123;<br>  <span class="hljs-attr">text</span>: &#123; <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;111111&#x27;</span> &#125;,<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">Child</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="常用生命周期"><a href="#常用生命周期" class="headerlink" title="常用生命周期"></a>常用生命周期</h3><h4 id="componentWillMount"><a href="#componentWillMount" class="headerlink" title="componentWillMount( )"></a>componentWillMount( )</h4><p>componentWillMount( ) 组件挂载之前</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./index.less&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">componentWillMount</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;组件挂载之前，componentWillMount&#x27;</span>)<br>  &#125;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>Hello world!<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount( )"></a>componentDidMount( )</h4><p>componentDidMount( ) 组件挂载之后</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./index.less&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  state = &#123;<br>    <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;张三&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">10</span>,<br>  &#125;;<br>  <span class="hljs-title function_">componentDidMount</span> () &#123;<br>    <span class="hljs-title function_">componentDidMount</span>(<span class="hljs-params"></span>) &#123;<br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;组件挂载之后，componentDidMount&quot;</span>);<br>      <span class="hljs-comment">//更改组件状态</span><br>      <span class="hljs-comment">//想要获取最新的状态，需要在setSate的第二个参数函数内部获取</span><br>      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setState</span>(<br>        &#123;<br>          <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;李四&quot;</span>,<br>        &#125;,<br>        <span class="hljs-function">() =&gt;</span> &#123;<br>          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">2</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">text</span>); <span class="hljs-comment">//李四 同步最新的状态</span><br>        &#125;<br>      );<br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">1</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">text</span>); <span class="hljs-comment">//张三 异步更新还是更改之前的状态</span><br>    &#125;<br>  &#125;<br>  <span class="hljs-title function_">render</span> () &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">      	<span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>&#123;this.state.text&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>&#123;this.state.age&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>注意<strong>更改 state 只能用 setState，但是 setState 是异步更新</strong>。在 setState 之后获取的值是更改之前的值，想要得到最新的值只能在 setState 的第二个参数中的回调函数中拿到最新值</p>
+<h5 id="setState-更新最新数据"><a href="#setState-更新最新数据" class="headerlink" title="setState 更新最新数据"></a>setState 更新最新数据</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setState</span>(<br>  &#123;<br>    <span class="hljs-attr">text</span>: <span class="hljs-string">&#x27;李四&#x27;</span>, <span class="hljs-comment">//更改的值</span><br>  &#125;,<br>  <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">//在第二个参数的回调函数中拿到最新的值</span><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">2</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">text</span>) <span class="hljs-comment">//李四 同步最新的状态</span><br>  &#125;<br>)<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">1</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">text</span>) <span class="hljs-comment">//张三 异步更新还是更改之前的状态</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="componentWillUnmount"><a href="#componentWillUnmount" class="headerlink" title="componentWillUnmount( )"></a>componentWillUnmount( )</h4><p>componentWillUnmount( ) 组件销毁时</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./index.less&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">componentWillUnmount</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;组件销毁时，componentWillUnmount&#x27;</span>)<br>  &#125;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>Hello world!<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="componentDidShow"><a href="#componentDidShow" class="headerlink" title="componentDidShow( )"></a>componentDidShow( )</h4><p>componentDidShow( ) 页面显示的时候，在 react 中不存在</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./index.less&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">componentDidShow</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">//react中不存在</span><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;页面显示的时候，componentDidShow&#x27;</span>)<br>  &#125;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>Hello world!<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="componentWillHide"><a href="#componentWillHide" class="headerlink" title="componentWillHide( )"></a>componentWillHide( )</h4><p>componentWillHide( ) 页面隐藏的时候，在 react 中不存在</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./index.less&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">componentWillHide</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">//react中不存在</span><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;页面隐藏的时候，componentDidHide&#x27;</span>)<br>  &#125;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>Hello world!<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="componentWillUpdate"><a href="#componentWillUpdate" class="headerlink" title="componentWillUpdate( )"></a>componentWillUpdate( )</h4><p>componentWillUpdate( ) state 数据将要更新之前</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./index.less&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">componentWillUpdate</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;state数据将要更新之前，componentWillUpdate&#x27;</span>)<br>  &#125;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>Hello world!<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="componentDidUpdate"><a href="#componentDidUpdate" class="headerlink" title="componentDidUpdate( )"></a>componentDidUpdate( )</h4><p>componentDidUpdate( ) state 数据将要更新之后</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./index.less&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">componentDidUpdate</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;state数据更新之后，componentDidUpdate&#x27;</span>)<br>  &#125;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>Hello world!<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="shouldComponentUpdate-nextProps-nextState"><a href="#shouldComponentUpdate-nextProps-nextState" class="headerlink" title="shouldComponentUpdate(nextProps, nextState)"></a>shouldComponentUpdate(nextProps, nextState)</h4><p>shouldComponentUpdate(nextProps, nextState) 检查此次 setState 是否进行 render 调用 默认返回 true，一般用来多次的 setState 调用时，提升 render 的性能。只需要判断最后一次是否修改 然后返回 true，再进行 render 渲染<br>两个参数 nextState 最新的状态，nextProps 最新的属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./index.less&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  state = &#123;<br>    <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;张三&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">10</span>,<br>  &#125;;<br>  <span class="hljs-title function_">componentDidMount</span> () &#123;<br>    <span class="hljs-title function_">componentDidMount</span>(<span class="hljs-params"></span>) &#123;<br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;组件挂载之后，componentDidMount&quot;</span>);<br>      <span class="hljs-comment">//更改组件状态</span><br>      <span class="hljs-comment">//想要获取最新的状态，需要在setSate的第二个参数函数内部获取</span><br>      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setState</span>(<br>        &#123;<br>          <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;李四&quot;</span>,<br>        &#125;,<br>        <span class="hljs-function">() =&gt;</span> &#123;<br>          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">2</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">text</span>); <span class="hljs-comment">//李四 同步最新的状态</span><br>        &#125;<br>      );<br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">1</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">text</span>); <span class="hljs-comment">//张三 异步更新还是更改之前的状态</span><br>    &#125;<br>  &#125;<br>  <span class="hljs-title function_">shouldComponentUpdate</span>(<span class="hljs-params">nextProps, nextState</span>) &#123;<br>    <span class="hljs-comment">//检查此次setState是否进行render调用 默认返回true</span><br>    <span class="hljs-comment">//一般用来多次的setState调用时，提升render的性能</span><br>    <span class="hljs-comment">// console.log(&quot;shouldComponentUpdate&quot;, nextState.text); //nextState最新的状态，nextProps最新的属性</span><br>    <span class="hljs-keyword">if</span> (nextState.<span class="hljs-property">text</span> === <span class="hljs-string">&quot;李四&quot;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>  &#125;<br>  <span class="hljs-title function_">render</span> () &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">      	<span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>&#123;this.state.text&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>&#123;this.state.age&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="componentWillReceiveProps-nextProps-nextState"><a href="#componentWillReceiveProps-nextProps-nextState" class="headerlink" title="componentWillReceiveProps(nextProps, nextState)"></a>componentWillReceiveProps(nextProps, nextState)</h4><p>componentWillReceiveProps(nextProps, nextState) 父组件传递给子组件的属性发送变化的时候，此钩子函数才会执行，初始化的时候不会执行。nextProps 才是最新的属性<br>src\pages\index\index.jsx 父组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./index.less&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Child</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./child&#x27;</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  state = &#123;<br>    <span class="hljs-attr">text</span>: &#123; <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;李四&#x27;</span> &#125;,<br>  &#125;<br>  <span class="hljs-title function_">componentDidMount</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">//更改组件的状态</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setState</span>(&#123;<br>      <span class="hljs-attr">text</span>: &#123; <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;王五&#x27;</span> &#125;,<br>    &#125;)<br>  &#125;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Child</span> <span class="hljs-attr">text</span>=<span class="hljs-string">&#123;this.state.text&#125;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Child</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>src\pages\index\child.jsx 子组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-comment">//初始化的时候不会执行</span><br>  <span class="hljs-comment">//父组件传递给子组件的属性发送变化的时候，此钩子函数才会执行</span><br>  <span class="hljs-title function_">componentWillReceiveProps</span>(<span class="hljs-params">nextProps, nextState</span>) &#123;<br>    <span class="hljs-comment">// console.log(this.props.text.username); //这里还是以前的属性</span><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(nextProps.<span class="hljs-property">text</span>.<span class="hljs-property">username</span>) <span class="hljs-comment">//nextProps才是最新的属性</span><br>  &#125;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">const</span> &#123; text &#125; = <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span><br>    <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>我是Child组件&#123;text.username&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>  &#125;<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">Child</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><h4 id="基本路由配置"><a href="#基本路由配置" class="headerlink" title="基本路由配置"></a>基本路由配置</h4><p>src\pages\test\test.jsx 新建一个文件以及配置文件 test.config.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;render...&#x27;</span>)<br>    <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span>test!!<span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>src\app.config.js 配置默认路径</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-attr">pages</span>: [<span class="hljs-string">&#x27;pages/test/test&#x27;</span>, <span class="hljs-string">&#x27;pages/index/index&#x27;</span>],<br>  <span class="hljs-attr">window</span>: &#123;<br>    <span class="hljs-attr">backgroundTextStyle</span>: <span class="hljs-string">&#x27;light&#x27;</span>,<br>    <span class="hljs-attr">navigationBarBackgroundColor</span>: <span class="hljs-string">&#x27;#fff&#x27;</span>,<br>    <span class="hljs-attr">navigationBarTitleText</span>: <span class="hljs-string">&#x27;WeChat&#x27;</span>,<br>    <span class="hljs-attr">navigationBarTextStyle</span>: <span class="hljs-string">&#x27;black&#x27;</span>,<br>  &#125;,<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>将<code>&quot;pages/test/test&quot;</code>写在数组前面就是默认路径，然后重启项目</p>
+<h4 id="基本页面跳转"><a href="#基本页面跳转" class="headerlink" title="基本页面跳转"></a>基本页面跳转</h4><h5 id="navigateTo"><a href="#navigateTo" class="headerlink" title="navigateTo"></a>navigateTo</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span>, <span class="hljs-title class_">Button</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Taro</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/taro&#x27;</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">handleClick</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">//保留当前页面，跳转到应用内的某个页面。但是不能跳到 tabbar 页面。</span><br>    <span class="hljs-comment">//使用 Taro.navigateBack 可以返回到原页面。小程序中页面栈最多十层。</span><br>    <span class="hljs-comment">//相当于 h5：$router.push</span><br>    <span class="hljs-title class_">Taro</span>.<span class="hljs-title function_">navigateTo</span>(&#123;<br>      <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;/pages/index/index&#x27;</span>,<br>    &#125;)<br>  &#125;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;this.handleClick&#125;</span>&gt;</span>test!!<span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="redirectTo"><a href="#redirectTo" class="headerlink" title="redirectTo"></a>redirectTo</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span>, <span class="hljs-title class_">Button</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Taro</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/taro&#x27;</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">handleClick</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">//关闭当前页面，跳转到应用内的某个页面。但是不允许跳转到 tabbar 页面。</span><br>    <span class="hljs-comment">//相当于 h5：$router.replace</span><br>    <span class="hljs-title class_">Taro</span>.<span class="hljs-title function_">redirectTo</span>(&#123;<br>      <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;/pages/index/index&#x27;</span>,<br>    &#125;)<br>  &#125;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;this.handleClick&#125;</span>&gt;</span>test!!<span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="路由传参"><a href="#路由传参" class="headerlink" title="路由传参"></a>路由传参</h4><p>src\pages\test\test.jsx 发送参数的页面，将参数拼接到 url 上</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span>, <span class="hljs-title class_">Button</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Taro</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/taro&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">handleClick</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">//关闭当前页面，跳转到应用内的某个页面。但是不允许跳转到 tabbar 页面。</span><br>    <span class="hljs-comment">//相当于 h5：$router.replace</span><br>    <span class="hljs-title class_">Taro</span>.<span class="hljs-title function_">redirectTo</span>(&#123;<br>      <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;/pages/index/index?id=1&#x27;</span>,<br>    &#125;)<br>  &#125;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;this.handleClick&#125;</span>&gt;</span>test!!<span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>src\pages\index\index.jsx 接收参数的页面，<code>const id = this.$router.params.id;</code>//已经失效 taro3 有更新用<code>getCurrentInstance()</code><br>taro3 中更新开发中我们常常会调用 <a target="_blank" rel="noopener" href="https://taro-docs.jd.com/taro/blog/2021-02-08-taro-jxpp#23-%E5%BB%BA%E8%AE%AE%E6%8A%8A-tarogetcurrentinstance-%E7%9A%84%E7%BB%93%E6%9E%9C%E4%BF%9D%E5%AD%98%E4%B8%8B%E6%9D%A5">Taro.getCurrentInstance()</a> 获取小程序的 app、page 对象、路由参数等数据。但频繁调用它可能会导致问题。把 Taro.getCurrentInstance() 的结果在组件中保存起来</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./index.less&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Child</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./child&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Taro</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/taro&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  state = &#123;<br>    <span class="hljs-attr">text</span>: &#123; <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;李四&#x27;</span> &#125;,<br>  &#125;<br>  <span class="hljs-title function_">componentWillMount</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">//获取到test页面传递过来的参数</span><br>    <span class="hljs-comment">// const id = this.$router.params.id;//已经失效taro3有更新用getCurrentInstance()</span><br>    <span class="hljs-comment">//taro3中更新开发中我们常常会调用 Taro.getCurrentInstance() 获取小程序的 app、page 对象、路由参数等数据。</span><br>    <span class="hljs-comment">//但频繁调用它可能会导致问题。把 Taro.getCurrentInstance() 的结果在组件中保存起来</span><br>    <span class="hljs-keyword">const</span> id = <span class="hljs-title class_">Taro</span>.<span class="hljs-title function_">getCurrentInstance</span>().<span class="hljs-property">router</span>.<span class="hljs-property">params</span>.<span class="hljs-property">id</span><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(id)<br>  &#125;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        &#123;/* <span class="hljs-tag">&lt;<span class="hljs-name">Child</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Child</span>&gt;</span> */&#125;</span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Child</span> <span class="hljs-attr">text</span>=<span class="hljs-string">&#123;this.state.text&#125;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Child</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="导出资源以及导入方式"><a href="#导出资源以及导入方式" class="headerlink" title="导出资源以及导入方式"></a>导出资源以及导入方式</h3><h4 id="导入模块"><a href="#导入模块" class="headerlink" title="导入模块"></a>导入模块</h4><h5 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h5><p>单独导出<br>src\util.js</p>
+<figure class="highlight arcade"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arcade"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">setData</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-string">&quot;setData&quot;</span>);<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getData</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-string">&quot;getData&quot;</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>解构赋值引入<br>src\pages\test\test.jsx</p>
+<figure class="highlight capnproto"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs capnproto"><span class="hljs-keyword">import</span> &#123; setData , getData &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../../util&quot;</span>;<br></code></pre></div></td></tr></table></figure>
+
+<p>如果是 export 单独导出，则解构赋值方法引入</p>
+<h5 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h5><p>默认方式导出</p>
+<figure class="highlight arcade"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arcade"><span class="hljs-keyword">function</span> <span class="hljs-title function_">setData</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-string">&quot;setData&quot;</span>);<br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">getData</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-string">&quot;getData&quot;</span>);<br>&#125;<br><span class="hljs-keyword">export</span> default setData;<br></code></pre></div></td></tr></table></figure>
+
+<p>单独引入</p>
+<figure class="highlight capnproto"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs capnproto"><span class="hljs-keyword">import</span> getData <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../../util&quot;</span>;<br></code></pre></div></td></tr></table></figure>
+
+<p>如果使用结构赋值方式引入会报错</p>
+<figure class="highlight clean"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs clean"><span class="hljs-keyword">import</span> &#123; getData &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../../util&quot;</span>;<span class="hljs-comment">//TypeError: Object(...) is not a function</span><br></code></pre></div></td></tr></table></figure>
+
+<h5 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h5><p>对象方式导出</p>
+<figure class="highlight arcade"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arcade"><span class="hljs-keyword">function</span> <span class="hljs-title function_">setData</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-string">&quot;setData&quot;</span>);<br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">getData</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-string">&quot;getData&quot;</span>);<br>&#125;<br><span class="hljs-keyword">export</span> default &#123; setData, getData &#125;;<br></code></pre></div></td></tr></table></figure>
+
+<p>调用方式引入</p>
+<figure class="highlight clean"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs clean"><span class="hljs-comment">//引入</span><br><span class="hljs-keyword">import</span> util <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../../util&quot;</span>;<br><br><span class="hljs-comment">//调用</span><br>util.getData();<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="导入图片资源"><a href="#导入图片资源" class="headerlink" title="导入图片资源"></a>导入图片资源</h4><h5 id="方法一-1"><a href="#方法一-1" class="headerlink" title="方法一"></a>方法一</h5><p>require 方式导入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Image</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Image</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&#123;require(</span>&#x27;<span class="hljs-attr">..</span>/<span class="hljs-attr">..</span>/<span class="hljs-attr">img</span>/<span class="hljs-attr">1.png</span>&#x27;)&#125;&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Image</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="方法二-1"><a href="#方法二-1" class="headerlink" title="方法二"></a>方法二</h5><p>import 方式导入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span>, <span class="hljs-title class_">Button</span>, <span class="hljs-title class_">Image</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">import</span> img <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../../img/1.png&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Image</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&#123;img&#125;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Image</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="导入样式资源"><a href="#导入样式资源" class="headerlink" title="导入样式资源"></a>导入样式资源</h4><p>src\pages\test\test.less</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">.<span class="hljs-property">index</span> &#123;<br>  .<span class="hljs-property">img</span> &#123;<br>    <span class="hljs-attr">width</span>: <span class="hljs-number">100</span>%;<br>    margin-<span class="hljs-attr">top</span>: 30px; <span class="hljs-comment">//小写px会自动转换成rem，大小PX不会转换</span><br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>src\pages\test\test.jsx</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span>, <span class="hljs-title class_">Button</span>, <span class="hljs-title class_">Image</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./test.less&#x27;</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Image</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;img&#x27;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&#123;img&#125;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Image</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="条件渲染"><a href="#条件渲染" class="headerlink" title="条件渲染"></a><a target="_blank" rel="noopener" href="https://taro-docs.jd.com/taro/docs/condition">条件渲染</a></h3><p>三目运算符加上函数调用的方式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span>, <span class="hljs-title class_">Button</span>, <span class="hljs-title class_">Image</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  state = &#123;<br>    <span class="hljs-attr">isShow</span>: <span class="hljs-literal">false</span>,<br>  &#125;<br>  <span class="hljs-title function_">getDom</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">let</span> &#123; isShow &#125; = <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span><br>    <span class="hljs-keyword">return</span> isShow ? (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;this.handleClick&#125;</span>&gt;</span>test!!<span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span></span><br>    ) : (<br>      <span class="hljs-string">&#x27;isShow:false&#x27;</span><br>    )<br>  &#125;<br><br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span>&#123;this.getDom()&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="列表循环"><a href="#列表循环" class="headerlink" title="列表循环"></a><a target="_blank" rel="noopener" href="https://taro-docs.jd.com/taro/docs/2.x/list">列表循环</a></h3><h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><p>Keys 可以在 DOM 中的某些元素被增加或删除的时候帮助 Nerv/小程序 识别哪些元素发生了变化。因此你应当给数组中的每一个元素赋予一个确定的标识。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span>, <span class="hljs-title class_">Button</span>, <span class="hljs-title class_">Image</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Index</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  state = &#123;<br>    <span class="hljs-attr">isShow</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-attr">list</span>: [<br>      &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;张三&#x27;</span> &#125;,<br>      &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;李四&#x27;</span> &#125;,<br>      &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;王五&#x27;</span> &#125;,<br>    ],<br>  &#125;<br><br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">const</span> &#123; list &#125; = <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span><br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        &#123;list.map((item, index) =&gt; &#123;</span><br><span class="language-xml">          return <span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;item.id&#125;</span>&gt;</span>&#123;item.title&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br><span class="language-xml">        &#125;)&#125;</span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="key-的取值"><a href="#key-的取值" class="headerlink" title="key 的取值"></a>key 的取值</h4><p>必须同时满足三个条件：</p>
+<ol>
+<li>稳定</li>
+<li>可预测</li>
+<li>唯一（相对于其他兄弟元素）</li>
+</ol>
+<p>最好的 key 就是数组里的 ID（通常由后端生成），他能同时满足以上三个条件，同时也不需要自己去生成。如果没有 ID，你能保证数组的元素某个键值字符串都是不同的（例如 item.title），那么使用那个字符串键值也可以。如果源数据没有提供很好的 key 值，或者需要遍历的数组生成的。那么你最好在数据创建或者修改之后给他添加一个好的 key 值：</p>
+<h4 id="与-React-的不同"><a href="#与-React-的不同" class="headerlink" title="与 React 的不同"></a>与 React 的不同</h4><p>在 React 中，JSX 是会编译成普通的 JS 的执行，每一个 JSX 元素，其实会通过 createElement 函数创建成一个 JavaScript 对象（React Element），因此实际上你可以这样写代码 React 也是完全能渲染的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> list = <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">list</span><br>  .<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">l</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (l.<span class="hljs-property">selected</span>) &#123;<br>      <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>&#123;l.text&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br>    &#125;<br>  &#125;)<br>  .<span class="hljs-title function_">filter</span>(<span class="hljs-title class_">React</span>.<span class="hljs-property">isValidElement</span>)<br></code></pre></div></td></tr></table></figure>
+
+<p>你甚至可以这样写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> list = <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">list</span><br>  .<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">l</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (l.<span class="hljs-property">selected</span>) &#123;<br>      <span class="hljs-keyword">return</span> &#123;<br>        <span class="hljs-attr">$$typeof</span>: <span class="hljs-title class_">Symbol</span>(react.<span class="hljs-property">element</span>),<br>        <span class="hljs-attr">props</span>: &#123;<br>          <span class="hljs-attr">children</span>: l.<span class="hljs-property">text</span>,<br>        &#125;,<br>        <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;li&#x27;</span>,<br>      &#125;<br>    &#125;<br>  &#125;)<br>  .<span class="hljs-title function_">filter</span>(<span class="hljs-title class_">React</span>.<span class="hljs-property">isValidElement</span>)<br></code></pre></div></td></tr></table></figure>
+
+<p>但是 Taro 中，JSX 会编译成微信小程序模板字符串，<strong>因此你不能把 map 函数生成的模板当做一个数组来处理</strong>。当你需要这么做时，应该先处理需要循环的数组，再用处理好的数组来调用 map 函数。例如上例应该写成：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> list = <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">list</span><br>  .<span class="hljs-title function_">filter</span>(<span class="hljs-function">(<span class="hljs-params">l</span>) =&gt;</span> l.<span class="hljs-property">selected</span>)<br>  .<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">l</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>&#123;l.text&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br>  &#125;)<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="Children-与组合"><a href="#Children-与组合" class="headerlink" title="Children 与组合"></a>Children 与组合</h3><p>src\pages\dialog\testDialog.jsx 父组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span>, <span class="hljs-title class_">Image</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Dialog</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./dialog&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestDialog</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Dialog</span>&gt;</span></span><br><span class="language-xml">          <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>我是第一个Dialog组件<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">Dialog</span>&gt;</span></span><br><span class="language-xml">        &#123;/* myTxt=&quot;你好！！！&quot; //传递属性 */&#125;</span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Dialog</span> <span class="hljs-attr">myTxt</span>=<span class="hljs-string">&#x27;你好！！！&#x27;</span>&gt;</span></span><br><span class="language-xml">          <span class="hljs-tag">&lt;<span class="hljs-name">Image</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&#123;require(</span>&#x27;<span class="hljs-attr">..</span>/<span class="hljs-attr">..</span>/<span class="hljs-attr">img</span>/<span class="hljs-attr">1.png</span>&#x27;)&#125;&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Image</span>&gt;</span></span><br><span class="language-xml">          &#123;/*类似插槽 */&#125;</span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">Dialog</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>src\pages\dialog\dialog.jsx 子组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Dialog</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  config = &#123;<br>    <span class="hljs-attr">navigationBarTitleText</span>: <span class="hljs-string">&#x27;弹出框&#x27;</span>,<br>  &#125;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        &#123;/* &#123;this.props.myTxt&#125;传递的属性 */&#125;</span><br><span class="language-xml">        &#123;/* &#123;this.props.children&#125;类似插槽的功能 */&#125;</span><br><span class="language-xml">        &#123;this.props.myTxt&#125;弹出框组件！！！&#123;this.props.children&#125;</span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><p><strong>请不要对 this.props.children 进行任何操作</strong>。Taro 在小程序中实现这个功能使用的是小程序的 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/wxml-wxss.html">slot</a> 功能，也就是说你可以把 this.props.children 理解为 slot 的语法糖，this.props.children 在 Taro 中并不是 React 的 ReactElement 对象，因此形如 this.props.children &amp;&amp; this.props.children、this.props.children[0] 在 Taro 中都是非法的。<br><strong>this.props.children 无法用 defaultProps 设置默认内容</strong>。由于小程序的限制，Taro 也无法知道组件的消费者是否传入内容，所以无法应用默认内容。<br><strong>不能把 this.props.children 分解为变量再使用</strong>。由于普通的 props 有一个确切的值，所以当你把它们分解为变量运行时可以处理，this.props.children 则不能这样操作，你必须显性地把 this.props.children 全部都写完整才能实现它的功能。</p>
+<h3 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h3><p>src\pages\event\event.jsx</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Button</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Event</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  state = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;张山&#x27;</span>,<br>  &#125;<br>  <span class="hljs-comment">//第一个参数是传递的参数，第二个参数是event事件</span><br>  <span class="hljs-title function_">handleClick</span>(<span class="hljs-params">param, event</span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(param, event)<br>    <span class="hljs-comment">//如果有两个div包裹且都要点击事件类似的情况，这就有事件冒泡</span><br>    <span class="hljs-comment">//阻止事件冒泡</span><br>    event.<span class="hljs-title function_">stopPropagation</span>()<br>  &#125;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span></span><br><span class="language-xml">        &#123;/* .bind第一个参数绑定this指向，第二个参数是传递的参数 */&#125;</span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;this.handleClick.bind(this,</span> <span class="hljs-attr">this.state.name</span>)&#125;&gt;</span></span><br><span class="language-xml">          event</span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>.bind 第一个参数绑定 this 指向，第二个参数是传递的参数。<br>如果遇到事件冒泡需要阻止用<code>event.stopPropagation()</code></p>
+<h3 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a><a target="_blank" rel="noopener" href="https://taro-docs.jd.com/taro/docs/2.x/envs/#processenvtaro_env">运行环境</a></h3><h5 id="内置环境变量"><a href="#内置环境变量" class="headerlink" title="内置环境变量"></a>内置环境变量</h5><p>注意：环境变量在代码中的使用方式，<a target="_blank" rel="noopener" href="https://taro-docs.jd.com/taro/docs/2.x/best-practice#%E6%9C%80%E4%BD%B3%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F">参考</a><br>Taro 在编译时提供了一些内置的环境变量来帮助用户做一些特殊处理</p>
+<h4 id="process-env-TARO-ENV"><a href="#process-env-TARO-ENV" class="headerlink" title="process.env.TARO_ENV"></a>process.env.TARO_ENV</h4><p>用于判断当前编译类型，目前有 weapp / swan / alipay / h5 / rn / tt / qq / quickapp 八个取值，可以通过这个变量来书写对应一些不同环境下的代码，在编译时会将不属于当前编译类型的代码去掉，只保留当前编译类型下的代码，例如想在微信小程序和 H5 端分别引用不同资源</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Button</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><br><span class="hljs-keyword">const</span> isH5 = process.<span class="hljs-property">env</span>.<span class="hljs-property">TARO_ENV</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Event</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>  <span class="hljs-title function_">componentWillUnmount</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">if</span> (isH5) &#123;<br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;现在的环境是web&#x27;</span>)<br>      <span class="hljs-comment">// require(&quot;path/to/h5/name&quot;); //引入h5的样式或者资源也能加载不同的组件</span><br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;现在的环境是小程序端&#x27;</span>)<br>      <span class="hljs-comment">// require(&quot;path/to/weapp/name&quot;);</span><br>    &#125;<br>  &#125;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#x27;index&#x27;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>不同的运行环境可以引入不同的样式或者资源也能加载不同的组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">if</span> (process.<span class="hljs-property">env</span>.<span class="hljs-property">TARO_ENV</span> === <span class="hljs-string">&#x27;weapp&#x27;</span>) &#123;<br>  <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path/to/weapp/name&#x27;</span>)<br>&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (process.<span class="hljs-property">env</span>.<span class="hljs-property">TARO_ENV</span> === <span class="hljs-string">&#x27;h5&#x27;</span>) &#123;<br>  <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path/to/h5/name&#x27;</span>)<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>同时也可以在 JSX 中使用，决定不同端要加载的组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">render</span> () &#123;<br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span></span><br><span class="language-xml">      &#123;process.env.TARO_ENV === &#x27;weapp&#x27; &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">ScrollViewWeapp</span> /&gt;</span>&#125;</span><br><span class="language-xml">      &#123;process.env.TARO_ENV === &#x27;h5&#x27; &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">ScrollViewH5</span> /&gt;</span>&#125;</span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>  )<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="接口请求"><a href="#接口请求" class="headerlink" title="接口请求"></a><a target="_blank" rel="noopener" href="https://taro-docs.jd.com/taro/docs/2.x/apis/network/request/request">接口请求</a></h3><h4 id="Taro-request-option"><a href="#Taro-request-option" class="headerlink" title="Taro.request(option)"></a>Taro.request(option)</h4><p>src\pages\blog\blog.jsx</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Taro</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/taro&#x27;</span><br><span class="hljs-keyword">import</span> &#123; useState &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span>, <span class="hljs-title class_">Button</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tarojs/components&#x27;</span><br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">Blog</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">const</span> [articleList, setArticleList] = <span class="hljs-title function_">useState</span>([])<br><br>  <span class="hljs-keyword">const</span> <span class="hljs-title function_">testHandler</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>    <span class="hljs-title class_">Taro</span>.<span class="hljs-title function_">request</span>(&#123;<br>      <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;https://apiblog.jspang.com/default/getArticleList&#x27;</span>,<br>    &#125;).<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> &#123;<br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">data</span>)<br>      <span class="hljs-title function_">setArticleList</span>(res.<span class="hljs-property">data</span>.<span class="hljs-property">list</span>)<br>    &#125;)<br>  &#125;<br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>接口请求<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;testHandler&#125;</span>&gt;</span>获取数据<span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span></span><br><span class="language-xml">      &#123;articleList.map((item, index) =&gt; &#123;</span><br><span class="language-xml">        return <span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;index&#125;</span>&gt;</span>- &#123;item.title&#125; <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br><span class="language-xml">      &#125;)&#125;</span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span><br>  )<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">Blog</span><br></code></pre></div></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Taro/">Taro</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%A4%9A%E7%AB%AF%E5%B0%8F%E7%A8%8B%E5%BA%8F/">多端小程序</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/12/07/%E6%95%B0%E7%BB%84/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数组</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/23/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">
+                        <span class="hidden-mobile">垃圾回收</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#valine",
+          app_id: "wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz",
+          app_key: "BlsdS19vhoVr77n1TiE2diHr",
+          placeholder: "老师们，说点什么吧！",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: true,
+          serverURLs: "https://wvn0ubbm.lc-cn-n1-shared.com",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> |<i class="iconfont icon-love"></i>| <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        蜀ICP备2021012542号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

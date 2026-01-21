@@ -1,0 +1,634 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="jackhoo">
+  <meta name="keywords" content="">
+  
+  <title>UmiJS踩坑笔记 - jackhoo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/%E6%AC%A2%E8%BF%8E%E5%A4%A7%E5%AE%B6%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%8C%E8%AF%B7%E5%B0%BD%E6%83%85%E7%95%99%E8%A8%80%E5%90%A7%EF%BC%81/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/hybrid.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"13982720426.github.io","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz","app_key":"BlsdS19vhoVr77n1TiE2diHr","server_url":"https://wvn0ubbm.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>jackhoo的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/13982720426/">
+                <i class="iconfont icon-github-fill"></i>
+                GitHub
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg2.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="UmiJS踩坑笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      jackhoo
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-28 21:18" pubdate>
+        星期三, 四月 28日 2021, 9:18 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">UmiJS踩坑笔记</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：25 分钟前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="UmiJS-踩坑笔记"><a href="#UmiJS-踩坑笔记" class="headerlink" title="UmiJS 踩坑笔记"></a>UmiJS 踩坑笔记</h1><p><a target="_blank" rel="noopener" href="https://umijs.org/zh-CN">UmiJS</a>官方网站</p>
+<h2 id="UmiJS-快速上手"><a href="#UmiJS-快速上手" class="headerlink" title="UmiJS 快速上手"></a>UmiJS 快速上手</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2625525/1619615607819-3f8fffc7-323e-40f6-a748-4dc4ea86931c.png#clientId=u83cb3f88-d331-4&from=drop&id=u5afa3aa7&margin=%5Bobject%20Object%5D&name=UmiJS%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B1.png&originHeight=673&originWidth=531&originalType=binary&size=60366&status=done&style=none&taskId=ud835d141-fb42-432c-a714-1716b4c9270" srcset="/img/loading.gif" lazyload alt="UmiJS快速上手1.png"></p>
+<h2 id="官方未介绍目录结构"><a href="#官方未介绍目录结构" class="headerlink" title="官方未介绍目录结构"></a>官方未介绍目录结构</h2><p><img src="https://images.weserv.nl/?url=cdn.hbtap.cn/blog/images/1768985902705_bl5e7s.png" srcset="/img/loading.gif" lazyload alt="官方未介绍的目录结构.png"></p>
+<h2 id="常用配置"><a href="#常用配置" class="headerlink" title="常用配置"></a>常用配置</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2625525/1619615653598-9a2bca24-9270-4dfd-a96b-ab6b0290f88c.png#clientId=u83cb3f88-d331-4&from=drop&id=u901e1e7e&margin=%5Bobject%20Object%5D&name=%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE.png&originHeight=581&originWidth=807&originalType=binary&size=88764&status=done&style=none&taskId=u3a7b0986-0e23-4043-addb-c3898e019e1" srcset="/img/loading.gif" lazyload alt="常用配置.png"></p>
+<h2 id="第一坑"><a href="#第一坑" class="headerlink" title="第一坑:"></a>第一坑:</h2><p>问题场景</p>
+<h3 id="使用-umijs-umi-app-为模板，创建一个项目："><a href="#使用-umijs-umi-app-为模板，创建一个项目：" class="headerlink" title="使用 @umijs/umi-app 为模板，创建一个项目："></a>使用 @umijs/umi-app 为模板，创建一个项目：</h3><figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">yarn</span> create <span class="hljs-variable">@umijs</span>/umi-app<br></code></pre></div></td></tr></table></figure>
+
+<p>创建失败，报如下错误：</p>
+<p>yarn create @umijs/umi-app 报错：文件名、目录名或卷标语法不正确。</p>
+<figure class="highlight dsconfig"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dsconfig"><span class="hljs-string">think</span>@<span class="hljs-string">think-PC</span> <span class="hljs-string">MINGW64</span> /<span class="hljs-string">e</span>/<span class="hljs-string">zny-projects</span>/<span class="hljs-string">demo01-umi</span><br>$ <span class="hljs-string">yarn</span> <span class="hljs-string">create</span> @<span class="hljs-string">umijs</span>/<span class="hljs-string">umi-app</span><br><span class="hljs-string">yarn</span> <span class="hljs-string">create</span> <span class="hljs-string">v1</span>.<span class="hljs-string">22</span>.<span class="hljs-string">4</span><br>[<span class="hljs-string">1</span>/<span class="hljs-string">4</span>] <span class="hljs-string">Resolving</span> <span class="hljs-string">packages</span>...<br>[<span class="hljs-string">2</span>/<span class="hljs-string">4</span>] <span class="hljs-string">Fetching</span> <span class="hljs-string">packages</span>...<br><span class="hljs-string">info</span> <span class="hljs-string">fsevents</span>@<span class="hljs-string">2</span>.<span class="hljs-string">1</span>.<span class="hljs-string">2</span>: <span class="hljs-string">The</span> <span class="hljs-string">platform</span> <span class="hljs-string">&quot;win32&quot;</span> <span class="hljs-string">is</span> <span class="hljs-string">incompatible</span> <span class="hljs-string">with</span> <span class="hljs-string">this</span> <span class="hljs-string">module</span>.<br><span class="hljs-string">info</span> <span class="hljs-string">&quot;fsevents@2.1.2&quot;</span> <span class="hljs-string">is</span> <span class="hljs-string">an</span> <span class="hljs-string">optional</span> <span class="hljs-string">dependency</span> <span class="hljs-string">and</span> <span class="hljs-string">failed</span> <span class="hljs-string">compatibility</span> <span class="hljs-string">check</span>. <span class="hljs-string">Excluding</span> <span class="hljs-string">it</span> <span class="hljs-string">from</span> <span class="hljs-string">installation</span>.<br>[<span class="hljs-string">3</span>/<span class="hljs-string">4</span>] <span class="hljs-string">Linking</span> <span class="hljs-string">dependencies</span>...<br><span class="hljs-string">warning</span> <span class="hljs-string">&quot;@umijs/create-umi-app &gt; @umijs/utils &gt; @babel/register@7.8.6&quot;</span> <span class="hljs-string">has</span> <span class="hljs-string">unmet</span> <span class="hljs-string">peer</span> <span class="hljs-string">dependency</span> <span class="hljs-string">&quot;@babel/core@^7.0.0-0&quot;</span>.<br>[<span class="hljs-string">4</span>/<span class="hljs-string">4</span>] <span class="hljs-string">Building</span> <span class="hljs-string">fresh</span> <span class="hljs-string">packages</span>...<br><span class="hljs-string">success</span> <span class="hljs-string">Installed</span> <span class="hljs-string">&quot;@umijs/create-umi-app@3.0.12&quot;</span> <span class="hljs-string">with</span> <span class="hljs-string">binaries</span>:<br>      - <span class="hljs-built_in">create-umi-app</span><br>文件名、目录名或卷标语法不正确。<br><span class="hljs-string">error</span> <span class="hljs-string">Command</span> <span class="hljs-string">failed</span>.<br><span class="hljs-string">Exit</span> <span class="hljs-string">code</span>: <span class="hljs-string">1</span><br><span class="hljs-string">Command</span>: <span class="hljs-string">D</span>:\<span class="hljs-string">Develop</span>\<span class="hljs-string">nodejs</span>\<span class="hljs-string">node_global</span>\<span class="hljs-string">bin</span>\<span class="hljs-built_in">create-umi-app</span><br><span class="hljs-string">Arguments</span>:<br><span class="hljs-string">Directory</span>: <span class="hljs-string">E</span>:\<span class="hljs-string">zny-projects</span>\<span class="hljs-string">demo01-umi</span><br><span class="hljs-string">Output</span>:<br><br><span class="hljs-string">info</span> <span class="hljs-string">Visit</span> <span class="hljs-string">https</span>://<span class="hljs-string">yarnpkg</span>.<span class="hljs-string">com</span>/<span class="hljs-string">en</span>/<span class="hljs-string">docs</span>/<span class="hljs-string">cli</span>/<span class="hljs-string">create</span> <span class="hljs-string">for</span> <span class="hljs-string">documentation</span> <span class="hljs-string">about</span> <span class="hljs-string">this</span> <span class="hljs-string">command</span>.<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="解决：参考-https-github-com-yaoningvital-blog-issues-207"><a href="#解决：参考-https-github-com-yaoningvital-blog-issues-207" class="headerlink" title="解决：参考 https://github.com/yaoningvital/blog/issues/207"></a>解决：参考 <a target="_blank" rel="noopener" href="https://github.com/yaoningvital/blog/issues/207">https://github.com/yaoningvital/blog/issues/207</a></h3><h4 id="1、我是用-npm-安装的-yarn-："><a href="#1、我是用-npm-安装的-yarn-：" class="headerlink" title="1、我是用 npm 安装的 yarn ："></a>1、我是用 npm 安装的 yarn ：</h4><p><code>npm i yarn tyarn -g</code></p>
+<h4 id="2、我重新设定了-npm-全局包的安装位置-和-缓存位置。"><a href="#2、我重新设定了-npm-全局包的安装位置-和-缓存位置。" class="headerlink" title="2、我重新设定了 npm 全局包的安装位置 和 缓存位置。"></a>2、我重新设定了 npm 全局包的安装位置 和 缓存位置。</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 查看 npm 全局包的安装位置</span><br>npm config get prefix    <span class="hljs-comment">// D:\Develop\nodejs\node_global</span><br><span class="hljs-comment">// 查看 npm 缓存位置</span><br>npm config get cache   <span class="hljs-comment">// D:\Develop\nodejs\node_cache</span><br></code></pre></div></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/17041261/77241598-5e534680-6c2f-11ea-9266-55213f7e8ace.png"><img src="https://images.weserv.nl/?url=cdn.hbtap.cn/blog/images/1768985920366_nioo32.png" srcset="/img/loading.gif" lazyload></a></p>
+<h4 id="3、查看-yarn-命令的目录："><a href="#3、查看-yarn-命令的目录：" class="headerlink" title="3、查看 yarn 命令的目录："></a>3、查看 yarn 命令的目录：</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">yarn <span class="hljs-variable language_">global</span> bin<br><span class="hljs-comment">// D:\Develop\nodejs\node_global\bin</span><br></code></pre></div></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/17041261/77241622-b7bb7580-6c2f-11ea-82b6-2b8647d98d59.png"><img src="https://images.weserv.nl/?url=cdn.hbtap.cn/blog/images/1768985922424_j9qukc.png" srcset="/img/loading.gif" lazyload></a></p>
+<h4 id="4、将获取到的-yarn-命令的目录配置到环境变量-Path-上。"><a href="#4、将获取到的-yarn-命令的目录配置到环境变量-Path-上。" class="headerlink" title="4、将获取到的 yarn 命令的目录配置到环境变量 Path 上。"></a>4、将获取到的 yarn 命令的目录配置到环境变量 Path 上。</h4><p><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/17041261/77241558-97d78200-6c2e-11ea-9d16-7768b6498f9b.png"><img src="https://images.weserv.nl/?url=cdn.hbtap.cn/blog/images/1768985924544_2fuvo9.png" srcset="/img/loading.gif" lazyload></a><br>到这一步之后，我再尝试执行命令<code>yarn create @umijs/umi-app</code>，问题并没有解决，还是报同样的错误。</p>
+<h4 id="5、查看-yarn-的全局安装位置："><a href="#5、查看-yarn-的全局安装位置：" class="headerlink" title="5、查看 yarn 的全局安装位置："></a>5、查看 yarn 的全局安装位置：</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">yarn <span class="hljs-variable language_">global</span> bin<br><span class="hljs-comment">// D:\Develop\nodejs\node_global\bin</span><br></code></pre></div></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/17041261/77241671-88593880-6c30-11ea-90d1-2e56ccd5d0a2.png"><img src="https://images.weserv.nl/?url=cdn.hbtap.cn/blog/images/1768985929200_lohs9s.png" srcset="/img/loading.gif" lazyload></a><br>可以发现，yarn 的全局安装位置 和 bin 的位置不一致。</p>
+<h4 id="6、修改-yarn-的全局安装位置"><a href="#6、修改-yarn-的全局安装位置" class="headerlink" title="6、修改 yarn 的全局安装位置"></a>6、修改 yarn 的全局安装位置</h4><p>将 yarn 的全局安装位置 修改为和 npm 的一致。<br>因为我的 npm 的位置是 “D:\Develop\nodejs”，那么我在 “D:\Develop” 下创建一个 yarn 文件夹，在 yarn 文件夹下再创建一个 global 文件夹和一个 cache 文件夹。<br>然后执行下面的命令，来设置 yarn 的全局安装位置和 缓存位置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">yarn config set <span class="hljs-variable language_">global</span>-folder <span class="hljs-string">&quot;D:\Develop\yarn\global&quot;</span><br>yarn config set cache-folder <span class="hljs-string">&quot;D:\Develop\yarn\cache&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/17041261/77241766-01a55b00-6c32-11ea-975e-142238576a38.png"><img src="https://images.weserv.nl/?url=cdn.hbtap.cn/blog/images/1768985930515_3xvaox.png" srcset="/img/loading.gif" lazyload></a><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/17041261/77241782-24377400-6c32-11ea-8cfb-7d44bb437e61.png"><img src="https://images.weserv.nl/?url=cdn.hbtap.cn/blog/images/1768985932006_9ihls3.png" srcset="/img/loading.gif" lazyload></a></p>
+<h4 id="7、再查看-yarn-的全局安装位置-和缓存位置"><a href="#7、再查看-yarn-的全局安装位置-和缓存位置" class="headerlink" title="7、再查看 yarn 的全局安装位置 和缓存位置"></a>7、再查看 yarn 的全局安装位置 和缓存位置</h4><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">$ yarn <span class="hljs-variable language_">global</span> dir<br><span class="hljs-comment">// D:\Develop\yarn\global</span><br><br><br>$ yarn cache dir<br><span class="hljs-comment">// D:\Develop\yarn\cache\v6</span><br></code></pre></div></td></tr></table></figure>
+
+<p>说明上一步的修改操作成功。</p>
+<h4 id="8、再执行-yarn-create-umijs-umi-app"><a href="#8、再执行-yarn-create-umijs-umi-app" class="headerlink" title="8、再执行 yarn create @umijs/umi-app"></a>8、再执行 yarn create @umijs/umi-app</h4><p>再执行 ：<br><code>yarn create @umijs/umi-app</code><br>操作成功：<img src="https://images.weserv.nl/?url=cdn.hbtap.cn/blog/images/1768986116546_55p6u6.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="第二坑："><a href="#第二坑：" class="headerlink" title="第二坑："></a>第二坑：</h2><h3 id="在yarn-build打包好，准备在serve服务器上本地验证"><a href="#在yarn-build打包好，准备在serve服务器上本地验证" class="headerlink" title="在yarn build打包好，准备在serve服务器上本地验证"></a>在<code>yarn build</code>打包好，准备在<code>serve</code>服务器上本地验证</h3><p>umi 官方文档显示</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">本地验证<br>发布之前，可以通过 serve 做本地验证，<br><br><br>$ yarn <span class="hljs-variable language_">global</span> add serve<br>$ serve ./dist<br><br>   ┌────────────────────────────────────────────────────┐<br>   │                                                    │<br>   │   <span class="hljs-title class_">Serving</span>!                                         │<br>   │                                                    │<br>   │   - <span class="hljs-title class_">Local</span>:            <span class="hljs-attr">http</span>:<span class="hljs-comment">//localhost:5000        │</span><br>   │   - <span class="hljs-title class_">On</span> <span class="hljs-title class_">Your</span> <span class="hljs-title class_">Network</span>:  <span class="hljs-attr">http</span>:<span class="hljs-comment">//192.168.12.34:5000    │</span><br>   │                                                    │<br>   │   <span class="hljs-title class_">Copied</span> local address to clipboard!               │<br>   │                                                    │<br>   └────────────────────────────────────────────────────┘<br></code></pre></div></td></tr></table></figure>
+
+<p>结果在 vscode 下报错</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable constant_">PS</span> <span class="hljs-attr">E</span>:\前端自学\react1\融职商场后台管理\umijs\myapp&gt; serve --version<br>serve : 无法将“serve”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，<br>如果包括路径，请确保路径正确，然后再试一次。<br>所在位置 行:<span class="hljs-number">1</span> 字符: <span class="hljs-number">1</span><br>+ serve --version<br>+ ~~~~~<br>    + <span class="hljs-title class_">CategoryInfo</span>          : <span class="hljs-title class_">ObjectNotFound</span>: (<span class="hljs-attr">serve</span>:<span class="hljs-title class_">String</span>) [], <span class="hljs-title class_">CommandNotFoundException</span><br>    + <span class="hljs-title class_">FullyQualifiedErrorId</span> : <span class="hljs-title class_">CommandNotFoundException</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="解决：最后在改在-CMD-命令行里执行成功"><a href="#解决：最后在改在-CMD-命令行里执行成功" class="headerlink" title="解决：最后在改在 CMD 命令行里执行成功"></a>解决：最后在改在 CMD 命令行里执行成功</h3><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title class_">Microsoft</span> <span class="hljs-title class_">Windows</span> [版本 <span class="hljs-number">10.0</span><span class="hljs-number">.19041</span><span class="hljs-number">.685</span>]<br>(c) <span class="hljs-number">2020</span> <span class="hljs-title class_">Microsoft</span> <span class="hljs-title class_">Corporation</span>. 保留所有权利。<br><br><span class="hljs-attr">E</span>:\前端自学\react1\融职商场后台管理\umijs\myapp&gt;serve ./dist<br><br>   ┌────────────────────────────────────────────────────┐<br>   │                                                    │<br>   │   <span class="hljs-title class_">Serving</span>!                                         │<br>   │                                                    │<br>   │   - <span class="hljs-title class_">Local</span>:            <span class="hljs-attr">http</span>:<span class="hljs-comment">//localhost:5000        │</span><br>   │   - <span class="hljs-title class_">On</span> <span class="hljs-title class_">Your</span> <span class="hljs-title class_">Network</span>:  <span class="hljs-attr">http</span>:<span class="hljs-comment">//192.168.43.198:5000   │</span><br>   │                                                    │<br>   │   <span class="hljs-title class_">Copied</span> local address to clipboard!               │<br>   │                                                    │<br>   └────────────────────────────────────────────────────┘<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="第三坑："><a href="#第三坑：" class="headerlink" title="第三坑："></a>第三坑：</h2><h3 id="配置publicPath、outputPath"><a href="#配置publicPath、outputPath" class="headerlink" title="配置publicPath、outputPath"></a>配置<code>publicPath</code>、<code>outputPath</code></h3><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-attr">publicPath</span>:<span class="hljs-string">&#x27;https://xxx.com/cdn/&#x27;</span>,<br><span class="hljs-attr">outputPath</span>:<span class="hljs-string">&#x27;build&#x27;</span>,<br></code></pre></div></td></tr></table></figure>
+
+<p><code>publicPath</code>:暂时无效果<br><code>outputPath</code>:未新建并打包到<code>build</code></p>
+<h3 id="解决：重新启动项目，需要多试几次publicPath、outputPath，"><a href="#解决：重新启动项目，需要多试几次publicPath、outputPath，" class="headerlink" title="解决：重新启动项目，需要多试几次publicPath、outputPath，"></a>解决：重新启动项目，需要多试几次<code>publicPath</code>、<code>outputPath</code>，</h3><h2 id="第四坑："><a href="#第四坑：" class="headerlink" title="第四坑："></a>第四坑：</h2><h3 id="使用dva插件时，执行命令umi-dva-list-model时："><a href="#使用dva插件时，执行命令umi-dva-list-model时：" class="headerlink" title="使用dva插件时，执行命令umi dva list model时："></a>使用<code>dva</code>插件时，执行命令<code>umi dva list model</code>时：</h3><p>umi : 无法将“umi”项识别为 cmdlet、函数、脚本文件或可运行程序的名称</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">umi : 无法将“umi”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如果包括路径，请确保路径正确，然后再试一次。<br>+ umi dva list model<br>+ ~~~<br>    + <span class="hljs-title class_">CategoryInfo</span>          : <span class="hljs-title class_">ObjectNotFound</span>: (<span class="hljs-attr">umi</span>:<span class="hljs-title class_">String</span>) [], <span class="hljs-title class_">CommandNotFoundException</span><br>    + <span class="hljs-title class_">FullyQualifiedErrorId</span> : <span class="hljs-title class_">CommandNotFoundException</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="解决：umi-dva-list-model命令前加上yarn，"><a href="#解决：umi-dva-list-model命令前加上yarn，" class="headerlink" title="解决：umi dva list model命令前加上yarn，"></a>解决：<code>umi dva list model</code>命令前加上<code>yarn</code>，</h3><p>使用<code>npm</code>也不行。<br>执行结果如下：<br><code>yarn umi dva list model </code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">yarn run v1<span class="hljs-number">.22</span><span class="hljs-number">.5</span><br>$ <span class="hljs-attr">E</span>:\umijs\myapp\node_modules\.<span class="hljs-property">bin</span>\umi dva list model<br><br>  <span class="hljs-title class_">Models</span> <span class="hljs-keyword">in</span> your <span class="hljs-attr">project</span>:<br><br><br>  <span class="hljs-title class_">Totally</span> <span class="hljs-number">0.</span><br><br><span class="hljs-title class_">Done</span> <span class="hljs-keyword">in</span> <span class="hljs-number">0.</span>92s.<br></code></pre></div></td></tr></table></figure>
+
+<p>umijsDemo <a target="_blank" rel="noopener" href="https://github.com/13982720426/UmiJS-Learning-record.git">https://github.com/13982720426/UmiJS-Learning-record.git</a></p>
+<h2 id="第五坑："><a href="#第五坑：" class="headerlink" title="第五坑："></a>第五坑：</h2><h3 id="使用-umi-ui-时配置-UMI-UI-1-umi-dev"><a href="#使用-umi-ui-时配置-UMI-UI-1-umi-dev" class="headerlink" title="使用 umi-ui 时配置 UMI_UI=1 umi dev"></a>使用 umi-ui 时配置 UMI_UI=1 umi dev</h3><p>在 umi_ui\package.json 中配置了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-string">&quot;start:umi-ui&quot;</span>: <span class="hljs-string">&quot;UMI_UI=1 umi dev&quot;</span>,<br></code></pre></div></td></tr></table></figure>
+
+<p>但是使用<code>yarn start:umi-ui</code>启动时 ‘UMI_UI’ 不是内部或外部命令，也不是可运行的程序</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">yarn run v1<span class="hljs-number">.22</span><span class="hljs-number">.5</span><br>$ <span class="hljs-variable constant_">UMI_UI</span>=<span class="hljs-number">1</span> umi dev<br><span class="hljs-string">&#x27;UMI_UI&#x27;</span> 不是内部或外部命令，也不是可运行的程序<br>或批处理文件。<br>error <span class="hljs-title class_">Command</span> failed <span class="hljs-keyword">with</span> exit code <span class="hljs-number">1.</span><br>info <span class="hljs-title class_">Visit</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//yarnpkg.com/en/docs/cli/run for documentation about this command.</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="解决：最后直接使用yarn-start命令"><a href="#解决：最后直接使用yarn-start命令" class="headerlink" title="解决：最后直接使用yarn start命令"></a>解决：最后直接使用<code>yarn start</code>命令</h3><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">yarn run v1<span class="hljs-number">.22</span><span class="hljs-number">.5</span><br>$ umi dev<br>🚀 <span class="hljs-title class_">Starting</span> <span class="hljs-title class_">Umi</span> <span class="hljs-variable constant_">UI</span> <span class="hljs-keyword">using</span> umi@<span class="hljs-number">3.4</span><span class="hljs-number">.14</span>...<br>🌈 <span class="hljs-title class_">Umi</span> <span class="hljs-variable constant_">UI</span> mini <span class="hljs-title class_">Ready</span> on port <span class="hljs-number">3000.</span><br><span class="hljs-title class_">Starting</span> the development server...<br><br>√ <span class="hljs-title class_">Webpack</span><br>  <span class="hljs-title class_">Compiled</span> successfully <span class="hljs-keyword">in</span> <span class="hljs-number">4.</span>46s<br><br> <span class="hljs-variable constant_">DONE</span>  <span class="hljs-title class_">Compiled</span> successfully <span class="hljs-keyword">in</span> 4461ms                                                                                                            下午<span class="hljs-number">9</span>:<span class="hljs-number">00</span>:<span class="hljs-number">37</span><br><br>  <span class="hljs-title class_">App</span> running <span class="hljs-attr">at</span>:<br>  - <span class="hljs-title class_">Local</span>:   <span class="hljs-attr">http</span>:<span class="hljs-comment">//localhost:8000 (copied to clipboard)</span><br>  - <span class="hljs-title class_">Network</span>: <span class="hljs-attr">http</span>:<span class="hljs-comment">//192.168.43.198:8000</span><br> <span class="hljs-variable constant_">WAIT</span>  <span class="hljs-title class_">Compiling</span>...                                                                                                                               下午<span class="hljs-number">9</span>:<span class="hljs-number">00</span>:<span class="hljs-number">37</span><br><br>√ <span class="hljs-title class_">Webpack</span><br>  <span class="hljs-title class_">Compiled</span> successfully <span class="hljs-keyword">in</span> <span class="hljs-number">252.</span>95ms<br><br> <span class="hljs-variable constant_">DONE</span>  <span class="hljs-title class_">Compiled</span> successfully <span class="hljs-keyword">in</span> 253ms<br></code></pre></div></td></tr></table></figure>
+
+<p>打开浏览器结果成功了<br><img src="https://images.weserv.nl/?url=cdn.hbtap.cn/blog/images/1768985951596_s3ko5y.png" srcset="/img/loading.gif" lazyload alt="浏览器运行成功.png"></p>
+<p>点击右下角悬浮球，就出现了控制台<br><img src="https://images.weserv.nl/?url=cdn.hbtap.cn/blog/images/1768985953213_w748l9.png" srcset="/img/loading.gif" lazyload alt="打开umi-ui控制台.png"></p>
+<p>umi-uiDome <a target="_blank" rel="noopener" href="https://github.com/13982720426/umi-ui.git">https://github.com/13982720426/umi-ui.git</a></p>
+<h2 id="第六坑："><a href="#第六坑：" class="headerlink" title="第六坑："></a>第六坑：</h2><h3 id="antd-pro-结合-uimjs-使用，安装工作台模板时报错"><a href="#antd-pro-结合-uimjs-使用，安装工作台模板时报错" class="headerlink" title="antd pro 结合 uimjs 使用，安装工作台模板时报错"></a>antd pro 结合 uimjs 使用，安装工作台模板时报错</h3><p><img src="https://images.weserv.nl/?url=cdn.hbtap.cn/blog/images/1768985956525_3nysxz.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>终端显示<code>Execute task error Error: Error: Command failed: npm install -d bizcharts@^3.5.3-beta.0 prop-types@^15.5.10 --registry=[https://registry.npm.taobao.org](https://registry.npm.taobao.org) --save</code><br>安装失败</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title class_">Bundle</span> <span class="hljs-keyword">with</span> webpack <span class="hljs-number">5.</span>..<br><span class="hljs-title class_">Execute</span> task error <span class="hljs-title class_">Error</span>: <span class="hljs-title class_">Error</span>: <span class="hljs-title class_">Command</span> <span class="hljs-attr">failed</span>: npm install -d bizcharts@^<span class="hljs-number">3.5</span><span class="hljs-number">.3</span>-beta<span class="hljs-number">.0</span> prop-types@^<span class="hljs-number">15.5</span><span class="hljs-number">.10</span> --registry=<span class="hljs-attr">https</span>:<span class="hljs-comment">//registry.npm.taobao.org --save</span><br><span class="hljs-literal">undefined</span><br><span class="hljs-literal">undefined</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="解决：在终端使用-cnpm-手动安装"><a href="#解决：在终端使用-cnpm-手动安装" class="headerlink" title="解决：在终端使用 cnpm 手动安装"></a>解决：在终端使用 cnpm 手动安装</h3><p><code>cnpm install -d bizcharts@^3.5.3-beta.0 prop-types@^15.5.10 --registry=[https://registry.npm.taobao.org](https://registry.npm.taobao.org) --save</code><br>安装成功</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">[<span class="hljs-number">1</span>/<span class="hljs-number">2</span>] prop-types@^<span class="hljs-number">15.5</span><span class="hljs-number">.10</span> installed at node_modules\_prop-types@<span class="hljs-number">15.7</span><span class="hljs-number">.2</span>@prop-types<br>[<span class="hljs-number">2</span>/<span class="hljs-number">2</span>] bizcharts@^<span class="hljs-number">3.5</span><span class="hljs-number">.3</span>-beta<span class="hljs-number">.0</span> installed at node_modules\_bizcharts@<span class="hljs-number">3.5</span><span class="hljs-number">.9</span>@bizcharts<br><span class="hljs-title class_">Recently</span> <span class="hljs-title function_">updated</span> (since <span class="hljs-number">2021</span>-<span class="hljs-number">05</span>-<span class="hljs-number">02</span>): <span class="hljs-number">9</span> <span class="hljs-title function_">packages</span> (detail see file <span class="hljs-attr">E</span>:\前端自学\react1\融职商场后台管理\antd_pro_simple\node_modules\.<span class="hljs-property">recently_updates</span>.<span class="hljs-property">txt</span>)<br>  <span class="hljs-title class_">Today</span>:<br>    → bizcharts@<span class="hljs-number">3.5</span><span class="hljs-number">.9</span> › @antv/g2@<span class="hljs-number">3.5</span><span class="hljs-number">.15</span> › venn.<span class="hljs-property">js</span>@<span class="hljs-number">0.2</span><span class="hljs-number">.20</span> › fmin@<span class="hljs-number">0.0</span><span class="hljs-number">.2</span> › tape@<span class="hljs-number">4.13</span><span class="hljs-number">.3</span> › string.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">trim</span>@<span class="hljs-number">1.2</span><span class="hljs-number">.4</span> › es-abstract@<span class="hljs-number">1.18</span><span class="hljs-number">.0</span> › es-to-primitive@<span class="hljs-number">1.2</span><span class="hljs-number">.1</span> › is-symbol@^<span class="hljs-number">1.0</span><span class="hljs-number">.2</span>(<span class="hljs-number">1.0</span><span class="hljs-number">.4</span>) (<span class="hljs-number">03</span>:<span class="hljs-number">12</span>:<span class="hljs-number">11</span>)<br><span class="hljs-title class_">All</span> packages <span class="hljs-title function_">installed</span> (<span class="hljs-number">117</span> packages installed <span class="hljs-keyword">from</span> npm registry, used 8s(network 8s), speed <span class="hljs-number">816.</span>88kB/s, json <span class="hljs-number">113</span>(<span class="hljs-number">383.</span>88kB), tarball <span class="hljs-number">5.</span>97MB)<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="第七坑："><a href="#第七坑：" class="headerlink" title="第七坑："></a>第七坑：</h2><h3 id="在-mock-文件夹中，无法直接打印数据在浏览器上显示"><a href="#在-mock-文件夹中，无法直接打印数据在浏览器上显示" class="headerlink" title="在 mock 文件夹中，无法直接打印数据在浏览器上显示"></a>在 mock 文件夹中，无法直接打印数据在浏览器上显示</h3><p>官方文档解释很少，在<code>express</code>第四版上查看<br><img src="https://images.weserv.nl/?url=cdn.hbtap.cn/blog/images/1768985958619_h7ls74.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>mock 类似后端，无法直接在浏览器中 consloe.log(req)打印出数据</p>
+<h3 id="解决：查看express官网，进去-v4-版本-Request-目录"><a href="#解决：查看express官网，进去-v4-版本-Request-目录" class="headerlink" title="解决：查看express官网，进去 v4 版本 Request 目录"></a>解决：查看<a target="_blank" rel="noopener" href="https://www.expressjs.com.cn/4x/api.html">express</a>官网，进去 v4 版本 Request 目录</h3><p>在 Request 目录下按住 ctrl+f 搜索 app.post<img src="https://images.weserv.nl/?url=cdn.hbtap.cn/blog/images/1768985962184_a2640w.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>得知在<code>req.body</code>可以获取到 mock 中的数据，并能通过<code>console.log(req.body)</code>打印到浏览器上</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>)<br><br><span class="hljs-keyword">var</span> app = <span class="hljs-title function_">express</span>()<br><br>app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">json</span>()) <span class="hljs-comment">// for parsing application/json</span><br>app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">urlencoded</span>(&#123; <span class="hljs-attr">extended</span>: <span class="hljs-literal">true</span> &#125;)) <span class="hljs-comment">// for parsing application/x-www-form-urlencoded</span><br><br>app.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/profile&#x27;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">req, res, next</span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(req.<span class="hljs-property">body</span>)<br>  res.<span class="hljs-title function_">json</span>(req.<span class="hljs-property">body</span>)<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/UI/">UI</a>
+                    
+                      <a class="hover-with-bg" href="/categories/UI/Umi/">Umi</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/UmiJS/">UmiJS</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/05/05/%E6%B5%85%E4%BA%86%E8%A7%A3-React%E4%B8%BA%E4%BD%95%E9%9C%80%E8%A6%81%E8%AE%BE%E5%AE%9A%E5%94%AF%E4%B8%80key%E5%80%BC/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">浅了解_React为何需要设定唯一key值</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/26/React-hooks/">
+                        <span class="hidden-mobile">React-Hooks</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#valine",
+          app_id: "wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz",
+          app_key: "BlsdS19vhoVr77n1TiE2diHr",
+          placeholder: "老师们，说点什么吧！",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: true,
+          serverURLs: "https://wvn0ubbm.lc-cn-n1-shared.com",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> |<i class="iconfont icon-love"></i>| <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        蜀ICP备2021012542号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

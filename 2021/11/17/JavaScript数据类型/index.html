@@ -1,0 +1,959 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="jackhoo">
+  <meta name="keywords" content="">
+  
+  <title>JavaScript数据类型 - jackhoo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/%E6%AC%A2%E8%BF%8E%E5%A4%A7%E5%AE%B6%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%8C%E8%AF%B7%E5%B0%BD%E6%83%85%E7%95%99%E8%A8%80%E5%90%A7%EF%BC%81/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/hybrid.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"13982720426.github.io","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz","app_key":"BlsdS19vhoVr77n1TiE2diHr","server_url":"https://wvn0ubbm.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>jackhoo的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/13982720426/">
+                <i class="iconfont icon-github-fill"></i>
+                GitHub
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg2.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JavaScript数据类型">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      jackhoo
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-17 18:39" pubdate>
+        星期三, 十一月 17日 2021, 6:39 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      93
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JavaScript数据类型</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2 小时前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="JavaScript-数据类型"><a href="#JavaScript-数据类型" class="headerlink" title="JavaScript 数据类型"></a>JavaScript 数据类型</h2><h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h3><p>ECMAScript 有 7 种简单数据类型（也称为原始类型）：<br><strong>Undefined</strong>、 <strong>Null</strong>、 <strong>Boolean</strong>、 <strong>Number</strong>、 <strong>String</strong>、 <strong>Symbol</strong> 和 <strong>BigInt</strong>(ES2020) 。<br>Symbol（符号）是 ECMAScript 6 新增的，BigInt 是 ES2020 新增<br>还有一种复杂数据类型叫 <strong>Object</strong>（对象）。Object 是一种无序名值对的集合。<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/BigInt"><strong>BigInt</strong></a> 是一种内置对象，它提供了一种方法来表示大于 253 - 1 的整数。这原本是 Javascript 中可以用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a> 表示的最大数字。<strong>BigInt</strong> 可以表示任意大的整数。可以用在一个整数字面量后面加 n 的方式定义一个 BigInt ，如：10n，或者调用函数 BigInt()。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> theBiggestInt = <span class="hljs-number">9007199254740991n</span><br><span class="hljs-comment">//使用 typeof 测试时， BigInt 对象返回 &quot;bigint&quot;</span><br><span class="hljs-keyword">typeof</span> <span class="hljs-number">1n</span> === <span class="hljs-string">&#x27;bigint&#x27;</span> <span class="hljs-comment">// true</span><br><span class="hljs-keyword">typeof</span> <span class="hljs-title class_">BigInt</span>(<span class="hljs-string">&#x27;1&#x27;</span>) === <span class="hljs-string">&#x27;bigint&#x27;</span> <span class="hljs-comment">// true</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="原始值与引用值"><a href="#原始值与引用值" class="headerlink" title="原始值与引用值"></a>原始值与引用值</h3><p>ECMAScript 变量可以包含两种不同类型的数据：原始值和引用值。<strong>原始值</strong>（primitive value）就是最简单的数据，<strong>引用值</strong>（reference value）则是由多个值构成的对象<br>​</p>
+<p><strong>原始值(基本类型)</strong> ：<strong>Undefined</strong>、 <strong>Null</strong>、 <strong>Boolean</strong>、 <strong>Number</strong>、 <strong>String</strong>、 <strong>Symbol <strong>和 <strong>BigInt</strong>(ES2020)。保存原始值的变量是 <strong>按值</strong>（by value）访问的，因为我们操作的就是存储在变量中的实际值。 特点：</strong>直接存储在栈(stack)中的数据</strong></p>
+<p><strong>引用值(引用数据类型)<strong>：Object、Array、Function。<br>引用值是保存在内存中的对象。 在操作对象时，实际上操作的是对该对象的</strong>引用</strong>（reference）而非实际的对象本身。为此，保存引用值的变量是<strong>按引用</strong>（by reference）访问的。 特点：<strong>存储的是该对象在栈中引用，真实的数据存放在堆内存里</strong><br>​</p>
+<h4 id="动态属性"><a href="#动态属性" class="headerlink" title="动态属性"></a>动态属性</h4><p>原始值和引用值的定义方式很类似，都是创建一个变量，然后给它赋一个值。对于引用值而言，可以随时添加、修改和删除其属性和方法。 在此之后，就可以访问这个新属性，直到对象被销毁或属性被显式地删除。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> person = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>()<br>person.<span class="hljs-property">name</span> = <span class="hljs-string">&#x27;Nicholas&#x27;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(person.<span class="hljs-property">name</span>) <span class="hljs-comment">// &quot;Nicholas&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>原始值不能有属性，尽管尝试给原始值添加属性不会报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> name = <span class="hljs-string">&#x27;Nicholas&#x27;</span><br>name.<span class="hljs-property">age</span> = <span class="hljs-number">27</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(name.<span class="hljs-property">age</span>) <span class="hljs-comment">// undefined</span><br></code></pre></div></td></tr></table></figure>
+
+<p>只有引用值可以动态添加后面可以使用的属性。原始类型的初始化可以只使用原始字面量形式。<br>如果使用的是 new 关键字，则 JavaScript 会创建一个 Object 类型的实例，但其行为类似原始值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> name1 = <span class="hljs-string">&#x27;Nicholas&#x27;</span><br><span class="hljs-keyword">let</span> name2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&#x27;Matt&#x27;</span>)<br>name1.<span class="hljs-property">age</span> = <span class="hljs-number">27</span><br>name2.<span class="hljs-property">age</span> = <span class="hljs-number">26</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(name1.<span class="hljs-property">age</span>) <span class="hljs-comment">// undefined</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(name2.<span class="hljs-property">age</span>) <span class="hljs-comment">// 26</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> name1) <span class="hljs-comment">// string</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> name2) <span class="hljs-comment">// object</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="复制值"><a href="#复制值" class="headerlink" title="复制值"></a>复制值</h4><p>在通过变量把一个原始值赋值到另一个变量时，原始值会被复制到新变量的位置。 这两个变量可以独立使用，互不干扰</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num1 = <span class="hljs-number">5</span><br><span class="hljs-keyword">let</span> num2 = num1<br></code></pre></div></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/11/20/FTl7hLmHZAiIUyz.png#crop=0&crop=0&crop=1&crop=1&id=nXFhP&originHeight=346&originWidth=440&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload><br>在把引用值从一个变量赋给另一个变量时，存储在变量中的值也会被复制到新变量所在的位置。区别在于，这里复制的值实际上是一个指针，它指向存储在堆内存中的对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> obj1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>()<br><span class="hljs-keyword">let</span> obj2 = obj1<br>obj1.<span class="hljs-property">name</span> = <span class="hljs-string">&#x27;Nicholas&#x27;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(obj2.<span class="hljs-property">name</span>) <span class="hljs-comment">// &quot;Nicholas&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/11/20/NQAtG1b2hedE8Ul.png#crop=0&crop=0&crop=1&crop=1&height=396&id=UfHpO&originHeight=329&originWidth=578&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=&width=696.0000610351562" srcset="/img/loading.gif" lazyload></p>
+<h4 id="传递参数"><a href="#传递参数" class="headerlink" title="传递参数"></a>传递参数</h4><p>ECMAScript 中所有函数的参数都是按值传递的。这意味着函数外的值会被复制到函数内部的参数中，就像从一个变量复制到另一个变量一样。如果是原始值，那么就跟原始值变量的复制一样，如果是引用值，那么就跟引用值变量的复制一样<br>在按引用传递参数时，值在内存中的位置会被保存在一个局部变量，这意味着对本地变量的修改会反映到函数外部。（这在 ECMAScript 中是不可能的。）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">addTen</span>(<span class="hljs-params">num</span>) &#123;<br>  num += <span class="hljs-number">10</span><br>  <span class="hljs-keyword">return</span> num<br>&#125;<br><span class="hljs-keyword">let</span> count = <span class="hljs-number">20</span><br><span class="hljs-keyword">let</span> result = <span class="hljs-title function_">addTen</span>(count)<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(count) <span class="hljs-comment">// 20，没有变化</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(result) <span class="hljs-comment">// 30</span><br></code></pre></div></td></tr></table></figure>
+
+<p>如果 num 是按引用传递的，那么 count 的值也会被修改为 30。这个事实在使用数值这样的原始值时是非常明显的 。如果变量中传递的是对象，就没那么清楚了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">setName</span>(<span class="hljs-params">obj</span>) &#123;<br>  obj.<span class="hljs-property">name</span> = <span class="hljs-string">&#x27;Nicholas&#x27;</span><br>&#125;<br><span class="hljs-keyword">let</span> person = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>()<br><span class="hljs-title function_">setName</span>(person)<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(person.<span class="hljs-property">name</span>) <span class="hljs-comment">// &quot;Nicholas</span><br></code></pre></div></td></tr></table></figure>
+
+<p>在函数内部， obj 和 person 都指向同一个对象。结果就是，即使对象是按值传进函数的， obj 也会通过引用问对象。当函数内部 给 obj 设置了 name 属性时，函数外部的对象也会反映这个变化， 因为 obj 指向的对象保存在全局作用域的堆内存上。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">setName</span>(<span class="hljs-params">obj</span>) &#123;<br>  obj.<span class="hljs-property">name</span> = <span class="hljs-string">&#x27;Nicholas&#x27;</span><br>  obj = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>()<br>  obj.<span class="hljs-property">name</span> = <span class="hljs-string">&#x27;Greg&#x27;</span><br>&#125;<br><span class="hljs-keyword">let</span> person = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>()<br><span class="hljs-title function_">setName</span>(person)<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(person.<span class="hljs-property">name</span>) <span class="hljs-comment">// &quot;Nicholas&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>这个例子前后唯一的变化就是 setName() 中多了两行代码， 将 obj 重新定义为一个有着不同 name 的新对象。当 person 传 入 setName() 时，其 name 属性被设置为 “Nicholas” 。然后变 量 obj 被设置为一个新对象且 name 属性被设置为 “Greg” 。如果 person 是按引用传递的，那么 person 应该自动将指针改为指向 name 为 “Greg” 的对象。可是，当我们再次访问 person.name 时，它的值是 “Nicholas” ，这表明函数中参数的值改变之后，原始的引用仍然没变。当 obj 在函数内部被重写时， 它变成了一个指向本地对象的指针。而那个本地对象在函数执行结束时就被销毁了。</p>
+<blockquote>
+<p>注意 ECMAScript 中函数的参数就是局部变量。</p>
+</blockquote>
+<h3 id="typeof-操作符"><a href="#typeof-操作符" class="headerlink" title="typeof 操作符"></a>typeof 操作符</h3><p>因为 ECMAScript 的类型系统是松散的，所以需要一种手段来确定任意变量的数据类型。typeof 操作符最适合用来判断一个变量是否为原始类型。更确切地说，它是判断一个变量是否为字符串、数值、布尔值或 undefined 的最好方式。如果值是对象或 null ，那么 typeof 返回 “object”<br>对一个值使用 typeof 操作符会返回下列字符串之一：</p>
+<ul>
+<li>“undefined” 表示值未定义；</li>
+<li>“boolean” 表示值为布尔值；</li>
+<li>“string” 表示值为字符串；</li>
+<li>“number” 表示值为数值；</li>
+<li>“object” 表示值为对象（而不是函数）或 null ；</li>
+<li>“function” 表示值为函数；</li>
+<li>“symbol” 表示值为符号。</li>
+<li>“bigint” 表示值为任意大的整数。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> s = <span class="hljs-string">&quot;Nicholas&quot;</span>;<br><span class="hljs-keyword">let</span> b = <span class="hljs-literal">true</span>;<br><span class="hljs-keyword">let</span> i = <span class="hljs-number">22</span>;<br><span class="hljs-keyword">let</span> u;<br><span class="hljs-keyword">let</span> a=<span class="hljs-number">1n</span><br><span class="hljs-keyword">let</span> n = <span class="hljs-literal">null</span>;<br><span class="hljs-keyword">let</span> o = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>();<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> s); <span class="hljs-comment">// string</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> i); <span class="hljs-comment">// number</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> b); <span class="hljs-comment">// boolean</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> u); <span class="hljs-comment">// undefined</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> a); <span class="hljs-comment">//	bigint</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> n); <span class="hljs-comment">// object</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> o); <span class="hljs-comment">// object</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>注意 typeof 在某些情况下返回的结果可能会让人费解，但技术上讲还是正确的。比如，调用 typeof null 返回的是 “object” 。这是因为特殊值 null 被认为是一个对空对象的引用。</p>
+</blockquote>
+<h3 id="instanceof-操作符"><a href="#instanceof-操作符" class="headerlink" title="instanceof 操作符"></a>instanceof 操作符</h3><p>typeof 虽然对原始值很有用，但它对引用值的用处不大。我们通常不关心一个值是不是对象，而是想知道它是什么类型的对象。为了解决这个问题，ECMAScript 提供了 instanceof 操作符</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">result = variable <span class="hljs-keyword">instanceof</span> constructor<br></code></pre></div></td></tr></table></figure>
+
+<p>如果变量是给定引用类型的实例，则 instanceof 操作符返回 true</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(person <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Object</span>); <span class="hljs-comment">// 变量persion是Object吗？</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(colors <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Array</span>); <span class="hljs-comment">// 变量colors是Array吗？</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(pattern <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">RegExp</span>); <span class="hljs-comment">// 变量pattern是RegExp吗？</span><br></code></pre></div></td></tr></table></figure>
+
+<p>所有引用值都是 Object 的实例，因此通过 instanceof 操作符检测任何引用值和 Object 构造函数都会返回 true 。类似地，如果用 instanceof 检测原始值，则始终会返回 false ，因为原始值不是对象</p>
+<h3 id="Undefined-类型"><a href="#Undefined-类型" class="headerlink" title="Undefined 类型"></a>Undefined 类型</h3><p>Undefined 类型只有一个值，就是特殊值 undefined 。当使 用 var 或 let 声明了变量但没有初始化时，就相当于给变量赋予 了 undefined 值：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> message<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(message == <span class="hljs-literal">undefined</span>) <span class="hljs-comment">// true</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>注意，包含 undefined 值的变量跟未定义变量是有区别的</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> message; <span class="hljs-comment">// 这个变量被声明了，只是值为undefined</span><br><br><span class="hljs-comment">// let age // 确保没有声明过这个变量</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(message); <span class="hljs-comment">// &quot;undefined&quot;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(age); <span class="hljs-comment">// 报错</span><br></code></pre></div></td></tr></table></figure>
+
+<p>在对未初始化的变量调用 typeof 时，返回的结果 是 “undefined” ，但对未声明的变量调用它时，返回的结果还 是 “undefined” 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> message; <span class="hljs-comment">// 这个变量被声明了，只是值为undefined</span><br><span class="hljs-comment">// make sure this variable isn&#x27;t declared</span><br><span class="hljs-comment">// let age</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> message); <span class="hljs-comment">// &quot;undefined&quot;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> age); <span class="hljs-comment">// &quot;undefined&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>无论是声明还是未声明， typeof 返回的都是字符串 “undefined” 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> message; <span class="hljs-comment">// 这个变量被声明了，只是值为undefined</span><br><span class="hljs-comment">// age没有声明</span><br><span class="hljs-keyword">if</span> (message) &#123;<br><span class="hljs-comment">// 这个块不会执行</span><br>&#125;<br><span class="hljs-keyword">if</span> (!message) &#123;<br><span class="hljs-comment">// 这个块会执行</span><br>&#125;<br><span class="hljs-keyword">if</span> (age) &#123;<br><span class="hljs-comment">// 这里会报错</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="Null-类型"><a href="#Null-类型" class="headerlink" title="Null 类型"></a>Null 类型</h3><p>Null 类型同样只有一个值，即特殊值 null 。逻辑上讲， null 值表示一个空对象指针，这也是给 typeof 传一个 null 会返回 “object” 的原因</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> car = <span class="hljs-literal">null</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> car) <span class="hljs-comment">// &quot;object&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>undefined 值是由 null 值派生而来的，因此 ECMA-262 将它们定义为表面上相等</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-literal">null</span> == <span class="hljs-literal">undefined</span>) <span class="hljs-comment">// true</span><br></code></pre></div></td></tr></table></figure>
+
+<p>用等于操作符（ == ）比较 null 和 undefined 始终返回 true 。<br>只要变量要保存对象，而当时又没有那个对象可保存，就要用 null 来填充该变量。这样就可以保持 null 是空对象指针的语义，并进一步将其与 undefined 区分开来。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> message = <span class="hljs-literal">null</span>;<br><span class="hljs-keyword">let</span> age;<br><span class="hljs-keyword">if</span> (message) &#123;<br><span class="hljs-comment">// 这个块不会执行</span><br>&#125;<br><span class="hljs-keyword">if</span> (!message) &#123;<br><span class="hljs-comment">// 这个块会执行</span><br>&#125;<br><span class="hljs-keyword">if</span> (age) &#123;<br><span class="hljs-comment">// 这个块不会执行</span><br>&#125;<br><span class="hljs-keyword">if</span> (!age) &#123;<br><span class="hljs-comment">// 这个块会执行</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="Boolean-类型"><a href="#Boolean-类型" class="headerlink" title="Boolean 类型"></a>Boolean 类型</h3><p>Boolean （布尔值）类型是 ECMAScript 中使用最频繁的类型之 一，有两个字面值： true 和 false 。这两个布尔值不同于数值， 因此 true 不等于 1，<br>虽然布尔值只有两个，但所有其他 ECMAScript 类型的值都有相应 布尔值的等价形式。要将一个其他类型的值转换为布尔值，可以调用特定的 Boolean() 转型函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> message = <span class="hljs-string">&#x27;Hello world!&#x27;</span><br><span class="hljs-keyword">let</span> messageAsBoolean = <span class="hljs-title class_">Boolean</span>(message)<br></code></pre></div></td></tr></table></figure>
+
+<p>字符串 message 会被转换为布尔值并保存在变 量 messageAsBoolean 中。 Boolean() 转型函数可以在任意类型的数据上调用，而且始终返回一个布尔值</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>转换为 true 的值</th>
+<th>转换为 false 的值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Boolean</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>String</td>
+<td>非空字符串</td>
+<td>“” （空字符串）</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>非零数值（包括无穷值、bigint）</td>
+<td>0 、 NaN （参见后面的相关内容）</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>任意对象</td>
+<td>null</td>
+</tr>
+<tr>
+<td>Undefined</td>
+<td>N/A（不存在）</td>
+<td>undefined</td>
+</tr>
+</tbody></table>
+<p>理解以上转换非常重要，因为像 if 等流控制语句会自动执行其 他类型值到布尔值的转换，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> message = <span class="hljs-string">&#x27;Hello world!&#x27;</span><br><span class="hljs-keyword">if</span> (message) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Value is true&#x27;</span>)<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="Number-类型"><a href="#Number-类型" class="headerlink" title="Number 类型"></a>Number 类型</h3><p>最基本的数值字面量格式是十进制整数，直接写出来即可：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> intNum = <span class="hljs-number">55</span> <span class="hljs-comment">// 整数</span><br></code></pre></div></td></tr></table></figure>
+
+<p>整数也可以用八进制（以 8 为基数）或十六进制（以 16 为基数）字面量表示。对于八进制字面量，第一个数字必须是零（0），然后是相应的八进制数字（数值 0~7）。如果字面量中包含的数字超出了应有的范围，就会忽略前缀的零，后面的数字序列会被当成十进制数，如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> octalNum1 = <span class="hljs-number">070</span>; <span class="hljs-comment">// 八进制的56</span><br><span class="hljs-keyword">let</span> octalNum2 = <span class="hljs-number">079</span>; <span class="hljs-comment">// 无效的八进制值，当成79处理</span><br><span class="hljs-keyword">let</span> octalNum3 = <span class="hljs-number">08</span>; <span class="hljs-comment">// 无效的八进制值，当成8处理</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>注意 由于 JavaScript 保存数值的方式，实际中可能存在正零（+0） 和负零（-0）。正零和负零在所有情况下都被认为是等同的</p>
+</blockquote>
+<h4 id="浮点值"><a href="#浮点值" class="headerlink" title="浮点值"></a>浮点值</h4><p>要定义浮点值，数值中必须包含小数点，而且小数点后面必须至 少有一个数字。虽然小数点前面不是必须有整数，但推荐加上。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> floatNum1 = <span class="hljs-number">1.1</span><br><span class="hljs-keyword">let</span> floatNum2 = <span class="hljs-number">0.1</span><br><span class="hljs-keyword">let</span> floatNum3 = <span class="hljs-number">0.1</span> <span class="hljs-comment">// 有效，但不推荐</span><br></code></pre></div></td></tr></table></figure>
+
+<p>因为存储浮点值使用的内存空间是存储整数值的两倍，所以 ECMAScript 总是想方设法把值转换为整数。在小数点后面没有数字的情况下，数值就会变成整数。<br>ECMAScript 中科学记数法的格式要求是一个数值（整数或浮点 数）后跟一个大写或小写的字母 e，再加上一个要乘的 10 的多少次幂。比如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> floatNum = <span class="hljs-number">3.125e7</span> <span class="hljs-comment">// 等于31250000</span><br></code></pre></div></td></tr></table></figure>
+
+<p>浮点值的精确度最高可达 17 位小数，但在算术计算中远不如整数精确。例如，0.1 加 0.2 得到的不是 0.3，而是 0.300 000 000 000 000 04。由于这种微小的舍入错误，导致很难测试特定的浮点值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">if</span> (a + b == <span class="hljs-number">0.3</span>) &#123; <span class="hljs-comment">// 别这么干！</span><br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;You got 0.3.&quot;</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="值的范围"><a href="#值的范围" class="headerlink" title="值的范围"></a>值的范围</h4><p>由于内存的限制，ECMAScript 并不支持表示这个世界上的所有数值。<br>ECMAScript 可以表示的最小数值保存在 <code>Number.MIN_VALUE</code> 中，这个值在多数浏览器中是 5e-324；可以表示的最大数值保存在 <code>Number.MAX_VALUE</code> 中，这个值在多数浏览器中是 1.797 693 134 862 315 7e+308<br>​</p>
+<p>如果某个计算得到的 数值结果超出了 JavaScript 可以表示的范围，那么这个数值会被自动转换为一个特殊的 <code>Infinit</code>（无穷）值。任何无法表示的负数以<code>-Infinity</code>（负无穷大）表示，任何无法表示的正数以<code>Infinity</code> （正无穷大）表示。<br>​</p>
+<p>如果计算返回正 Infinity 或负 Infinity ，则该值将不能再进一步用于任何计算。<br> 要确定一个值是不是有限大（即介于 JavaScript 能表示的最小值和最大值之间），可以使用<code>isFinite()</code> 函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> result = <span class="hljs-title class_">Number</span>.<span class="hljs-property">MAX_VALUE</span> + <span class="hljs-title class_">Number</span>.<span class="hljs-property">MAX_VALUE</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">isFinite</span>(result)) <span class="hljs-comment">// false</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="NaN"><a href="#NaN" class="headerlink" title="NaN"></a>NaN</h4><p>有一个特殊的数值叫 NaN ，意思是“不是数值”（Not a Number），用于表示本来要返回数值的操作失败了（而不是抛出错误）。比如，用 0 除任意数值在其他语言中通常都会导致错误， 从而中止代码执行。但在 ECMAScript 中，0、+0 或-0 相除会返回 NaN</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">0</span>/<span class="hljs-number">0</span>); <span class="hljs-comment">// NaN</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(-<span class="hljs-number">0</span>/+<span class="hljs-number">0</span>); <span class="hljs-comment">// NaN</span><br><br><span class="hljs-comment">//如果分子是非0值，分母是有符号0或无符号0，则会返回Infinity 或 -Infinity ：</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">5</span>/<span class="hljs-number">0</span>); <span class="hljs-comment">// Infinity</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">5</span>/-<span class="hljs-number">0</span>); <span class="hljs-comment">// -Infinity</span><br><span class="hljs-comment">// NaN 不等于包括 NaN 在内的任何值</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">NaN</span> == <span class="hljs-title class_">NaN</span>); <span class="hljs-comment">// false</span><br></code></pre></div></td></tr></table></figure>
+
+<p>ECMAScript 提供了 <code>isNaN()</code> 函数。该函数接收一个参数，可以是任意数据类型，然后判断这个参数是否“不是数值”。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">isNaN</span>(<span class="hljs-title class_">NaN</span>)); <span class="hljs-comment">// true</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">isNaN</span>(<span class="hljs-number">10</span>)); <span class="hljs-comment">// false，10是数值</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">isNaN</span>(<span class="hljs-string">&quot;10&quot;</span>)); <span class="hljs-comment">// false，可以转换为数值10</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">isNaN</span>(<span class="hljs-string">&quot;blue&quot;</span>)); <span class="hljs-comment">// true，不可以转换为数值</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">isNaN</span>(<span class="hljs-literal">true</span>)); <span class="hljs-comment">// false，可以转换为数值1</span><br></code></pre></div></td></tr></table></figure>
+
+<p>把一个值传给 <code>isNaN()</code> 后，该函数会尝试把它转换为数值。某些非数值的值可以直接转换成数值，如字符串 “10” 或布尔值。 任何不能转换为数值的值都会导致这个函数返回 true</p>
+<blockquote>
+<p>isNaN() 可以用于测试对象。此时， 首先会调用对象的 valueOf() 方法，然后再确定返回的值是否可以转换为数值。如果不能，再调用 toString() 方法， 并测试其返回值</p>
+</blockquote>
+<h4 id="数值转换"><a href="#数值转换" class="headerlink" title="数值转换"></a>数值转换</h4><p>有 3 个函数可以将非数值转换为数值： <code>Number() </code>、 <code>parseInt()</code> 和<code>parseFloat() </code>。<br>Number() 是转型函数， 可用于任何数据类型。后两个函数主要用于将字符串转换为数值。</p>
+<h5 id="Number-函数基于如下规则执行转换。"><a href="#Number-函数基于如下规则执行转换。" class="headerlink" title="Number() 函数基于如下规则执行转换。"></a>Number() 函数基于如下规则执行转换。</h5><ul>
+<li>布尔值， true 转换为 1， false 转换为 0。</li>
+<li>数值，直接返回。 null ，返回 0。</li>
+<li>undefined ，返回 NaN 。</li>
+<li>字符串，应用以下规则。<ul>
+<li>如果字符串包含数值字符，包括数值字符前面带加、减号的情况，则转换为一个十进制数值。</li>
+<li>如果字符串包含有效的浮点值格式如 “1.1” ，则会转换为相应的浮点值（同样，忽略前面的零）。</li>
+<li>如果字符串包含有效的十六进制格式如 “0xf” ，则会转换为与该十六进制值对应的十进制整数值。</li>
+<li>如果是空字符串（不包含字符），则返回 0。</li>
+<li>如果字符串包含除上述情况之外的其他字符，则返回 NaN 。 对象，调用 valueOf() 方法，并按照上述规则转换返回的值。</li>
+<li>如果转换结果是 NaN ，则调用 toString() 方法，再按照转换字符串的规则转换</li>
+</ul>
+</li>
+<li>对象，调用 valueOf() 方法，并按照上述规则转换返回的值。如果转换结果是 NaN ，则调用 toString() 方法，再按照转换字符串的规则转换。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num1 = <span class="hljs-title class_">Number</span>(<span class="hljs-string">&quot;Hello world!&quot;</span>); <span class="hljs-comment">// NaN</span><br><span class="hljs-keyword">let</span> num2 = <span class="hljs-title class_">Number</span>(<span class="hljs-string">&quot;&quot;</span>); <span class="hljs-comment">// 0</span><br><span class="hljs-keyword">let</span> num3 = <span class="hljs-title class_">Number</span>(<span class="hljs-string">&quot;000011&quot;</span>); <span class="hljs-comment">// 11</span><br><span class="hljs-keyword">let</span> num4 = <span class="hljs-title class_">Number</span>(<span class="hljs-literal">true</span>); <span class="hljs-comment">// 1</span><br></code></pre></div></td></tr></table></figure>
+
+<p>考虑到用 Number() 函数转换字符串时相对复杂且有点反常规，通常在需要得到整数时可以优先使用 parseInt() 函数。</p>
+<h5 id="parseInt-函数更专注于字符串是否包含数值模式。"><a href="#parseInt-函数更专注于字符串是否包含数值模式。" class="headerlink" title="parseInt() 函数更专注于字符串是否包含数值模式。"></a>parseInt() 函数更专注于字符串是否包含数值模式。</h5><p>如果第一个字符不是数值字符、加号或减号， parseInt() 立即返回 NaN 。这意味着空字符串也会返回 NaN （这一点跟 Number() 不一样，它返回 0）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num1 = <span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;1234blue&quot;</span>); <span class="hljs-comment">// 1234</span><br><span class="hljs-keyword">let</span> num2 = <span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;&quot;</span>); <span class="hljs-comment">// NaN</span><br><span class="hljs-keyword">let</span> num3 = <span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;0xA&quot;</span>); <span class="hljs-comment">// 10，解释为十六进制整数</span><br><span class="hljs-keyword">let</span> num4 = <span class="hljs-built_in">parseInt</span>(<span class="hljs-number">22.5</span>); <span class="hljs-comment">// 22</span><br><span class="hljs-keyword">let</span> num5 = <span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;70&quot;</span>); <span class="hljs-comment">// 70，解释为十进制值</span><br><span class="hljs-keyword">let</span> num6 = <span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;0xf&quot;</span>); <span class="hljs-comment">// 15，解释为十六进制整数</span><br></code></pre></div></td></tr></table></figure>
+
+<p>不同的数值格式很容易混淆，因此 parseInt() 也接收第二个参数，用于指定底数（进制数）。如果知道要解析的值是十六进制，那么可以传入 16 作为第二个参数，以便正确解析：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num = <span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;0xAF&quot;</span>, <span class="hljs-number">16</span>); <span class="hljs-comment">// 175</span><br><span class="hljs-keyword">let</span> num1 = <span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;AF&quot;</span>, <span class="hljs-number">16</span>); <span class="hljs-comment">// 175</span><br><span class="hljs-keyword">let</span> num2 = <span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;AF&quot;</span>); <span class="hljs-comment">// NaN 转换检测到第一个字符就是非数值字符，随即自动停止并返回 NaN </span><br></code></pre></div></td></tr></table></figure>
+
+<p>通过第二个参数，可以极大扩展转换后获得的结果类型</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num1 = <span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;10&quot;</span>, <span class="hljs-number">2</span>); <span class="hljs-comment">// 2，按二进制解析</span><br><span class="hljs-keyword">let</span> num2 = <span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;10&quot;</span>, <span class="hljs-number">8</span>); <span class="hljs-comment">// 8，按八进制解析</span><br><span class="hljs-keyword">let</span> num3 = <span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;10&quot;</span>, <span class="hljs-number">10</span>); <span class="hljs-comment">// 10，按十进制解析</span><br><span class="hljs-keyword">let</span> num4 = <span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;10&quot;</span>, <span class="hljs-number">16</span>); <span class="hljs-comment">// 16，按十六进制解析</span><br></code></pre></div></td></tr></table></figure>
+
+<h5 id="parseFloat-函数的工作方式跟-parseInt-函数类似，-都是从位置-0-开始检测每个字符"><a href="#parseFloat-函数的工作方式跟-parseInt-函数类似，-都是从位置-0-开始检测每个字符" class="headerlink" title="parseFloat() 函数的工作方式跟 parseInt() 函数类似， 都是从位置 0 开始检测每个字符"></a>parseFloat() 函数的工作方式跟 parseInt() 函数类似， 都是从位置 0 开始检测每个字符</h5><p>它也是解析到字符串末尾或者解析到一个无效的浮点数值字符为止。这意味着第一次出现的小数点是有效的，但第二次出现的小数点就无效了，此时字符串的剩余字符都会被忽略。因此，”22.34.5” 将转换成 22.34<br>parseFloat() 函数的另一个不同之处在于，它始终忽略字符串开头的零。 十六进制数值始终会返回 0。 因为 parseFloat() 只解析十进制值，因此不能指定底数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num1 = <span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;1234blue&quot;</span>); <span class="hljs-comment">// 1234，按整数解析</span><br><span class="hljs-keyword">let</span> num2 = <span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;0xA&quot;</span>); <span class="hljs-comment">// 0</span><br><span class="hljs-keyword">let</span> num3 = <span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;22.5&quot;</span>); <span class="hljs-comment">// 22.5</span><br><span class="hljs-keyword">let</span> num4 = <span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;22.34.5&quot;</span>); <span class="hljs-comment">// 22.34</span><br><span class="hljs-keyword">let</span> num5 = <span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;0908.5&quot;</span>); <span class="hljs-comment">// 908.5</span><br><span class="hljs-keyword">let</span> num6 = <span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;3.125e7&quot;</span>); <span class="hljs-comment">//31250000</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="String-类型"><a href="#String-类型" class="headerlink" title="String 类型"></a>String 类型</h3><p>String （字符串）数据类型表示零或多个 16 位 Unicode 字符序列</p>
+<h4 id="字符字面量"><a href="#字符字面量" class="headerlink" title="字符字面量"></a>字符字面量</h4><p>字符串数据类型包含一些字符字面量，用于表示非打印字符或有 其他用途的字符，如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>字面量</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\n</td>
+<td>换行</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>制表</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>退格</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>回车</td>
+</tr>
+<tr>
+<td>\f</td>
+<td>换页</td>
+</tr>
+<tr>
+<td>\\</td>
+<td>反斜杠（ \ ）</td>
+</tr>
+<tr>
+<td>&#39;</td>
+<td>单引号（ ‘ ），在字符串以单引号标示时使 用，例如 ‘He said, &#39;hey.&#39;‘</td>
+</tr>
+<tr>
+<td>&quot;</td>
+<td>双引号（ “ ），在字符串以双引号标示时使 用，例如 “He said, &quot;hey.&quot;“</td>
+</tr>
+<tr>
+<td>\`</td>
+<td>反引号（ ` ），在字符串以反引号标示时 使用，例如 `He said, \`hey.\``</td>
+</tr>
+<tr>
+<td>\xnn</td>
+<td>以十六进制编码 nn 表示的字符（其中 n 是 十六进制数字 0~F），例如 \x41 等于 “A”</td>
+</tr>
+<tr>
+<td>\unnnn</td>
+<td>以十六进制编码 nnnn 表示的 Unicode 字符 （其中 n 是十六进制数字 0~F），例如 \u03a3 等于希腊字符 “Σ”</td>
+</tr>
+</tbody></table>
+<h4 id="字符串的特点"><a href="#字符串的特点" class="headerlink" title="字符串的特点"></a>字符串的特点</h4><p>ECMAScript 中的字符串是不可变的（immutable），意思是一旦创建，它们的值就不能变了。要修改某个变量中的字符串值，必须先销毁原始的字符串，然后将包含新值的另一个字符串保存到该变量</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> lang = <span class="hljs-string">&#x27;Java&#x27;</span><br>lang = lang + <span class="hljs-string">&#x27;Script&#x27;</span> <span class="hljs-comment">//JavaScript</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="转换为字符串"><a href="#转换为字符串" class="headerlink" title="转换为字符串"></a>转换为字符串</h4><p>有两种方式把一个值转换为字符串。首先是使用几乎所有值都有的<code>toString()</code> 方法。这个方法唯一的用途就是返回当前值的字符串等价物。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> age = <span class="hljs-number">11</span>;<br><span class="hljs-keyword">let</span> ageAsString = age.<span class="hljs-title function_">toString</span>(); <span class="hljs-comment">// 字符串&quot;11&quot;</span><br><span class="hljs-keyword">let</span> found = <span class="hljs-literal">true</span>;<br><span class="hljs-keyword">let</span> foundAsString = found.<span class="hljs-title function_">toString</span>(); <span class="hljs-comment">// 字符串&quot;true&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<p><strong>toString() 方法可见于数值、布尔值、对象和字符串值。</strong>（没错，字符串值也有 toString() 方法，该方法只是简单地返回自身的一个副本。）<strong>null 和 undefined 值没有 toString() 方法</strong>。<br>toString() 返回数值的十进制字符串表示。而通过传入参 数，可以得到数值的二进制、八进制、十六进制，或者其他任何 有效基数的字符串表示</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num = <span class="hljs-number">10</span>;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num.<span class="hljs-title function_">toString</span>()); <span class="hljs-comment">// &quot;10&quot;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num.<span class="hljs-title function_">toString</span>(<span class="hljs-number">2</span>)); <span class="hljs-comment">// &quot;1010&quot;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num.<span class="hljs-title function_">toString</span>(<span class="hljs-number">8</span>)); <span class="hljs-comment">// &quot;12&quot;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num.<span class="hljs-title function_">toString</span>(<span class="hljs-number">10</span>)); <span class="hljs-comment">// &quot;10&quot;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num.<span class="hljs-title function_">toString</span>(<span class="hljs-number">16</span>)); <span class="hljs-comment">// &quot;a&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>如果你不确定一个值是不是 null 或 undefined ，可以使用 String() 转型函数，它始终会返回表示相应类型值的字符串。<br><code>String()</code> 函数遵循如下规则。</p>
+<ul>
+<li>如果值有 toString() 方法，则调用该方法（不传参数） 并返回结果。</li>
+<li>如果值是 null ，返回 “null” 。</li>
+<li>如果值是 undefined ，返回 “undefined” 。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> value1 = <span class="hljs-number">10</span>;<br><span class="hljs-keyword">let</span> value2 = <span class="hljs-literal">true</span>;<br><span class="hljs-keyword">let</span> value3 = <span class="hljs-literal">null</span>;<br><span class="hljs-keyword">let</span> value4;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">String</span>(value1)); <span class="hljs-comment">// &quot;10&quot;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">String</span>(value2)); <span class="hljs-comment">// &quot;true&quot;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">String</span>(value3)); <span class="hljs-comment">// &quot;null&quot;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">String</span>(value4)); <span class="hljs-comment">// &quot;undefined&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>因为 null 和 undefined 没有 toString() 方法，所以 String() 方法就直接返回了这两个 值的字面量文本。</p>
+<h4 id="模板字面量"><a href="#模板字面量" class="headerlink" title="模板字面量"></a>模板字面量</h4><p>ECMAScript 6 新增了使用模板字面量定义字符串的能力。与使用 单引号或双引号不同，模板字面量保留换行字符，可以跨行定义字符串</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> pageHTML = <span class="hljs-string">`</span><br><span class="hljs-string">  &lt;div&gt;</span><br><span class="hljs-string">    &lt;a href=&quot;#&quot;&gt;</span><br><span class="hljs-string">    	&lt;span&gt;Jake&lt;/span&gt;</span><br><span class="hljs-string">    &lt;/a&gt;</span><br><span class="hljs-string">  &lt;/div&gt;`</span>;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>由于模板字面量会保持反引号内部的空格，因此在使用时要格外注意</p>
+<h4 id="字符串插值"><a href="#字符串插值" class="headerlink" title="字符串插值"></a>字符串插值</h4><p>模板字面量最常用的一个特性是支持字符串插值，也就是可以在一个连续定义中插入一个或多个值<br>字符串插值通过在<code>$&#123;&#125;</code>中使用一个 JavaScript 表达式实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> value = <span class="hljs-number">5</span>;<br><span class="hljs-keyword">let</span> exponent = <span class="hljs-string">&#x27;second&#x27;</span>;<br><span class="hljs-comment">// 以前，字符串插值是这样实现的：</span><br><span class="hljs-keyword">let</span> interpolatedString =value + <span class="hljs-string">&#x27; to the &#x27;</span> + exponent + <span class="hljs-string">&#x27; power is &#x27;</span> + (value * value);<br><span class="hljs-comment">// 现在，可以用模板字面量这样实现：</span><br><span class="hljs-keyword">let</span> interpolatedTemplateLiteral =<span class="hljs-string">`<span class="hljs-subst">$&#123; value &#125;</span> to the <span class="hljs-subst">$&#123; exponent &#125;</span> power is <span class="hljs-subst">$&#123; value * value &#125;</span>`</span>;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(interpolatedString); <span class="hljs-comment">//5 to the second power is 25</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(interpolatedTemplateLiteral); <span class="hljs-comment">//5 to the second power is 25</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="模板字面量标签函数"><a href="#模板字面量标签函数" class="headerlink" title="模板字面量标签函数"></a>模板字面量标签函数</h4><p>模板字面量也支持定义标签函数（tag function），而通过标签函数可以自定义插值行为。标签函数会接收被插值记号分隔后的模板和对每个表达式求值的结果</p>
+<h4 id="原始字符串"><a href="#原始字符串" class="headerlink" title="原始字符串"></a>原始字符串</h4><p>使用模板字面量也可以直接获取原始的模板字面量内容（如换行符或 Unicode 字符），而不是被转换后的字符表示。为此，可以使用默认的 String.raw 标签函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// Unicode示例</span><br><span class="hljs-comment">// \u00A9是版权符号</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`\u00A9`</span>); <span class="hljs-comment">// ©</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">String</span>.<span class="hljs-property">raw</span><span class="hljs-string">`\u00A9`</span>); <span class="hljs-comment">// \u00A9</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="Symbol-类型"><a href="#Symbol-类型" class="headerlink" title="Symbol 类型"></a>Symbol 类型</h3><p>Symbol （符号）是 ECMAScript 6 新增的数据类型。符号是原始值，且符号实例是唯一、不可变的。符号的用途是确保对象属性使用唯一标识符，不会发生属性冲突的危险。</p>
+<h4 id="符号的基本用法"><a href="#符号的基本用法" class="headerlink" title="符号的基本用法"></a>符号的基本用法</h4><p>符号需要使用 Symbol() 函数初始化。因为符号本身是原始类型，所以 typeof 操作符对符号返回 symbol</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> sym = <span class="hljs-title class_">Symbol</span>()<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> sym) <span class="hljs-comment">// symbol</span><br></code></pre></div></td></tr></table></figure>
+
+<p>Symbol() 函数不能用作构造函数，与 new 关键字一起使用。这样做是为了避免创建符号包装对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> mySymbol = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Symbol</span>() <span class="hljs-comment">// TypeError:Symbol is not a constructor</span><br></code></pre></div></td></tr></table></figure>
+
+<p>如果你确实想使用符号包装对象，可以借用 Object() 函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> mySymbol = <span class="hljs-title class_">Symbol</span>()<br><span class="hljs-keyword">let</span> myWrappedSymbol = <span class="hljs-title class_">Object</span>(mySymbol)<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> myWrappedSymbol) <span class="hljs-comment">//&quot;object&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="BigInt-类型"><a href="#BigInt-类型" class="headerlink" title="BigInt 类型"></a>BigInt 类型</h3><p>在 ES2020 之前，JavaScript 只有一种数值类型：number(数字)，而之后为了安全表达比 -9007199254740991 ~ 9007199254740991 安全范围之外的数字。引入了 BigInt 类型<br>BigInt 可以表示任意大的整数。</p>
+<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><ul>
+<li>直接在数字后面加一个 n</li>
+<li>调用 BigInt()构造函数</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title class_">BigInt</span>(value) <span class="hljs-comment">//value: 创建对象的数值。可以是字符串或者整数。</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> bigInt = <span class="hljs-number">9007199254740992n</span>; <span class="hljs-comment">//通过直接在数字后面加n</span><br><span class="hljs-keyword">const</span> bigNumber = <span class="hljs-title class_">BigInt</span>(<span class="hljs-number">9007199254740992</span>); <span class="hljs-comment">// 对十进制数字使用BigInt函数</span><br><span class="hljs-keyword">const</span> bigString = <span class="hljs-title class_">BigInt</span>(<span class="hljs-string">&quot;9007199254740992&quot;</span>); <span class="hljs-comment">//对String类型的使用BigInt函数，先隐式转换为十进制的数字，再显式转换为BigIn类型</span><br><span class="hljs-keyword">const</span> bigHex = <span class="hljs-title class_">BigInt</span>(<span class="hljs-number">0x20000000000000</span>); <span class="hljs-comment">// 对十六进制数字使用BigInt函数</span><br><span class="hljs-keyword">const</span> bigBin = <span class="hljs-title class_">BigInt</span>(<span class="hljs-number">0b100000000000000000000000000000000000000000000000000000</span>); <span class="hljs-comment">//对二进制数字使用BigInt函数</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>注意， BigInt() 不是构造函数，因此不能使用 new 操作符</p>
+</blockquote>
+<h4 id="类型判断"><a href="#类型判断" class="headerlink" title="类型判断"></a>类型判断</h4><p>我们可以通过 typeof 操作符来判断是否为 BigInt 类型（返回字符串”bigint”）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">typeof</span> <span class="hljs-number">1n</span> === <span class="hljs-string">&#x27;bigint&#x27;</span> <span class="hljs-comment">// true</span><br><span class="hljs-keyword">typeof</span> <span class="hljs-title class_">BigInt</span>(<span class="hljs-string">&#x27;1&#x27;</span>) === <span class="hljs-string">&#x27;bigint&#x27;</span>; <span class="hljs-comment">// true</span><br></code></pre></div></td></tr></table></figure>
+
+<p>同样的，我们也可以用最通用的 Object.prototype.toString 方法（返回字符串”[object BigInt]”）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title class_">Object</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">toString</span>.<span class="hljs-title function_">call</span>(<span class="hljs-number">10n</span>) === <span class="hljs-string">&#x27;[object BigInt]&#x27;</span> <span class="hljs-comment">// true</span><br></code></pre></div></td></tr></table></figure>
+
+<p>使用 Object 包装后， BigInt 被认为是一个普通 “object” ：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">typeof</span> <span class="hljs-title class_">Object</span>(<span class="hljs-number">1n</span>) === <span class="hljs-string">&#x27;object&#x27;</span> <span class="hljs-comment">// true</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h4><p>以下操作符可以和 BigInt 一起使用： +、*、-、**、% 。<br>除 &gt;&gt;&gt; （无符号右移）之外的 位操作 也可以支持。（因为 BigInt 都是有符号的 &gt;&gt;&gt; （无符号右移）不能用于 BigInt）。</p>
+<table>
+<thead>
+<tr>
+<th><strong>符号</strong></th>
+<th><strong>名称</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>加法</td>
+</tr>
+<tr>
+<td>*</td>
+<td>乘法</td>
+</tr>
+<tr>
+<td>-</td>
+<td>减法</td>
+</tr>
+<tr>
+<td>%</td>
+<td>求余</td>
+</tr>
+<tr>
+<td>**</td>
+<td>求幂</td>
+</tr>
+<tr>
+<td>&lt;&lt;</td>
+<td>左移位</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>右移位</td>
+</tr>
+</tbody></table>
+<p>当 BigInt 使用/操作符时，带小数的运算会被取整。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> expected = <span class="hljs-number">4n</span> / <span class="hljs-number">2n</span> <span class="hljs-comment">//2n</span><br><span class="hljs-keyword">const</span> rounded = <span class="hljs-number">5n</span> / <span class="hljs-number">2n</span>; <span class="hljs-comment">//2n, not 2.5n</span><br></code></pre></div></td></tr></table></figure>
+
+<p>BigInt 类型虽然和 Number 很像，可以做各种数学运算，但是在运算过程中要注意两点:</p>
+<ul>
+<li>BigInt 类型不能用 Math 对象中的方法。</li>
+<li>不能和 Number 示例混合运算。因为 JavaScript 在处理不同类型的运算时，会把他们先转换为同一类型，而 BigInt 类型变量在被隐式转换为 Number 类型时，可能会丢失精度，或者直接报错</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> number = <span class="hljs-number">1</span><br><span class="hljs-keyword">const</span> bigInt = <span class="hljs-number">9007199254740993n</span><br>number + bigInt <span class="hljs-comment">//  TypeError: Cannot mix BigInt and other types</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="BigInt-类型和其他类型比较"><a href="#BigInt-类型和其他类型比较" class="headerlink" title="BigInt 类型和其他类型比较"></a>BigInt 类型和其他类型比较</h4><h5 id="BigInt-和-Number-不是严格相等的，但是宽松相等的"><a href="#BigInt-和-Number-不是严格相等的，但是宽松相等的" class="headerlink" title="BigInt 和 Number 不是严格相等的，但是宽松相等的"></a>BigInt 和 Number 不是严格相等的，但是宽松相等的</h5><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-number">10n</span> === <span class="hljs-number">10</span> <span class="hljs-comment">// false</span><br><span class="hljs-number">10n</span> == <span class="hljs-number">10</span><span class="hljs-comment">// true</span><br></code></pre></div></td></tr></table></figure>
+
+<p>Number 和 BigInt 可以进行比较</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-number">1n</span> &lt; <span class="hljs-number">2</span>;        <span class="hljs-comment">// true</span><br><span class="hljs-number">2n</span> &gt; <span class="hljs-number">1</span>;        <span class="hljs-comment">// true</span><br><br><span class="hljs-number">2n</span> &lt; <span class="hljs-number">2</span>;        <span class="hljs-comment">// false</span><br><span class="hljs-number">2n</span> &lt;= <span class="hljs-number">2</span>;			 <span class="hljs-comment">// true</span><br><br><span class="hljs-number">2n</span> &gt; <span class="hljs-number">2</span>;        <span class="hljs-comment">// false</span><br><span class="hljs-number">2n</span> &gt;= <span class="hljs-number">2</span>;    	 <span class="hljs-comment">// true</span><br></code></pre></div></td></tr></table></figure>
+
+<p>两者也可以混在一个数组内并排序。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> mixed = [<span class="hljs-number">4n</span>, <span class="hljs-number">6</span>, -<span class="hljs-number">12n</span>, <span class="hljs-number">10</span>, <span class="hljs-number">4</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0n</span>];    <span class="hljs-comment">// [4n, 6, -12n, 10, 4, 0, 0n]</span><br>mixed.<span class="hljs-title function_">sort</span>();    <span class="hljs-comment">// [-12n, 0, 0n, 10, 4n, 4, 6]</span><br></code></pre></div></td></tr></table></figure>
+
+<p>BigInt 在需要转换成 Boolean 的时表现跟 Number 类似：如通过 Boolean 函数转换；用于 Logical Operators ||, &amp;&amp;, 和 ! 的操作数；或者用于在像 if statement 这样的条件语句中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">if</span> (<span class="hljs-number">0n</span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Hello from the if!&#x27;</span>);<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Hello from the else!&#x27;</span>);<br>&#125;	<span class="hljs-comment">// ↪ &quot;Hello from the else!&quot;</span><br><br><span class="hljs-number">0n</span> || <span class="hljs-number">12n</span>	<span class="hljs-comment">// ↪ 12n</span><br><br><span class="hljs-number">0n</span> &amp;&amp; <span class="hljs-number">12n</span>	<span class="hljs-comment">// ↪ 0n</span><br><br><span class="hljs-title class_">Boolean</span>(<span class="hljs-number">0n</span>)	<span class="hljs-comment">// ↪ false</span><br><br><span class="hljs-title class_">Boolean</span>(<span class="hljs-number">12n</span>)	<span class="hljs-comment">// ↪ true</span><br><br>!<span class="hljs-number">12n</span>	<span class="hljs-comment">// ↪ false</span><br><br>!<span class="hljs-number">0n</span>	<span class="hljs-comment">// ↪ true</span><br><br></code></pre></div></td></tr></table></figure>
+
+<p>它在某些方面类似于 Number ，但是也有几个关键的不同点：不能用与 Math 对象中的方法；不能和任何 Number 实例混合运算，两者必须转换成同一种类型。在两种类型来回转换时要小心，因为 BigInt 变量在转换成 Number 变量时可能会丢失精度。</p>
+<h5 id="不允许隐式类型转换"><a href="#不允许隐式类型转换" class="headerlink" title="不允许隐式类型转换"></a>不允许隐式类型转换</h5><p>因为隐式类型转换可能丢失信息，所以不允许在 bigint 和 Number 之间进行混合操作。当混合使用大整数和浮点数时，结果值可能无法由 BigInt 或 Number 精确表示。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-number">10n</span> + <span class="hljs-number">1</span>;    <span class="hljs-comment">// Uncaught TypeError: Cannot mix BigInt and other types, use explicit conversions</span><br><span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(<span class="hljs-number">2n</span>, <span class="hljs-number">4n</span>, <span class="hljs-number">6n</span>);    <span class="hljs-comment">// TypeError...</span><br></code></pre></div></td></tr></table></figure>
+
+<h5 id="BigInt-和-String"><a href="#BigInt-和-String" class="headerlink" title="BigInt 和 String"></a>BigInt 和 String</h5><p>难免会遇到数字和字符串的转换，BigInt 也不例外，不过可惜的是 BigInt 转为 String 时，其标志性的 n 会被省略，如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title class_">String</span>(<span class="hljs-number">10n</span>) <span class="hljs-comment">// &#x27;10&#x27;</span><br><span class="hljs-string">&#x27;&#x27;</span> + <span class="hljs-number">11n</span>;    <span class="hljs-comment">// &#x27;11&#x27;</span><br></code></pre></div></td></tr></table></figure>
+
+<h5 id="零值"><a href="#零值" class="headerlink" title="零值"></a>零值</h5><p>BigInt 没有 Number 的正零(+0)和负零(-0)之分。因为 BigInt 表示的是整数</p>
+<h5 id="无穷和-NaN-判断"><a href="#无穷和-NaN-判断" class="headerlink" title="无穷和 NaN 判断"></a>无穷和 NaN 判断</h5><p>很有趣的现象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-built_in">isFinite</span>(<span class="hljs-number">10n</span>);    <span class="hljs-comment">// Uncaught TypeError: Cannot convert a BigInt value to a number</span><br><span class="hljs-title class_">Number</span>.<span class="hljs-built_in">isFinite</span>(<span class="hljs-number">10n</span>);    <span class="hljs-comment">// false</span><br><br><span class="hljs-built_in">isNaN</span>(<span class="hljs-number">10n</span>);    <span class="hljs-comment">// Uncaught TypeError: Cannot convert a BigInt value to a number</span><br><span class="hljs-title class_">Number</span>.<span class="hljs-built_in">isNaN</span>(<span class="hljs-number">10n</span>);    <span class="hljs-comment">// false</span><br><br><span class="hljs-title class_">Number</span>.<span class="hljs-built_in">isFinite</span>(<span class="hljs-number">10n</span>)===<span class="hljs-title class_">Number</span>.<span class="hljs-built_in">isNaN</span>(<span class="hljs-number">10n</span>) <span class="hljs-comment">//true</span><br></code></pre></div></td></tr></table></figure>
+
+<p>由此我们可以看出 isFinite()和 Number.isFinite()、isNaN()和 Number.isNaN()的区别：<br>isFinite(val)/isNaN(val)的工作机制都是讲参数值 val 转为数值后再进行比较判断，而 Number.isFinite(val)/Number.isNaN(val)则可以理解为直接简单粗暴的变量全等判断（val === Infinity/val === NaN）</p>
+<h3 id="Object-类型"><a href="#Object-类型" class="headerlink" title="Object 类型"></a>Object 类型</h3><p>ECMAScript 中的对象其实就是一组数据和功能的集合。对象通过 new 操作符后跟对象类型的名称来创建。开发者可以通过创建 Object 类型的实例来创建自己的对象，然后再给对象添加属性和方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> o = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>()<br></code></pre></div></td></tr></table></figure>
+
+<p>但 ECMAScript 只要求在给构造函数提供参数时使用括号。如果没有参数，如上面的例子所示，那么完全可以省略括号（不推荐）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> o = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>() <span class="hljs-comment">// 合法，但不推荐</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="每个-Object-实例都有如下属性和方法。"><a href="#每个-Object-实例都有如下属性和方法。" class="headerlink" title="每个 Object 实例都有如下属性和方法。"></a>每个 Object 实例都有如下属性和方法。</h4><ul>
+<li>constructor ：用于创建当前对象的函数。在前面的例子中，这个属性的值就是 Object() 函数。</li>
+<li>hasOwnProperty(propertyName) ：用于判断当前对象实例（不是原型）上是否存在给定的属性。要检查的属性名必须是字符串（如 o.hasOwnProperty(“name”) ）。</li>
+<li>isPrototypeof(object) ：用于判断当前对象是否为另一个对象的原型。</li>
+<li>propertyIsEnumerable(propertyName) ：用于判断给定的属性是否可以使用 for-in 语句枚举。与 hasOwnProperty() 一样，属性名必须是字符串。</li>
+<li>toLocaleString() ：返回对象的字符串表示，该字符串反映对象所在的本地化执行环境。</li>
+<li>toString() ：返回对象的字符串表示。</li>
+<li>valueOf() ：返回对象对应的字符串、数值或布尔值表示。通常与 toString() 的返回值相同。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>JavaScript 变量可以保存两种类型的值：原始值和引用值。原始值 可能是以下 7 种原始数据类型之一： Undefined 、 Null 、 Boolean 、 Number 、 String 、 Symbol 和 Bigint 。原始值和引用值有以下特点。</p>
+<ul>
+<li>原始值大小固定，因此保存在栈内存上。</li>
+<li>从一个变量到另一个变量复制原始值会创建该值的第二个副本。</li>
+<li>引用值是对象，存储在堆内存上。 包含引用值的变量实际上只包含指向相应对象的一个指针，而不是对象本身。</li>
+<li>从一个变量到另一个变量复制引用值只会复制指针，因此结果是两个变量都指向同一个对象。</li>
+<li>typeof 操作符可以确定值的原始类型，而 instanceof 操作符用于确保值的引用类型</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaScript/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AC%AC%E5%9B%9B%E7%89%88%E7%AC%94%E8%AE%B0/">JavaScript高级程序设计第四版笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/11/23/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">执行上下文与作用域</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/11/React%E4%BD%BF%E7%94%A8require%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA/">
+                        <span class="hidden-mobile">React使用require动态加载图片不显示问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#valine",
+          app_id: "wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz",
+          app_key: "BlsdS19vhoVr77n1TiE2diHr",
+          placeholder: "老师们，说点什么吧！",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: true,
+          serverURLs: "https://wvn0ubbm.lc-cn-n1-shared.com",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> |<i class="iconfont icon-love"></i>| <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        蜀ICP备2021012542号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

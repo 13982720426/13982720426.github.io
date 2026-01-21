@@ -1,0 +1,672 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="jackhoo">
+  <meta name="keywords" content="">
+  
+  <title>解决AntdPro中ModalForm表单重置问题 - jackhoo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/%E6%AC%A2%E8%BF%8E%E5%A4%A7%E5%AE%B6%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%8C%E8%AF%B7%E5%B0%BD%E6%83%85%E7%95%99%E8%A8%80%E5%90%A7%EF%BC%81/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/hybrid.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"13982720426.github.io","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz","app_key":"BlsdS19vhoVr77n1TiE2diHr","server_url":"https://wvn0ubbm.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>jackhoo的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/13982720426/">
+                <i class="iconfont icon-github-fill"></i>
+                GitHub
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg2.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="解决AntdPro中ModalForm表单重置问题">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      jackhoo
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-29 09:56" pubdate>
+        星期四, 七月 29日 2021, 9:56 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      721 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">解决AntdPro中ModalForm表单重置问题</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2 小时前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="解决-AntdPro-中-ModalForm-表单重置问题"><a href="#解决-AntdPro-中-ModalForm-表单重置问题" class="headerlink" title="解决 AntdPro 中 ModalForm 表单重置问题"></a>解决 AntdPro 中 ModalForm 表单重置问题</h1><p>需求是我们点击弹窗确定之后，第二次再次点击弹窗表单数据清除。</p>
+<h2 id="Modal"><a href="#Modal" class="headerlink" title="Modal"></a>Modal</h2><p>先看看 antd 中的 Modal 是如何配置的</p>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>默认值</strong></th>
+<th><strong>版本</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>destroyOnClose</strong></td>
+<td>关闭时销毁 Modal 里的子元素</td>
+<td>boolean</td>
+<td>false</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="destroyOnClose-使用方法"><a href="#destroyOnClose-使用方法" class="headerlink" title="destroyOnClose 使用方法"></a>destroyOnClose 使用方法</h3><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript">&lt;<span class="hljs-title class_">Modal</span><br>  title=<span class="hljs-string">&quot;添加用户&quot;</span><br>  visible=&#123;isModalVisible&#125;<br>  onCancel=&#123;<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">isShowModal</span>(<span class="hljs-literal">false</span>)&#125;<br>  footer=&#123;<span class="hljs-literal">null</span>&#125;<br>  destroyOnClose=&#123;<span class="hljs-literal">true</span>&#125;&gt;&lt;/<span class="hljs-title class_">Modal</span>&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>可以看到在 Modal 中直接给<code>destroyOnClose=&#123;true&#125;</code>就可以清除元素里边的东西。</p>
+<h2 id="ModalForm"><a href="#ModalForm" class="headerlink" title="ModalForm"></a>ModalForm</h2><p>ModalForm 组合了 Modal 和 ProForm 可以减少繁琐的状态管理。<br>先来看官方文档<a target="_blank" rel="noopener" href="https://procomponents.ant.design/components/modal-form/#api">https://procomponents.ant.design/components/modal-form/#api</a><br><img src="https://i.loli.net/2021/07/29/a3JqodGrRPuVBKF.png#id=bbFOg&originHeight=568&originWidth=1203&originalType=binary&ratio=1&status=done&style=none" srcset="/img/loading.gif" lazyload><br>官方文档的方法是通过<strong>formRef</strong>手动重置，但是我们想要的是点击确定之后，第二次再次点击弹窗表单数据清除。</p>
+<h3 id="API-1"><a href="#API-1" class="headerlink" title="API"></a>API</h3><table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>默认值</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>trigger</strong></td>
+<td>用于触发 Modal 打开的 dom，一般是 button</td>
+<td>ReactNode</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>visible</strong></td>
+<td>是否打开</td>
+<td>boolean</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>onVisibleChange</strong></td>
+<td>visible 改变时触发</td>
+<td>(visible:boolean)=&gt;void</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>modalProps</strong></td>
+<td>Modal 的 props，使用方式与 <a target="_blank" rel="noopener" href="https://ant.design/components/modal-cn/">antd</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>相同。注意：不支持 ‘visible’，请使用全局的 visible</td>
+<td><a target="_blank" rel="noopener" href="https://ant.design/components/modal-cn/#API">props</a></td>
+<td>-</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>title</strong></td>
+<td>弹框的标题</td>
+<td>ReactNode</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>width</strong></td>
+<td>弹框的宽度</td>
+<td>Number</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>onFinish</strong></td>
+<td>提交数据时触发，如果返回一个 true。会关掉抽屉,如果配置了 destroyOnClose 还会重置表单。</td>
+<td>async (values)=&gt;boolean</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>submitter</strong></td>
+<td>提交按钮相关配置，使用方式与<a target="_blank" rel="noopener" href="https://procomponents.ant.design/components/form">ProForm</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>相同。</td>
+<td><a target="_blank" rel="noopener" href="https://procomponents.ant.design/components/form">ProForm</a></td>
+<td>-</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>Antdpro 中的 ModalForm 是集合 Modal 和 ProForm 了其中 <strong>onFinish</strong> 有一个 destroyOnClose 属性需要配置才会重置表单，但是在 MadalForm 中没有明确说明<br>在程序中找到 <strong>ModalForm</strong> 一层一层的找进去<br>第一层：有基本常用的属性。但是有一个 <strong>modalProps</strong> 在点进去看</p>
+<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> &#123; <span class="hljs-title class_">ModalProps</span>, <span class="hljs-title class_">FormProps</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;antd&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> &#123; <span class="hljs-title class_">CommonFormProps</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../../BaseForm&#x27;</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">declare</span> <span class="hljs-keyword">type</span> <span class="hljs-title class_">ModalFormProps</span>&lt;T = <span class="hljs-title class_">Record</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">any</span>&gt;&gt; = <span class="hljs-title class_">Omit</span>&lt;<br>  <span class="hljs-title class_">FormProps</span>&lt;T&gt;,<br>  <span class="hljs-string">&#x27;onFinish&#x27;</span> | <span class="hljs-string">&#x27;title&#x27;</span><br>&gt; &amp;<br>  <span class="hljs-title class_">CommonFormProps</span>&lt;T&gt; &amp; &#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 接受返回一个boolean，返回 true 会关掉这个弹窗</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@name</span> 表单结束后调用</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-attr">onFinish</span>?: <span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">formData</span>: T</span>) =&gt;</span> <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-built_in">boolean</span> | <span class="hljs-built_in">void</span>&gt;<br>    <span class="hljs-comment">/** <span class="hljs-doctag">@name</span> 用于触发抽屉打开的 dom */</span><br>    <span class="hljs-attr">trigger</span>?: <span class="hljs-variable constant_">JSX</span>.<span class="hljs-property">Element</span><br>    <span class="hljs-comment">/** <span class="hljs-doctag">@name</span> 受控的打开关闭 */</span><br>    <span class="hljs-attr">visible</span>?: <span class="hljs-title class_">ModalProps</span>[<span class="hljs-string">&#x27;visible&#x27;</span>]<br>    <span class="hljs-comment">/** <span class="hljs-doctag">@name</span> 打开关闭的事件 */</span><br>    <span class="hljs-attr">onVisibleChange</span>?: <span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">visible</span>: <span class="hljs-built_in">boolean</span></span>) =&gt;</span> <span class="hljs-built_in">void</span><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 不支持 &#x27;visible&#x27;，请使用全局的 visible</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@name</span> 弹框的属性</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-attr">modalProps</span>?: <span class="hljs-title class_">Omit</span>&lt;<span class="hljs-title class_">ModalProps</span>, <span class="hljs-string">&#x27;visible&#x27;</span>&gt;<br>    <span class="hljs-comment">/** <span class="hljs-doctag">@name</span> 弹框的标题 */</span><br>    <span class="hljs-attr">title</span>?: <span class="hljs-title class_">ModalProps</span>[<span class="hljs-string">&#x27;title&#x27;</span>]<br>    <span class="hljs-comment">/** <span class="hljs-doctag">@name</span> 弹框的宽度 */</span><br>    <span class="hljs-attr">width</span>?: <span class="hljs-title class_">ModalProps</span>[<span class="hljs-string">&#x27;width&#x27;</span>]<br>  &#125;<br><span class="hljs-keyword">declare</span> <span class="hljs-keyword">function</span> <span class="hljs-title class_">ModalForm</span>&lt;T = <span class="hljs-title class_">Record</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">any</span>&gt;&gt;(&#123;<br>  children,<br>  trigger,<br>  onVisibleChange,<br>  modalProps,<br>  onFinish,<br>  title,<br>  width,<br>  ...rest<br>&#125;: <span class="hljs-title class_">ModalFormProps</span>&lt;T&gt;): <span class="hljs-variable constant_">JSX</span>.<span class="hljs-property">Element</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">ModalForm</span><br></code></pre></div></td></tr></table></figure>
+
+<p>第二层： <strong>ModalProps <strong>内部有所有属性，其中有</strong>destroyOnClose?: boolean;</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ModalProps</span> &#123;<br>  <span class="hljs-attr">destroyOnClose</span>?: <span class="hljs-built_in">boolean</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>所以我们找到了<strong>destroyOnClose</strong>的使用方法</p>
+<h3 id="destroyOnClose-使用方法-1"><a href="#destroyOnClose-使用方法-1" class="headerlink" title="destroyOnClose 使用方法"></a>destroyOnClose 使用方法</h3><figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript">&lt;<span class="hljs-title class_">ModalForm</span><br>  title=<span class="hljs-string">&quot;添加佣金&quot;</span><br>  width=<span class="hljs-string">&quot;400px&quot;</span><br>  visible=&#123;createModalVisible&#125;<br>  onVisibleChange=&#123;handleModalVisible&#125;<br>  modalProps=&#123;&#123;<br>    <span class="hljs-attr">destroyOnClose</span>: <span class="hljs-literal">true</span>,<br>  &#125;&#125;<br>  onFinish=&#123;<span class="hljs-keyword">async</span> value =&gt; &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(value)<br>  &#125;&#125;&gt;&lt;/<span class="hljs-title class_">ModalForm</span>&gt;<br></code></pre></div></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/UI/">UI</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Antd/">Antd</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Antd-Pro/">Antd Pro</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Modal/">Modal</a>
+                    
+                      <a class="hover-with-bg" href="/tags/ModalForm/">ModalForm</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/08/01/random%E7%94%9F%E6%88%90%5Bx,y%5D%E4%B9%8B%E9%97%B4%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B4%E6%95%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">random生成[x,y]之间的随机整数</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/27/%E5%88%A9%E7%94%A8border%E7%94%BB%E4%B8%89%E8%A7%92%E5%BD%A2/">
+                        <span class="hidden-mobile">利用border画三角形</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#valine",
+          app_id: "wvn0ubBMNgOQNv8Swlonq3X9-gzGzoHsz",
+          app_key: "BlsdS19vhoVr77n1TiE2diHr",
+          placeholder: "老师们，说点什么吧！",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: true,
+          serverURLs: "https://wvn0ubbm.lc-cn-n1-shared.com",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> |<i class="iconfont icon-love"></i>| <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        蜀ICP备2021012542号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
